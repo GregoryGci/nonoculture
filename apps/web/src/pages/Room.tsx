@@ -15,7 +15,7 @@ import { ChainPromptForm } from "../components/ChainPromptForm";
 import { DrawingCanvas } from "../components/DrawingCanvas";
 import { ChainGuessForm } from "../components/ChainGuessForm";
 import { ChainRevealSlideshow } from "../components/ChainRevealSlideshow";
-import type { QuestionPublic } from "@nonoculture/shared";
+import type { QuestionPublic, RoomStateSync } from "@nonoculture/shared";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -145,16 +145,18 @@ export function Room() {
             </ChainStep>
           )}
 
-          {state.phase === "HOST_REVIEW" && (
-            <HostReviewPanel
-              reviewQuestions={state.reviewQuestions ?? []}
-              isHost={isHost}
-              onGrade={(deckIndex, targetPlayerId, grade) =>
-                send({ type: "SUBMIT_HOST_GRADE", deckIndex, playerId: targetPlayerId, grade })
-              }
-              onFinish={() => send({ type: "HOST_NEXT" })}
-            />
-          )}
+          {state.phase === "HOST_REVIEW" &&
+            (isHost ? (
+              <HostReviewPanel
+                reviewQuestions={state.reviewQuestions ?? []}
+                onGrade={(deckIndex, targetPlayerId, grade) =>
+                  send({ type: "SUBMIT_HOST_GRADE", deckIndex, playerId: targetPlayerId, grade })
+                }
+                onFinish={() => send({ type: "HOST_NEXT" })}
+              />
+            ) : (
+              <WaitingForPodium players={state.players} />
+            ))}
 
           {state.phase === "FINISHED" && (
             <>
@@ -253,6 +255,21 @@ function RoomCode({ code }: { code: string }) {
       <button onClick={copy} className="btn btn-secondary h-10 text-[13px]">
         {copied ? "Lien copié" : "Copier le lien d’invitation"}
       </button>
+    </div>
+  );
+}
+
+/** What everyone but the host sees while grading happens: scores moving, live. */
+function WaitingForPodium({ players }: { players: RoomStateSync["players"] }) {
+  return (
+    <div className="flex flex-col gap-8">
+      {/* No eyebrow: the page header already reads "Correction". */}
+      <div className="flex flex-col items-center gap-3 text-center">
+        <h1 className="display text-[clamp(1.5rem,6vw,2.25rem)]">L’hôte note les réponses</h1>
+        <p className="waiting text-[15px] font-medium">Le podium arrive…</p>
+      </div>
+      {/* Not a dead wait: the ranking reorders as the host grades. */}
+      <Scoreboard players={players} />
     </div>
   );
 }

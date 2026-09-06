@@ -72,8 +72,19 @@ function computeChainReveal(
   });
 }
 
-function computeReviewQuestions(state: GameState, nicknameOf: (id: string) => string): ReviewQuestion[] | null {
-  if (state.phase !== "HOST_REVIEW") return null;
+/**
+ * The grading list, for the host alone.
+ *
+ * Everyone used to receive it so the room could follow along, but players now wait on the
+ * podium instead, and shipping every answer to a client that never displays them only puts
+ * them in reach of the network inspector.
+ */
+function computeReviewQuestions(
+  state: GameState,
+  forPlayerId: string,
+  nicknameOf: (id: string) => string,
+): ReviewQuestion[] | null {
+  if (state.phase !== "HOST_REVIEW" || forPlayerId !== state.hostPlayerId) return null;
   return Object.entries(state.answerLog)
     .map(([deckIndexStr, answers]) => {
       const deckIndex = Number(deckIndexStr);
@@ -147,6 +158,6 @@ export function buildStateSync(
     youHaveAnswered: state.answers.some((a) => a.playerId === forPlayerId),
     chainTask: computeChainTask(state, forPlayerId, resolveDrawing),
     chainReveal: computeChainReveal(state, nicknameOf, resolveDrawing),
-    reviewQuestions: computeReviewQuestions(state, nicknameOf),
+    reviewQuestions: computeReviewQuestions(state, forPlayerId, nicknameOf),
   };
 }

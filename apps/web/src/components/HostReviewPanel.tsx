@@ -10,14 +10,13 @@ const GRADES: { grade: Grade; label: string }[] = [
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
+/** Host-only. Everyone else waits on the podium, so there is no read-only mode here. */
 export function HostReviewPanel({
   reviewQuestions,
-  isHost,
   onGrade,
   onFinish,
 }: {
   reviewQuestions: ReviewQuestion[];
-  isHost: boolean;
   onGrade: (deckIndex: number, playerId: string, grade: Grade) => void;
   onFinish: () => void;
 }) {
@@ -39,11 +38,9 @@ export function HostReviewPanel({
         <p className="text-[17px]" style={{ color: "var(--color-text-muted)" }}>
           Aucune réponse à corriger.
         </p>
-        {isHost && (
-          <button onClick={onFinish} className="btn btn-primary h-14 w-full">
-            Voir le podium
-          </button>
-        )}
+        <button onClick={onFinish} className="btn btn-primary h-14 w-full">
+          Voir le podium
+        </button>
       </div>
     );
   }
@@ -96,32 +93,26 @@ export function HostReviewPanel({
                   <span className="min-w-0 flex-1 truncate text-[17px]">{a.raw || "—"}</span>
                 </div>
 
-                {isHost ? (
-                  <div className="flex gap-1.5">
-                    {GRADES.map(({ grade, label }) => {
-                      const on = a.grade === grade;
-                      return (
-                        <button
-                          key={label}
-                          onClick={() => onGrade(q.deckIndex, a.playerId, grade)}
-                          aria-pressed={on}
-                          className="h-9 flex-1 rounded-full text-[13px] font-medium transition-all duration-300"
-                          style={{
-                            background: on ? "var(--color-accent)" : "transparent",
-                            color: on ? "var(--color-accent-contrast)" : "var(--color-text-muted)",
-                            border: `1px solid ${on ? "var(--color-accent)" : "var(--color-border)"}`,
-                          }}
-                        >
-                          {label}
-                        </button>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  <span className="text-[13px]" style={{ color: "var(--color-text-faint)" }}>
-                    {a.grade === null ? "en attente de l’hôte…" : `noté ${a.grade}`}
-                  </span>
-                )}
+                <div className="flex gap-1.5">
+                  {GRADES.map(({ grade, label }) => {
+                    const on = a.grade === grade;
+                    return (
+                      <button
+                        key={label}
+                        onClick={() => onGrade(q.deckIndex, a.playerId, grade)}
+                        aria-pressed={on}
+                        className="h-9 flex-1 rounded-full text-[13px] font-medium transition-all duration-300"
+                        style={{
+                          background: on ? "var(--color-accent)" : "transparent",
+                          color: on ? "var(--color-accent-contrast)" : "var(--color-text-muted)",
+                          border: `1px solid ${on ? "var(--color-accent)" : "var(--color-border)"}`,
+                        }}
+                      >
+                        {label}
+                      </button>
+                    );
+                  })}
+                </div>
               </li>
             ))}
           </ul>
@@ -133,13 +124,9 @@ export function HostReviewPanel({
           Précédente
         </button>
         {isLast ? (
-          isHost ? (
-            <button onClick={onFinish} className="btn btn-primary flex-1">
-              Voir le podium
-            </button>
-          ) : (
-            <span className="waiting flex-1 text-center text-[13px] font-medium">L’hôte termine la correction…</span>
-          )
+          <button onClick={onFinish} className="btn btn-primary flex-1">
+            Voir le podium
+          </button>
         ) : (
           <button onClick={() => go(1)} className="btn btn-secondary flex-1">
             Suivante
@@ -147,11 +134,9 @@ export function HostReviewPanel({
         )}
       </div>
 
-      {isHost && (
-        <p className="text-center text-[13px]" style={{ color: "var(--color-text-faint)" }}>
-          {graded}/{q.answers.length} notées sur cette question
-        </p>
-      )}
+      <p className="text-center text-[13px]" style={{ color: "var(--color-text-faint)" }}>
+        {graded}/{q.answers.length} notées sur cette question
+      </p>
     </div>
   );
 }

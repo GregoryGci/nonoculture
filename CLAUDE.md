@@ -50,8 +50,10 @@ directement sur le slot suivant du deck — **aucun `REVEAL` ni `SCOREBOARD` ent
 questions**, pour rester fluide. Chaque réponse est archivée (`GameState.answerLog`,
 par index de deck) pendant toute la partie. Une fois le deck épuisé, la partie passe en
 `HOST_REVIEW` (pas de timer, `phaseDeadlineTs: null`) : l'hôte note chaque réponse de
-chaque joueur à chaque question via `SUBMIT_HOST_GRADE` (Nul=0 / Presque=0.5 / Good=1),
-visible en lecture seule par tout le monde pour la transparence ; le score est appliqué
+chaque joueur à chaque question via `SUBMIT_HOST_GRADE` (Nul=0 / Presque=0.5 / Good=1).
+**La liste de correction n'est envoyée qu'à l'hôte** (`buildStateSync` la met à `null`
+pour tous les autres, voir `selectors.test.ts`) : les autres joueurs voient un écran
+d'attente du podium avec le classement qui se réordonne en direct. Le score est appliqué
 immédiatement et peut être corrigé (re-noter écrase l'ancienne note, pas de cumul). Le
 host clique "Voir le podium" (`HOST_NEXT`) quand il a fini pour passer à `FINISHED`.
 
