@@ -26,6 +26,9 @@ Tout est commité dans git, un commit par étape logique — `git log --oneline`
   `apps/server/seed/downloads/`) — pour les régénérer : `FREESOUND_TOKEN=<ta clé>
   pnpm --filter server sounds:fetch` puis `pnpm --filter server media:add <fichier>`
   pour chacun, puis `pnpm --filter server seed seed/audio-questions.json`.
+- **+160 questions texte**, portant la banque à **375 questions** sur **12 thèmes** :
+  15 de plus sur chacun des 8 thèmes d'origine, + 2 nouveaux thèmes (`litterature` × 20,
+  `technologie` × 20). Fichier `apps/server/seed/questions-batch2.json`.
 - **Pas fait, sur demande explicite** : vrais openings d'anime / génériques de films en
   MP3. Ce sont des œuvres musicales protégées par le droit d'auteur (studios, labels) —
   contrairement aux bruitages CC0 ci-dessus, il n'existe pas de source légale gratuite
