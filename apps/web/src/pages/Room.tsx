@@ -66,6 +66,7 @@ export function Room() {
                 <div className="flex flex-col gap-4">
                   <HostSettings
                     settings={state.settings}
+                    connectedPlayers={state.players.filter((p) => p.connected).length}
                     onChange={(settings) => send({ type: "HOST_SETTINGS", ...settings })}
                   />
                   <button onClick={() => send({ type: "START_GAME" })} className="btn btn-primary h-14 text-base">

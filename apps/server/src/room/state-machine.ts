@@ -1,9 +1,8 @@
-import { DEFAULT_SETTINGS, isChainMatch } from "@nonoculture/shared";
+import { CHAIN_MIN_PLAYERS, DEFAULT_SETTINGS, isChainMatch } from "@nonoculture/shared";
 import type { GameSettings, Grade } from "@nonoculture/shared";
 import {
   CHAIN_DRAW_DURATION_MS,
   CHAIN_GUESS_DURATION_MS,
-  CHAIN_MIN_PLAYERS,
   CHAIN_POINTS,
   CHAIN_PROMPT_DURATION_MS,
   CHAIN_REVEAL_PER_ITEM_MS,

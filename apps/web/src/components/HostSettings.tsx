@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { GameSettings } from "@nonoculture/shared";
+import { CHAIN_MIN_PLAYERS, type GameSettings } from "@nonoculture/shared";
 import { fetchPlayableThemes } from "../lib/api";
 
 const ALL_THEMES: { id: string; label: string }[] = [
@@ -33,9 +33,11 @@ function Row({ label, value, children }: { label: string; value: string; childre
 
 export function HostSettings({
   settings,
+  connectedPlayers,
   onChange,
 }: {
   settings: GameSettings;
+  connectedPlayers: number;
   onChange: (settings: Partial<GameSettings>) => void;
 }) {
   // Some themes exist in the UI but have nothing behind them in the bank (never seeded, or
@@ -71,6 +73,20 @@ export function HostSettings({
           onChange={(e) => onChange({ questionCount: Number(e.target.value) })}
         />
       </Row>
+
+      {/* The drawing round is skipped below three players, which reads as a bug from the
+          lobby unless the rule is stated where the game is configured. */}
+      <div className="flex items-baseline justify-between gap-4">
+        <span className="eyebrow">Manche dessinée</span>
+        <span
+          className="text-right text-[13px]"
+          style={{ color: connectedPlayers >= CHAIN_MIN_PLAYERS ? "var(--color-success)" : "var(--color-text-faint)" }}
+        >
+          {connectedPlayers >= CHAIN_MIN_PLAYERS
+            ? "active"
+            : `${CHAIN_MIN_PLAYERS} joueurs minimum (vous êtes ${connectedPlayers})`}
+        </span>
+      </div>
 
       <Row label="Temps par question" value={`${settings.questionDurationSec}s`}>
         <input

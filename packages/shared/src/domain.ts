@@ -22,6 +22,13 @@ export type QuestionType = (typeof QUESTION_TYPES)[number];
  */
 export const MAX_DRAWING_DATA_URL_LENGTH = 60_000;
 
+/**
+ * A drawing round needs three links to work — one writes, the next draws, a third guesses.
+ * With two players the guesser is the author, who already knows the answer, so the slot is
+ * skipped. Shared because the client explains the rule and the server enforces it.
+ */
+export const CHAIN_MIN_PLAYERS = 3;
+
 /** A manual grade the host assigns to one player's answer during HOST_REVIEW. */
 export const GRADES = [0, 0.5, 1] as const;
 export type Grade = (typeof GRADES)[number];

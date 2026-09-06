@@ -100,7 +100,6 @@ export const DISCONNECT_GRACE_MS = 5 * 60 * 1000;
 export const ROOM_IDLE_TIMEOUT_MS = 30 * 60 * 1000;
 export const CODE_RELEASE_DELAY_MS = 30 * 60 * 1000;
 
-export const CHAIN_MIN_PLAYERS = 3;
 export const CHAIN_PROMPT_DURATION_MS = 30_000;
 export const CHAIN_DRAW_DURATION_MS = 45_000;
 export const CHAIN_GUESS_DURATION_MS = 30_000;
