@@ -38,7 +38,14 @@ export interface SubmittedAnswer {
 export interface ChainRoundState {
   order: string[]; // playerIds, snapshotted when the round starts
   prompts: Record<string, string>; // originPlayerId -> prompt text
-  drawings: Record<string, string>; // originPlayerId -> drawing data URL
+  /**
+   * originPlayerId -> whether that link's drawing has been submitted. The image bytes
+   * themselves are deliberately *not* here: GameState is serialised into a single DO
+   * storage value on every phase transition, so carrying a handful of base64 images in
+   * it would rewrite hundreds of kilobytes per submission and can blow past the
+   * per-value storage limit outright. RoomDO keeps them in their own keys instead.
+   */
+  drawings: Record<string, boolean>;
   guesses: Record<string, string>; // originPlayerId -> guess text
 }
 
@@ -73,7 +80,7 @@ export type GameEvent =
   | { kind: "SUBMIT_CHAIN_DRAWING"; playerId: string; dataUrl: string; now: number }
   | { kind: "SUBMIT_CHAIN_GUESS"; playerId: string; text: string; now: number }
   | { kind: "HOST_NEXT"; playerId: string; now: number }
-  | { kind: "HOST_KICK"; playerId: string; targetId: string }
+  | { kind: "HOST_KICK"; playerId: string; targetId: string; now: number }
   | { kind: "ALARM_FIRED"; now: number }
   | { kind: "PLAY_AGAIN"; playerId: string; now: number };
 
@@ -81,7 +88,13 @@ export type Effect =
   | { kind: "SET_CODE_EXPIRY"; expiresAt: number }
   | { kind: "DESTROY_ROOM" }
   | { kind: "SEND_ANSWER_RECEIVED"; playerId: string }
-  | { kind: "SEND_ERROR"; playerId: string; message: string };
+  | { kind: "SEND_ERROR"; playerId: string; message: string }
+  /** The state machine accepted a drawing; RoomDO persists the bytes out-of-band. */
+  | { kind: "STORE_CHAIN_DRAWING"; originId: string; dataUrl: string }
+  /** The chain round is over — its out-of-band drawings can go. */
+  | { kind: "CLEAR_CHAIN_DRAWINGS" }
+  /** Force-close every socket of a player, so a kick actually removes them. */
+  | { kind: "CLOSE_PLAYER_SOCKETS"; playerId: string; reason: string };
 
 export const DISCONNECT_GRACE_MS = 5 * 60 * 1000;
 export const ROOM_IDLE_TIMEOUT_MS = 30 * 60 * 1000;

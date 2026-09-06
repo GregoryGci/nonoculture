@@ -11,13 +11,19 @@ import type { GameEvent, GameState } from "./types.js";
 
 interface Env {
   DB: D1Database;
-  MEDIA: R2Bucket;
+  /** Optional: the R2 bucket isn't bound until one exists on the account. */
+  MEDIA?: R2Bucket;
   ADMIN_SECRET: string;
 }
 
-type SocketAttachment = { playerId: string } | { observer: true };
+/** Every accepted socket gets a socketId up front so it can be rate-limited individually
+ *  even before it identifies itself; playerId/observer are added once it does. */
+type SocketAttachment =
+  { socketId: string } | { socketId: string; playerId: string } | { socketId: string; observer: true };
 
 const STORAGE_KEY = "state";
+/** Chain drawings are stored one key each, outside the (frequently rewritten) game state. */
+const DRAWING_PREFIX = "chain:drawing:";
 // Generous enough for a host rapid-firing SUBMIT_HOST_GRADE through a long review list.
 const MESSAGE_RATE_LIMIT = { maxHits: 120, windowMs: 10_000 };
 
@@ -35,16 +41,25 @@ function resolveMediaUrl(mediaKey: string): string {
 
 export class RoomDO extends DurableObject<Env> {
   private gameState: GameState | null = null;
+  /** originPlayerId -> data URL, mirroring the DRAWING_PREFIX storage keys. Only ever
+   *  populated during a chain round, so this stays a handful of entries. */
+  private chainDrawings = new Map<string, string>();
   private readonly messageLimiter = new RateLimiter(MESSAGE_RATE_LIMIT.maxHits, MESSAGE_RATE_LIMIT.windowMs);
 
   constructor(ctx: DurableObjectState, env: Env) {
     super(ctx, env);
-    ctx.blockConcurrencyWhile(async () => {
+    // Not awaitable from a constructor by design: blockConcurrencyWhile makes the runtime
+    // queue every incoming event until the state is rehydrated.
+    void ctx.blockConcurrencyWhile(async () => {
       this.gameState = (await ctx.storage.get<GameState>(STORAGE_KEY)) ?? null;
+      const stored = await ctx.storage.list<string>({ prefix: DRAWING_PREFIX });
+      for (const [key, dataUrl] of stored) {
+        this.chainDrawings.set(key.slice(DRAWING_PREFIX.length), dataUrl);
+      }
     });
   }
 
-  override async fetch(request: Request): Promise<Response> {
+  override fetch(request: Request): Response {
     if (request.headers.get("Upgrade") !== "websocket") {
       return new Response("expected websocket", { status: 426 });
     }
@@ -57,6 +72,7 @@ export class RoomDO extends DurableObject<Env> {
     const client = pair[0];
     const server = pair[1];
     this.ctx.acceptWebSocket(server);
+    server.serializeAttachment({ socketId: crypto.randomUUID() } satisfies SocketAttachment);
     // Free ping/pong: the runtime answers "PING" with "PONG" without waking the DO.
     this.ctx.setWebSocketAutoResponse(new WebSocketRequestResponsePair("PING", "PONG"));
     return new Response(null, { status: 101, webSocket: client });
@@ -69,14 +85,23 @@ export class RoomDO extends DurableObject<Env> {
     });
   }
 
+  private readonly resolveDrawing = (originPlayerId: string): string => this.chainDrawings.get(originPlayerId) ?? "";
+
   private broadcastStateSync(): void {
     if (!this.gameState) return;
     for (const ws of this.ctx.getWebSockets()) {
       const meta = ws.deserializeAttachment() as SocketAttachment | null;
       if (!meta) continue;
       const forPlayerId = "playerId" in meta ? meta.playerId : "";
-      send(ws, "STATE_SYNC", buildStateSync(this.gameState, forPlayerId, resolveMediaUrl));
+      send(ws, "STATE_SYNC", buildStateSync(this.gameState, forPlayerId, resolveMediaUrl, this.resolveDrawing));
     }
+  }
+
+  private async clearChainDrawings(): Promise<void> {
+    if (this.chainDrawings.size === 0) return;
+    const keys = [...this.chainDrawings.keys()].map((id) => `${DRAWING_PREFIX}${id}`);
+    this.chainDrawings.clear();
+    await this.ctx.storage.delete(keys);
   }
 
   private async persistAndSchedule(): Promise<void> {
@@ -103,6 +128,19 @@ export class RoomDO extends DurableObject<Env> {
         send(originSocket, "ERROR", { message: effect.message });
       } else if (effect.kind === "SET_CODE_EXPIRY") {
         await setRoomCodeExpiry(this.env.DB, state.roomCode, effect.expiresAt);
+      } else if (effect.kind === "STORE_CHAIN_DRAWING") {
+        this.chainDrawings.set(effect.originId, effect.dataUrl);
+        await this.ctx.storage.put(`${DRAWING_PREFIX}${effect.originId}`, effect.dataUrl);
+      } else if (effect.kind === "CLEAR_CHAIN_DRAWINGS") {
+        await this.clearChainDrawings();
+      } else if (effect.kind === "CLOSE_PLAYER_SOCKETS") {
+        for (const socket of this.socketsFor(effect.playerId)) {
+          try {
+            socket.close(4003, effect.reason);
+          } catch {
+            /* already closed */
+          }
+        }
       } else if (effect.kind === "DESTROY_ROOM") {
         for (const ws of this.ctx.getWebSockets()) {
           try {
@@ -111,6 +149,7 @@ export class RoomDO extends DurableObject<Env> {
             /* ignore */
           }
         }
+        this.chainDrawings.clear();
         await this.ctx.storage.deleteAll();
         await this.ctx.storage.deleteAlarm();
         this.gameState = null;
@@ -131,7 +170,9 @@ export class RoomDO extends DurableObject<Env> {
     if (typeof message !== "string" || !this.gameState) return;
 
     const meta = ws.deserializeAttachment() as SocketAttachment | null;
-    const limiterKey = meta && "playerId" in meta ? meta.playerId : "anonymous";
+    // Per socket, never a shared "anonymous" bucket: one noisy unidentified client would
+    // otherwise exhaust the window and silently block everyone else's HELLO.
+    const limiterKey = meta && "playerId" in meta ? meta.playerId : (meta?.socketId ?? "unattached");
     if (!this.messageLimiter.check(limiterKey, Date.now())) return;
 
     let raw: unknown;
@@ -165,7 +206,8 @@ export class RoomDO extends DurableObject<Env> {
         if (other !== ws) other.close(4002, "replaced by a newer connection");
       }
       const playerToken = existing?.playerToken ?? crypto.randomUUID();
-      ws.serializeAttachment({ playerId: parsed.playerId } satisfies SocketAttachment);
+      const socketId = meta?.socketId ?? crypto.randomUUID();
+      ws.serializeAttachment({ socketId, playerId: parsed.playerId } satisfies SocketAttachment);
       send(ws, "HELLO_OK", { playerToken });
       await this.dispatch(
         { kind: "PLAYER_JOIN", playerId: parsed.playerId, playerToken, roomCode: parsed.roomCode, now },
@@ -179,8 +221,11 @@ export class RoomDO extends DurableObject<Env> {
         send(ws, "ERROR", { message: "wrong room" });
         return;
       }
-      ws.serializeAttachment({ observer: true } satisfies SocketAttachment);
-      send(ws, "STATE_SYNC", buildStateSync(this.gameState, "", resolveMediaUrl));
+      ws.serializeAttachment({
+        socketId: meta?.socketId ?? crypto.randomUUID(),
+        observer: true,
+      } satisfies SocketAttachment);
+      send(ws, "STATE_SYNC", buildStateSync(this.gameState, "", resolveMediaUrl, this.resolveDrawing));
       return;
     }
 
@@ -206,7 +251,9 @@ export class RoomDO extends DurableObject<Env> {
         break;
       }
       case "START_GAME": {
-        const deck = await buildDeck(this.env.DB, this.gameState.settings);
+        const deck = await buildDeck(this.env.DB, this.gameState.settings, {
+          mediaAvailable: this.env.MEDIA !== undefined,
+        });
         await this.dispatch({ kind: "START_GAME", playerId, now, deck }, ws);
         break;
       }
@@ -224,7 +271,13 @@ export class RoomDO extends DurableObject<Env> {
         break;
       case "SUBMIT_HOST_GRADE":
         await this.dispatch(
-          { kind: "SUBMIT_HOST_GRADE", playerId, deckIndex: parsed.deckIndex, targetPlayerId: parsed.playerId, grade: parsed.grade },
+          {
+            kind: "SUBMIT_HOST_GRADE",
+            playerId,
+            deckIndex: parsed.deckIndex,
+            targetPlayerId: parsed.playerId,
+            grade: parsed.grade,
+          },
           ws,
         );
         break;
@@ -232,16 +285,13 @@ export class RoomDO extends DurableObject<Env> {
         await this.dispatch({ kind: "HOST_NEXT", playerId, now }, ws);
         break;
       case "HOST_KICK":
-        await this.dispatch({ kind: "HOST_KICK", playerId, targetId: parsed.playerId }, ws);
+        await this.dispatch({ kind: "HOST_KICK", playerId, targetId: parsed.playerId, now }, ws);
         break;
       case "PLAY_AGAIN":
         await this.dispatch({ kind: "PLAY_AGAIN", playerId, now }, ws);
         break;
       case "SUBMIT_CHAIN_PROMPT":
-        await this.dispatch(
-          { kind: "SUBMIT_CHAIN_PROMPT", playerId, text: sanitizeText(parsed.text, 80), now },
-          ws,
-        );
+        await this.dispatch({ kind: "SUBMIT_CHAIN_PROMPT", playerId, text: sanitizeText(parsed.text, 80), now }, ws);
         break;
       case "SUBMIT_CHAIN_DRAWING":
         if (!parsed.dataUrl.startsWith("data:image/")) {
@@ -251,10 +301,7 @@ export class RoomDO extends DurableObject<Env> {
         await this.dispatch({ kind: "SUBMIT_CHAIN_DRAWING", playerId, dataUrl: parsed.dataUrl, now }, ws);
         break;
       case "SUBMIT_CHAIN_GUESS":
-        await this.dispatch(
-          { kind: "SUBMIT_CHAIN_GUESS", playerId, text: sanitizeText(parsed.text, 80), now },
-          ws,
-        );
+        await this.dispatch({ kind: "SUBMIT_CHAIN_GUESS", playerId, text: sanitizeText(parsed.text, 80), now }, ws);
         break;
     }
   }

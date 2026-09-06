@@ -1,4 +1,4 @@
-import { classifyAnswer, DEFAULT_SETTINGS } from "@quiproquo/shared";
+import { DEFAULT_SETTINGS, isChainMatch } from "@quiproquo/shared";
 import type { GameSettings, Grade } from "@quiproquo/shared";
 import {
   CHAIN_DRAW_DURATION_MS,
@@ -11,7 +11,7 @@ import {
   DISCONNECT_GRACE_MS,
   ROOM_IDLE_TIMEOUT_MS,
 } from "./types.js";
-import type { ChainRoundState, DeckItem, Effect, GameEvent, GameState, InternalPlayer } from "./types.js";
+import type { ChainRoundState, Effect, GameEvent, GameState, InternalPlayer } from "./types.js";
 
 export interface TransitionResult {
   state: GameState;
@@ -20,12 +20,12 @@ export interface TransitionResult {
 
 function clampSettings(partial: Partial<GameSettings>, base: GameSettings): GameSettings {
   return {
-    questionCount: partial.questionCount !== undefined
-      ? Math.min(40, Math.max(20, partial.questionCount))
-      : base.questionCount,
-    questionDurationSec: partial.questionDurationSec !== undefined
-      ? Math.min(30, Math.max(15, partial.questionDurationSec))
-      : base.questionDurationSec,
+    questionCount:
+      partial.questionCount !== undefined ? Math.min(40, Math.max(20, partial.questionCount)) : base.questionCount,
+    questionDurationSec:
+      partial.questionDurationSec !== undefined
+        ? Math.min(30, Math.max(15, partial.questionDurationSec))
+        : base.questionDurationSec,
     themes: partial.themes ?? base.themes,
   };
 }
@@ -57,7 +57,7 @@ export function originForRole(order: string[], playerId: string, roleOffset: num
   return order[(idx - roleOffset + order.length) % order.length]!;
 }
 
-function allChainStepDone(state: GameState, submissions: Record<string, string>, roleOffset: number): boolean {
+function allChainStepDone(state: GameState, submissions: Record<string, unknown>, roleOffset: number): boolean {
   const order = state.chain?.order ?? [];
   if (order.length === 0) return false;
   const relevantOrigins = order.filter((_, idx) => {
@@ -68,7 +68,7 @@ function allChainStepDone(state: GameState, submissions: Record<string, string>,
   return relevantOrigins.every((originId) => submissions[originId] !== undefined);
 }
 
-function fillMissing(order: string[], entries: Record<string, string>, fallback: string): Record<string, string> {
+function fillMissing<T>(order: string[], entries: Record<string, T>, fallback: T): Record<string, T> {
   const filled = { ...entries };
   for (const id of order) {
     if (filled[id] === undefined) filled[id] = fallback;
@@ -77,12 +77,18 @@ function fillMissing(order: string[], entries: Record<string, string>, fallback:
 }
 
 function advancePastChainPrompt(state: GameState, now: number): GameState {
-  const chain: ChainRoundState = { ...state.chain!, prompts: fillMissing(state.chain!.order, state.chain!.prompts, "…") };
+  const chain: ChainRoundState = {
+    ...state.chain!,
+    prompts: fillMissing(state.chain!.order, state.chain!.prompts, "…"),
+  };
   return { ...state, chain, phase: "CHAIN_DRAW", phaseDeadlineTs: now + CHAIN_DRAW_DURATION_MS };
 }
 
 function advancePastChainDraw(state: GameState, now: number): GameState {
-  const chain: ChainRoundState = { ...state.chain!, drawings: fillMissing(state.chain!.order, state.chain!.drawings, "") };
+  const chain: ChainRoundState = {
+    ...state.chain!,
+    drawings: fillMissing(state.chain!.order, state.chain!.drawings, false),
+  };
   return { ...state, chain, phase: "CHAIN_GUESS", phaseDeadlineTs: now + CHAIN_GUESS_DURATION_MS };
 }
 
@@ -92,8 +98,7 @@ function resolveChain(state: GameState, now: number): GameState {
   order.forEach((originId, idx) => {
     const prompt = prompts[originId] ?? "";
     const guess = guesses[originId] ?? "";
-    const matched = prompt.length > 0 && guess.length > 0 && classifyAnswer(guess, prompt).classification === "auto_valid";
-    if (!matched) return;
+    if (!isChainMatch(guess, prompt)) return;
     const drawerId = order[(idx + 1) % order.length]!;
     const guesserId = order[(idx + 2) % order.length]!;
     for (const id of [originId, drawerId, guesserId]) {
@@ -112,7 +117,10 @@ function resolveChain(state: GameState, now: number): GameState {
 }
 
 function advancePastChainGuess(state: GameState, now: number): GameState {
-  const chain: ChainRoundState = { ...state.chain!, guesses: fillMissing(state.chain!.order, state.chain!.guesses, "") };
+  const chain: ChainRoundState = {
+    ...state.chain!,
+    guesses: fillMissing(state.chain!.order, state.chain!.guesses, ""),
+  };
   return resolveChain({ ...state, chain }, now);
 }
 
@@ -122,7 +130,8 @@ function startDeckSlot(state: GameState, index: number, now: number): GameState 
   if (index >= state.deck.length) {
     return { ...state, phase: "HOST_REVIEW", deckIndex: index, chain: null, phaseDeadlineTs: null };
   }
-  const item: DeckItem = state.deck[index]!;
+  const item = state.deck[index];
+  if (!item) return startDeckSlot(state, index + 1, now); // defensive: a malformed deck slot
   const base = { ...state, deckIndex: index, answers: [] };
   if (item.kind === "trivia") {
     return {
@@ -155,6 +164,30 @@ function logAnswersAndAdvance(state: GameState, now: number): GameState {
   const answerLog =
     state.answers.length > 0 ? { ...state.answerLog, [state.deckIndex]: state.answers } : state.answerLog;
   return advanceDeck({ ...state, answerLog }, now);
+}
+
+/**
+ * Re-evaluates the current step now that the roster changed. Without this, a round whose
+ * last outstanding player disconnects sits there until its timer expires, even though
+ * everyone still in the room is done.
+ */
+function advanceIfStepComplete(state: GameState, now: number): GameState {
+  // Only when someone is still around: an empty room shouldn't burn through phases.
+  if (connectedPlayers(state).length === 0) return state;
+  if (state.phase === "QUESTION") {
+    return allConnectedAnswered(state) ? logAnswersAndAdvance(state, now) : state;
+  }
+  if (!state.chain) return state;
+  if (state.phase === "CHAIN_PROMPT") {
+    return allChainStepDone(state, state.chain.prompts, 0) ? advancePastChainPrompt(state, now) : state;
+  }
+  if (state.phase === "CHAIN_DRAW") {
+    return allChainStepDone(state, state.chain.drawings, 1) ? advancePastChainDraw(state, now) : state;
+  }
+  if (state.phase === "CHAIN_GUESS") {
+    return allChainStepDone(state, state.chain.guesses, 2) ? advancePastChainGuess(state, now) : state;
+  }
+  return state;
 }
 
 export function createRoom(roomCode: string, now: number): GameState {
@@ -245,14 +278,26 @@ export function transition(state: GameState, event: GameEvent): TransitionResult
           };
         }
       }
-      next = { ...state, players, hostPlayerId };
+      next = advanceIfStepComplete({ ...state, players, hostPlayerId }, event.now);
       break;
     }
 
     case "HOST_KICK": {
       if (event.playerId !== state.hostPlayerId) break;
+      if (!state.players[event.targetId]) break;
       const { [event.targetId]: _removed, ...rest } = state.players;
-      next = { ...state, players: rest };
+      // Removing them from the state isn't enough: their socket would still be open and a
+      // fresh HELLO would walk them straight back in as a new player.
+      effects.push({ kind: "CLOSE_PLAYER_SOCKETS", playerId: event.targetId, reason: "kicked" });
+      let hostPlayerId = state.hostPlayerId;
+      if (event.targetId === state.hostPlayerId) {
+        // The host kicked themselves — hand the room over instead of leaving hostPlayerId
+        // pointing at someone who no longer exists (nobody could start or end the game).
+        const successor = oldestConnected({ ...state, players: rest });
+        hostPlayerId = successor?.playerId ?? "";
+        if (successor) rest[successor.playerId] = { ...successor, isHost: true };
+      }
+      next = advanceIfStepComplete({ ...state, players: rest, hostPlayerId }, event.now);
       break;
     }
 
@@ -264,7 +309,16 @@ export function transition(state: GameState, event: GameEvent): TransitionResult
 
     case "START_GAME": {
       if (event.playerId !== state.hostPlayerId || state.phase !== "LOBBY") break;
-      if (event.deck.length === 0) break;
+      if (event.deck.length === 0) {
+        // Empty bank or a theme filter that matches nothing — say so instead of starting
+        // a game with no questions in it.
+        effects.push({
+          kind: "SEND_ERROR",
+          playerId: event.playerId,
+          message: "Aucune question disponible pour ces thèmes.",
+        });
+        break;
+      }
       next = startDeckSlot({ ...state, deck: event.deck }, 0, event.now);
       break;
     }
@@ -279,7 +333,10 @@ export function transition(state: GameState, event: GameEvent): TransitionResult
       if (state.answers.some((a) => a.playerId === event.playerId)) break; // locked
 
       effects.push({ kind: "SEND_ANSWER_RECEIVED", playerId: event.playerId });
-      next = { ...state, answers: [...state.answers, { playerId: event.playerId, raw: event.raw, submittedAt: event.now }] };
+      next = {
+        ...state,
+        answers: [...state.answers, { playerId: event.playerId, raw: event.raw, submittedAt: event.now }],
+      };
 
       if (allConnectedAnswered(next)) {
         next = logAnswersAndAdvance(next, event.now);
@@ -324,8 +381,9 @@ export function transition(state: GameState, event: GameEvent): TransitionResult
       if (!state.players[event.playerId]?.connected) break;
       const origin = originForRole(state.chain.order, event.playerId, 1);
       if (!origin || state.chain.drawings[origin] !== undefined) break;
-      const chain = { ...state.chain, drawings: { ...state.chain.drawings, [origin]: event.dataUrl } };
+      const chain = { ...state.chain, drawings: { ...state.chain.drawings, [origin]: true } };
       next = { ...state, chain };
+      effects.push({ kind: "STORE_CHAIN_DRAWING", originId: origin, dataUrl: event.dataUrl });
       effects.push({ kind: "SEND_ANSWER_RECEIVED", playerId: event.playerId });
       if (allChainStepDone(next, chain.drawings, 1)) {
         next = advancePastChainDraw(next, event.now);
@@ -359,9 +417,7 @@ export function transition(state: GameState, event: GameEvent): TransitionResult
 
     case "PLAY_AGAIN": {
       if (event.playerId !== state.hostPlayerId || state.phase !== "FINISHED") break;
-      const players = Object.fromEntries(
-        Object.entries(state.players).map(([id, p]) => [id, { ...p, score: 0 }]),
-      );
+      const players = Object.fromEntries(Object.entries(state.players).map(([id, p]) => [id, { ...p, score: 0 }]));
       next = {
         ...state,
         phase: "LOBBY",
@@ -386,6 +442,9 @@ export function transition(state: GameState, event: GameEvent): TransitionResult
   if (next !== state) {
     const now = "now" in event ? event.now : state.lastActivityAt;
     next = { ...next, lastActivityAt: now };
+    if (state.chain !== null && next.chain === null) {
+      effects.push({ kind: "CLEAR_CHAIN_DRAWINGS" });
+    }
     if (next.phase === "FINISHED" && state.phase !== "FINISHED") {
       effects.push({ kind: "SET_CODE_EXPIRY", expiresAt: next.lastActivityAt + CODE_RELEASE_DELAY_MS });
     }
@@ -447,7 +506,9 @@ export function computeNextAlarmTs(state: GameState): number | null {
       candidates.push(p.disconnectedAt + DISCONNECT_GRACE_MS);
     }
   }
-  if (connectedPlayers(state).length === 0 && state.phase !== "FINISHED") {
+  // Including FINISHED: a room nobody ever came back to still has to be swept, otherwise
+  // its storage lives forever with no alarm left to collect it.
+  if (connectedPlayers(state).length === 0) {
     candidates.push(state.lastActivityAt + ROOM_IDLE_TIMEOUT_MS);
   }
   return candidates.length > 0 ? Math.min(...candidates) : null;

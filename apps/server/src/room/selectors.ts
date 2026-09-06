@@ -1,5 +1,12 @@
-import { classifyAnswer } from "@quiproquo/shared";
-import type { ChainResult, ChainTask, PlayerPublic, QuestionPublic, ReviewQuestion, RoomStateSync } from "@quiproquo/shared";
+import { isChainMatch } from "@quiproquo/shared";
+import type {
+  ChainResult,
+  ChainTask,
+  PlayerPublic,
+  QuestionPublic,
+  ReviewQuestion,
+  RoomStateSync,
+} from "@quiproquo/shared";
 import { originForRole } from "./state-machine.js";
 import { CHAIN_POINTS } from "./types.js";
 import type { GameState, InternalQuestion } from "./types.js";
@@ -9,7 +16,10 @@ function triviaAt(state: GameState, index: number): InternalQuestion | null {
   return item?.kind === "trivia" ? item.question : null;
 }
 
-function computeChainTask(state: GameState, forPlayerId: string): ChainTask | null {
+/** Looks up a chain drawing's data URL — the bytes live outside GameState (see ChainRoundState). */
+export type DrawingResolver = (originPlayerId: string) => string;
+
+function computeChainTask(state: GameState, forPlayerId: string, resolveDrawing: DrawingResolver): ChainTask | null {
   if (!state.chain || !state.chain.order.includes(forPlayerId)) return null;
   const { order, prompts, drawings, guesses } = state.chain;
 
@@ -21,35 +31,39 @@ function computeChainTask(state: GameState, forPlayerId: string): ChainTask | nu
     return {
       role: "draw",
       content: origin ? (prompts[origin] ?? "") : null,
-      alreadySubmitted: origin ? drawings[origin] !== undefined : false,
+      alreadySubmitted: origin ? drawings[origin] === true : false,
     };
   }
   if (state.phase === "CHAIN_GUESS") {
     const origin = originForRole(order, forPlayerId, 2);
     return {
       role: "guess",
-      content: origin ? (drawings[origin] ?? "") : null,
+      content: origin ? resolveDrawing(origin) : null,
       alreadySubmitted: origin ? guesses[origin] !== undefined : false,
     };
   }
   return null;
 }
 
-function computeChainReveal(state: GameState, nicknameOf: (id: string) => string): ChainResult[] | null {
+function computeChainReveal(
+  state: GameState,
+  nicknameOf: (id: string) => string,
+  resolveDrawing: DrawingResolver,
+): ChainResult[] | null {
   if (state.phase !== "CHAIN_REVEAL" || !state.chain) return null;
-  const { order, prompts, drawings, guesses } = state.chain;
+  const { order, prompts, guesses } = state.chain;
   return order.map((originId, idx) => {
     const drawerId = order[(idx + 1) % order.length]!;
     const guesserId = order[(idx + 2) % order.length]!;
     const prompt = prompts[originId] ?? "";
     const guess = guesses[originId] ?? "";
-    const matched = prompt.length > 0 && guess.length > 0 && classifyAnswer(guess, prompt).classification === "auto_valid";
+    const matched = isChainMatch(guess, prompt);
     return {
       originPlayerId: originId,
       originNickname: nicknameOf(originId),
       prompt,
       drawerNickname: nicknameOf(drawerId),
-      drawingDataUrl: drawings[originId] ?? "",
+      drawingDataUrl: resolveDrawing(originId),
       guesserNickname: nicknameOf(guesserId),
       guess,
       matched,
@@ -84,6 +98,7 @@ export function buildStateSync(
   state: GameState,
   forPlayerId: string,
   resolveMediaUrl: (mediaKey: string) => string = () => "",
+  resolveDrawing: DrawingResolver = () => "",
 ): RoomStateSync {
   const players: PlayerPublic[] = Object.values(state.players)
     .sort((a, b) => a.joinedAt - b.joinedAt)
@@ -130,8 +145,8 @@ export function buildStateSync(
     nextQuestionMedia,
     phaseDeadlineTs: state.phaseDeadlineTs,
     youHaveAnswered: state.answers.some((a) => a.playerId === forPlayerId),
-    chainTask: computeChainTask(state, forPlayerId),
-    chainReveal: computeChainReveal(state, nicknameOf),
+    chainTask: computeChainTask(state, forPlayerId, resolveDrawing),
+    chainReveal: computeChainReveal(state, nicknameOf, resolveDrawing),
     reviewQuestions: computeReviewQuestions(state, nicknameOf),
   };
 }

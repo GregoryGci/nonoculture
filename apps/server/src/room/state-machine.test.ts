@@ -3,11 +3,11 @@ import { computeNextAlarmTs, createRoom, transition } from "./state-machine.js";
 import type { DeckItem, GameState, InternalQuestion } from "./types.js";
 import {
   CHAIN_DRAW_DURATION_MS,
-  CHAIN_GUESS_DURATION_MS,
   CHAIN_POINTS,
   CHAIN_PROMPT_DURATION_MS,
   CHAIN_REVEAL_PER_ITEM_MS,
   DISCONNECT_GRACE_MS,
+  ROOM_IDLE_TIMEOUT_MS,
 } from "./types.js";
 
 const T0 = 1_000_000;
@@ -143,12 +143,22 @@ describe("game loop: QUESTION -> QUESTION -> HOST_REVIEW -> FINISHED", () => {
 
   it("advances straight to the next QUESTION as soon as all connected players answer, no wait", () => {
     let state = setupStarted();
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Paris", now: T0 + 200 })
-      .state;
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "host",
+      questionId: 1,
+      raw: "Paris",
+      now: T0 + 200,
+    }).state;
     expect(state.phase).toBe("QUESTION");
     expect(state.deckIndex).toBe(0);
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p2", questionId: 1, raw: "paris", now: T0 + 201 })
-      .state;
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "p2",
+      questionId: 1,
+      raw: "paris",
+      now: T0 + 201,
+    }).state;
     expect(state.phase).toBe("QUESTION");
     expect(state.deckIndex).toBe(1);
     expect(state.phaseDeadlineTs).toBe(T0 + 201 + state.settings.questionDurationSec * 1000);
@@ -157,10 +167,20 @@ describe("game loop: QUESTION -> QUESTION -> HOST_REVIEW -> FINISHED", () => {
 
   it("archives answers for the review before clearing them", () => {
     let state = setupStarted();
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Paris", now: T0 + 200 })
-      .state;
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p2", questionId: 1, raw: "nope", now: T0 + 201 })
-      .state;
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "host",
+      questionId: 1,
+      raw: "Paris",
+      now: T0 + 200,
+    }).state;
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "p2",
+      questionId: 1,
+      raw: "nope",
+      now: T0 + 201,
+    }).state;
     expect(state.answerLog[0]).toEqual([
       { playerId: "host", raw: "Paris", submittedAt: T0 + 200 },
       { playerId: "p2", raw: "nope", submittedAt: T0 + 201 },
@@ -169,10 +189,20 @@ describe("game loop: QUESTION -> QUESTION -> HOST_REVIEW -> FINISHED", () => {
 
   it("locks a second answer from the same player", () => {
     let state = setupStarted();
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Paris", now: T0 + 200 })
-      .state;
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Lyon", now: T0 + 201 })
-      .state;
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "host",
+      questionId: 1,
+      raw: "Paris",
+      now: T0 + 200,
+    }).state;
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "host",
+      questionId: 1,
+      raw: "Lyon",
+      now: T0 + 201,
+    }).state;
     expect(state.answers.filter((a) => a.playerId === "host")).toHaveLength(1);
     expect(state.answers[0]?.raw).toBe("Paris");
   });
@@ -188,24 +218,54 @@ describe("game loop: QUESTION -> QUESTION -> HOST_REVIEW -> FINISHED", () => {
 
   it("does not award any score automatically — scoring is entirely manual, at HOST_REVIEW", () => {
     let state = setupStarted();
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Paris", now: T0 + 200 })
-      .state;
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p2", questionId: 1, raw: "Paris", now: T0 + 201 })
-      .state;
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "host",
+      questionId: 1,
+      raw: "Paris",
+      now: T0 + 200,
+    }).state;
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "p2",
+      questionId: 1,
+      raw: "Paris",
+      now: T0 + 201,
+    }).state;
     expect(state.players.host?.score).toBe(0);
     expect(state.players.p2?.score).toBe(0);
   });
 
   it("reaches HOST_REVIEW (no timer) after the last question, then FINISHED once the host is done", () => {
     let state = setupStarted();
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Paris", now: T0 + 200 })
-      .state;
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p2", questionId: 1, raw: "Paris", now: T0 + 201 })
-      .state; // -> QUESTION #2
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 2, raw: "Berlin", now: T0 + 300 })
-      .state;
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p2", questionId: 2, raw: "Berlin", now: T0 + 301 })
-      .state; // -> HOST_REVIEW
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "host",
+      questionId: 1,
+      raw: "Paris",
+      now: T0 + 200,
+    }).state;
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "p2",
+      questionId: 1,
+      raw: "Paris",
+      now: T0 + 201,
+    }).state; // -> QUESTION #2
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "host",
+      questionId: 2,
+      raw: "Berlin",
+      now: T0 + 300,
+    }).state;
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "p2",
+      questionId: 2,
+      raw: "Berlin",
+      now: T0 + 301,
+    }).state; // -> HOST_REVIEW
     expect(state.phase).toBe("HOST_REVIEW");
     expect(state.phaseDeadlineTs).toBeNull(); // host takes as long as they want
 
@@ -216,14 +276,34 @@ describe("game loop: QUESTION -> QUESTION -> HOST_REVIEW -> FINISHED", () => {
 
   it("ignores HOST_NEXT (finish review) from a non-host player", () => {
     let state = setupStarted();
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Paris", now: T0 + 200 })
-      .state;
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p2", questionId: 1, raw: "Paris", now: T0 + 201 })
-      .state;
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 2, raw: "Berlin", now: T0 + 300 })
-      .state;
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p2", questionId: 2, raw: "Berlin", now: T0 + 301 })
-      .state; // -> HOST_REVIEW
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "host",
+      questionId: 1,
+      raw: "Paris",
+      now: T0 + 200,
+    }).state;
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "p2",
+      questionId: 1,
+      raw: "Paris",
+      now: T0 + 201,
+    }).state;
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "host",
+      questionId: 2,
+      raw: "Berlin",
+      now: T0 + 300,
+    }).state;
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "p2",
+      questionId: 2,
+      raw: "Berlin",
+      now: T0 + 301,
+    }).state; // -> HOST_REVIEW
     state = transition(state, { kind: "HOST_NEXT", playerId: "p2", now: T0 + 500 }).state;
     expect(state.phase).toBe("HOST_REVIEW");
   });
@@ -242,10 +322,20 @@ describe("HOST_REVIEW / SUBMIT_HOST_GRADE", () => {
       now: T0 + 100,
       deck: trivia(question({ id: 1 })),
     }).state;
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Paris", now: T0 + 200 })
-      .state;
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p2", questionId: 1, raw: "Pariss", now: T0 + 201 })
-      .state; // -> HOST_REVIEW
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "host",
+      questionId: 1,
+      raw: "Paris",
+      now: T0 + 200,
+    }).state;
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "p2",
+      questionId: 1,
+      raw: "Pariss",
+      now: T0 + 201,
+    }).state; // -> HOST_REVIEW
     return state;
   }
 
@@ -336,10 +426,20 @@ describe("HOST_REVIEW / SUBMIT_HOST_GRADE", () => {
       now: T0 + 100,
       deck: trivia(question({ id: 1 }), question({ id: 2 })),
     }).state;
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Paris", now: T0 + 200 })
-      .state;
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p2", questionId: 1, raw: "Paris", now: T0 + 201 })
-      .state; // -> QUESTION #2, still mid-game
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "host",
+      questionId: 1,
+      raw: "Paris",
+      now: T0 + 200,
+    }).state;
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "p2",
+      questionId: 1,
+      raw: "Paris",
+      now: T0 + 201,
+    }).state; // -> QUESTION #2, still mid-game
     state = transition(state, {
       kind: "SUBMIT_HOST_GRADE",
       playerId: "host",
@@ -378,8 +478,13 @@ describe("disconnect grace period", () => {
       deck: trivia(question(), question({ id: 2 })),
     }).state;
     state = transition(state, { kind: "PLAYER_DISCONNECT", playerId: "p2", now: T0 + 150 }).state;
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Paris", now: T0 + 200 })
-      .state;
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "host",
+      questionId: 1,
+      raw: "Paris",
+      now: T0 + 200,
+    }).state;
     expect(state.phase).toBe("QUESTION");
     expect(state.deckIndex).toBe(1); // advanced past question 1 without waiting on the disconnected p2
   });
@@ -428,8 +533,13 @@ describe("computeNextAlarmTs", () => {
       now: T0 + 100,
       deck: trivia(question()),
     }).state;
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Paris", now: T0 + 200 })
-      .state;
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "host",
+      questionId: 1,
+      raw: "Paris",
+      now: T0 + 200,
+    }).state;
     expect(state.phase).toBe("HOST_REVIEW");
     expect(computeNextAlarmTs(state)).toBeNull();
   });
@@ -495,9 +605,55 @@ describe("chain round (téléphone dessiné)", () => {
     expect(state.phase).toBe("CHAIN_DRAW");
     state = transition(state, { kind: "SUBMIT_CHAIN_DRAWING", playerId: "host", dataUrl: "d-p3", now: T0 + 122 }).state;
     expect(state.phase).toBe("CHAIN_GUESS");
-    expect(state.chain?.drawings.host).toBe("d-host");
-    expect(state.chain?.drawings.p2).toBe("d-p2");
-    expect(state.chain?.drawings.p3).toBe("d-p3");
+    // The state only records *that* each origin's drawing arrived; the bytes travel as an
+    // effect and are stored outside GameState (see ChainRoundState.drawings).
+    expect(state.chain?.drawings.host).toBe(true);
+    expect(state.chain?.drawings.p2).toBe(true);
+    expect(state.chain?.drawings.p3).toBe(true);
+  });
+
+  it("hands the drawing bytes to an effect instead of putting them in the game state", () => {
+    let state = setupChainStarted();
+    for (const [playerId, text] of [
+      ["host", "chat"],
+      ["p2", "banane"],
+      ["p3", "voiture"],
+    ] as const) {
+      state = transition(state, { kind: "SUBMIT_CHAIN_PROMPT", playerId, text, now: T0 + 110 }).state;
+    }
+    const result = transition(state, {
+      kind: "SUBMIT_CHAIN_DRAWING",
+      playerId: "p2",
+      dataUrl: "data:image/webp;base64,AAAA",
+      now: T0 + 120,
+    });
+    expect(result.effects).toContainEqual({
+      kind: "STORE_CHAIN_DRAWING",
+      originId: "host",
+      dataUrl: "data:image/webp;base64,AAAA",
+    });
+    expect(JSON.stringify(result.state)).not.toContain("data:image");
+  });
+
+  it("tells the room to drop the stored drawings once the chain round is over", () => {
+    let state = setupChainStarted();
+    for (const [playerId, text] of [
+      ["host", "chat"],
+      ["p2", "banane"],
+      ["p3", "voiture"],
+    ] as const) {
+      state = transition(state, { kind: "SUBMIT_CHAIN_PROMPT", playerId, text, now: T0 + 110 }).state;
+    }
+    for (const playerId of ["p2", "p3", "host"] as const) {
+      state = transition(state, { kind: "SUBMIT_CHAIN_DRAWING", playerId, dataUrl: "d", now: T0 + 120 }).state;
+    }
+    for (const playerId of ["p3", "host", "p2"] as const) {
+      state = transition(state, { kind: "SUBMIT_CHAIN_GUESS", playerId, text: "x", now: T0 + 130 }).state;
+    }
+    expect(state.phase).toBe("CHAIN_REVEAL");
+    const result = transition(state, { kind: "HOST_NEXT", playerId: "host", now: T0 + 200 });
+    expect(result.state.chain).toBeNull();
+    expect(result.effects).toContainEqual({ kind: "CLEAR_CHAIN_DRAWINGS" });
   });
 
   it("resolves guesses, scores only the matching chain, and moves to CHAIN_REVEAL", () => {
@@ -512,7 +668,12 @@ describe("chain round (téléphone dessiné)", () => {
     state = transition(state, { kind: "SUBMIT_CHAIN_GUESS", playerId: "p3", text: "chat", now: T0 + 130 }).state; // correct
     state = transition(state, { kind: "SUBMIT_CHAIN_GUESS", playerId: "host", text: "nawak", now: T0 + 131 }).state; // wrong
     expect(state.phase).toBe("CHAIN_GUESS");
-    state = transition(state, { kind: "SUBMIT_CHAIN_GUESS", playerId: "p2", text: "nimportequoi", now: T0 + 132 }).state; // wrong
+    state = transition(state, {
+      kind: "SUBMIT_CHAIN_GUESS",
+      playerId: "p2",
+      text: "nimportequoi",
+      now: T0 + 132,
+    }).state; // wrong
     expect(state.phase).toBe("CHAIN_REVEAL");
     // only host's chain matched (prompt "chat" correctly guessed by p3) -> host, p2 (drawer), p3 (guesser) each score
     expect(state.players.host?.score).toBe(CHAIN_POINTS);
@@ -551,10 +712,20 @@ describe("PLAY_AGAIN", () => {
       now: T0 + 100,
       deck: trivia(question()),
     }).state;
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Paris", now: T0 + 200 })
-      .state;
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p2", questionId: 1, raw: "Paris", now: T0 + 201 })
-      .state; // -> HOST_REVIEW
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "host",
+      questionId: 1,
+      raw: "Paris",
+      now: T0 + 200,
+    }).state;
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "p2",
+      questionId: 1,
+      raw: "Paris",
+      now: T0 + 201,
+    }).state; // -> HOST_REVIEW
     state = transition(state, {
       kind: "SUBMIT_HOST_GRADE",
       playerId: "host",
@@ -571,5 +742,150 @@ describe("PLAY_AGAIN", () => {
     expect(state.grades).toEqual({});
     expect(state.answerLog).toEqual({});
     expect(Object.keys(state.players)).toEqual(["host", "p2"]);
+  });
+});
+
+describe("HOST_KICK", () => {
+  function lobbyOfThree() {
+    let state = createRoom("1234", T0);
+    state = join(state, "host", T0);
+    state = join(state, "p2", T0 + 1);
+    state = join(state, "p3", T0 + 2);
+    return state;
+  }
+
+  it("removes the player and asks the room to close their sockets", () => {
+    // Dropping them from the state isn't enough on its own: a still-open socket can send
+    // HELLO again and walk straight back in as a brand-new player.
+    const { state, effects } = transition(lobbyOfThree(), {
+      kind: "HOST_KICK",
+      playerId: "host",
+      targetId: "p3",
+      now: T0 + 10,
+    });
+    expect(Object.keys(state.players)).toEqual(["host", "p2"]);
+    expect(effects).toContainEqual({ kind: "CLOSE_PLAYER_SOCKETS", playerId: "p3", reason: "kicked" });
+  });
+
+  it("hands the room over when the host kicks themselves, instead of leaving it hostless", () => {
+    const { state } = transition(lobbyOfThree(), {
+      kind: "HOST_KICK",
+      playerId: "host",
+      targetId: "host",
+      now: T0 + 10,
+    });
+    expect(state.hostPlayerId).toBe("p2");
+    expect(state.players.p2?.isHost).toBe(true);
+    // and the new host can actually drive the room
+    const started = transition(state, { kind: "START_GAME", playerId: "p2", now: T0 + 20, deck: trivia(question()) });
+    expect(started.state.phase).toBe("QUESTION");
+  });
+
+  it("ignores a kick from a non-host, and a kick aimed at nobody", () => {
+    expect(
+      transition(lobbyOfThree(), { kind: "HOST_KICK", playerId: "p2", targetId: "p3", now: T0 + 10 }).state.players.p3,
+    ).toBeDefined();
+    expect(
+      transition(lobbyOfThree(), { kind: "HOST_KICK", playerId: "host", targetId: "ghost", now: T0 + 10 }).effects,
+    ).toEqual([]);
+  });
+});
+
+describe("advancing when the roster shrinks", () => {
+  it("moves on as soon as the player everyone was waiting for disconnects", () => {
+    let state = createRoom("1234", T0);
+    state = join(state, "host", T0);
+    state = join(state, "p2", T0 + 1);
+    state = transition(state, {
+      kind: "START_GAME",
+      playerId: "host",
+      now: T0 + 100,
+      deck: trivia(question({ id: 1 }), question({ id: 2 })),
+    }).state;
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "host",
+      questionId: 1,
+      raw: "Paris",
+      now: T0 + 200,
+    }).state;
+    expect(state.phase).toBe("QUESTION");
+    expect(state.deckIndex).toBe(0); // still waiting on p2
+
+    state = transition(state, { kind: "PLAYER_DISCONNECT", playerId: "p2", now: T0 + 210 }).state;
+    // p2 can no longer answer, so sitting on the timer would just stall everyone else
+    expect(state.deckIndex).toBe(1);
+    expect(state.answerLog[0]).toHaveLength(1);
+  });
+
+  it("does not burn through phases when the room empties out completely", () => {
+    let state = createRoom("1234", T0);
+    state = join(state, "host", T0);
+    state = transition(state, {
+      kind: "START_GAME",
+      playerId: "host",
+      now: T0 + 100,
+      deck: trivia(question({ id: 1 }), question({ id: 2 })),
+    }).state;
+    state = transition(state, { kind: "PLAYER_DISCONNECT", playerId: "host", now: T0 + 200 }).state;
+    expect(state.phase).toBe("QUESTION");
+    expect(state.deckIndex).toBe(0);
+  });
+});
+
+describe("START_GAME with nothing to play", () => {
+  it("refuses an empty deck and tells the host why", () => {
+    let state = createRoom("1234", T0);
+    state = join(state, "host", T0);
+    const { state: next, effects } = transition(state, {
+      kind: "START_GAME",
+      playerId: "host",
+      now: T0 + 100,
+      deck: [],
+    });
+    expect(next.phase).toBe("LOBBY");
+    expect(effects).toContainEqual({
+      kind: "SEND_ERROR",
+      playerId: "host",
+      message: "Aucune question disponible pour ces thèmes.",
+    });
+  });
+});
+
+describe("idle room cleanup", () => {
+  function finishedAndAbandoned() {
+    let state = createRoom("1234", T0);
+    state = join(state, "host", T0);
+    state = transition(state, { kind: "START_GAME", playerId: "host", now: T0 + 100, deck: trivia(question()) }).state;
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "host",
+      questionId: 1,
+      raw: "Paris",
+      now: T0 + 200,
+    }).state; // -> HOST_REVIEW
+    state = transition(state, { kind: "HOST_NEXT", playerId: "host", now: T0 + 300 }).state; // -> FINISHED
+    return transition(state, { kind: "PLAYER_DISCONNECT", playerId: "host", now: T0 + 400 }).state;
+  }
+
+  it("still schedules an alarm for a FINISHED room nobody came back to", () => {
+    // Without this the last alarm fires when the grace period ends, finds nothing to do,
+    // and schedules nothing further — the room's storage then lives forever.
+    let state = finishedAndAbandoned();
+    expect(computeNextAlarmTs(state)).toBe(T0 + 400 + DISCONNECT_GRACE_MS);
+
+    state = transition(state, { kind: "ALARM_FIRED", now: T0 + 400 + DISCONNECT_GRACE_MS }).state;
+    expect(state.players).toEqual({});
+    expect(computeNextAlarmTs(state)).toBe(state.lastActivityAt + ROOM_IDLE_TIMEOUT_MS);
+  });
+
+  it("destroys the room once that idle deadline passes", () => {
+    let state = finishedAndAbandoned();
+    state = transition(state, { kind: "ALARM_FIRED", now: T0 + 400 + DISCONNECT_GRACE_MS }).state;
+    const { effects } = transition(state, {
+      kind: "ALARM_FIRED",
+      now: state.lastActivityAt + ROOM_IDLE_TIMEOUT_MS,
+    });
+    expect(effects).toContainEqual({ kind: "DESTROY_ROOM" });
   });
 });
