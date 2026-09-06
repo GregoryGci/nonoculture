@@ -40,10 +40,13 @@ export function ProfileForm({ onSubmit }: { onSubmit: (nickname: string, avatar:
               type="button"
               onClick={() => setAvatar(a.id)}
               className="flex aspect-square items-center justify-center rounded-[var(--radius-control)] transition-all duration-300"
+              // Barely dimmed: the colour is the identity, so fading the unselected ones to
+              // half made the whole set read as mud. Selection is carried by the ring instead.
               style={{
                 background: selected ? "var(--color-surface-2)" : "transparent",
                 border: `1px solid ${selected ? "var(--color-border-strong)" : "transparent"}`,
-                opacity: selected ? 1 : 0.5,
+                opacity: selected ? 1 : 0.85,
+                transform: selected ? "scale(1)" : "scale(0.92)",
               }}
               aria-pressed={selected}
               aria-label={a.label}

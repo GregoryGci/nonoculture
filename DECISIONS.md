@@ -33,9 +33,10 @@ autonomie. Remplacée sur demande explicite par une direction cyberpunk :
   dans `theme.css`), panneaux à coins coupés (`.panel-notched`) sur le code de room,
   transitions d'entrée de phase (`.phase-enter`), pulsation du timer sous 5s
   (`.timer-urgent`).
-- Avatars : set original de 12 visages générés en SVG (gros yeux, coiffures/expressions
-  variées, petite marque néon "cyber") dans `apps/web/src/components/Avatar.tsx` — pas
-  d'images externes, pas de souci de droits d'auteur.
+- Avatars : 12 sphères SVG dessinées localement, un dégradé froid par identité
+  (`apps/web/src/lib/avatars.ts`, rendu dans `Avatar.tsx`). Elles remplacent les visages
+  illustrés servis par l'API publique DiceBear, qui juraient avec la direction artistique
+  et faisaient dépendre un projet autonome d'un tiers. Pas d'images externes.
 
 ## Comment changer ces choix
 

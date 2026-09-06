@@ -157,7 +157,6 @@ export function Room() {
 
           {state.phase === "FINISHED" && (
             <>
-              <p className="eyebrow text-center">Résultat final</p>
               <Podium players={state.players} />
               <hr className="divider" />
               <Scoreboard players={state.players} />
