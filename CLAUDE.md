@@ -55,9 +55,15 @@ visible en lecture seule par tout le monde pour la transparence ; le score est a
 immédiatement et peut être corrigé (re-noter écrase l'ancienne note, pas de cumul). Le
 host clique "Voir le podium" (`HOST_NEXT`) quand il a fini pour passer à `FINISHED`.
 
-Le deck (`GameState.deck`) mélange des questions trivia et des manches "téléphone
-dessiné" (~2 sur 15 slots, voir `apps/server/src/lib/questions.ts#buildDeck`), qui
-gardent elles leur scoring automatique :
+Le deck (`GameState.deck`) est composé selon des **quotas explicites par 15 slots** :
+**1 manche dessinée + 4 questions audio**, le reste en texte (voir
+`apps/server/src/lib/questions.ts#buildDeck`). L'audio est tiré par sa propre requête
+pour que le quota soit garanti et non laissé au hasard du `ORDER BY RANDOM()`. Chaque
+quota se dégrade proprement : si la banque manque de sons — ou si aucune source média
+n'est branchée — le texte comble, et la partie garde la longueur choisie par l'hôte.
+Au moins une manche dessinée est toujours placée dès que le deck peut en accueillir une
+(sinon une partie courte arrondissait à zéro, ce qui est exactement la longueur qu'on
+choisit pour tester le mode). Les manches dessinées gardent leur scoring automatique :
 
 ```
 CHAIN_PROMPT → CHAIN_DRAW → CHAIN_GUESS → CHAIN_REVEAL → (slot suivant du deck)

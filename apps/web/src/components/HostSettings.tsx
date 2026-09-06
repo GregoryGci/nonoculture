@@ -15,6 +15,8 @@ const ALL_THEMES: { id: string; label: string }[] = [
   { id: "cuisine", label: "Cuisine" },
   { id: "litterature", label: "Littérature" },
   { id: "technologie", label: "Technologie" },
+  { id: "lol", label: "League of Legends" },
+  { id: "dofus", label: "Dofus" },
 ];
 
 function Row({ label, value, children }: { label: string; value: string; children: React.ReactNode }) {

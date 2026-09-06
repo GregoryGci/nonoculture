@@ -112,7 +112,10 @@ export async function buildDeck(
   { mediaAvailable }: { mediaAvailable: boolean },
 ): Promise<DeckItem[]> {
   const total = settings.questionCount;
-  const requestedChainCount = Math.round((total * CHAIN_ROUNDS_PER_15) / 15);
+  // At the 1-per-15 rate a short game rounds down to zero drawing rounds, which is exactly
+  // the length a host picks to try the mode out. Always keep one when the deck can hold it
+  // (a slot that is neither first nor last, so 3 slots minimum).
+  const requestedChainCount = Math.max(total >= 3 ? 1 : 0, Math.round((total * CHAIN_ROUNDS_PER_15) / 15));
   const questionSlots = Math.max(0, total - requestedChainCount);
   const audioQuota = mediaAvailable ? Math.round((total * AUDIO_QUESTIONS_PER_15) / 15) : 0;
 
