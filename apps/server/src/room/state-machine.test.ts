@@ -78,7 +78,7 @@ describe("host migration on disconnect", () => {
     state = join(state, "host", T0);
     state = join(state, "p2", T0 + 10);
     state = transition(state, { kind: "PLAYER_DISCONNECT", playerId: "host", now: T0 + 20 }).state;
-    state = transition(state, { kind: "PLAYER_RECONNECT", playerId: "host", now: T0 + 25 }).state;
+    state = join(state, "host", T0 + 25); // reconnect via a fresh HELLO/PLAYER_JOIN
     expect(state.hostPlayerId).toBe("p2");
     expect(state.players.host?.isHost).toBe(false);
   });

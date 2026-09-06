@@ -59,7 +59,6 @@ export interface GameState {
 export type GameEvent =
   | { kind: "PLAYER_JOIN"; playerId: string; playerToken: string; roomCode: string; now: number }
   | { kind: "PLAYER_DISCONNECT"; playerId: string; now: number }
-  | { kind: "PLAYER_RECONNECT"; playerId: string; now: number }
   | { kind: "SET_PROFILE"; playerId: string; nickname: string; avatar: string }
   | { kind: "HOST_SETTINGS"; playerId: string; settings: Partial<GameSettings> }
   | { kind: "START_GAME"; playerId: string; now: number; questions: InternalQuestion[] }

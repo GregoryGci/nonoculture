@@ -1,0 +1,239 @@
+import { DurableObject } from "cloudflare:workers";
+import { parseClientMessage } from "@quiproquo/shared";
+import type { GameSettings, ServerMessageType } from "@quiproquo/shared";
+import { drawQuestions } from "../lib/questions.js";
+import { sanitizeNickname, sanitizeText } from "../lib/sanitize.js";
+import { setRoomCodeExpiry } from "../lib/room-code.js";
+import { RateLimiter } from "../lib/rate-limit.js";
+import { buildStateSync } from "./selectors.js";
+import { computeNextAlarmTs, createRoom, transition } from "./state-machine.js";
+import type { GameEvent, GameState } from "./types.js";
+
+interface Env {
+  DB: D1Database;
+  MEDIA: R2Bucket;
+  ADMIN_SECRET: string;
+}
+
+interface SocketAttachment {
+  playerId: string;
+}
+
+const STORAGE_KEY = "state";
+const MESSAGE_RATE_LIMIT = { maxHits: 20, windowMs: 10_000 };
+
+function send(ws: WebSocket, type: ServerMessageType, payload: unknown): void {
+  try {
+    ws.send(JSON.stringify({ type, payload }));
+  } catch {
+    // socket already closed; ignore, cleanup happens via webSocketClose/error
+  }
+}
+
+export class RoomDO extends DurableObject<Env> {
+  private gameState: GameState | null = null;
+  private readonly messageLimiter = new RateLimiter(MESSAGE_RATE_LIMIT.maxHits, MESSAGE_RATE_LIMIT.windowMs);
+
+  constructor(ctx: DurableObjectState, env: Env) {
+    super(ctx, env);
+    ctx.blockConcurrencyWhile(async () => {
+      this.gameState = (await ctx.storage.get<GameState>(STORAGE_KEY)) ?? null;
+    });
+  }
+
+  override async fetch(request: Request): Promise<Response> {
+    if (request.headers.get("Upgrade") !== "websocket") {
+      return new Response("expected websocket", { status: 426 });
+    }
+    if (!this.gameState) {
+      const roomCode = new URL(request.url).searchParams.get("code");
+      if (!roomCode) return new Response("missing room code", { status: 400 });
+      this.gameState = createRoom(roomCode, Date.now());
+    }
+    const pair = new WebSocketPair();
+    const client = pair[0];
+    const server = pair[1];
+    this.ctx.acceptWebSocket(server);
+    return new Response(null, { status: 101, webSocket: client });
+  }
+
+  private socketsFor(playerId: string): WebSocket[] {
+    return this.ctx.getWebSockets().filter((ws) => {
+      const meta = ws.deserializeAttachment() as SocketAttachment | null;
+      return meta?.playerId === playerId;
+    });
+  }
+
+  private broadcastStateSync(): void {
+    if (!this.gameState) return;
+    for (const ws of this.ctx.getWebSockets()) {
+      const meta = ws.deserializeAttachment() as SocketAttachment | null;
+      if (!meta) continue;
+      send(ws, "STATE_SYNC", buildStateSync(this.gameState, meta.playerId));
+    }
+  }
+
+  private async persistAndSchedule(): Promise<void> {
+    if (!this.gameState) return;
+    await this.ctx.storage.put(STORAGE_KEY, this.gameState);
+    const nextAlarm = computeNextAlarmTs(this.gameState);
+    if (nextAlarm !== null) {
+      await this.ctx.storage.setAlarm(nextAlarm);
+    } else {
+      await this.ctx.storage.deleteAlarm();
+    }
+  }
+
+  private async dispatch(event: GameEvent, originSocket?: WebSocket): Promise<void> {
+    if (!this.gameState) return;
+    const prevPhase = this.gameState.phase;
+    const { state, effects } = transition(this.gameState, event);
+    this.gameState = state;
+
+    for (const effect of effects) {
+      if (effect.kind === "SEND_ANSWER_RECEIVED" && originSocket) {
+        send(originSocket, "ANSWER_RECEIVED", {});
+      } else if (effect.kind === "SEND_ERROR" && originSocket) {
+        send(originSocket, "ERROR", { message: effect.message });
+      } else if (effect.kind === "SET_CODE_EXPIRY") {
+        await setRoomCodeExpiry(this.env.DB, state.roomCode, effect.expiresAt);
+      } else if (effect.kind === "DESTROY_ROOM") {
+        for (const ws of this.ctx.getWebSockets()) {
+          try {
+            ws.close(1000, "room closed");
+          } catch {
+            /* ignore */
+          }
+        }
+        await this.ctx.storage.deleteAll();
+        await this.ctx.storage.deleteAlarm();
+        this.gameState = null;
+        return;
+      }
+    }
+
+    if (prevPhase !== state.phase) {
+      for (const ws of this.ctx.getWebSockets()) {
+        send(ws, "PHASE_CHANGE", { phase: state.phase });
+      }
+    }
+    this.broadcastStateSync();
+    await this.persistAndSchedule();
+  }
+
+  override async webSocketMessage(ws: WebSocket, message: string | ArrayBuffer): Promise<void> {
+    if (typeof message !== "string" || !this.gameState) return;
+
+    const meta = ws.deserializeAttachment() as SocketAttachment | null;
+    const limiterKey = meta?.playerId ?? "anonymous";
+    if (!this.messageLimiter.check(limiterKey, Date.now())) return;
+
+    let raw: unknown;
+    try {
+      raw = JSON.parse(message);
+    } catch {
+      send(ws, "ERROR", { message: "malformed JSON" });
+      return;
+    }
+    const parsed = parseClientMessage(raw);
+    if (!parsed) {
+      send(ws, "ERROR", { message: "invalid message" });
+      return;
+    }
+
+    const now = Date.now();
+
+    if (parsed.type === "HELLO") {
+      if (parsed.roomCode !== this.gameState.roomCode) {
+        send(ws, "ERROR", { message: "wrong room" });
+        return;
+      }
+      const existing = this.gameState.players[parsed.playerId];
+      if (existing && parsed.playerToken && existing.playerToken !== parsed.playerToken) {
+        send(ws, "ERROR", { message: "invalid token" });
+        ws.close(4001, "invalid token");
+        return;
+      }
+      // Double-tab detection: close any previous socket for this player.
+      for (const other of this.socketsFor(parsed.playerId)) {
+        if (other !== ws) other.close(4002, "replaced by a newer connection");
+      }
+      const playerToken = existing?.playerToken ?? parsed.playerToken ?? crypto.randomUUID();
+      ws.serializeAttachment({ playerId: parsed.playerId } satisfies SocketAttachment);
+      await this.dispatch(
+        { kind: "PLAYER_JOIN", playerId: parsed.playerId, playerToken, roomCode: parsed.roomCode, now },
+        ws,
+      );
+      return;
+    }
+
+    if (!meta) {
+      send(ws, "ERROR", { message: "send HELLO first" });
+      return;
+    }
+    const playerId = meta.playerId;
+
+    switch (parsed.type) {
+      case "SET_PROFILE":
+        await this.dispatch(
+          { kind: "SET_PROFILE", playerId, nickname: sanitizeNickname(parsed.nickname), avatar: parsed.avatar },
+          ws,
+        );
+        break;
+      case "HOST_SETTINGS": {
+        const settings: Partial<GameSettings> = {};
+        if (parsed.questionCount !== undefined) settings.questionCount = parsed.questionCount;
+        if (parsed.questionDurationSec !== undefined) settings.questionDurationSec = parsed.questionDurationSec;
+        if (parsed.themes !== undefined) settings.themes = parsed.themes;
+        await this.dispatch({ kind: "HOST_SETTINGS", playerId, settings }, ws);
+        break;
+      }
+      case "START_GAME": {
+        const questions = await drawQuestions(this.env.DB, this.gameState.settings);
+        await this.dispatch({ kind: "START_GAME", playerId, now, questions }, ws);
+        break;
+      }
+      case "SUBMIT_ANSWER":
+        await this.dispatch(
+          {
+            kind: "SUBMIT_ANSWER",
+            playerId,
+            questionId: parsed.questionId,
+            raw: sanitizeText(parsed.answer, 200),
+            now,
+          },
+          ws,
+        );
+        break;
+      case "CAST_JUDGE_VOTE":
+        await this.dispatch({ kind: "CAST_JUDGE_VOTE", playerId, vote: parsed.vote, now }, ws);
+        break;
+      case "HOST_NEXT":
+        await this.dispatch({ kind: "HOST_NEXT", playerId, now }, ws);
+        break;
+      case "HOST_KICK":
+        await this.dispatch({ kind: "HOST_KICK", playerId, targetId: parsed.playerId }, ws);
+        break;
+      case "PLAY_AGAIN":
+        await this.dispatch({ kind: "PLAY_AGAIN", playerId, now }, ws);
+        break;
+    }
+  }
+
+  override async webSocketClose(ws: WebSocket): Promise<void> {
+    const meta = ws.deserializeAttachment() as SocketAttachment | null;
+    if (!meta || !this.gameState) return;
+    // Ignore if this socket was already replaced by a newer one for the same player.
+    if (this.socketsFor(meta.playerId).some((s) => s !== ws)) return;
+    await this.dispatch({ kind: "PLAYER_DISCONNECT", playerId: meta.playerId, now: Date.now() });
+  }
+
+  override async webSocketError(ws: WebSocket): Promise<void> {
+    await this.webSocketClose(ws);
+  }
+
+  override async alarm(): Promise<void> {
+    if (!this.gameState) return;
+    await this.dispatch({ kind: "ALARM_FIRED", now: Date.now() });
+  }
+}

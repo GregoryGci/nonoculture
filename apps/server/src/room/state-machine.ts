@@ -215,19 +215,6 @@ export function transition(state: GameState, event: GameEvent): TransitionResult
       break;
     }
 
-    case "PLAYER_RECONNECT": {
-      const player = state.players[event.playerId];
-      if (!player) break;
-      next = {
-        ...state,
-        players: {
-          ...state.players,
-          [event.playerId]: { ...player, connected: true, disconnectedAt: null },
-        },
-      };
-      break;
-    }
-
     case "HOST_KICK": {
       if (event.playerId !== state.hostPlayerId) break;
       const { [event.targetId]: _removed, ...rest } = state.players;
