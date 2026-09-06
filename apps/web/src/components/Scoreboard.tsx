@@ -1,32 +1,44 @@
+import { AnimatePresence, motion } from "motion/react";
 import type { PlayerPublic } from "@quiproquo/shared";
 import { Avatar } from "./Avatar";
+
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function Scoreboard({ players }: { players: PlayerPublic[] }) {
   const ranked = [...players].sort((a, b) => b.score - a.score);
   const max = Math.max(1, ...ranked.map((p) => p.score));
 
   return (
-    <div className="flex flex-col gap-3">
-      {ranked.map((p, i) => (
-        <div key={p.playerId} className="flex items-center gap-3">
-          <span className="w-6 shrink-0 text-center font-bold" style={{ color: "var(--color-text-muted)" }}>
-            {i + 1}
-          </span>
-          <Avatar id={p.avatar} size={28} className="shrink-0" />
-          <span className="w-28 shrink-0 truncate font-medium">{p.nickname}</span>
-          <div className="h-3 flex-1 overflow-hidden rounded-full" style={{ background: "var(--color-border)" }}>
-            <div
-              className="h-full rounded-full transition-all duration-500 ease-out"
-              style={{
-                width: `${(p.score / max) * 100}%`,
-                background: "var(--color-accent)",
-                boxShadow: "0 0 10px color-mix(in srgb, var(--color-accent) 70%, transparent)",
-              }}
-            />
-          </div>
-          <span className="tabular w-10 shrink-0 text-right font-bold">{p.score}</span>
-        </div>
-      ))}
+    <div className="flex flex-col gap-4">
+      <AnimatePresence initial={false}>
+        {ranked.map((p, i) => (
+          <motion.div
+            key={p.playerId}
+            layout
+            transition={{ duration: 0.5, ease: EASE }}
+            className="flex flex-col gap-2"
+          >
+            <div className="flex items-center gap-3">
+              <span className="tabular w-4 text-sm" style={{ color: "var(--color-text-faint)" }}>
+                {i + 1}
+              </span>
+              <Avatar id={p.avatar} size={24} className="shrink-0" />
+              <span className="min-w-0 flex-1 truncate text-[15px] font-medium">{p.nickname}</span>
+              <span className="tabular text-[15px] font-medium">{p.score}</span>
+            </div>
+            {/* Hairline bar rather than a chunky one: it reads as a measurement, not a game HUD. */}
+            <div className="h-px w-full" style={{ background: "var(--color-border)" }}>
+              <motion.div
+                className="h-px"
+                style={{ background: "var(--color-text)" }}
+                initial={{ width: 0 }}
+                animate={{ width: `${(p.score / max) * 100}%` }}
+                transition={{ duration: 0.9, ease: EASE }}
+              />
+            </div>
+          </motion.div>
+        ))}
+      </AnimatePresence>
     </div>
   );
 }

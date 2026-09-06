@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "motion/react";
 
 export function AnswerForm({
   alreadyAnswered,
@@ -18,19 +19,34 @@ export function AnswerForm({
     setJustSubmitted(true);
   }
 
+  // Once locked the form is replaced entirely — a disabled input still invites typing.
+  if (locked) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className="panel flex h-14 items-center justify-center gap-2.5 px-5"
+      >
+        <span style={{ color: "var(--color-success)" }}>✓</span>
+        <span className="waiting text-[15px] font-medium">En attente des autres…</span>
+      </motion.div>
+    );
+  }
+
   return (
     <form onSubmit={handleSubmit} className="flex gap-2">
       <input
         autoFocus
-        disabled={locked}
         value={value}
         onChange={(e) => setValue(e.target.value)}
         maxLength={200}
         placeholder="Ta réponse…"
-        className="input-cyber min-h-14 flex-1 rounded-[var(--radius-control)] px-5 text-lg"
+        aria-label="Ta réponse"
+        className="input-cyber h-14 flex-1 rounded-[var(--radius-control)] px-5 text-lg"
       />
-      <button type="submit" disabled={locked || !value.trim()} className="btn btn-primary min-h-14 px-8 text-lg">
-        {locked ? "Envoyé" : "Valider"}
+      <button type="submit" disabled={!value.trim()} className="btn btn-primary h-14 px-7">
+        Valider
       </button>
     </form>
   );

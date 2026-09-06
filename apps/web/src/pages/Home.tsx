@@ -31,31 +31,58 @@ export function Home() {
   }
 
   return (
-    <div className="phase-enter mx-auto flex min-h-dvh max-w-sm flex-col items-center justify-center gap-8 px-6 text-center">
-      <h1 className="font-mono text-4xl font-bold tracking-tight">
-        Qui<span style={{ color: "var(--color-accent)" }}>pro</span>quo
-      </h1>
-      <p style={{ color: "var(--color-text-muted)" }}>Le quiz entre potes où on voit toutes vos réponses.</p>
+    <div className="mx-auto flex min-h-dvh w-full max-w-md flex-col justify-center px-6 py-16">
+      <div className="stagger flex flex-col items-center text-center">
+        <p className="eyebrow">Quiz party</p>
 
-      <button onClick={() => void handleCreate()} disabled={creating} className="btn btn-primary w-full py-3 text-lg">
-        {creating ? "Création…" : "Créer une partie"}
-      </button>
+        <h1 className="display mt-5 text-[clamp(3rem,14vw,4.5rem)]">Quiproquo</h1>
 
-      <form onSubmit={handleJoin} className="flex w-full gap-2">
-        <input
-          value={joinCode}
-          onChange={(e) => setJoinCode(e.target.value.replace(/\D/g, ""))}
-          inputMode="numeric"
-          maxLength={5}
-          placeholder="Code"
-          className="input-cyber font-mono min-h-11 flex-1 rounded-[var(--radius-control)] px-4 text-center text-lg tracking-widest"
-        />
-        <button type="submit" className="btn btn-secondary">
-          Rejoindre
-        </button>
-      </form>
+        <p className="mt-5 max-w-xs text-[17px] leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
+          Réponses libres, corrigées par l&apos;hôte. Tout le monde voit tout à la fin.
+        </p>
 
-      {error && <p style={{ color: "var(--color-accent-2)" }}>{error}</p>}
+        <div className="mt-12 w-full">
+          <button
+            onClick={() => void handleCreate()}
+            disabled={creating}
+            className="btn btn-primary h-14 w-full text-base"
+          >
+            {creating ? "Création…" : "Créer une partie"}
+          </button>
+        </div>
+
+        <div className="mt-8 flex w-full items-center gap-4">
+          <hr className="divider flex-1" />
+          <span className="eyebrow">ou rejoindre</span>
+          <hr className="divider flex-1" />
+        </div>
+
+        <form onSubmit={handleJoin} className="mt-8 flex w-full gap-2">
+          <input
+            value={joinCode}
+            onChange={(e) => {
+              setJoinCode(e.target.value.replace(/\D/g, ""));
+              setError(null);
+            }}
+            inputMode="numeric"
+            maxLength={5}
+            placeholder="Code"
+            aria-label="Code de la partie"
+            className="input-cyber h-14 flex-1 rounded-[var(--radius-control)] px-5 text-center text-2xl font-medium tracking-[0.3em]"
+          />
+          <button type="submit" disabled={joinCode.length < 4} className="btn btn-secondary h-14">
+            Rejoindre
+          </button>
+        </form>
+
+        <p
+          className="mt-6 min-h-5 text-sm transition-opacity duration-300"
+          style={{ color: "var(--color-danger)", opacity: error ? 1 : 0 }}
+          role="status"
+        >
+          {error ?? " "}
+        </p>
+      </div>
     </div>
   );
 }

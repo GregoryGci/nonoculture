@@ -1,22 +1,36 @@
 @import "tailwindcss";
 
+/**
+ * Design language: precision instrument.
+ * True black canvas, achromatic surfaces built only from white at low alpha, one system
+ * blue reserved for state (focus, progress, live). No decorative colour, no glow — depth
+ * comes from hairline borders, blur and a single inset highlight, the way glass does.
+ */
 @theme {
-  --color-bg: #05070c;
-  --color-surface: #0d1220;
-  --color-surface-2: #141b2e;
-  --color-border: #1e2740;
-  --color-border-strong: #2c3a5c;
-  --color-text: #e7f3ff;
-  --color-text-muted: #6b7b99;
-  --color-accent: #f5d90a;
-  --color-accent-contrast: #171200;
-  --color-accent-2: #ff2e9a;
+  --color-bg: #000000;
+  --color-surface: rgba(255, 255, 255, 0.04);
+  --color-surface-2: rgba(255, 255, 255, 0.07);
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-strong: rgba(255, 255, 255, 0.24);
+  --color-text: #f5f5f7;
+  --color-text-muted: rgba(245, 245, 247, 0.6);
+  --color-text-faint: rgba(245, 245, 247, 0.36);
+  --color-accent: #ffffff;
+  --color-accent-contrast: #000000;
+  --color-signal: #0a84ff;
+  --color-success: #30d158;
+  --color-danger: #ff453a;
+  /* Kept: existing markup references it for error text. */
+  --color-accent-2: #ff453a;
 
-  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+  --font-mono: "Inter", ui-monospace, "SF Mono", monospace;
 
-  --radius-card: 14px;
-  --radius-control: 10px;
+  --radius-card: 18px;
+  --radius-control: 12px;
+
+  /* Expo-out. The single curve everything decelerates on, so motion feels like one system. */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -36,31 +50,27 @@ body,
 }
 
 body {
-  background:
-    radial-gradient(
-      ellipse 70% 45% at 50% -10%,
-      color-mix(in srgb, var(--color-accent) 10%, transparent),
-      transparent 60%
-    ),
-    var(--color-bg);
-  background-attachment: fixed;
+  background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-sans);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
   position: relative;
+  overflow-x: hidden;
 }
 
+/* A single cold light source above the fold. Replaces the old grid + neon vignette. */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background-image:
-    linear-gradient(color-mix(in srgb, var(--color-border) 60%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in srgb, var(--color-border) 60%, transparent) 1px, transparent 1px);
-  background-size: 44px 44px;
-  opacity: 0.4;
   z-index: 0;
+  background:
+    radial-gradient(ellipse 90% 55% at 50% -20%, rgba(255, 255, 255, 0.09), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 50% 115%, rgba(10, 132, 255, 0.07), transparent 70%);
 }
 
 #root {
@@ -68,13 +78,35 @@ body::before {
   z-index: 1;
 }
 
+::selection {
+  background: rgba(255, 255, 255, 0.18);
+}
+
 .tabular {
   font-variant-numeric: tabular-nums;
-  font-family: var(--font-mono);
+  letter-spacing: -0.02em;
 }
 
 .font-mono {
   font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Typography ---------- */
+
+.display {
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+/* Small caps label above a block — the section marker. */
+.eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
 }
 
 /* ---------- Buttons ---------- */
@@ -84,81 +116,61 @@ body::before {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  min-height: 44px;
-  padding: 0 1.25rem;
-  border-radius: var(--radius-control);
-  font-weight: 600;
-  font-family: var(--font-sans);
-  letter-spacing: 0.01em;
+  min-height: 46px;
+  padding: 0 1.5rem;
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: -0.01em;
   border: 1px solid transparent;
   cursor: pointer;
+  white-space: nowrap;
   transition:
-    transform 150ms ease,
-    box-shadow 200ms ease,
-    border-color 200ms ease,
-    background-color 200ms ease,
-    opacity 150ms ease;
+    transform 240ms var(--ease),
+    background-color 240ms var(--ease),
+    border-color 240ms var(--ease),
+    color 240ms var(--ease),
+    opacity 240ms var(--ease);
   user-select: none;
 }
 .btn:disabled {
-  opacity: 0.4;
+  opacity: 0.32;
   cursor: not-allowed;
 }
-.btn:not(:disabled):hover {
-  transform: translateY(-1px) scale(1.015);
-}
 .btn:not(:disabled):active {
-  transform: translateY(0) scale(0.97);
+  transform: scale(0.975);
+}
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.55);
 }
 
+/* White pill on black: the one high-contrast element per screen. */
 .btn-primary {
   background: var(--color-accent);
   color: var(--color-accent-contrast);
 }
 .btn-primary:not(:disabled):hover {
-  box-shadow:
-    0 0 16px color-mix(in srgb, var(--color-accent) 70%, transparent),
-    0 0 40px color-mix(in srgb, var(--color-accent) 25%, transparent);
+  background: #d8d8dc;
 }
 
 .btn-secondary {
   background: var(--color-surface);
   color: var(--color-text);
   border-color: var(--color-border);
+  backdrop-filter: blur(20px);
 }
 .btn-secondary:not(:disabled):hover {
-  border-color: var(--color-accent);
-  box-shadow: 0 0 12px color-mix(in srgb, var(--color-accent) 35%, transparent);
+  background: var(--color-surface-2);
+  border-color: var(--color-border-strong);
 }
 
 .btn-ghost {
   background: transparent;
   color: var(--color-text-muted);
-  border-color: var(--color-border);
 }
 .btn-ghost:not(:disabled):hover {
   color: var(--color-text);
-  border-color: var(--color-border-strong);
-}
-
-.avatar-pick {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  aspect-ratio: 1;
-  border-radius: var(--radius-control);
-  cursor: pointer;
-  transition:
-    transform 150ms ease,
-    box-shadow 200ms ease,
-    border-color 200ms ease;
-}
-.avatar-pick:hover {
-  transform: scale(1.06);
-  border-color: var(--color-border-strong) !important;
-}
-.avatar-pick:active {
-  transform: scale(0.95);
 }
 
 /* ---------- Inputs ---------- */
@@ -167,15 +179,23 @@ body::before {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   color: var(--color-text);
+  font-size: 16px; /* keeps iOS from zooming on focus */
+  letter-spacing: -0.01em;
+  backdrop-filter: blur(20px);
   transition:
-    border-color 150ms ease,
-    box-shadow 150ms ease;
+    border-color 240ms var(--ease),
+    background-color 240ms var(--ease),
+    box-shadow 240ms var(--ease);
+}
+.input-cyber::placeholder {
+  color: var(--color-text-faint);
 }
 .input-cyber:focus-visible,
 .input-cyber:focus {
   outline: none;
-  border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 18%, transparent);
+  background: var(--color-surface-2);
+  border-color: rgba(10, 132, 255, 0.7);
+  box-shadow: 0 0 0 4px rgba(10, 132, 255, 0.16);
 }
 
 /* ---------- Range sliders ---------- */
@@ -184,64 +204,85 @@ input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 4px;
+  height: 3px;
   background: var(--color-border);
   border-radius: 999px;
   outline: none;
+  cursor: pointer;
 }
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  background: var(--color-accent);
-  box-shadow: 0 0 10px color-mix(in srgb, var(--color-accent) 70%, transparent);
-  cursor: pointer;
-  transition: transform 150ms ease;
+  background: #ffffff;
+  border: none;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.5),
+    0 0 0 0 rgba(255, 255, 255, 0.12);
+  cursor: grab;
+  transition:
+    transform 240ms var(--ease),
+    box-shadow 240ms var(--ease);
 }
-input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
+input[type="range"]:hover::-webkit-slider-thumb {
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.5),
+    0 0 0 8px rgba(255, 255, 255, 0.1);
+}
+input[type="range"]:active::-webkit-slider-thumb {
+  cursor: grabbing;
+  transform: scale(1.1);
 }
 input[type="range"]::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
   border: none;
   border-radius: 50%;
-  background: var(--color-accent);
-  box-shadow: 0 0 10px color-mix(in srgb, var(--color-accent) 70%, transparent);
-  cursor: pointer;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  cursor: grab;
 }
 
-/* ---------- Panels / cards ---------- */
+/* ---------- Surfaces ---------- */
 
 .panel {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  /* One inset highlight along the top edge: how real glass catches light. */
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
   transition:
-    border-color 200ms ease,
-    box-shadow 200ms ease;
+    border-color 320ms var(--ease),
+    background-color 320ms var(--ease),
+    transform 320ms var(--ease);
 }
 
 .panel-hover:hover {
   border-color: var(--color-border-strong);
+  background: var(--color-surface-2);
 }
 
-.panel-glow {
-  box-shadow: 0 0 24px -8px color-mix(in srgb, var(--color-accent) 60%, transparent);
+/* Reserved for the element that is genuinely live right now. */
+.panel-active {
+  border-color: rgba(10, 132, 255, 0.55);
+  background: rgba(10, 132, 255, 0.08);
 }
 
-/* Cut corners on the two "front and center" panels for a HUD feel — used sparingly. */
-.panel-notched {
-  clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+.divider {
+  height: 1px;
+  background: var(--color-border);
+  border: none;
 }
 
 /* ---------- Motion ---------- */
 
-@keyframes fadeSlideIn {
+@keyframes riseIn {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
@@ -249,26 +290,39 @@ input[type="range"]::-moz-range-thumb {
   }
 }
 .phase-enter {
-  animation: fadeSlideIn 220ms ease-out both;
+  animation: riseIn 620ms var(--ease) both;
 }
 
-@keyframes pulseGlow {
-  0%,
-  100% {
-    text-shadow: 0 0 8px color-mix(in srgb, var(--color-accent) 70%, transparent);
-  }
-  50% {
-    text-shadow: 0 0 22px color-mix(in srgb, var(--color-accent) 100%, transparent);
-  }
+/* Staggers children of a container without needing JS per item. */
+.stagger > * {
+  animation: riseIn 620ms var(--ease) both;
 }
-.timer-urgent {
-  animation: pulseGlow 700ms ease-in-out infinite;
+.stagger > *:nth-child(1) {
+  animation-delay: 40ms;
+}
+.stagger > *:nth-child(2) {
+  animation-delay: 90ms;
+}
+.stagger > *:nth-child(3) {
+  animation-delay: 140ms;
+}
+.stagger > *:nth-child(4) {
+  animation-delay: 190ms;
+}
+.stagger > *:nth-child(5) {
+  animation-delay: 240ms;
+}
+.stagger > *:nth-child(6) {
+  animation-delay: 290ms;
+}
+.stagger > *:nth-child(n + 7) {
+  animation-delay: 330ms;
 }
 
-@keyframes popIn {
+@keyframes scaleIn {
   from {
     opacity: 0;
-    transform: scale(0.9);
+    transform: scale(0.94);
   }
   to {
     opacity: 1;
@@ -276,5 +330,37 @@ input[type="range"]::-moz-range-thumb {
   }
 }
 .pop-in {
-  animation: popIn 180ms ease-out both;
+  animation: scaleIn 520ms var(--ease) both;
+}
+
+/* Timer under 5s: opacity only, no colour shift or glow. */
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+.timer-urgent {
+  animation: breathe 1s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+/* Waiting on other players — a slow sweep across muted text. */
+.waiting {
+  background: linear-gradient(90deg, var(--color-text-faint) 0%, var(--color-text) 50%, var(--color-text-faint) 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 2.6s linear infinite;
 }

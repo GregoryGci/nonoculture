@@ -1,34 +1,51 @@
+import { motion } from "motion/react";
 import type { ChainResult } from "@quiproquo/shared";
 
+const EASE = [0.16, 1, 0.3, 1] as const;
+
+/** Each chain reads top to bottom as prompt → drawing → guess, with the verdict last. */
 export function ChainRevealSlideshow({ chains }: { chains: ChainResult[] }) {
   return (
     <div className="flex w-full flex-col gap-4">
-      {chains.map((c) => (
-        <div
+      {chains.map((c, i) => (
+        <motion.article
           key={c.originPlayerId}
-          className="panel pop-in flex flex-col gap-2 p-4"
-          style={{
-            borderColor: c.matched ? "var(--color-accent)" : "var(--color-border)",
-            boxShadow: c.matched ? "0 0 20px -6px var(--color-accent)" : "none",
-          }}
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: EASE, delay: i * 0.12 }}
+          className="panel flex flex-col gap-4 p-5"
+          {...(c.matched ? { style: { borderColor: "rgba(48,209,88,0.4)" } } : {})}
         >
-          <p className="text-sm" style={{ color: "var(--color-text-muted)" }}>
-            <strong>{c.originNickname}</strong> a donné : « {c.prompt || "…"} »
-          </p>
+          <div>
+            <p className="eyebrow">{c.originNickname} a écrit</p>
+            <p className="mt-1.5 text-[17px] font-medium">{c.prompt || "—"}</p>
+          </div>
+
           {c.drawingDataUrl && (
-            <img src={c.drawingDataUrl} alt="" className="mx-auto max-h-48 rounded-[var(--radius-control)]" />
+            <img
+              src={c.drawingDataUrl}
+              alt=""
+              className="mx-auto max-h-52 rounded-[var(--radius-control)]"
+              style={{ border: "1px solid var(--color-border)" }}
+            />
           )}
-          <p className="text-sm" style={{ color: "var(--color-text-muted)" }}>
-            <strong>{c.drawerNickname}</strong> a dessiné ça, et <strong>{c.guesserNickname}</strong> a deviné :
-          </p>
-          <p className="text-center text-lg font-bold">« {c.guess || "…"} »</p>
+
+          <div>
+            <p className="eyebrow">
+              {c.drawerNickname} a dessiné · {c.guesserNickname} a deviné
+            </p>
+            <p className="mt-1.5 text-[17px] font-medium">{c.guess || "—"}</p>
+          </div>
+
+          <hr className="divider" />
+
           <p
-            className="text-center font-semibold"
-            style={{ color: c.matched ? "var(--color-accent)" : "var(--color-text-muted)" }}
+            className="text-[13px] font-medium"
+            style={{ color: c.matched ? "var(--color-success)" : "var(--color-text-faint)" }}
           >
-            {c.matched ? `Deviné ! +${c.points} pour les 3` : "Raté"}
+            {c.matched ? `Trouvé · +${c.points} pour les trois` : "Perdu en route"}
           </p>
-        </div>
+        </motion.article>
       ))}
     </div>
   );
