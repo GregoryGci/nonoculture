@@ -33,8 +33,8 @@ autonomie. Remplacée sur demande explicite par une direction cyberpunk :
   dans `theme.css`), panneaux à coins coupés (`.panel-notched`) sur le code de room,
   transitions d'entrée de phase (`.phase-enter`), pulsation du timer sous 5s
   (`.timer-urgent`).
-- Avatars : 12 têtes de personnages en trait manga, style **lorelei** de DiceBear (CC0,
-  aucune attribution requise). Générées **hors ligne** par
+- Avatars : 12 robots, style **bottts** de DiceBear par Pablo Stanley (libre pour usage
+  personnel et commercial, aucune attribution requise). Générés **hors ligne** par
   `apps/server/scripts/generate-avatars.mjs` (paquets npm `@dicebear/core` +
   `@dicebear/collection`, en devDependencies) vers `apps/web/public/avatars/*.svg`, qui
   sont commitées. L'app sert donc des fichiers finis : plus d'appel à l'API publique

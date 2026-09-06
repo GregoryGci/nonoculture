@@ -1,13 +1,14 @@
 /**
  * Generates the twelve player avatars as static SVG files, once, at authoring time.
  *
- * Style: DiceBear "lorelei" (CC0 — no attribution required), rendered locally through the
+ * Style: DiceBear "bottts" by Pablo Stanley (free for personal and commercial use, no
+ * attribution required), rendered locally through the
  * npm package rather than the public HTTP API, so the app ships the finished files and never
  * depends on a third party being reachable. Re-run only to change the set:
  *   node apps/server/scripts/generate-avatars.mjs
  */
 import { createAvatar } from "@dicebear/core";
-import { lorelei } from "@dicebear/collection";
+import { bottts } from "@dicebear/collection";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
@@ -32,7 +33,7 @@ const outDir = join(import.meta.dirname, "..", "..", "web", "public", "avatars")
 mkdirSync(outDir, { recursive: true });
 
 for (const { id, seed, bg } of AVATARS) {
-  const svg = createAvatar(lorelei, {
+  const svg = createAvatar(bottts, {
     seed,
     size: 128,
     radius: 50, // circular crop, so every avatar is a disc like the rest of the UI
