@@ -11,6 +11,10 @@ import { RevealList } from "../components/RevealList";
 import { JudgeVotePanel } from "../components/JudgeVotePanel";
 import { Scoreboard } from "../components/Scoreboard";
 import { Podium } from "../components/Podium";
+import { ChainPromptForm } from "../components/ChainPromptForm";
+import { DrawingCanvas } from "../components/DrawingCanvas";
+import { ChainGuessForm } from "../components/ChainGuessForm";
+import { ChainRevealSlideshow } from "../components/ChainRevealSlideshow";
 import type { QuestionPublic } from "@quiproquo/shared";
 
 export function Room() {
@@ -99,6 +103,71 @@ export function Room() {
               isOwnAnswer={state.judgePrompt.playerId === playerId}
               onVote={(vote) => send({ type: "CAST_JUDGE_VOTE", answerId: state.judgePrompt!.answerId, vote })}
             />
+          )}
+        </>
+      )}
+
+      {you?.nickname && state.phase === "CHAIN_PROMPT" && (
+        <>
+          <ChainHeader deadline={state.phaseDeadlineTs} />
+          {state.chainTask ? (
+            <ChainPromptForm
+              alreadySubmitted={state.chainTask.alreadySubmitted}
+              onSubmit={(text) => send({ type: "SUBMIT_CHAIN_PROMPT", text })}
+            />
+          ) : (
+            <NotParticipating />
+          )}
+        </>
+      )}
+
+      {you?.nickname && state.phase === "CHAIN_DRAW" && (
+        <>
+          <ChainHeader deadline={state.phaseDeadlineTs} />
+          {state.chainTask ? (
+            state.chainTask.alreadySubmitted ? (
+              <p className="text-center" style={{ color: "var(--color-text-muted)" }}>
+                Dessin envoyé, en attente des autres…
+              </p>
+            ) : (
+              <>
+                <p className="text-center text-xl font-semibold">Dessine : « {state.chainTask.content} »</p>
+                <DrawingCanvas onSubmit={(dataUrl) => send({ type: "SUBMIT_CHAIN_DRAWING", dataUrl })} />
+              </>
+            )
+          ) : (
+            <NotParticipating />
+          )}
+        </>
+      )}
+
+      {you?.nickname && state.phase === "CHAIN_GUESS" && (
+        <>
+          <ChainHeader deadline={state.phaseDeadlineTs} />
+          {state.chainTask ? (
+            <ChainGuessForm
+              drawingDataUrl={state.chainTask.content ?? ""}
+              alreadySubmitted={state.chainTask.alreadySubmitted}
+              onSubmit={(text) => send({ type: "SUBMIT_CHAIN_GUESS", text })}
+            />
+          ) : (
+            <NotParticipating />
+          )}
+        </>
+      )}
+
+      {you?.nickname && state.phase === "CHAIN_REVEAL" && (
+        <>
+          <ChainHeader deadline={state.phaseDeadlineTs} />
+          <ChainRevealSlideshow chains={state.chainReveal ?? []} />
+          {isHost && (
+            <button
+              onClick={() => send({ type: "HOST_NEXT" })}
+              className="min-h-11 rounded-[var(--radius-control)] font-semibold"
+              style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}
+            >
+              Suivant
+            </button>
           )}
         </>
       )}
@@ -196,6 +265,23 @@ function QuestionMedia({ question }: { question: QuestionPublic }) {
     );
   }
   return null;
+}
+
+function ChainHeader({ deadline }: { deadline: number | null }) {
+  return (
+    <div className="flex items-center justify-between">
+      <span style={{ color: "var(--color-accent)" }}>📞 Téléphone dessiné</span>
+      <Timer deadlineTs={deadline} />
+    </div>
+  );
+}
+
+function NotParticipating() {
+  return (
+    <p className="text-center" style={{ color: "var(--color-text-muted)" }}>
+      Tu as rejoint pendant cette manche spéciale, tu reprendras à la suivante. Patiente…
+    </p>
+  );
 }
 
 function QuestionHeader({ index, total, deadline }: { index: number; total: number; deadline: number | null }) {
