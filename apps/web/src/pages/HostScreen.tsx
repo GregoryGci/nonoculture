@@ -59,15 +59,15 @@ export function HostScreen() {
         </>
       )}
 
-      {(state.phase === "REVEAL" || state.phase === "JUDGING") && state.revealedCorrectAnswer && (
-        <p className="text-4xl font-bold">
-          Réponse : <span style={{ color: "var(--color-accent)" }}>{state.revealedCorrectAnswer}</span>
+      {state.phase === "HOST_REVIEW" && (
+        <p className="text-3xl font-bold" style={{ color: "var(--color-text-muted)" }}>
+          L'hôte corrige les réponses…
         </p>
       )}
 
-      {(state.phase === "SCOREBOARD" || state.phase === "FINISHED") && (
+      {state.phase === "FINISHED" && (
         <div className="w-full max-w-2xl">
-          {state.phase === "FINISHED" && <Podium players={state.players} />}
+          <Podium players={state.players} />
           <Scoreboard players={state.players} />
         </div>
       )}

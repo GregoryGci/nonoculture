@@ -1,4 +1,4 @@
-import type { GameSettings, Phase, QuestionType } from "@quiproquo/shared";
+import type { GameSettings, Grade, Phase, QuestionType } from "@quiproquo/shared";
 
 /** Full question record as stored in D1 — includes the secret answer/aliases. */
 export interface InternalQuestion {
@@ -32,15 +32,6 @@ export interface SubmittedAnswer {
   playerId: string;
   raw: string;
   submittedAt: number;
-  classification: "auto_valid" | "auto_invalid" | "grey_zone";
-  /** Final accepted/rejected state — set immediately for auto_valid/auto_invalid,
-   *  set after the room vote (or host tie-break) for grey_zone. */
-  accepted: boolean | null;
-}
-
-export interface JudgeVote {
-  voterId: string;
-  vote: "valid" | "invalid";
 }
 
 /** Snapshot of participants and their submissions for the chain round currently in play. */
@@ -60,8 +51,10 @@ export interface GameState {
   deck: DeckItem[]; // the drawn deck for this game, in play order
   deckIndex: number; // -1 before the first slot
   answers: SubmittedAnswer[]; // answers for the *current* trivia question only
-  greyZoneQueue: string[]; // playerIds pending judgement, current question only
-  currentJudging: { playerId: string; votes: Record<string, JudgeVote> } | null;
+  /** Every trivia question's answers, keyed by deck index, kept for the end-of-game host review. */
+  answerLog: Record<number, SubmittedAnswer[]>;
+  /** Host-assigned grades, keyed by `${deckIndex}:${playerId}`. */
+  grades: Record<string, Grade>;
   chain: ChainRoundState | null; // set only while playing a chain slot
   phaseDeadlineTs: number | null;
   createdAt: number;
@@ -75,7 +68,7 @@ export type GameEvent =
   | { kind: "HOST_SETTINGS"; playerId: string; settings: Partial<GameSettings> }
   | { kind: "START_GAME"; playerId: string; now: number; deck: DeckItem[] }
   | { kind: "SUBMIT_ANSWER"; playerId: string; questionId: number; raw: string; now: number }
-  | { kind: "CAST_JUDGE_VOTE"; playerId: string; vote: "valid" | "invalid"; now: number }
+  | { kind: "SUBMIT_HOST_GRADE"; playerId: string; deckIndex: number; targetPlayerId: string; grade: Grade }
   | { kind: "SUBMIT_CHAIN_PROMPT"; playerId: string; text: string; now: number }
   | { kind: "SUBMIT_CHAIN_DRAWING"; playerId: string; dataUrl: string; now: number }
   | { kind: "SUBMIT_CHAIN_GUESS"; playerId: string; text: string; now: number }
@@ -90,9 +83,6 @@ export type Effect =
   | { kind: "SEND_ANSWER_RECEIVED"; playerId: string }
   | { kind: "SEND_ERROR"; playerId: string; message: string };
 
-export const REVEAL_DURATION_MS = 6_000;
-export const JUDGE_VOTE_DURATION_MS = 10_000;
-export const SCOREBOARD_DURATION_MS = 5_000;
 export const DISCONNECT_GRACE_MS = 5 * 60 * 1000;
 export const ROOM_IDLE_TIMEOUT_MS = 30 * 60 * 1000;
 export const CODE_RELEASE_DELAY_MS = 30 * 60 * 1000;

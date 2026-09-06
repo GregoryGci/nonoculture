@@ -7,8 +7,7 @@ import { ProfileForm } from "../components/ProfileForm";
 import { HostSettings } from "../components/HostSettings";
 import { Timer } from "../components/Timer";
 import { AnswerForm } from "../components/AnswerForm";
-import { RevealList } from "../components/RevealList";
-import { JudgeVotePanel } from "../components/JudgeVotePanel";
+import { HostReviewPanel } from "../components/HostReviewPanel";
 import { Scoreboard } from "../components/Scoreboard";
 import { Podium } from "../components/Podium";
 import { ChainPromptForm } from "../components/ChainPromptForm";
@@ -33,7 +32,7 @@ export function Room() {
   const isHost = you?.isHost ?? false;
 
   return (
-    <div className="mx-auto flex min-h-dvh max-w-lg flex-col gap-6 px-4 py-8">
+    <div className="mx-auto flex min-h-dvh w-full max-w-2xl flex-col justify-center gap-6 px-4 py-10">
       <ReconnectBanner status={status} />
       {lastError && (
         <p className="text-center text-sm" style={{ color: "var(--color-accent)" }}>
@@ -74,37 +73,15 @@ export function Room() {
           {state.phase === "QUESTION" && state.currentQuestion && (
             <>
               <QuestionHeader index={state.questionIndex} total={state.questionTotal} deadline={state.phaseDeadlineTs} />
-              <p className="text-center text-xl font-semibold">{state.currentQuestion.prompt}</p>
+              <p className="text-center text-2xl font-semibold">{state.currentQuestion.prompt}</p>
               <QuestionMedia question={state.currentQuestion} />
               <AnswerForm
+                key={state.currentQuestion.id}
                 alreadyAnswered={state.youHaveAnswered}
                 onSubmit={(answer) => send({ type: "SUBMIT_ANSWER", questionId: state.currentQuestion!.id, answer })}
               />
               <PlayerList players={state.players} youId={playerId} />
-            </>
-          )}
-
-          {state.phase === "REVEAL" && (
-            <>
-              <QuestionHeader index={state.questionIndex} total={state.questionTotal} deadline={state.phaseDeadlineTs} />
-              <RevealList
-                answers={state.revealedAnswers ?? []}
-                correctAnswer={state.revealedCorrectAnswer}
-                explanation={state.revealedExplanation}
-              />
-            </>
-          )}
-
-          {state.phase === "JUDGING" && (
-            <>
-              <QuestionHeader index={state.questionIndex} total={state.questionTotal} deadline={state.phaseDeadlineTs} />
-              {state.judgePrompt && (
-                <JudgeVotePanel
-                  prompt={state.judgePrompt}
-                  isOwnAnswer={state.judgePrompt.playerId === playerId}
-                  onVote={(vote) => send({ type: "CAST_JUDGE_VOTE", answerId: state.judgePrompt!.answerId, vote })}
-                />
-              )}
+              <MediaPreloader media={state.nextQuestionMedia} />
             </>
           )}
 
@@ -169,17 +146,15 @@ export function Room() {
             </>
           )}
 
-          {state.phase === "SCOREBOARD" && (
-            <>
-              <QuestionHeader index={state.questionIndex} total={state.questionTotal} deadline={state.phaseDeadlineTs} />
-              <Scoreboard players={state.players} />
-              <MediaPreloader media={state.nextQuestionMedia} />
-              {isHost && (
-                <button onClick={() => send({ type: "HOST_NEXT" })} className="btn btn-secondary">
-                  Suivant
-                </button>
-              )}
-            </>
+          {state.phase === "HOST_REVIEW" && (
+            <HostReviewPanel
+              reviewQuestions={state.reviewQuestions ?? []}
+              isHost={isHost}
+              onGrade={(deckIndex, targetPlayerId, grade) =>
+                send({ type: "SUBMIT_HOST_GRADE", deckIndex, playerId: targetPlayerId, grade })
+              }
+              onFinish={() => send({ type: "HOST_NEXT" })}
+            />
           )}
 
           {state.phase === "FINISHED" && (
@@ -221,7 +196,7 @@ function RoomCodeHeader({ code }: { code: string }) {
   );
 }
 
-/** Warms the browser cache for the next question's media during SCOREBOARD, so QUESTION never waits on it. */
+/** Warms the browser cache for the next question's media while the current one is on screen. */
 function MediaPreloader({ media }: { media: { type: string; url: string } | null }) {
   useEffect(() => {
     if (!media) return;

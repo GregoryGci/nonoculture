@@ -18,7 +18,8 @@ interface Env {
 type SocketAttachment = { playerId: string } | { observer: true };
 
 const STORAGE_KEY = "state";
-const MESSAGE_RATE_LIMIT = { maxHits: 20, windowMs: 10_000 };
+// Generous enough for a host rapid-firing SUBMIT_HOST_GRADE through a long review list.
+const MESSAGE_RATE_LIMIT = { maxHits: 120, windowMs: 10_000 };
 
 function send(ws: WebSocket, type: ServerMessageType, payload: unknown): void {
   try {
@@ -221,8 +222,11 @@ export class RoomDO extends DurableObject<Env> {
           ws,
         );
         break;
-      case "CAST_JUDGE_VOTE":
-        await this.dispatch({ kind: "CAST_JUDGE_VOTE", playerId, vote: parsed.vote, now }, ws);
+      case "SUBMIT_HOST_GRADE":
+        await this.dispatch(
+          { kind: "SUBMIT_HOST_GRADE", playerId, deckIndex: parsed.deckIndex, targetPlayerId: parsed.playerId, grade: parsed.grade },
+          ws,
+        );
         break;
       case "HOST_NEXT":
         await this.dispatch({ kind: "HOST_NEXT", playerId, now }, ws);

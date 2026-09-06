@@ -66,14 +66,17 @@ function main() {
   const args = process.argv.slice(2);
   const remote = args.includes("--remote");
   const inputPath = args.find((a) => !a.startsWith("--"));
+  const keyOverrideArg = args.find((a) => a.startsWith("--key="));
   if (!inputPath || !existsSync(inputPath)) {
-    console.error("Usage: pnpm media:add <fichier> [--remote]");
+    console.error("Usage: pnpm media:add <fichier> [--remote] [--key=<r2-key-sans-extension>]");
     process.exit(1);
   }
 
   const ext = extname(inputPath).toLowerCase();
   const kind = detectKind(ext);
-  const key = `${kind}-${Date.now()}-${basename(inputPath, ext).replace(/[^a-z0-9-]/gi, "_")}`;
+  const key =
+    keyOverrideArg?.slice("--key=".length) ??
+    `${kind}-${Date.now()}-${basename(inputPath, ext).replace(/[^a-z0-9-]/gi, "_")}`;
 
   const outDir = mkdtempSync(join(tmpdir(), "quiproquo-media-"));
   console.log(`Compressing ${inputPath} (${kind})...`);

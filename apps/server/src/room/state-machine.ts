@@ -1,5 +1,5 @@
-import { classifyAnswer, computeScoreDeltas, applyScoreDeltas, DEFAULT_SETTINGS } from "@quiproquo/shared";
-import type { GameSettings } from "@quiproquo/shared";
+import { classifyAnswer, DEFAULT_SETTINGS } from "@quiproquo/shared";
+import type { GameSettings, Grade } from "@quiproquo/shared";
 import {
   CHAIN_DRAW_DURATION_MS,
   CHAIN_GUESS_DURATION_MS,
@@ -9,21 +9,9 @@ import {
   CHAIN_REVEAL_PER_ITEM_MS,
   CODE_RELEASE_DELAY_MS,
   DISCONNECT_GRACE_MS,
-  JUDGE_VOTE_DURATION_MS,
-  REVEAL_DURATION_MS,
   ROOM_IDLE_TIMEOUT_MS,
-  SCOREBOARD_DURATION_MS,
 } from "./types.js";
-import type {
-  ChainRoundState,
-  DeckItem,
-  Effect,
-  GameEvent,
-  GameState,
-  InternalPlayer,
-  InternalQuestion,
-  SubmittedAnswer,
-} from "./types.js";
+import type { ChainRoundState, DeckItem, Effect, GameEvent, GameState, InternalPlayer } from "./types.js";
 
 export interface TransitionResult {
   state: GameState;
@@ -50,92 +38,6 @@ function oldestConnected(state: GameState, excluding?: string): InternalPlayer |
   const candidates = connectedPlayers(state).filter((p) => p.playerId !== excluding);
   if (candidates.length === 0) return null;
   return candidates.reduce((a, b) => (a.joinedAt <= b.joinedAt ? a : b));
-}
-
-function finalizeAnswer(a: SubmittedAnswer): SubmittedAnswer {
-  if (a.accepted !== null) return a;
-  if (a.classification === "auto_valid") return { ...a, accepted: true };
-  if (a.classification === "auto_invalid") return { ...a, accepted: false };
-  return a; // grey_zone left pending unless voted on
-}
-
-function currentTriviaQuestion(state: GameState): InternalQuestion | null {
-  const item = state.deck[state.deckIndex];
-  return item?.kind === "trivia" ? item.question : null;
-}
-
-function currentDifficulty(state: GameState): 1 | 2 | 3 {
-  return currentTriviaQuestion(state)?.difficulty ?? 1;
-}
-
-/** Apply score deltas for every answer that now has a final accepted value. */
-function applyPendingScores(state: GameState): GameState {
-  const finalized = state.answers.map(finalizeAnswer);
-  const deltas = computeScoreDeltas(
-    finalized.filter((a) => a.accepted !== null).map((a) => ({ playerId: a.playerId, accepted: a.accepted as boolean })),
-    currentDifficulty(state),
-  );
-  const scores = applyScoreDeltas(
-    Object.fromEntries(Object.values(state.players).map((p) => [p.playerId, p.score])),
-    deltas,
-  );
-  const players = Object.fromEntries(
-    Object.entries(state.players).map(([id, p]) => [id, { ...p, score: scores[id] ?? p.score }]),
-  );
-  return { ...state, answers: finalized, players };
-}
-
-function goToScoreboardOrNext(state: GameState, now: number): GameState {
-  const scored = applyPendingScores(state);
-  return {
-    ...scored,
-    phase: "SCOREBOARD",
-    currentJudging: null,
-    greyZoneQueue: [],
-    chain: null,
-    phaseDeadlineTs: now + SCOREBOARD_DURATION_MS,
-  };
-}
-
-function startJudgingOrScoreboard(state: GameState, now: number): GameState {
-  if (state.greyZoneQueue.length === 0) {
-    return goToScoreboardOrNext(state, now);
-  }
-  const [next, ...rest] = state.greyZoneQueue;
-  return {
-    ...state,
-    phase: "JUDGING",
-    greyZoneQueue: rest,
-    currentJudging: { playerId: next!, votes: {} },
-    phaseDeadlineTs: now + JUDGE_VOTE_DURATION_MS,
-  };
-}
-
-function finalizeCurrentJudging(state: GameState): GameState {
-  if (!state.currentJudging) return state;
-  const { playerId, votes } = state.currentJudging;
-  const tally = Object.values(votes).reduce(
-    (acc, v) => (v.vote === "valid" ? { ...acc, valid: acc.valid + 1 } : { ...acc, invalid: acc.invalid + 1 }),
-    { valid: 0, invalid: 0 },
-  );
-  let accepted: boolean;
-  if (tally.valid > tally.invalid) {
-    accepted = true;
-  } else if (tally.invalid > tally.valid) {
-    accepted = false;
-  } else {
-    const hostVote = votes[state.hostPlayerId];
-    accepted = hostVote ? hostVote.vote === "valid" : false; // no tiebreak cast => reject
-  }
-  const answers = state.answers.map((a) => (a.playerId === playerId ? { ...a, accepted } : a));
-  return { ...state, answers, currentJudging: null };
-}
-
-function allEligibleVoted(state: GameState): boolean {
-  if (!state.currentJudging) return false;
-  const { playerId, votes } = state.currentJudging;
-  const eligible = connectedPlayers(state).filter((p) => p.playerId !== playerId);
-  return eligible.length > 0 && eligible.every((p) => votes[p.playerId] !== undefined);
 }
 
 function allConnectedAnswered(state: GameState): boolean {
@@ -214,24 +116,14 @@ function advancePastChainGuess(state: GameState, now: number): GameState {
   return resolveChain({ ...state, chain }, now);
 }
 
-function goToScoreboardFromChainReveal(state: GameState, now: number): GameState {
-  return { ...state, phase: "SCOREBOARD", chain: null, phaseDeadlineTs: now + SCOREBOARD_DURATION_MS };
-}
-
-/** Enters the deck slot at `index`: a trivia QUESTION, a chain round, or FINISHED past the end.
+/** Enters the deck slot at `index`: a trivia QUESTION, a chain round, or HOST_REVIEW past the end.
  *  Chain slots are skipped (recursively) if too few players are connected to run one. */
 function startDeckSlot(state: GameState, index: number, now: number): GameState {
   if (index >= state.deck.length) {
-    return { ...state, phase: "FINISHED", deckIndex: index, phaseDeadlineTs: null };
+    return { ...state, phase: "HOST_REVIEW", deckIndex: index, chain: null, phaseDeadlineTs: null };
   }
   const item: DeckItem = state.deck[index]!;
-  const base = {
-    ...state,
-    deckIndex: index,
-    answers: [],
-    greyZoneQueue: [],
-    currentJudging: null,
-  };
+  const base = { ...state, deckIndex: index, answers: [] };
   if (item.kind === "trivia") {
     return {
       ...base,
@@ -253,8 +145,16 @@ function startDeckSlot(state: GameState, index: number, now: number): GameState 
   };
 }
 
-function advanceFromScoreboard(state: GameState, now: number): GameState {
+/** Moves on to the next deck slot (or HOST_REVIEW), with no scoreboard/reveal interlude. */
+function advanceDeck(state: GameState, now: number): GameState {
   return startDeckSlot(state, state.deckIndex + 1, now);
+}
+
+/** Archives the current question's answers for the end-of-game review, then advances. */
+function logAnswersAndAdvance(state: GameState, now: number): GameState {
+  const answerLog =
+    state.answers.length > 0 ? { ...state.answerLog, [state.deckIndex]: state.answers } : state.answerLog;
+  return advanceDeck({ ...state, answerLog }, now);
 }
 
 export function createRoom(roomCode: string, now: number): GameState {
@@ -267,8 +167,8 @@ export function createRoom(roomCode: string, now: number): GameState {
     deck: [],
     deckIndex: -1,
     answers: [],
-    greyZoneQueue: [],
-    currentJudging: null,
+    answerLog: {},
+    grades: {},
     chain: null,
     phaseDeadlineTs: null,
     createdAt: now,
@@ -371,44 +271,38 @@ export function transition(state: GameState, event: GameEvent): TransitionResult
 
     case "SUBMIT_ANSWER": {
       if (state.phase !== "QUESTION") break;
-      const question = currentTriviaQuestion(state);
+      const item = state.deck[state.deckIndex];
+      const question = item?.kind === "trivia" ? item.question : null;
       if (!question || question.id !== event.questionId) break;
       const player = state.players[event.playerId];
       if (!player || !player.connected) break;
       if (state.answers.some((a) => a.playerId === event.playerId)) break; // locked
 
-      const { classification } = classifyAnswer(event.raw, question.answer, question.aliases);
-      const answer: SubmittedAnswer = {
-        playerId: event.playerId,
-        raw: event.raw,
-        submittedAt: event.now,
-        classification,
-        accepted: classification === "grey_zone" ? null : classification === "auto_valid",
-      };
       effects.push({ kind: "SEND_ANSWER_RECEIVED", playerId: event.playerId });
-      next = { ...state, answers: [...state.answers, answer] };
+      next = { ...state, answers: [...state.answers, { playerId: event.playerId, raw: event.raw, submittedAt: event.now }] };
 
       if (allConnectedAnswered(next)) {
-        next = revealFromQuestion(next, event.now);
+        next = logAnswersAndAdvance(next, event.now);
       }
       break;
     }
 
-    case "CAST_JUDGE_VOTE": {
-      if (state.phase !== "JUDGING" || !state.currentJudging) break;
-      if (event.playerId === state.currentJudging.playerId) break; // can't vote on own answer
-      if (!state.players[event.playerId]?.connected) break;
+    case "SUBMIT_HOST_GRADE": {
+      if (state.phase !== "HOST_REVIEW" || event.playerId !== state.hostPlayerId) break;
+      const answered = state.answerLog[event.deckIndex]?.some((a) => a.playerId === event.targetPlayerId);
+      if (!answered) break;
+      const key = `${event.deckIndex}:${event.targetPlayerId}`;
+      const previousGrade: Grade = state.grades[key] ?? 0;
+      const target = state.players[event.targetPlayerId];
+      if (!target) break;
       next = {
         ...state,
-        currentJudging: {
-          ...state.currentJudging,
-          votes: { ...state.currentJudging.votes, [event.playerId]: { voterId: event.playerId, vote: event.vote } },
+        grades: { ...state.grades, [key]: event.grade },
+        players: {
+          ...state.players,
+          [event.targetPlayerId]: { ...target, score: target.score - previousGrade + event.grade },
         },
       };
-      if (allEligibleVoted(next)) {
-        next = finalizeCurrentJudging(next);
-        next = startJudgingOrScoreboard(next, event.now);
-      }
       break;
     }
 
@@ -455,12 +349,10 @@ export function transition(state: GameState, event: GameEvent): TransitionResult
 
     case "HOST_NEXT": {
       if (event.playerId !== state.hostPlayerId) break;
-      if (state.phase === "SCOREBOARD") {
-        next = advanceFromScoreboard(state, event.now);
-      } else if (state.phase === "REVEAL") {
-        next = startJudgingOrScoreboard(state, event.now);
-      } else if (state.phase === "CHAIN_REVEAL") {
-        next = goToScoreboardFromChainReveal(state, event.now);
+      if (state.phase === "CHAIN_REVEAL") {
+        next = advanceDeck(state, event.now);
+      } else if (state.phase === "HOST_REVIEW") {
+        next = { ...state, phase: "FINISHED", phaseDeadlineTs: null };
       }
       break;
     }
@@ -477,8 +369,8 @@ export function transition(state: GameState, event: GameEvent): TransitionResult
         deck: [],
         deckIndex: -1,
         answers: [],
-        greyZoneQueue: [],
-        currentJudging: null,
+        answerLog: {},
+        grades: {},
         chain: null,
         phaseDeadlineTs: null,
       };
@@ -500,16 +392,6 @@ export function transition(state: GameState, event: GameEvent): TransitionResult
   }
 
   return { state: next, effects };
-}
-
-function revealFromQuestion(state: GameState, now: number): GameState {
-  const greyZoneQueue = state.answers.filter((a) => a.classification === "grey_zone").map((a) => a.playerId);
-  return {
-    ...state,
-    phase: "REVEAL",
-    greyZoneQueue,
-    phaseDeadlineTs: now + REVEAL_DURATION_MS,
-  };
 }
 
 function handleAlarm(state: GameState, now: number, effects: Effect[]): GameState {
@@ -541,14 +423,7 @@ function handleAlarm(state: GameState, now: number, effects: Effect[]): GameStat
   // 3. Phase deadline handling.
   if (next.phaseDeadlineTs !== null && now >= next.phaseDeadlineTs) {
     if (next.phase === "QUESTION") {
-      next = revealFromQuestion(next, now);
-    } else if (next.phase === "REVEAL") {
-      next = startJudgingOrScoreboard(next, now);
-    } else if (next.phase === "JUDGING") {
-      next = finalizeCurrentJudging(next);
-      next = startJudgingOrScoreboard(next, now);
-    } else if (next.phase === "SCOREBOARD") {
-      next = advanceFromScoreboard(next, now);
+      next = logAnswersAndAdvance(next, now);
     } else if (next.phase === "CHAIN_PROMPT") {
       next = advancePastChainPrompt(next, now);
     } else if (next.phase === "CHAIN_DRAW") {
@@ -556,7 +431,7 @@ function handleAlarm(state: GameState, now: number, effects: Effect[]): GameStat
     } else if (next.phase === "CHAIN_GUESS") {
       next = advancePastChainGuess(next, now);
     } else if (next.phase === "CHAIN_REVEAL") {
-      next = goToScoreboardFromChainReveal(next, now);
+      next = advanceDeck(next, now);
     }
   }
 

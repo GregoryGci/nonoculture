@@ -1,13 +1,11 @@
 export const PHASES = [
   "LOBBY",
   "QUESTION",
-  "REVEAL",
-  "JUDGING",
-  "SCOREBOARD",
   "CHAIN_PROMPT",
   "CHAIN_DRAW",
   "CHAIN_GUESS",
   "CHAIN_REVEAL",
+  "HOST_REVIEW",
   "FINISHED",
 ] as const;
 
@@ -15,6 +13,10 @@ export type Phase = (typeof PHASES)[number];
 
 export const QUESTION_TYPES = ["text", "image", "audio", "video"] as const;
 export type QuestionType = (typeof QUESTION_TYPES)[number];
+
+/** A manual grade the host assigns to one player's answer during HOST_REVIEW. */
+export const GRADES = [0, 0.5, 1] as const;
+export type Grade = (typeof GRADES)[number];
 
 export interface GameSettings {
   questionCount: number; // 20-40
@@ -31,7 +33,7 @@ export const DEFAULT_SETTINGS: GameSettings = {
 export interface PlayerPublic {
   playerId: string;
   nickname: string;
-  avatar: string; // emoji, or an svg-avatar id (see packages/shared/src/avatars.ts)
+  avatar: string; // emoji, or an svg-avatar id (see apps/web/src/components/Avatar.tsx)
   score: number;
   connected: boolean;
   isHost: boolean;
@@ -46,22 +48,6 @@ export interface QuestionPublic {
   type: QuestionType;
   prompt: string;
   mediaUrl: string | null;
-}
-
-export interface RevealedAnswer {
-  playerId: string;
-  nickname: string;
-  rawAnswer: string;
-  /** null while a grey-zone answer is still awaiting the room's JUDGING vote. */
-  accepted: boolean | null;
-  points: number;
-}
-
-export interface JudgePromptItem {
-  answerId: string;
-  playerId: string;
-  nickname: string;
-  rawAnswer: string;
 }
 
 /**
@@ -88,6 +74,23 @@ export interface ChainResult {
   points: number;
 }
 
+/** One player's answer to one trivia question, as graded (or not yet) by the host. */
+export interface ReviewAnswer {
+  playerId: string;
+  nickname: string;
+  raw: string;
+  grade: Grade | null;
+}
+
+/** One trivia question and every answer given to it, for the host's end-of-game review pass. */
+export interface ReviewQuestion {
+  deckIndex: number;
+  prompt: string;
+  correctAnswer: string;
+  explanation: string | null;
+  answers: ReviewAnswer[];
+}
+
 /**
  * The full state a client needs to render itself from scratch — sent as STATE_SYNC.
  * No client-side guessing allowed: everything visible must be derivable from this alone.
@@ -101,15 +104,12 @@ export interface RoomStateSync {
   questionIndex: number; // 0-based index into the full deck (trivia + chain slots)
   questionTotal: number;
   currentQuestion: QuestionPublic | null;
-  /** Set only during SCOREBOARD so the client can preload the next question's media in advance. */
+  /** Set during QUESTION so the client can preload the next question's media in advance. */
   nextQuestionMedia: { type: QuestionType; url: string } | null;
   phaseDeadlineTs: number | null; // absolute server timestamp, null = no countdown
   youHaveAnswered: boolean;
-  revealedAnswers: RevealedAnswer[] | null;
-  /** The expected answer text, shown from REVEAL onward for the question just played. */
-  revealedCorrectAnswer: string | null;
-  revealedExplanation: string | null;
-  judgePrompt: JudgePromptItem | null;
   chainTask: ChainTask | null;
   chainReveal: ChainResult[] | null;
+  /** Every trivia question and answer of the game, for the host's end-of-game review — set only during HOST_REVIEW. */
+  reviewQuestions: ReviewQuestion[] | null;
 }

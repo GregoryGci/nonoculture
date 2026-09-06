@@ -36,10 +36,12 @@ export const SubmitAnswerMsg = z.object({
   answer: z.string().max(200),
 });
 
-export const CastJudgeVoteMsg = z.object({
-  type: z.literal("CAST_JUDGE_VOTE"),
-  answerId: z.string(),
-  vote: z.enum(["valid", "invalid"]),
+/** Host-only: assigns a grade to one player's answer to one trivia question during HOST_REVIEW. */
+export const SubmitHostGradeMsg = z.object({
+  type: z.literal("SUBMIT_HOST_GRADE"),
+  deckIndex: z.number().int().min(0),
+  playerId: uuid,
+  grade: z.union([z.literal(0), z.literal(0.5), z.literal(1)]),
 });
 
 export const HostNextMsg = z.object({
@@ -86,7 +88,7 @@ export const ClientMessage = z.discriminatedUnion("type", [
   SetProfileMsg,
   StartGameMsg,
   SubmitAnswerMsg,
-  CastJudgeVoteMsg,
+  SubmitHostGradeMsg,
   HostNextMsg,
   HostKickMsg,
   HostSettingsMsg,

@@ -27,9 +27,9 @@ export function AnswerForm({
         onChange={(e) => setValue(e.target.value)}
         maxLength={200}
         placeholder="Ta réponse…"
-        className="input-cyber min-h-11 flex-1 rounded-[var(--radius-control)] px-4 text-base"
+        className="input-cyber min-h-14 flex-1 rounded-[var(--radius-control)] px-5 text-lg"
       />
-      <button type="submit" disabled={locked || !value.trim()} className="btn btn-primary">
+      <button type="submit" disabled={locked || !value.trim()} className="btn btn-primary min-h-14 px-8 text-lg">
         {locked ? "Envoyé" : "Valider"}
       </button>
     </form>

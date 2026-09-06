@@ -1,18 +1,8 @@
-import { classifyAnswer, pointsForDifficulty } from "@quiproquo/shared";
-import type {
-  ChainResult,
-  ChainTask,
-  JudgePromptItem,
-  PlayerPublic,
-  QuestionPublic,
-  RevealedAnswer,
-  RoomStateSync,
-} from "@quiproquo/shared";
+import { classifyAnswer } from "@quiproquo/shared";
+import type { ChainResult, ChainTask, PlayerPublic, QuestionPublic, ReviewQuestion, RoomStateSync } from "@quiproquo/shared";
 import { originForRole } from "./state-machine.js";
 import { CHAIN_POINTS } from "./types.js";
 import type { GameState, InternalQuestion } from "./types.js";
-
-const REVEAL_VISIBLE_PHASES = new Set(["REVEAL", "JUDGING", "SCOREBOARD"]);
 
 function triviaAt(state: GameState, index: number): InternalQuestion | null {
   const item = state.deck[index];
@@ -68,6 +58,28 @@ function computeChainReveal(state: GameState, nicknameOf: (id: string) => string
   });
 }
 
+function computeReviewQuestions(state: GameState, nicknameOf: (id: string) => string): ReviewQuestion[] | null {
+  if (state.phase !== "HOST_REVIEW") return null;
+  return Object.entries(state.answerLog)
+    .map(([deckIndexStr, answers]) => {
+      const deckIndex = Number(deckIndexStr);
+      const question = triviaAt(state, deckIndex);
+      return {
+        deckIndex,
+        prompt: question?.prompt ?? "",
+        correctAnswer: question?.answer ?? "",
+        explanation: question?.explanation ?? null,
+        answers: answers.map((a) => ({
+          playerId: a.playerId,
+          nickname: nicknameOf(a.playerId),
+          raw: a.raw,
+          grade: state.grades[`${deckIndex}:${a.playerId}`] ?? null,
+        })),
+      };
+    })
+    .sort((a, b) => a.deckIndex - b.deckIndex);
+}
+
 export function buildStateSync(
   state: GameState,
   forPlayerId: string,
@@ -97,33 +109,14 @@ export function buildStateSync(
       }
     : null;
 
+  // Preloaded while the current question is on screen, so it's already cached by the time we advance.
   const nextQuestion = triviaAt(state, state.deckIndex + 1);
   const nextQuestionMedia =
-    state.phase === "SCOREBOARD" && nextQuestion?.mediaKey
+    state.phase === "QUESTION" && nextQuestion?.mediaKey
       ? { type: nextQuestion.type, url: resolveMediaUrl(nextQuestion.mediaKey) }
       : null;
 
   const nicknameOf = (playerId: string) => state.players[playerId]?.nickname ?? "?";
-
-  const revealedAnswers: RevealedAnswer[] | null = REVEAL_VISIBLE_PHASES.has(state.phase)
-    ? state.answers.map((a) => ({
-        playerId: a.playerId,
-        nickname: nicknameOf(a.playerId),
-        rawAnswer: a.raw,
-        accepted: a.accepted,
-        points: a.accepted ? pointsForDifficulty(question?.difficulty ?? 1) : 0,
-      }))
-    : null;
-
-  const judgePrompt: JudgePromptItem | null =
-    state.phase === "JUDGING" && state.currentJudging
-      ? {
-          answerId: state.currentJudging.playerId,
-          playerId: state.currentJudging.playerId,
-          nickname: nicknameOf(state.currentJudging.playerId),
-          rawAnswer: state.answers.find((a) => a.playerId === state.currentJudging?.playerId)?.raw ?? "",
-        }
-      : null;
 
   return {
     roomCode: state.roomCode,
@@ -137,11 +130,8 @@ export function buildStateSync(
     nextQuestionMedia,
     phaseDeadlineTs: state.phaseDeadlineTs,
     youHaveAnswered: state.answers.some((a) => a.playerId === forPlayerId),
-    revealedAnswers,
-    revealedCorrectAnswer: REVEAL_VISIBLE_PHASES.has(state.phase) ? (question?.answer ?? null) : null,
-    revealedExplanation: REVEAL_VISIBLE_PHASES.has(state.phase) ? (question?.explanation ?? null) : null,
-    judgePrompt,
     chainTask: computeChainTask(state, forPlayerId),
     chainReveal: computeChainReveal(state, nicknameOf),
+    reviewQuestions: computeReviewQuestions(state, nicknameOf),
   };
 }

@@ -8,9 +8,6 @@ import {
   CHAIN_PROMPT_DURATION_MS,
   CHAIN_REVEAL_PER_ITEM_MS,
   DISCONNECT_GRACE_MS,
-  JUDGE_VOTE_DURATION_MS,
-  REVEAL_DURATION_MS,
-  SCOREBOARD_DURATION_MS,
 } from "./types.js";
 
 const T0 = 1_000_000;
@@ -109,7 +106,7 @@ describe("host migration on disconnect", () => {
   });
 });
 
-describe("game loop: QUESTION -> REVEAL -> SCOREBOARD", () => {
+describe("game loop: QUESTION -> QUESTION -> HOST_REVIEW -> FINISHED", () => {
   function setupStarted() {
     let state = createRoom("1234", T0);
     state = join(state, "host", T0);
@@ -144,37 +141,30 @@ describe("game loop: QUESTION -> REVEAL -> SCOREBOARD", () => {
     expect(state.phaseDeadlineTs).toBe(T0 + 100 + state.settings.questionDurationSec * 1000);
   });
 
-  it("advances to REVEAL as soon as all connected players answer, before the timer", () => {
-    let state = setupStarted();
-    state = transition(state, {
-      kind: "SUBMIT_ANSWER",
-      playerId: "host",
-      questionId: 1,
-      raw: "Paris",
-      now: T0 + 200,
-    }).state;
-    expect(state.phase).toBe("QUESTION");
-    state = transition(state, {
-      kind: "SUBMIT_ANSWER",
-      playerId: "p2",
-      questionId: 1,
-      raw: "paris",
-      now: T0 + 201,
-    }).state;
-    expect(state.phase).toBe("REVEAL");
-    expect(state.phaseDeadlineTs).toBe(T0 + 201 + REVEAL_DURATION_MS);
-  });
-
-  it("gives SCOREBOARD a fixed server-side duration", () => {
+  it("advances straight to the next QUESTION as soon as all connected players answer, no wait", () => {
     let state = setupStarted();
     state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Paris", now: T0 + 200 })
       .state;
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p2", questionId: 1, raw: "Paris", now: T0 + 201 })
+    expect(state.phase).toBe("QUESTION");
+    expect(state.deckIndex).toBe(0);
+    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p2", questionId: 1, raw: "paris", now: T0 + 201 })
       .state;
-    const revealDeadline = state.phaseDeadlineTs!;
-    state = transition(state, { kind: "ALARM_FIRED", now: revealDeadline }).state;
-    expect(state.phase).toBe("SCOREBOARD");
-    expect(state.phaseDeadlineTs).toBe(revealDeadline + SCOREBOARD_DURATION_MS);
+    expect(state.phase).toBe("QUESTION");
+    expect(state.deckIndex).toBe(1);
+    expect(state.phaseDeadlineTs).toBe(T0 + 201 + state.settings.questionDurationSec * 1000);
+    expect(state.answers).toHaveLength(0); // fresh buffer for the new question
+  });
+
+  it("archives answers for the review before clearing them", () => {
+    let state = setupStarted();
+    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Paris", now: T0 + 200 })
+      .state;
+    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p2", questionId: 1, raw: "nope", now: T0 + 201 })
+      .state;
+    expect(state.answerLog[0]).toEqual([
+      { playerId: "host", raw: "Paris", submittedAt: T0 + 200 },
+      { playerId: "p2", raw: "nope", submittedAt: T0 + 201 },
+    ]);
   });
 
   it("locks a second answer from the same player", () => {
@@ -187,183 +177,176 @@ describe("game loop: QUESTION -> REVEAL -> SCOREBOARD", () => {
     expect(state.answers[0]?.raw).toBe("Paris");
   });
 
-  it("times out unanswered players via ALARM_FIRED and reveals", () => {
+  it("times out unanswered players via ALARM_FIRED and moves on with whatever was submitted", () => {
     let state = setupStarted();
     const deadline = state.phaseDeadlineTs!;
     state = transition(state, { kind: "ALARM_FIRED", now: deadline }).state;
-    expect(state.phase).toBe("REVEAL");
-    expect(state.answers).toHaveLength(0); // nobody answered
+    expect(state.phase).toBe("QUESTION");
+    expect(state.deckIndex).toBe(1);
+    expect(state.answerLog[0]).toBeUndefined(); // nobody answered in time, nothing to log or review
   });
 
-  it("auto-accepts an exact answer and scores it on reveal->scoreboard", () => {
-    let state = setupStarted();
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Paris", now: T0 + 200 })
-      .state;
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p2", questionId: 1, raw: "nope", now: T0 + 201 })
-      .state;
-    expect(state.phase).toBe("REVEAL");
-    state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state;
-    expect(state.phase).toBe("SCOREBOARD");
-    expect(state.players.host?.score).toBe(1); // difficulty 1
-    expect(state.players.p2?.score).toBe(0);
-  });
-
-  it("skips JUDGING entirely when nothing is in the grey zone", () => {
-    let state = setupStarted();
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Paris", now: T0 + 200 })
-      .state;
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p2", questionId: 1, raw: "xyz", now: T0 + 201 })
-      .state;
-    state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state;
-    expect(state.phase).toBe("SCOREBOARD");
-  });
-
-  it("advances from SCOREBOARD to the next QUESTION, then to FINISHED after the last one", () => {
+  it("does not award any score automatically — scoring is entirely manual, at HOST_REVIEW", () => {
     let state = setupStarted();
     state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Paris", now: T0 + 200 })
       .state;
     state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p2", questionId: 1, raw: "Paris", now: T0 + 201 })
       .state;
-    state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state; // -> SCOREBOARD
-    state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state; // -> QUESTION #2
-    expect(state.phase).toBe("QUESTION");
-    expect(state.deckIndex).toBe(1);
+    expect(state.players.host?.score).toBe(0);
+    expect(state.players.p2?.score).toBe(0);
+  });
 
+  it("reaches HOST_REVIEW (no timer) after the last question, then FINISHED once the host is done", () => {
+    let state = setupStarted();
+    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Paris", now: T0 + 200 })
+      .state;
+    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p2", questionId: 1, raw: "Paris", now: T0 + 201 })
+      .state; // -> QUESTION #2
     state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 2, raw: "Berlin", now: T0 + 300 })
       .state;
     state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p2", questionId: 2, raw: "Berlin", now: T0 + 301 })
-      .state;
-    state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state; // -> SCOREBOARD
-    state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state; // -> FINISHED
+      .state; // -> HOST_REVIEW
+    expect(state.phase).toBe("HOST_REVIEW");
+    expect(state.phaseDeadlineTs).toBeNull(); // host takes as long as they want
+
+    state = transition(state, { kind: "HOST_NEXT", playerId: "host", now: T0 + 500 }).state;
     expect(state.phase).toBe("FINISHED");
     expect(state.phaseDeadlineTs).toBeNull();
   });
 
-  it("lets the host skip the scoreboard wait via HOST_NEXT", () => {
+  it("ignores HOST_NEXT (finish review) from a non-host player", () => {
     let state = setupStarted();
     state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Paris", now: T0 + 200 })
       .state;
     state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p2", questionId: 1, raw: "Paris", now: T0 + 201 })
       .state;
-    state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state; // -> SCOREBOARD
-    state = transition(state, { kind: "HOST_NEXT", playerId: "host", now: T0 + 500 }).state;
-    expect(state.phase).toBe("QUESTION");
-  });
-
-  it("ignores HOST_NEXT from a non-host player", () => {
-    let state = setupStarted();
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Paris", now: T0 + 200 })
+    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 2, raw: "Berlin", now: T0 + 300 })
       .state;
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p2", questionId: 1, raw: "Paris", now: T0 + 201 })
-      .state;
-    state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state; // -> SCOREBOARD
-    const before = state.phase;
+    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p2", questionId: 2, raw: "Berlin", now: T0 + 301 })
+      .state; // -> HOST_REVIEW
     state = transition(state, { kind: "HOST_NEXT", playerId: "p2", now: T0 + 500 }).state;
-    expect(state.phase).toBe(before);
+    expect(state.phase).toBe("HOST_REVIEW");
   });
 });
 
-describe("JUDGING", () => {
-  function setupGreyZone() {
+describe("HOST_REVIEW / SUBMIT_HOST_GRADE", () => {
+  function setupAtReview() {
     let state = createRoom("1234", T0);
     state = join(state, "host", T0);
     state = withProfile(state, "host", "Alice");
     state = join(state, "p2", T0 + 1);
     state = withProfile(state, "p2", "Bob");
-    state = join(state, "p3", T0 + 2);
-    state = withProfile(state, "p3", "Carl");
     state = transition(state, {
       kind: "START_GAME",
       playerId: "host",
       now: T0 + 100,
-      deck: trivia(question({ id: 1, answer: "Berlin" })),
+      deck: trivia(question({ id: 1 })),
     }).state;
-    // "berlim" vs "berlin" -> normalized distance 1/6 = 0.167, in the grey zone (0.15, 0.5).
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "berlim", now: T0 + 200 })
-      .state; // grey zone
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p2", questionId: 1, raw: "nope", now: T0 + 201 })
-      .state; // auto_invalid
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p3", questionId: 1, raw: "Berlin", now: T0 + 202 })
-      .state; // auto_valid
-    return state; // all 3 answered -> already moved to REVEAL
+    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Paris", now: T0 + 200 })
+      .state;
+    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p2", questionId: 1, raw: "Pariss", now: T0 + 201 })
+      .state; // -> HOST_REVIEW
+    return state;
   }
 
-  it("enters JUDGING for a grey-zone answer after REVEAL", () => {
-    let state = setupGreyZone();
-    expect(state.phase).toBe("REVEAL");
-    const revealDeadline = state.phaseDeadlineTs!;
-    state = transition(state, { kind: "ALARM_FIRED", now: revealDeadline }).state;
-    expect(state.phase).toBe("JUDGING");
-    expect(state.currentJudging?.playerId).toBe("host");
-    expect(state.phaseDeadlineTs).toBe(revealDeadline + JUDGE_VOTE_DURATION_MS);
-  });
-
-  it("the answer owner cannot vote on their own answer", () => {
-    let state = setupGreyZone();
-    state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state; // JUDGING
-    const before = state;
-    state = transition(state, { kind: "CAST_JUDGE_VOTE", playerId: "host", vote: "valid", now: T0 + 300 }).state;
-    expect(state.currentJudging?.votes).toEqual(before.currentJudging?.votes);
-  });
-
-  it("accepts the answer once majority votes valid, and advances early", () => {
-    let state = setupGreyZone();
-    state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state; // JUDGING
-    state = transition(state, { kind: "CAST_JUDGE_VOTE", playerId: "p2", vote: "valid", now: T0 + 300 }).state;
-    // only p2 and p3 are eligible voters (host owns the answer) -> after both vote, auto-advance
-    state = transition(state, { kind: "CAST_JUDGE_VOTE", playerId: "p3", vote: "valid", now: T0 + 301 }).state;
-    expect(state.phase).toBe("SCOREBOARD");
+  it("assigns GOOD (1), PRESQUE (0.5) or NUL (0) and updates the score immediately", () => {
+    let state = setupAtReview();
+    state = transition(state, {
+      kind: "SUBMIT_HOST_GRADE",
+      playerId: "host",
+      deckIndex: 0,
+      targetPlayerId: "host",
+      grade: 1,
+    }).state;
     expect(state.players.host?.score).toBe(1);
+
+    state = transition(state, {
+      kind: "SUBMIT_HOST_GRADE",
+      playerId: "host",
+      deckIndex: 0,
+      targetPlayerId: "p2",
+      grade: 0.5,
+    }).state;
+    expect(state.players.p2?.score).toBe(0.5);
+    expect(state.grades["0:host"]).toBe(1);
+    expect(state.grades["0:p2"]).toBe(0.5);
   });
 
-  it("rejects the answer when majority votes invalid", () => {
-    let state = setupGreyZone();
-    state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state; // JUDGING
-    state = transition(state, { kind: "CAST_JUDGE_VOTE", playerId: "p2", vote: "invalid", now: T0 + 300 }).state;
-    state = transition(state, { kind: "CAST_JUDGE_VOTE", playerId: "p3", vote: "invalid", now: T0 + 301 }).state;
+  it("re-grading the same answer replaces the previous score instead of stacking", () => {
+    let state = setupAtReview();
+    state = transition(state, {
+      kind: "SUBMIT_HOST_GRADE",
+      playerId: "host",
+      deckIndex: 0,
+      targetPlayerId: "host",
+      grade: 1,
+    }).state;
+    state = transition(state, {
+      kind: "SUBMIT_HOST_GRADE",
+      playerId: "host",
+      deckIndex: 0,
+      targetPlayerId: "host",
+      grade: 0,
+    }).state;
     expect(state.players.host?.score).toBe(0);
   });
 
-  it("falls back to the host's vote to break a tie", () => {
+  it("ignores a grade from a non-host player", () => {
+    let state = setupAtReview();
+    state = transition(state, {
+      kind: "SUBMIT_HOST_GRADE",
+      playerId: "p2",
+      deckIndex: 0,
+      targetPlayerId: "host",
+      grade: 1,
+    }).state;
+    expect(state.players.host?.score).toBe(0);
+  });
+
+  it("ignores a grade for a player who never answered that question", () => {
     let state = createRoom("1234", T0);
     state = join(state, "host", T0);
-    state = withProfile(state, "host", "Alice");
     state = join(state, "p2", T0 + 1);
-    state = withProfile(state, "p2", "Bob");
     state = join(state, "p3", T0 + 2);
-    state = withProfile(state, "p3", "Carl");
-    state = join(state, "p4", T0 + 3);
-    state = withProfile(state, "p4", "Dan");
     state = transition(state, {
       kind: "START_GAME",
       playerId: "host",
       now: T0 + 100,
-      deck: trivia(question({ id: 1, answer: "Berlin" })),
+      deck: trivia(question({ id: 1 })),
     }).state;
-    // p2's answer goes to judging; host, p3, p4 vote (host is a voter here, p2 is the owner)
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p2", questionId: 1, raw: "berlim", now: T0 + 200 })
-      .state;
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Berlin", now: T0 + 201 })
-      .state;
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p3", questionId: 1, raw: "Berlin", now: T0 + 202 })
-      .state;
-    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p4", questionId: 1, raw: "Berlin", now: T0 + 203 })
-      .state; // -> REVEAL (all answered)
-    state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state; // -> JUDGING
-    state = transition(state, { kind: "CAST_JUDGE_VOTE", playerId: "host", vote: "valid", now: T0 + 300 }).state;
-    state = transition(state, { kind: "CAST_JUDGE_VOTE", playerId: "p3", vote: "invalid", now: T0 + 301 }).state;
-    // tie 1-1 pending p4's vote too -> not resolved yet since not all eligible voted (host,p3,p4 = 3 eligible)
-    state = transition(state, { kind: "CAST_JUDGE_VOTE", playerId: "p4", vote: "invalid", now: T0 + 302 }).state;
-    // 1 valid (host) vs 2 invalid (p3,p4) -> majority invalid, not actually a tie; assert rejected
-    expect(state.players.p2?.score).toBe(0);
+    // Only host and p2 answer; p3 stays connected but never submits, so the alarm timeout advances.
+    state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state;
+    state = transition(state, {
+      kind: "SUBMIT_HOST_GRADE",
+      playerId: "host",
+      deckIndex: 0,
+      targetPlayerId: "p3",
+      grade: 1,
+    }).state;
+    expect(state.players.p3?.score).toBe(0);
   });
 
-  it("times out a vote via ALARM_FIRED and moves to the next grey-zone item or SCOREBOARD", () => {
-    let state = setupGreyZone();
-    state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state; // JUDGING
-    const deadline = state.phaseDeadlineTs!;
-    state = transition(state, { kind: "ALARM_FIRED", now: deadline }).state;
-    expect(state.phase).toBe("SCOREBOARD"); // no votes cast -> rejected by default, no more grey items
+  it("ignores grades outside HOST_REVIEW", () => {
+    let state = createRoom("1234", T0);
+    state = join(state, "host", T0);
+    state = join(state, "p2", T0 + 1);
+    state = transition(state, {
+      kind: "START_GAME",
+      playerId: "host",
+      now: T0 + 100,
+      deck: trivia(question({ id: 1 }), question({ id: 2 })),
+    }).state;
+    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Paris", now: T0 + 200 })
+      .state;
+    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p2", questionId: 1, raw: "Paris", now: T0 + 201 })
+      .state; // -> QUESTION #2, still mid-game
+    state = transition(state, {
+      kind: "SUBMIT_HOST_GRADE",
+      playerId: "host",
+      deckIndex: 0,
+      targetPlayerId: "host",
+      grade: 1,
+    }).state;
     expect(state.players.host?.score).toBe(0);
   });
 });
@@ -392,12 +375,13 @@ describe("disconnect grace period", () => {
       kind: "START_GAME",
       playerId: "host",
       now: T0 + 100,
-      deck: trivia(question()),
+      deck: trivia(question(), question({ id: 2 })),
     }).state;
     state = transition(state, { kind: "PLAYER_DISCONNECT", playerId: "p2", now: T0 + 150 }).state;
     state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Paris", now: T0 + 200 })
       .state;
-    expect(state.phase).toBe("REVEAL");
+    expect(state.phase).toBe("QUESTION");
+    expect(state.deckIndex).toBe(1); // advanced past question 1 without waiting on the disconnected p2
   });
 });
 
@@ -433,6 +417,21 @@ describe("computeNextAlarmTs", () => {
     state = transition(state, { kind: "PLAYER_DISCONNECT", playerId: "p2", now: T0 + 150 }).state;
     const expected = Math.min(state.phaseDeadlineTs!, T0 + 150 + DISCONNECT_GRACE_MS);
     expect(computeNextAlarmTs(state)).toBe(expected);
+  });
+
+  it("returns null during HOST_REVIEW", () => {
+    let state = createRoom("1234", T0);
+    state = join(state, "host", T0);
+    state = transition(state, {
+      kind: "START_GAME",
+      playerId: "host",
+      now: T0 + 100,
+      deck: trivia(question()),
+    }).state;
+    state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Paris", now: T0 + 200 })
+      .state;
+    expect(state.phase).toBe("HOST_REVIEW");
+    expect(computeNextAlarmTs(state)).toBeNull();
   });
 });
 
@@ -522,14 +521,14 @@ describe("chain round (téléphone dessiné)", () => {
     expect(state.phaseDeadlineTs).toBe(T0 + 132 + 3 * CHAIN_REVEAL_PER_ITEM_MS);
   });
 
-  it("lets the host skip the CHAIN_REVEAL wait and clears the chain state", () => {
+  it("lets the host skip the CHAIN_REVEAL wait and clears the chain state, going straight to the next deck slot", () => {
     let state = setupChainStarted();
     state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state; // -> CHAIN_DRAW (fallback prompts)
     state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state; // -> CHAIN_GUESS (fallback drawings)
     state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state; // -> CHAIN_REVEAL (fallback guesses)
     expect(state.phase).toBe("CHAIN_REVEAL");
     state = transition(state, { kind: "HOST_NEXT", playerId: "host", now: T0 + 999 }).state;
-    expect(state.phase).toBe("SCOREBOARD");
+    expect(state.phase).toBe("HOST_REVIEW"); // deck had only the one chain slot
     expect(state.chain).toBeNull();
   });
 
@@ -542,7 +541,7 @@ describe("chain round (téléphone dessiné)", () => {
 });
 
 describe("PLAY_AGAIN", () => {
-  it("resets scores and phase but keeps the same players", () => {
+  it("resets scores, grades and phase but keeps the same players", () => {
     let state = createRoom("1234", T0);
     state = join(state, "host", T0);
     state = join(state, "p2", T0 + 1);
@@ -555,14 +554,22 @@ describe("PLAY_AGAIN", () => {
     state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Paris", now: T0 + 200 })
       .state;
     state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p2", questionId: 1, raw: "Paris", now: T0 + 201 })
-      .state;
-    state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state; // SCOREBOARD
-    state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state; // FINISHED
+      .state; // -> HOST_REVIEW
+    state = transition(state, {
+      kind: "SUBMIT_HOST_GRADE",
+      playerId: "host",
+      deckIndex: 0,
+      targetPlayerId: "host",
+      grade: 1,
+    }).state;
+    state = transition(state, { kind: "HOST_NEXT", playerId: "host", now: T0 + 400 }).state; // -> FINISHED
     expect(state.players.host?.score).toBe(1);
 
     state = transition(state, { kind: "PLAY_AGAIN", playerId: "host", now: T0 + 1000 }).state;
     expect(state.phase).toBe("LOBBY");
     expect(state.players.host?.score).toBe(0);
+    expect(state.grades).toEqual({});
+    expect(state.answerLog).toEqual({});
     expect(Object.keys(state.players)).toEqual(["host", "p2"]);
   });
 });
