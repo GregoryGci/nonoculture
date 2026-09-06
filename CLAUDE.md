@@ -27,7 +27,7 @@ premier** en reprenant ce projet, c'est la source de vérité sur ce qui est fai
   l'**Alarms API** (`ctx.storage.setAlarm()` / `alarm()` handler), sinon l'hibernation
   est bloquée et le DO facture du compute inutilement.
 - `ctx.setWebSocketAutoResponse()` pour le ping/pong (gratuit, ne réveille pas le DO).
-- Aucune réponse d'un joueur ne doit être diffusée aux autres avant la phase `REVEAL`
+- Aucune réponse d'un joueur ne doit être diffusée aux autres avant `HOST_REVIEW`
   (sinon triche via l'inspecteur réseau). `ANSWER_RECEIVED` est un accusé sans contenu.
 - Le DO persiste son état dans son storage SQLite après **chaque** transition de phase.
 - TypeScript strict partout, pas de `any`. Types du protocole WS et schémas Zod dans
@@ -35,19 +35,32 @@ premier** en reprenant ce projet, c'est la source de vérité sur ce qui est fai
 
 ## Machine à états (dans `apps/server/src/room/`)
 
+**Le scoring des questions texte est 100% manuel, décidé par l'hôte à la fin de la
+partie — pas d'auto-validation Levenshlein/JUDGING pour ces questions** (changement
+demandé en session, remplace l'auto-validation décrite dans `docs/brief.md` section 6 ;
+`classifyAnswer`/Levenshtein restent utilisés, mais seulement pour le matching
+prompt/devinette de la manche chaîne).
+
 ```
-LOBBY → QUESTION → REVEAL → JUDGING → SCOREBOARD → (QUESTION | CHAIN_PROMPT | FINISHED)
+LOBBY → QUESTION → (QUESTION suivante | CHAIN_PROMPT | HOST_REVIEW) → FINISHED
 ```
 
-`JUDGING` est sauté si aucune réponse n'est en zone grise après l'auto-validation
-(Levenshtein normalisé ≤ 0.15 = validé auto, très éloigné = refusé auto). Détail complet
-dans `docs/brief.md` section 6.
+Dès que tous les joueurs connectés ont répondu (ou que le timer expire), on enchaîne
+directement sur le slot suivant du deck — **aucun `REVEAL` ni `SCOREBOARD` entre les
+questions**, pour rester fluide. Chaque réponse est archivée (`GameState.answerLog`,
+par index de deck) pendant toute la partie. Une fois le deck épuisé, la partie passe en
+`HOST_REVIEW` (pas de timer, `phaseDeadlineTs: null`) : l'hôte note chaque réponse de
+chaque joueur à chaque question via `SUBMIT_HOST_GRADE` (Nul=0 / Presque=0.5 / Good=1),
+visible en lecture seule par tout le monde pour la transparence ; le score est appliqué
+immédiatement et peut être corrigé (re-noter écrase l'ancienne note, pas de cumul). Le
+host clique "Voir le podium" (`HOST_NEXT`) quand il a fini pour passer à `FINISHED`.
 
 Le deck (`GameState.deck`) mélange des questions trivia et des manches "téléphone
-dessiné" (~2 sur 15 slots, voir `apps/server/src/lib/questions.ts#buildDeck`) :
+dessiné" (~2 sur 15 slots, voir `apps/server/src/lib/questions.ts#buildDeck`), qui
+gardent elles leur scoring automatique :
 
 ```
-CHAIN_PROMPT → CHAIN_DRAW → CHAIN_GUESS → CHAIN_REVEAL → SCOREBOARD
+CHAIN_PROMPT → CHAIN_DRAW → CHAIN_GUESS → CHAIN_REVEAL → (slot suivant du deck)
 ```
 
 Tous les joueurs connectés sont pris en rotation (`GameState.chain.order`, snapshotté au

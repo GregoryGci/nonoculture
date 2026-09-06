@@ -6,6 +6,19 @@ Tout est commité dans git, un commit par étape logique — `git log --oneline`
 
 ## Ajouts du 2026-09-06 (sur demande explicite, en session)
 
+- **Scoring manuel par l'hôte** (remplace l'auto-validation/JUDGING du brief original) :
+  les questions s'enchaînent sans attendre (dès que tout le monde a répondu, direct à la
+  suivante, aucun écran REVEAL/SCOREBOARD entre elles). À la fin de la partie, nouvelle
+  phase `HOST_REVIEW` (sans timer) : l'hôte note chaque réponse de chaque joueur à chaque
+  question — Nul (0) / Presque (0.5) / Good (1) — visible en direct par tout le monde,
+  score appliqué immédiatement et re-notable. Un vrai bug a été trouvé et corrigé au
+  passage : le formulaire de réponse ne se réinitialisait plus entre deux questions
+  (elles restent dans la même phase `QUESTION` maintenant) — corrigé en le re-montant
+  par id de question. Limite de débit WS relevée (20→120 msg/10s) pour que l'hôte
+  puisse noter beaucoup de réponses rapidement sans se faire silencieusement bloquer.
+  Testé de bout en bout avec 2 clients WebSocket réels + vérification visuelle navigateur.
+- **Layout** : blocs plus grands, centrés verticalement à l'écran (`max-w-2xl`,
+  `justify-center`), inputs/boutons/lignes de joueurs agrandis.
 - **Manche "téléphone dessiné"** (~2 questions sur 15) : nouvelle machine à états
   `CHAIN_PROMPT → CHAIN_DRAW → CHAIN_GUESS → CHAIN_REVEAL`, rotation à 3 maillons entre
   tous les joueurs connectés, scoring par comparaison texte (même moteur que les
