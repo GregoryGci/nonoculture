@@ -14,6 +14,11 @@ interface Env {
   ASSETS?: { fetch: typeof fetch };
 }
 
+/** Either binding can serve /media/:key, so either one makes media questions playable. */
+function hasMediaSource(env: Env): boolean {
+  return env.MEDIA !== undefined || env.ASSETS !== undefined;
+}
+
 const app = new Hono<{ Bindings: Env }>();
 
 const createRoomLimiter = new RateLimiter(10, 60_000);
@@ -28,7 +33,7 @@ app.post("/api/rooms", async (c) => {
 });
 
 app.get("/api/themes", async (c) => {
-  const themes = await listPlayableThemes(c.env.DB, c.env.MEDIA !== undefined);
+  const themes = await listPlayableThemes(c.env.DB, hasMediaSource(c.env));
   return c.json({ themes });
 });
 

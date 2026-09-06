@@ -1,17 +1,193 @@
 [
-  {"theme":"animaux","difficulty":1,"type":"audio","prompt":"Quel animal fait ce bruit ?","media_key":"audio-1788691267541-animaux-un_lion.mp3","answer":"un lion","aliases":["lion"],"source":"Freesound.org (CC0) - lion.wav"},
-  {"theme":"animaux","difficulty":1,"type":"audio","prompt":"Quel animal fait ce bruit ?","media_key":"audio-1788691264331-animaux-un_chien.mp3","answer":"un chien","aliases":["chien"],"source":"Freesound.org (CC0) - Dog play.WAV"},
-  {"theme":"animaux","difficulty":1,"type":"audio","prompt":"Quel animal fait ce bruit ?","media_key":"audio-1788691257928-animaux-une_vache.mp3","answer":"une vache","aliases":["vache"],"source":"Freesound.org (CC0) - Cow Mooing, Take 3"},
-  {"theme":"animaux","difficulty":1,"type":"audio","prompt":"Quel animal fait ce bruit ?","media_key":"audio-1788691265944-animaux-un_coq.mp3","answer":"un coq","aliases":["coq"],"source":"Freesound.org (CC0) - Rooster Crowing"},
-  {"theme":"animaux","difficulty":1,"type":"audio","prompt":"Quel animal fait ce bruit ?","media_key":"audio-1788691261106-animaux-un_chat.mp3","answer":"un chat","aliases":["chat"],"source":"Freesound.org (CC0) - Cat meowing for food 3"},
-  {"theme":"animaux","difficulty":2,"type":"audio","prompt":"Quel animal fait ce bruit ?","media_key":"audio-1788691269102-animaux-un_l_phant.mp3","answer":"un éléphant","aliases":["éléphant","elephant"],"source":"Freesound.org (CC0) - Elephant sound"},
-  {"theme":"animaux","difficulty":1,"type":"audio","prompt":"Quel animal fait ce bruit ?","media_key":"audio-1788691259495-animaux-un_canard.mp3","answer":"un canard","aliases":["canard"],"source":"Freesound.org (CC0) - Ducks Quacking To Each Other"},
-  {"theme":"animaux","difficulty":1,"type":"audio","prompt":"Quel animal fait ce bruit ?","media_key":"audio-1788691262743-animaux-un_cheval.mp3","answer":"un cheval","aliases":["cheval"],"source":"Freesound.org (CC0) - Horse Neigh"},
-  {"theme":"animaux","difficulty":2,"type":"audio","prompt":"Quel animal fait ce bruit ?","media_key":"audio-1788691270769-animaux-un_mouton.mp3","answer":"un mouton","aliases":["mouton","brebis"],"source":"Freesound.org (CC0) - Ewe baa"},
-  {"theme":"cuisine","difficulty":2,"type":"audio","prompt":"Quel bruit de cuisine entends-tu ?","media_key":"audio-1788691272328-cuisine-de_la_friture.mp3","answer":"de la friture","aliases":["friture","poêle qui grésille","grésillement"],"source":"Freesound.org (CC0) - Sizzler"},
-  {"theme":"cuisine","difficulty":2,"type":"audio","prompt":"Quel bruit de cuisine entends-tu ?","media_key":"audio-1788691277039-cuisine-on_d_coupe_des_l_gumes.mp3","answer":"on découpe des légumes","aliases":["découper des légumes","couper des légumes","découpe"],"source":"Freesound.org (CC0) - Cutting a Carrot"},
-  {"theme":"cuisine","difficulty":2,"type":"audio","prompt":"Quel bruit de cuisine entends-tu ?","media_key":"audio-1788691273863-cuisine-de_l_eau_qui_bout.mp3","answer":"de l'eau qui bout","aliases":["ébullition","eau bouillante","eau qui bout"],"source":"Freesound.org (CC0) - Hot Water Spilling out while Boiling Eggs"},
-  {"theme":"cuisine","difficulty":2,"type":"audio","prompt":"Quel bruit de cuisine entends-tu ?","media_key":"audio-1788691280298-cuisine-un_mixeur.mp3","answer":"un mixeur","aliases":["blender","mixeur électrique"],"source":"Freesound.org (CC0) - Blender.mp3"},
-  {"theme":"cuisine","difficulty":2,"type":"audio","prompt":"Quel bruit de cuisine entends-tu ?","media_key":"audio-1788691278669-cuisine-une_bouilloire.mp3","answer":"une bouilloire","aliases":["bouilloire","bouilloire qui siffle"],"source":"Freesound.org (CC0) - kettle short.wav"},
-  {"theme":"cuisine","difficulty":1,"type":"audio","prompt":"Quel bruit de cuisine entends-tu ?","media_key":"audio-1788691275440-cuisine-du_popcorn.mp3","answer":"du popcorn","aliases":["pop-corn","pop corn"],"source":"Freesound.org (CC0) - Popcorn Real.wav"}
+  {
+    "theme": "animaux",
+    "difficulty": 1,
+    "type": "audio",
+    "prompt": "Quel animal fait ce bruit ?",
+    "media_key": "animaux-un_lion.mp3",
+    "answer": "un lion",
+    "aliases": [
+      "lion"
+    ],
+    "source": "Freesound.org #467762 (CC0) - lion.wav"
+  },
+  {
+    "theme": "animaux",
+    "difficulty": 1,
+    "type": "audio",
+    "prompt": "Quel animal fait ce bruit ?",
+    "media_key": "animaux-un_chien.mp3",
+    "answer": "un chien",
+    "aliases": [
+      "chien"
+    ],
+    "source": "Freesound.org #396307 (CC0) - Dog play.WAV"
+  },
+  {
+    "theme": "animaux",
+    "difficulty": 1,
+    "type": "audio",
+    "prompt": "Quel animal fait ce bruit ?",
+    "media_key": "animaux-une_vache.mp3",
+    "answer": "une vache",
+    "aliases": [
+      "vache"
+    ],
+    "source": "Freesound.org #847404 (CC0) - Bovines - Cattle; Cow Mooing, Take 3"
+  },
+  {
+    "theme": "animaux",
+    "difficulty": 1,
+    "type": "audio",
+    "prompt": "Quel animal fait ce bruit ?",
+    "media_key": "animaux-un_coq.mp3",
+    "answer": "un coq",
+    "aliases": [
+      "coq"
+    ],
+    "source": "Freesound.org #556913 (CC0) - Rooster Crowing"
+  },
+  {
+    "theme": "animaux",
+    "difficulty": 1,
+    "type": "audio",
+    "prompt": "Quel animal fait ce bruit ?",
+    "media_key": "animaux-un_chat.mp3",
+    "answer": "un chat",
+    "aliases": [
+      "chat"
+    ],
+    "source": "Freesound.org #730100 (CC0) - Cat meowing for food 3"
+  },
+  {
+    "theme": "animaux",
+    "difficulty": 1,
+    "type": "audio",
+    "prompt": "Quel animal fait ce bruit ?",
+    "media_key": "animaux-un_l_phant.mp3",
+    "answer": "un éléphant",
+    "aliases": [
+      "éléphant",
+      "elephant"
+    ],
+    "source": "Freesound.org #819668 (CC0) - Elephant sound"
+  },
+  {
+    "theme": "animaux",
+    "difficulty": 1,
+    "type": "audio",
+    "prompt": "Quel animal fait ce bruit ?",
+    "media_key": "animaux-un_canard.mp3",
+    "answer": "un canard",
+    "aliases": [
+      "canard"
+    ],
+    "source": "Freesound.org #719115 (CC0) - Ducks Quacking To Each Other"
+  },
+  {
+    "theme": "animaux",
+    "difficulty": 1,
+    "type": "audio",
+    "prompt": "Quel animal fait ce bruit ?",
+    "media_key": "animaux-un_cheval.mp3",
+    "answer": "un cheval",
+    "aliases": [
+      "cheval"
+    ],
+    "source": "Freesound.org #826753 (CC0) - Renill de cavall / Horse Neigh"
+  },
+  {
+    "theme": "animaux",
+    "difficulty": 1,
+    "type": "audio",
+    "prompt": "Quel animal fait ce bruit ?",
+    "media_key": "animaux-un_mouton.mp3",
+    "answer": "un mouton",
+    "aliases": [
+      "mouton",
+      "brebis"
+    ],
+    "source": "Freesound.org #677221 (CC0) - Ewe baa"
+  },
+  {
+    "theme": "cuisine",
+    "difficulty": 1,
+    "type": "audio",
+    "prompt": "Que se passe-t-il en cuisine ?",
+    "media_key": "cuisine-de_la_friture.mp3",
+    "answer": "de la friture",
+    "aliases": [
+      "friture",
+      "poêle qui grésille",
+      "grésillement"
+    ],
+    "source": "Freesound.org #540080 (CC0) - Sizzler"
+  },
+  {
+    "theme": "cuisine",
+    "difficulty": 1,
+    "type": "audio",
+    "prompt": "Que se passe-t-il en cuisine ?",
+    "media_key": "cuisine-on_d_coupe_des_l_gumes.mp3",
+    "answer": "on découpe des légumes",
+    "aliases": [
+      "découper des légumes",
+      "couper des légumes",
+      "découpe"
+    ],
+    "source": "Freesound.org #634119 (CC0) - Cutting a Carrot"
+  },
+  {
+    "theme": "cuisine",
+    "difficulty": 1,
+    "type": "audio",
+    "prompt": "Que se passe-t-il en cuisine ?",
+    "media_key": "cuisine-de_l_eau_qui_bout.mp3",
+    "answer": "de l'eau qui bout",
+    "aliases": [
+      "ébullition",
+      "eau bouillante",
+      "eau qui bout"
+    ],
+    "source": "Freesound.org #862443 (CC0) - Hot Water Spilling out while Boiling Eggs"
+  },
+  {
+    "theme": "cuisine",
+    "difficulty": 1,
+    "type": "audio",
+    "prompt": "Que se passe-t-il en cuisine ?",
+    "media_key": "cuisine-un_mixeur.mp3",
+    "answer": "un mixeur",
+    "aliases": [
+      "blender",
+      "mixeur électrique"
+    ],
+    "source": "Freesound.org #232915 (CC0) - Blender.mp3"
+  },
+  {
+    "theme": "cuisine",
+    "difficulty": 1,
+    "type": "audio",
+    "prompt": "Que se passe-t-il en cuisine ?",
+    "media_key": "cuisine-une_bouilloire.mp3",
+    "answer": "une bouilloire",
+    "aliases": [
+      "bouilloire",
+      "bouilloire qui siffle"
+    ],
+    "source": "Freesound.org #234309 (CC0) - kettle short.wav"
+  },
+  {
+    "theme": "cuisine",
+    "difficulty": 1,
+    "type": "audio",
+    "prompt": "Que se passe-t-il en cuisine ?",
+    "media_key": "cuisine-du_popcorn.mp3",
+    "answer": "du popcorn",
+    "aliases": [
+      "pop-corn",
+      "pop corn"
+    ],
+    "source": "Freesound.org #91262 (CC0) - Popcorn Real.wav"
+  }
 ]

@@ -13,6 +13,8 @@ interface Env {
   DB: D1Database;
   /** Optional: the R2 bucket isn't bound until one exists on the account. */
   MEDIA?: R2Bucket;
+  /** Static assets, which also carry question media (apps/web/public/media). */
+  ASSETS?: { fetch: typeof fetch };
   ADMIN_SECRET: string;
 }
 
@@ -252,7 +254,9 @@ export class RoomDO extends DurableObject<Env> {
       }
       case "START_GAME": {
         const deck = await buildDeck(this.env.DB, this.gameState.settings, {
-          mediaAvailable: this.env.MEDIA !== undefined,
+          // Either source can serve /media/:key. Checking only R2 here silently zeroed the
+          // audio quota on an account without R2, so no audio question was ever drawn.
+          mediaAvailable: this.env.MEDIA !== undefined || this.env.ASSETS !== undefined,
         });
         await this.dispatch({ kind: "START_GAME", playerId, now, deck }, ws);
         break;
