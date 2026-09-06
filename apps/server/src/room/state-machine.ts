@@ -1,4 +1,4 @@
-import { CHAIN_MIN_PLAYERS, DEFAULT_SETTINGS, isChainMatch } from "@nonoculture/shared";
+import { CHAIN_MIN_PLAYERS, DEFAULT_SETTINGS, MAX_CHAIN_ROUNDS, isChainMatch } from "@nonoculture/shared";
 import type { GameSettings, Grade } from "@nonoculture/shared";
 import {
   CHAIN_DRAW_DURATION_MS,
@@ -25,6 +25,10 @@ function clampSettings(partial: Partial<GameSettings>, base: GameSettings): Game
       partial.questionDurationSec !== undefined
         ? Math.min(30, Math.max(15, partial.questionDurationSec))
         : base.questionDurationSec,
+    chainRounds:
+      partial.chainRounds !== undefined
+        ? Math.min(MAX_CHAIN_ROUNDS, Math.max(0, partial.chainRounds))
+        : base.chainRounds,
     themes: partial.themes ?? base.themes,
   };
 }

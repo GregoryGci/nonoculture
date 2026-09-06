@@ -14,11 +14,10 @@ interface QuestionRow {
 }
 
 /**
- * Deck composition, expressed per 15 slots: 1 drawing round, 4 audio questions, the rest
- * plain text. These are quotas, not probabilities — audio questions are drawn from their
- * own query so a game reliably contains them instead of depending on what RANDOM() picked.
+ * Audio share of the deck, per 15 slots. A quota rather than a probability: audio questions
+ * come from their own query, so a game reliably contains some instead of depending on what
+ * RANDOM() happened to pick. Drawing rounds are no longer a ratio — the host sets the count.
  */
-const CHAIN_ROUNDS_PER_15 = 1;
 const AUDIO_QUESTIONS_PER_15 = 4;
 
 function toInternal(row: QuestionRow): InternalQuestion {
@@ -45,15 +44,23 @@ async function fetchQuestions(
   db: D1Database,
   settings: GameSettings,
   limit: number,
-  kind: "audio" | "text",
+  kind: "audio" | "rest",
+  mediaAvailable: boolean,
 ): Promise<InternalQuestion[]> {
   if (limit <= 0) return [];
   const themes = settings.themes;
   const clauses = ["verified = 1"];
   if (themes.length > 0) clauses.push(`theme IN (${themes.map(() => "?").join(",")})`);
-  // "text" means "needs no media to be playable", which is also what makes it safe to serve
-  // with no R2 binding; "audio" is the quota bucket the deck fills separately.
-  clauses.push(kind === "audio" ? "type = 'audio' AND media_key IS NOT NULL" : "media_key IS NULL");
+  if (kind === "audio") {
+    // The quota bucket, drawn separately so a game reliably contains some.
+    clauses.push("type = 'audio' AND media_key IS NOT NULL");
+  } else {
+    // Everything else, images included. Splitting on "media_key IS NULL" instead made image
+    // questions unreachable: they carry a media key but are not audio, so they fell through
+    // both buckets and could never be drawn.
+    clauses.push("type <> 'audio'");
+    if (!mediaAvailable) clauses.push("media_key IS NULL");
+  }
   const stmt = db
     .prepare(`SELECT * FROM questions WHERE ${clauses.join(" AND ")} ORDER BY RANDOM() LIMIT ?`)
     .bind(...themes, limit);
@@ -115,14 +122,15 @@ export async function buildDeck(
   // At the 1-per-15 rate a short game rounds down to zero drawing rounds, which is exactly
   // the length a host picks to try the mode out. Always keep one when the deck can hold it
   // (a slot that is neither first nor last, so 3 slots minimum).
-  const requestedChainCount = Math.max(total >= 3 ? 1 : 0, Math.round((total * CHAIN_ROUNDS_PER_15) / 15));
+  // A chain round is never the first or last slot, so a deck shorter than 3 can hold none.
+  const requestedChainCount = total >= 3 ? Math.min(settings.chainRounds, total - 2) : 0;
   const questionSlots = Math.max(0, total - requestedChainCount);
   const audioQuota = mediaAvailable ? Math.round((total * AUDIO_QUESTIONS_PER_15) / 15) : 0;
 
-  const audio = await fetchQuestions(db, settings, Math.min(audioQuota, questionSlots), "audio");
-  // Whatever audio couldn't supply falls back to text, so the deck keeps its intended length.
-  const text = await fetchQuestions(db, settings, questionSlots - audio.length, "text");
-  const questions = shuffle([...audio, ...text]);
+  const audio = await fetchQuestions(db, settings, Math.min(audioQuota, questionSlots), "audio", mediaAvailable);
+  // Whatever audio couldn't supply is taken up here, so the deck keeps its intended length.
+  const rest = await fetchQuestions(db, settings, questionSlots - audio.length, "rest", mediaAvailable);
+  const questions = shuffle([...audio, ...rest]);
 
   // The bank may hold fewer questions than asked for (narrow theme filter, unseeded DB).
   // Only ever lay out as many question slots as we actually drew — filling the gap with

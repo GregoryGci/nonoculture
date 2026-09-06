@@ -248,6 +248,7 @@ export class RoomDO extends DurableObject<Env> {
         const settings: Partial<GameSettings> = {};
         if (parsed.questionCount !== undefined) settings.questionCount = parsed.questionCount;
         if (parsed.questionDurationSec !== undefined) settings.questionDurationSec = parsed.questionDurationSec;
+        if (parsed.chainRounds !== undefined) settings.chainRounds = parsed.chainRounds;
         if (parsed.themes !== undefined) settings.themes = parsed.themes;
         await this.dispatch({ kind: "HOST_SETTINGS", playerId, settings }, ws);
         break;

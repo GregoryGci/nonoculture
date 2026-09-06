@@ -1,0 +1,902 @@
+[
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-france.webp",
+    "answer": "France",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of France.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-etats-unis.webp",
+    "answer": "États-Unis",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of the United States (DDD-F-416E specifications).svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-turquie.webp",
+    "answer": "Turquie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Turkey.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-russie.webp",
+    "answer": "Russie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Russia.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-japon.webp",
+    "answer": "Japon",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Japan.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-italie.webp",
+    "answer": "Italie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Italy.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-allemagne.webp",
+    "answer": "Allemagne",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Germany.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-finlande.webp",
+    "answer": "Finlande",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Finland.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-inde.webp",
+    "answer": "Inde",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of India.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-republique-populaire-de-chine.webp",
+    "answer": "république populaire de Chine",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of the People's Republic of China.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-mexique.webp",
+    "answer": "Mexique",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Mexico.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-australie.webp",
+    "answer": "Australie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Australia (converted).svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-canada.webp",
+    "answer": "Canada",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Canada (Pantone).svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-espagne.webp",
+    "answer": "Espagne",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Spain.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-royaume-uni.webp",
+    "answer": "Royaume-Uni",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of the United Kingdom (3-5).svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-norvege.webp",
+    "answer": "Norvège",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Norway.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-pologne.webp",
+    "answer": "Pologne",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Poland.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-egypte.webp",
+    "answer": "Égypte",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Egypt.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-ukraine.webp",
+    "answer": "Ukraine",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Ukraine.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-suisse.webp",
+    "answer": "Suisse",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Switzerland.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-bresil.webp",
+    "answer": "Brésil",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Brazil.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-albanie.webp",
+    "answer": "Albanie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Albania.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-belgique.webp",
+    "answer": "Belgique",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Belgium.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-chili.webp",
+    "answer": "Chili",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Chile.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-israel.webp",
+    "answer": "Israël",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Israel.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-grece.webp",
+    "answer": "Grèce",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Greece.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-iran.webp",
+    "answer": "Iran",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Iran.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-pays-bas.webp",
+    "answer": "Pays-Bas",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of the Netherlands.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-algerie.webp",
+    "answer": "Algérie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Algeria.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 1,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-argentine.webp",
+    "answer": "Argentine",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Argentina.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-portugal.webp",
+    "answer": "Portugal",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Portugal (official).svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-autriche.webp",
+    "answer": "Autriche",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Austria.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-suede.webp",
+    "answer": "Suède",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Sweden.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-danemark.webp",
+    "answer": "Danemark",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Denmark.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-vietnam.webp",
+    "answer": "Vietnam",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Vietnam.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-afrique-du-sud.webp",
+    "answer": "Afrique du Sud",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of South Africa.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-colombie.webp",
+    "answer": "Colombie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Colombia.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-indonesie.webp",
+    "answer": "Indonésie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Indonesia.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-afghanistan.webp",
+    "answer": "Afghanistan",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of the Taliban.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-bulgarie.webp",
+    "answer": "Bulgarie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Bulgaria.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-azerbaidjan.webp",
+    "answer": "Azerbaïdjan",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Azerbaijan.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-bielorussie.webp",
+    "answer": "Biélorussie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Belarus.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-hongrie.webp",
+    "answer": "Hongrie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Hungary.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-pakistan.webp",
+    "answer": "Pakistan",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Pakistan.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-islande.webp",
+    "answer": "Islande",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Iceland.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-tchequie.webp",
+    "answer": "Tchéquie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of the Czech Republic.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-croatie.webp",
+    "answer": "Croatie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Croatia.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-thailande.webp",
+    "answer": "Thaïlande",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Thailand.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-estonie.webp",
+    "answer": "Estonie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Estonia.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-coree-du-sud.webp",
+    "answer": "Corée du Sud",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of South Korea.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-lituanie.webp",
+    "answer": "Lituanie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Lithuania.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-armenie.webp",
+    "answer": "Arménie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Armenia.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-serbie.webp",
+    "answer": "Serbie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Serbia.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-irak.webp",
+    "answer": "Irak",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Iraq.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-arabie-saoudite.webp",
+    "answer": "Arabie saoudite",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Saudi Arabia.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-kazakhstan.webp",
+    "answer": "Kazakhstan",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Kazakhstan.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-nigeria.webp",
+    "answer": "Nigeria",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Nigeria.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-nouvelle-zelande.webp",
+    "answer": "Nouvelle-Zélande",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of New Zealand.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-bangladesh.webp",
+    "answer": "Bangladesh",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Bangladesh.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 2,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-georgie.webp",
+    "answer": "Géorgie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Georgia.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-ethiopie.webp",
+    "answer": "Éthiopie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Ethiopia.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-roumanie.webp",
+    "answer": "Roumanie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Romania.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-venezuela.webp",
+    "answer": "Venezuela",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Venezuela.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-irlande.webp",
+    "answer": "Irlande",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Ireland.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-bosnie-herzegovine.webp",
+    "answer": "Bosnie-Herzégovine",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Bosnia and Herzegovina.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-vatican.webp",
+    "answer": "Vatican",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Vatican City (2023–present).svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-slovaquie.webp",
+    "answer": "Slovaquie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Slovakia.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-malaisie.webp",
+    "answer": "Malaisie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Malaysia.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-kenya.webp",
+    "answer": "Kenya",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Kenya.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-lettonie.webp",
+    "answer": "Lettonie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Latvia.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-luxembourg.webp",
+    "answer": "Luxembourg",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Luxembourg.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-syrie.webp",
+    "answer": "Syrie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Syria (2025-).svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-maroc.webp",
+    "answer": "Maroc",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Morocco.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-soudan.webp",
+    "answer": "Soudan",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Sudan.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-philippines.webp",
+    "answer": "Philippines",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of the Philippines.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-andorre.webp",
+    "answer": "Andorre",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Andorra.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-republique-democratique-du-congo.webp",
+    "answer": "république démocratique du Congo",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of the Democratic Republic of the Congo.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-singapour.webp",
+    "answer": "Singapour",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Singapore.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-libye.webp",
+    "answer": "Libye",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Libya.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-perou.webp",
+    "answer": "Pérou",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Peru.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-slovenie.webp",
+    "answer": "Slovénie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Slovenia.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-moldavie.webp",
+    "answer": "Moldavie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Moldova.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-cambodge.webp",
+    "answer": "Cambodge",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Cambodia.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-liban.webp",
+    "answer": "Liban",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Lebanon.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-tunisie.webp",
+    "answer": "Tunisie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Tunisia.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-malte.webp",
+    "answer": "Malte",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Malta.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-macedoine-du-nord.webp",
+    "answer": "Macédoine du Nord",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of North Macedonia.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-chypre.webp",
+    "answer": "Chypre",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Cyprus.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-somalie.webp",
+    "answer": "Somalie",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Somalia.svg (Public domain)"
+  },
+  {
+    "theme": "drapeaux",
+    "difficulty": 3,
+    "type": "image",
+    "prompt": "Quel pays a ce drapeau ?",
+    "media_key": "flag-ghana.webp",
+    "answer": "Ghana",
+    "aliases": [],
+    "source": "Wikimedia Commons — Flag of Ghana.svg (Public domain)"
+  }
+]

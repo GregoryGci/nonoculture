@@ -83,6 +83,15 @@ export function HostReviewPanel({
 
           <hr className="divider" />
 
+          {/* The common case by far: everyone got it. One tap beats N taps. */}
+          <button
+            onClick={() => q.answers.forEach((a) => onGrade(q.deckIndex, a.playerId, 1))}
+            disabled={q.answers.every((a) => a.grade === 1)}
+            className="btn btn-secondary h-11 w-full text-[13px]"
+          >
+            Tout accepter
+          </button>
+
           <ul className="flex flex-col gap-4">
             {q.answers.map((a) => (
               <li key={a.playerId} className="flex flex-col gap-2.5">

@@ -36,12 +36,41 @@ export type Grade = (typeof GRADES)[number];
 export interface GameSettings {
   questionCount: number; // 5-40
   questionDurationSec: number; // 15-30
+  /** Drawing rounds in the deck, 0-6. They count towards questionCount. */
+  chainRounds: number;
   themes: string[]; // empty = all themes
+}
+
+export const MAX_CHAIN_ROUNDS = 6;
+
+/** Theme ids the bank uses, with their display label. Shared so the settings screen and the
+ *  question screen name a theme the same way. */
+export const THEME_LABELS: Record<string, string> = {
+  histoire: "Histoire",
+  geo: "Géographie",
+  sciences: "Sciences",
+  cinema: "Cinéma",
+  musique: "Musique",
+  gaming: "Gaming",
+  sport: "Sport",
+  insolite: "Insolite",
+  animaux: "Animaux",
+  cuisine: "Cuisine",
+  litterature: "Littérature",
+  technologie: "Technologie",
+  lol: "League of Legends",
+  dofus: "Dofus",
+  drapeaux: "Drapeaux",
+};
+
+export function themeLabel(id: string): string {
+  return THEME_LABELS[id] ?? id;
 }
 
 export const DEFAULT_SETTINGS: GameSettings = {
   questionCount: 20,
   questionDurationSec: 20,
+  chainRounds: 1,
   themes: [],
 };
 

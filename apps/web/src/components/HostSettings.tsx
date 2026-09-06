@@ -1,23 +1,8 @@
 import { useEffect, useState } from "react";
-import { CHAIN_MIN_PLAYERS, type GameSettings } from "@nonoculture/shared";
+import { CHAIN_MIN_PLAYERS, MAX_CHAIN_ROUNDS, THEME_LABELS, type GameSettings } from "@nonoculture/shared";
 import { fetchPlayableThemes } from "../lib/api";
 
-const ALL_THEMES: { id: string; label: string }[] = [
-  { id: "histoire", label: "Histoire" },
-  { id: "geo", label: "Géographie" },
-  { id: "sciences", label: "Sciences" },
-  { id: "cinema", label: "Cinéma" },
-  { id: "musique", label: "Musique" },
-  { id: "gaming", label: "Gaming" },
-  { id: "sport", label: "Sport" },
-  { id: "insolite", label: "Insolite" },
-  { id: "animaux", label: "Animaux" },
-  { id: "cuisine", label: "Cuisine" },
-  { id: "litterature", label: "Littérature" },
-  { id: "technologie", label: "Technologie" },
-  { id: "lol", label: "League of Legends" },
-  { id: "dofus", label: "Dofus" },
-];
+const ALL_THEMES = Object.entries(THEME_LABELS).map(([id, label]) => ({ id, label }));
 
 function Row({ label, value, children }: { label: string; value: string; children: React.ReactNode }) {
   return (
@@ -74,19 +59,24 @@ export function HostSettings({
         />
       </Row>
 
-      {/* The drawing round is skipped below three players, which reads as a bug from the
-          lobby unless the rule is stated where the game is configured. */}
-      <div className="flex items-baseline justify-between gap-4">
-        <span className="eyebrow">Manche dessinée</span>
-        <span
-          className="text-right text-[13px]"
-          style={{ color: connectedPlayers >= CHAIN_MIN_PLAYERS ? "var(--color-success)" : "var(--color-text-faint)" }}
-        >
-          {connectedPlayers >= CHAIN_MIN_PLAYERS
-            ? "active"
-            : `${CHAIN_MIN_PLAYERS} joueurs minimum (vous êtes ${connectedPlayers})`}
-        </span>
-      </div>
+      <Row label="Manches dessinées" value={String(settings.chainRounds)}>
+        <input
+          type="range"
+          min={0}
+          max={MAX_CHAIN_ROUNDS}
+          step={1}
+          value={settings.chainRounds}
+          aria-label="Nombre de manches dessinées"
+          onChange={(e) => onChange({ chainRounds: Number(e.target.value) })}
+        />
+        {/* Skipped below three players, which reads as a bug from the lobby unless the rule
+            is stated where the game is configured. */}
+        {settings.chainRounds > 0 && connectedPlayers < CHAIN_MIN_PLAYERS && (
+          <p className="text-[13px]" style={{ color: "var(--color-text-faint)" }}>
+            Sautées : {CHAIN_MIN_PLAYERS} joueurs minimum (vous êtes {connectedPlayers})
+          </p>
+        )}
+      </Row>
 
       <Row label="Temps par question" value={`${settings.questionDurationSec}s`}>
         <input

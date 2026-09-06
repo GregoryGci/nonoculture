@@ -15,7 +15,7 @@ import { ChainPromptForm } from "../components/ChainPromptForm";
 import { DrawingCanvas } from "../components/DrawingCanvas";
 import { ChainGuessForm } from "../components/ChainGuessForm";
 import { ChainRevealSlideshow } from "../components/ChainRevealSlideshow";
-import type { QuestionPublic, RoomStateSync } from "@nonoculture/shared";
+import { themeLabel, type QuestionPublic, type RoomStateSync } from "@nonoculture/shared";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -81,7 +81,10 @@ export function Room() {
 
           {state.phase === "QUESTION" && state.currentQuestion && (
             <>
-              <h1 className="display text-center text-[clamp(1.5rem,6vw,2.25rem)]">{state.currentQuestion.prompt}</h1>
+              <div className="flex flex-col items-center gap-3 text-center">
+                <p className="eyebrow">{themeLabel(state.currentQuestion.theme)}</p>
+                <h1 className="display text-[clamp(1.5rem,6vw,2.25rem)]">{state.currentQuestion.prompt}</h1>
+              </div>
               <QuestionMedia question={state.currentQuestion} />
               <AnswerForm
                 key={state.currentQuestion.id}
@@ -112,7 +115,10 @@ export function Room() {
                 state.chainTask.alreadySubmitted ? (
                   <p className="waiting py-6 text-center text-[15px] font-medium">En attente des autres…</p>
                 ) : (
-                  <DrawingCanvas onSubmit={(dataUrl) => send({ type: "SUBMIT_CHAIN_DRAWING", dataUrl })} />
+                  <DrawingCanvas
+                    deadlineTs={state.phaseDeadlineTs}
+                    onSubmit={(dataUrl) => send({ type: "SUBMIT_CHAIN_DRAWING", dataUrl })}
+                  />
                 )
               ) : (
                 <NotParticipating />
