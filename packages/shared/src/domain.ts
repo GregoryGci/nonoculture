@@ -4,6 +4,10 @@ export const PHASES = [
   "REVEAL",
   "JUDGING",
   "SCOREBOARD",
+  "CHAIN_PROMPT",
+  "CHAIN_DRAW",
+  "CHAIN_GUESS",
+  "CHAIN_REVEAL",
   "FINISHED",
 ] as const;
 
@@ -27,7 +31,7 @@ export const DEFAULT_SETTINGS: GameSettings = {
 export interface PlayerPublic {
   playerId: string;
   nickname: string;
-  avatar: string; // emoji
+  avatar: string; // emoji, or an svg-avatar id (see packages/shared/src/avatars.ts)
   score: number;
   connected: boolean;
   isHost: boolean;
@@ -61,6 +65,30 @@ export interface JudgePromptItem {
 }
 
 /**
+ * What the current player must do right now during a chain ("téléphone dessiné") round.
+ * `content` is what was handed to them by the previous link in the chain — null for the
+ * "prompt" role, which originates the chain instead of continuing it.
+ */
+export interface ChainTask {
+  role: "prompt" | "draw" | "guess";
+  content: string | null;
+  alreadySubmitted: boolean;
+}
+
+/** One fully-resolved chain, shown to everyone during CHAIN_REVEAL. */
+export interface ChainResult {
+  originPlayerId: string;
+  originNickname: string;
+  prompt: string;
+  drawerNickname: string;
+  drawingDataUrl: string;
+  guesserNickname: string;
+  guess: string;
+  matched: boolean;
+  points: number;
+}
+
+/**
  * The full state a client needs to render itself from scratch — sent as STATE_SYNC.
  * No client-side guessing allowed: everything visible must be derivable from this alone.
  */
@@ -70,7 +98,7 @@ export interface RoomStateSync {
   settings: GameSettings;
   players: PlayerPublic[];
   hostPlayerId: string;
-  questionIndex: number; // 0-based
+  questionIndex: number; // 0-based index into the full deck (trivia + chain slots)
   questionTotal: number;
   currentQuestion: QuestionPublic | null;
   /** Set only during SCOREBOARD so the client can preload the next question's media in advance. */
@@ -82,4 +110,6 @@ export interface RoomStateSync {
   revealedCorrectAnswer: string | null;
   revealedExplanation: string | null;
   judgePrompt: JudgePromptItem | null;
+  chainTask: ChainTask | null;
+  chainReveal: ChainResult[] | null;
 }

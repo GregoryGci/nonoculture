@@ -23,7 +23,7 @@ export const ObserveMsg = z.object({
 export const SetProfileMsg = z.object({
   type: z.literal("SET_PROFILE"),
   nickname,
-  avatar: z.string().min(1).max(8), // emoji
+  avatar: z.string().min(1).max(24), // emoji, or an id from packages/shared avatar set
 });
 
 export const StartGameMsg = z.object({
@@ -62,6 +62,24 @@ export const PlayAgainMsg = z.object({
   type: z.literal("PLAY_AGAIN"),
 });
 
+// --- Chain round ("téléphone dessiné") ---
+
+export const SubmitChainPromptMsg = z.object({
+  type: z.literal("SUBMIT_CHAIN_PROMPT"),
+  text: z.string().min(1).max(80),
+});
+
+/** A small compressed PNG/WebP data URL — the client keeps the canvas tiny to stay under this. */
+export const SubmitChainDrawingMsg = z.object({
+  type: z.literal("SUBMIT_CHAIN_DRAWING"),
+  dataUrl: z.string().min(1).max(200_000),
+});
+
+export const SubmitChainGuessMsg = z.object({
+  type: z.literal("SUBMIT_CHAIN_GUESS"),
+  text: z.string().min(1).max(80),
+});
+
 export const ClientMessage = z.discriminatedUnion("type", [
   HelloMsg,
   ObserveMsg,
@@ -73,6 +91,9 @@ export const ClientMessage = z.discriminatedUnion("type", [
   HostKickMsg,
   HostSettingsMsg,
   PlayAgainMsg,
+  SubmitChainPromptMsg,
+  SubmitChainDrawingMsg,
+  SubmitChainGuessMsg,
 ]);
 
 export type ClientMessage = z.infer<typeof ClientMessage>;

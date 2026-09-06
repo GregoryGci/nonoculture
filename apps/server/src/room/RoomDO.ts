@@ -1,7 +1,7 @@
 import { DurableObject } from "cloudflare:workers";
 import { parseClientMessage } from "@quiproquo/shared";
 import type { GameSettings, ServerMessageType } from "@quiproquo/shared";
-import { drawQuestions } from "../lib/questions.js";
+import { buildDeck } from "../lib/questions.js";
 import { sanitizeNickname, sanitizeText } from "../lib/sanitize.js";
 import { setRoomCodeExpiry } from "../lib/room-code.js";
 import { RateLimiter } from "../lib/rate-limit.js";
@@ -205,8 +205,8 @@ export class RoomDO extends DurableObject<Env> {
         break;
       }
       case "START_GAME": {
-        const questions = await drawQuestions(this.env.DB, this.gameState.settings);
-        await this.dispatch({ kind: "START_GAME", playerId, now, questions }, ws);
+        const deck = await buildDeck(this.env.DB, this.gameState.settings);
+        await this.dispatch({ kind: "START_GAME", playerId, now, deck }, ws);
         break;
       }
       case "SUBMIT_ANSWER":
@@ -232,6 +232,25 @@ export class RoomDO extends DurableObject<Env> {
         break;
       case "PLAY_AGAIN":
         await this.dispatch({ kind: "PLAY_AGAIN", playerId, now }, ws);
+        break;
+      case "SUBMIT_CHAIN_PROMPT":
+        await this.dispatch(
+          { kind: "SUBMIT_CHAIN_PROMPT", playerId, text: sanitizeText(parsed.text, 80), now },
+          ws,
+        );
+        break;
+      case "SUBMIT_CHAIN_DRAWING":
+        if (!parsed.dataUrl.startsWith("data:image/")) {
+          send(ws, "ERROR", { message: "invalid drawing" });
+          break;
+        }
+        await this.dispatch({ kind: "SUBMIT_CHAIN_DRAWING", playerId, dataUrl: parsed.dataUrl, now }, ws);
+        break;
+      case "SUBMIT_CHAIN_GUESS":
+        await this.dispatch(
+          { kind: "SUBMIT_CHAIN_GUESS", playerId, text: sanitizeText(parsed.text, 80), now },
+          ws,
+        );
         break;
     }
   }

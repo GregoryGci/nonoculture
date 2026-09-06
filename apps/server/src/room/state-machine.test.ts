@@ -1,7 +1,17 @@
 import { describe, expect, it } from "vitest";
 import { computeNextAlarmTs, createRoom, transition } from "./state-machine.js";
-import type { GameState, InternalQuestion } from "./types.js";
-import { DISCONNECT_GRACE_MS, JUDGE_VOTE_DURATION_MS, REVEAL_DURATION_MS, SCOREBOARD_DURATION_MS } from "./types.js";
+import type { DeckItem, GameState, InternalQuestion } from "./types.js";
+import {
+  CHAIN_DRAW_DURATION_MS,
+  CHAIN_GUESS_DURATION_MS,
+  CHAIN_POINTS,
+  CHAIN_PROMPT_DURATION_MS,
+  CHAIN_REVEAL_PER_ITEM_MS,
+  DISCONNECT_GRACE_MS,
+  JUDGE_VOTE_DURATION_MS,
+  REVEAL_DURATION_MS,
+  SCOREBOARD_DURATION_MS,
+} from "./types.js";
 
 const T0 = 1_000_000;
 
@@ -18,6 +28,14 @@ function question(overrides: Partial<InternalQuestion> = {}): InternalQuestion {
     explanation: null,
     ...overrides,
   };
+}
+
+function trivia(...questions: InternalQuestion[]): DeckItem[] {
+  return questions.map((q) => ({ kind: "trivia" as const, question: q }));
+}
+
+function chainSlot(): DeckItem {
+  return { kind: "chain" };
 }
 
 function join(state: GameState, playerId: string, now = T0) {
@@ -102,7 +120,7 @@ describe("game loop: QUESTION -> REVEAL -> SCOREBOARD", () => {
       kind: "START_GAME",
       playerId: "host",
       now: T0 + 100,
-      questions: [question({ id: 1 }), question({ id: 2, answer: "Berlin" })],
+      deck: trivia(question({ id: 1 }), question({ id: 2, answer: "Berlin" })),
     });
     return result.state;
   }
@@ -115,7 +133,7 @@ describe("game loop: QUESTION -> REVEAL -> SCOREBOARD", () => {
       kind: "START_GAME",
       playerId: "p2",
       now: T0 + 100,
-      questions: [question()],
+      deck: trivia(question()),
     });
     expect(result.state.phase).toBe("LOBBY");
   });
@@ -209,7 +227,7 @@ describe("game loop: QUESTION -> REVEAL -> SCOREBOARD", () => {
     state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state; // -> SCOREBOARD
     state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state; // -> QUESTION #2
     expect(state.phase).toBe("QUESTION");
-    expect(state.questionIndex).toBe(1);
+    expect(state.deckIndex).toBe(1);
 
     state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 2, raw: "Berlin", now: T0 + 300 })
       .state;
@@ -258,7 +276,7 @@ describe("JUDGING", () => {
       kind: "START_GAME",
       playerId: "host",
       now: T0 + 100,
-      questions: [question({ id: 1, answer: "Berlin" })],
+      deck: trivia(question({ id: 1, answer: "Berlin" })),
     }).state;
     // "berlim" vs "berlin" -> normalized distance 1/6 = 0.167, in the grey zone (0.15, 0.5).
     state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "berlim", now: T0 + 200 })
@@ -320,7 +338,7 @@ describe("JUDGING", () => {
       kind: "START_GAME",
       playerId: "host",
       now: T0 + 100,
-      questions: [question({ id: 1, answer: "Berlin" })],
+      deck: trivia(question({ id: 1, answer: "Berlin" })),
     }).state;
     // p2's answer goes to judging; host, p3, p4 vote (host is a voter here, p2 is the owner)
     state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "p2", questionId: 1, raw: "berlim", now: T0 + 200 })
@@ -374,7 +392,7 @@ describe("disconnect grace period", () => {
       kind: "START_GAME",
       playerId: "host",
       now: T0 + 100,
-      questions: [question()],
+      deck: trivia(question()),
     }).state;
     state = transition(state, { kind: "PLAYER_DISCONNECT", playerId: "p2", now: T0 + 150 }).state;
     state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Paris", now: T0 + 200 })
@@ -397,7 +415,7 @@ describe("computeNextAlarmTs", () => {
       kind: "START_GAME",
       playerId: "host",
       now: T0 + 100,
-      questions: [question()],
+      deck: trivia(question()),
     }).state;
     expect(computeNextAlarmTs(state)).toBe(state.phaseDeadlineTs);
   });
@@ -410,11 +428,116 @@ describe("computeNextAlarmTs", () => {
       kind: "START_GAME",
       playerId: "host",
       now: T0 + 100,
-      questions: [question()],
+      deck: trivia(question()),
     }).state;
     state = transition(state, { kind: "PLAYER_DISCONNECT", playerId: "p2", now: T0 + 150 }).state;
     const expected = Math.min(state.phaseDeadlineTs!, T0 + 150 + DISCONNECT_GRACE_MS);
     expect(computeNextAlarmTs(state)).toBe(expected);
+  });
+});
+
+describe("chain round (téléphone dessiné)", () => {
+  function setupChainStarted() {
+    let state = createRoom("1234", T0);
+    state = join(state, "host", T0);
+    state = withProfile(state, "host", "Alice");
+    state = join(state, "p2", T0 + 1);
+    state = withProfile(state, "p2", "Bob");
+    state = join(state, "p3", T0 + 2);
+    state = withProfile(state, "p3", "Carl");
+    return transition(state, { kind: "START_GAME", playerId: "host", now: T0 + 100, deck: [chainSlot()] }).state;
+  }
+
+  it("enters CHAIN_PROMPT with all connected players snapshotted in join order", () => {
+    const state = setupChainStarted();
+    expect(state.phase).toBe("CHAIN_PROMPT");
+    expect(state.chain?.order).toEqual(["host", "p2", "p3"]);
+    expect(state.phaseDeadlineTs).toBe(T0 + 100 + CHAIN_PROMPT_DURATION_MS);
+  });
+
+  it("skips a chain slot entirely when fewer than 3 players are connected", () => {
+    let state = createRoom("1234", T0);
+    state = join(state, "host", T0);
+    state = join(state, "p2", T0 + 1);
+    state = transition(state, {
+      kind: "START_GAME",
+      playerId: "host",
+      now: T0 + 100,
+      deck: [chainSlot(), ...trivia(question())],
+    }).state;
+    expect(state.phase).toBe("QUESTION"); // the chain slot was skipped straight through
+  });
+
+  it("advances to CHAIN_DRAW once everyone has submitted a prompt, before the timer", () => {
+    let state = setupChainStarted();
+    state = transition(state, { kind: "SUBMIT_CHAIN_PROMPT", playerId: "host", text: "chat", now: T0 + 110 }).state;
+    state = transition(state, { kind: "SUBMIT_CHAIN_PROMPT", playerId: "p2", text: "banane", now: T0 + 111 }).state;
+    expect(state.phase).toBe("CHAIN_PROMPT");
+    state = transition(state, { kind: "SUBMIT_CHAIN_PROMPT", playerId: "p3", text: "voiture", now: T0 + 112 }).state;
+    expect(state.phase).toBe("CHAIN_DRAW");
+    expect(state.phaseDeadlineTs).toBe(T0 + 112 + CHAIN_DRAW_DURATION_MS);
+  });
+
+  it("locks a second prompt submission from the same player", () => {
+    let state = setupChainStarted();
+    state = transition(state, { kind: "SUBMIT_CHAIN_PROMPT", playerId: "host", text: "chat", now: T0 + 110 }).state;
+    state = transition(state, { kind: "SUBMIT_CHAIN_PROMPT", playerId: "host", text: "chien", now: T0 + 111 }).state;
+    expect(state.chain?.prompts.host).toBe("chat");
+  });
+
+  it("routes each drawer to the correct origin prompt, and advances to CHAIN_GUESS", () => {
+    let state = setupChainStarted();
+    state = transition(state, { kind: "SUBMIT_CHAIN_PROMPT", playerId: "host", text: "chat", now: T0 + 110 }).state;
+    state = transition(state, { kind: "SUBMIT_CHAIN_PROMPT", playerId: "p2", text: "banane", now: T0 + 111 }).state;
+    state = transition(state, { kind: "SUBMIT_CHAIN_PROMPT", playerId: "p3", text: "voiture", now: T0 + 112 }).state; // -> CHAIN_DRAW
+    // rotation [host, p2, p3]: p2 draws host's prompt, p3 draws p2's prompt, host draws p3's prompt
+    state = transition(state, { kind: "SUBMIT_CHAIN_DRAWING", playerId: "p2", dataUrl: "d-host", now: T0 + 120 }).state;
+    state = transition(state, { kind: "SUBMIT_CHAIN_DRAWING", playerId: "p3", dataUrl: "d-p2", now: T0 + 121 }).state;
+    expect(state.phase).toBe("CHAIN_DRAW");
+    state = transition(state, { kind: "SUBMIT_CHAIN_DRAWING", playerId: "host", dataUrl: "d-p3", now: T0 + 122 }).state;
+    expect(state.phase).toBe("CHAIN_GUESS");
+    expect(state.chain?.drawings.host).toBe("d-host");
+    expect(state.chain?.drawings.p2).toBe("d-p2");
+    expect(state.chain?.drawings.p3).toBe("d-p3");
+  });
+
+  it("resolves guesses, scores only the matching chain, and moves to CHAIN_REVEAL", () => {
+    let state = setupChainStarted();
+    state = transition(state, { kind: "SUBMIT_CHAIN_PROMPT", playerId: "host", text: "chat", now: T0 + 110 }).state;
+    state = transition(state, { kind: "SUBMIT_CHAIN_PROMPT", playerId: "p2", text: "banane", now: T0 + 111 }).state;
+    state = transition(state, { kind: "SUBMIT_CHAIN_PROMPT", playerId: "p3", text: "voiture", now: T0 + 112 }).state;
+    state = transition(state, { kind: "SUBMIT_CHAIN_DRAWING", playerId: "p2", dataUrl: "d-host", now: T0 + 120 }).state;
+    state = transition(state, { kind: "SUBMIT_CHAIN_DRAWING", playerId: "p3", dataUrl: "d-p2", now: T0 + 121 }).state;
+    state = transition(state, { kind: "SUBMIT_CHAIN_DRAWING", playerId: "host", dataUrl: "d-p3", now: T0 + 122 }).state;
+    // rotation [host, p2, p3]: host guesses p2's drawing, p2 guesses p3's drawing, p3 guesses host's drawing
+    state = transition(state, { kind: "SUBMIT_CHAIN_GUESS", playerId: "p3", text: "chat", now: T0 + 130 }).state; // correct
+    state = transition(state, { kind: "SUBMIT_CHAIN_GUESS", playerId: "host", text: "nawak", now: T0 + 131 }).state; // wrong
+    expect(state.phase).toBe("CHAIN_GUESS");
+    state = transition(state, { kind: "SUBMIT_CHAIN_GUESS", playerId: "p2", text: "nimportequoi", now: T0 + 132 }).state; // wrong
+    expect(state.phase).toBe("CHAIN_REVEAL");
+    // only host's chain matched (prompt "chat" correctly guessed by p3) -> host, p2 (drawer), p3 (guesser) each score
+    expect(state.players.host?.score).toBe(CHAIN_POINTS);
+    expect(state.players.p2?.score).toBe(CHAIN_POINTS);
+    expect(state.players.p3?.score).toBe(CHAIN_POINTS);
+    expect(state.phaseDeadlineTs).toBe(T0 + 132 + 3 * CHAIN_REVEAL_PER_ITEM_MS);
+  });
+
+  it("lets the host skip the CHAIN_REVEAL wait and clears the chain state", () => {
+    let state = setupChainStarted();
+    state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state; // -> CHAIN_DRAW (fallback prompts)
+    state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state; // -> CHAIN_GUESS (fallback drawings)
+    state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state; // -> CHAIN_REVEAL (fallback guesses)
+    expect(state.phase).toBe("CHAIN_REVEAL");
+    state = transition(state, { kind: "HOST_NEXT", playerId: "host", now: T0 + 999 }).state;
+    expect(state.phase).toBe("SCOREBOARD");
+    expect(state.chain).toBeNull();
+  });
+
+  it("fills missing submissions with a fallback on timeout instead of hanging forever", () => {
+    let state = setupChainStarted();
+    state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state;
+    expect(state.phase).toBe("CHAIN_DRAW");
+    expect(Object.values(state.chain!.prompts)).toEqual(["…", "…", "…"]);
   });
 });
 
@@ -427,7 +550,7 @@ describe("PLAY_AGAIN", () => {
       kind: "START_GAME",
       playerId: "host",
       now: T0 + 100,
-      questions: [question()],
+      deck: trivia(question()),
     }).state;
     state = transition(state, { kind: "SUBMIT_ANSWER", playerId: "host", questionId: 1, raw: "Paris", now: T0 + 200 })
       .state;
