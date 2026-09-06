@@ -1,0 +1,39 @@
+name = "quiproquo-server"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# --- Static front-end (built apps/web/dist), served by Workers Assets in prod.
+# Not used by `wrangler dev` in this repo (web runs on its own Vite dev server locally).
+[assets]
+directory = "../web/dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+
+# --- Durable Object: 1 instance per room, adressed by idFromName(roomCode).
+[[durable_objects.bindings]]
+name = "ROOM"
+class_name = "RoomDO"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["RoomDO"]
+
+# --- D1: question bank + room-code registry.
+# PLACEHOLDER database_id: replace after `wrangler d1 create quiproquo-db`
+# (see DECISIONS.md — no real Cloudflare account connected yet, dev runs on
+# the local Miniflare D1 emulation regardless of this id).
+[[d1_databases]]
+binding = "DB"
+database_name = "quiproquo-db"
+database_id = "00000000-0000-0000-0000-000000000000"
+migrations_dir = "migrations"
+
+# --- R2: question media (images/audio/video).
+# PLACEHOLDER bucket, create with `wrangler r2 bucket create quiproquo-media`.
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "quiproquo-media"
+
+[vars]
+ADMIN_SECRET = "dev-secret-change-me"

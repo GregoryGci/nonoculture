@@ -1,0 +1,26 @@
+{
+  "name": "@quiproquo/server",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --local --persist-to=.wrangler/state",
+    "deploy": "wrangler deploy",
+    "test": "vitest run",
+    "seed": "tsx scripts/seed.ts",
+    "media:add": "tsx scripts/media-add.ts",
+    "db:migrate:local": "wrangler d1 migrations apply quiproquo-db --local"
+  },
+  "dependencies": {
+    "@quiproquo/shared": "workspace:*",
+    "hono": "^4.6.16",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250109.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^3.0.5",
+    "wrangler": "^3.99.0"
+  }
+}

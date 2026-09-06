@@ -48,7 +48,8 @@ export interface RevealedAnswer {
   playerId: string;
   nickname: string;
   rawAnswer: string;
-  accepted: boolean;
+  /** null while a grey-zone answer is still awaiting the room's JUDGING vote. */
+  accepted: boolean | null;
   points: number;
 }
 
