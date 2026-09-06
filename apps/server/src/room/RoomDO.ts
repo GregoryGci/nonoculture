@@ -56,6 +56,8 @@ export class RoomDO extends DurableObject<Env> {
     const client = pair[0];
     const server = pair[1];
     this.ctx.acceptWebSocket(server);
+    // Free ping/pong: the runtime answers "PING" with "PONG" without waking the DO.
+    this.ctx.setWebSocketAutoResponse(new WebSocketRequestResponsePair("PING", "PONG"));
     return new Response(null, { status: 101, webSocket: client });
   }
 

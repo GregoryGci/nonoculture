@@ -9,11 +9,13 @@ interface ServerEnvelope {
 }
 
 const BACKOFF_STEPS_MS = [500, 1000, 2000, 4000, 10000];
+const PING_INTERVAL_MS = 30_000;
 
 export class RoomConnection {
   private ws: WebSocket | null = null;
   private reconnectAttempt = 0;
   private reconnectTimer: ReturnType<typeof setTimeout> | null = null;
+  private pingInterval: ReturnType<typeof setInterval> | null = null;
   private closedByUser = false;
   readonly playerId = getOrCreatePlayerId();
 
@@ -40,9 +42,16 @@ export class RoomConnection {
         roomCode: this.roomCode,
         ...(token ? { playerToken: token } : {}),
       });
+      if (this.pingInterval) clearInterval(this.pingInterval);
+      // Plain-text "PING"/"PONG", answered by the DO's free WebSocket auto-response
+      // (ctx.setWebSocketAutoResponse) without waking it from hibernation.
+      this.pingInterval = setInterval(() => {
+        if (ws.readyState === WebSocket.OPEN) ws.send("PING");
+      }, PING_INTERVAL_MS);
     });
 
     ws.addEventListener("message", (event) => {
+      if (event.data === "PONG") return;
       let envelope: ServerEnvelope;
       try {
         envelope = JSON.parse(event.data);
@@ -90,6 +99,7 @@ export class RoomConnection {
   close(): void {
     this.closedByUser = true;
     if (this.reconnectTimer) clearTimeout(this.reconnectTimer);
+    if (this.pingInterval) clearInterval(this.pingInterval);
     this.ws?.close();
     this.onStatus("closed");
   }
