@@ -37,9 +37,9 @@ premier** en reprenant ce projet, c'est la source de vérité sur ce qui est fai
 
 **Le scoring des questions texte est 100% manuel, décidé par l'hôte à la fin de la
 partie — pas d'auto-validation Levenshlein/JUDGING pour ces questions** (changement
-demandé en session, remplace l'auto-validation décrite dans `docs/brief.md` section 6 ;
-`classifyAnswer`/Levenshtein restent utilisés, mais seulement pour le matching
-prompt/devinette de la manche chaîne).
+demandé en session, remplace l'auto-validation décrite dans `docs/brief.md` section 6).
+Le seul scoring automatique restant est celui de la manche chaîne, via `isChainMatch`
+(`packages/shared/src/answer-validation.ts`).
 
 ```
 LOBBY → QUESTION → (QUESTION suivante | CHAIN_PROMPT | HOST_REVIEW) → FINISHED
@@ -67,10 +67,18 @@ Tous les joueurs connectés sont pris en rotation (`GameState.chain.order`, snap
 lancement) : chacun écrit un prompt, dessine le prompt du joueur précédent, puis devine le
 dessin du joueur encore avant — 3 chaînes de longueur 3 tournent en parallèle. Sauté si
 moins de 3 joueurs sont connectés à ce moment (`CHAIN_MIN_PLAYERS`). Scoring : la
-proposition finale est comparée au prompt d'origine avec la même logique
-`classifyAnswer` que les questions texte ; si ça matche, origine + dessinateur + devineur
-touchent chacun `CHAIN_POINTS`. Voir `state-machine.ts` (`originForRole`,
-`resolveChain`) et ses tests pour la logique de rotation.
+proposition finale est comparée au prompt d'origine par `isChainMatch`, qui compare les
+**mots significatifs** et non une distance globale (sur des phrases libres, une distance
+seule fait matcher « p2 qui danse » avec « host qui danse ») ; si ça matche, origine +
+dessinateur + devineur touchent chacun `CHAIN_POINTS`. Voir `state-machine.ts`
+(`originForRole`, `resolveChain`) et ses tests pour la logique de rotation.
+
+**Les dessins ne sont jamais stockés dans `GameState`** : `chain.drawings` ne garde qu'un
+booléen « a soumis », les octets vivent dans des clés de storage séparées du DO
+(`chain:drawing:<originId>`, via les effets `STORE_CHAIN_DRAWING` / `CLEAR_CHAIN_DRAWINGS`).
+L'état complet est réécrit dans une seule valeur de storage à chaque transition : y laisser
+des images base64 réécrirait des centaines de Ko par soumission et dépasserait la limite
+par valeur.
 
 ## Commandes
 

@@ -51,6 +51,119 @@ Tout est commité dans git, un commit par étape logique — `git log --oneline`
   privé) via `pnpm media:add`, ou des pistes "inspirées de" libres de droits (pas les
   vrais titres) trouvables sur les mêmes plateformes CC0.
 
+## Passe d'audit et corrections — 2026-09-06
+
+Audit complet du projet puis correction de tout ce qu'il a remonté. **76 tests Vitest**
+(53 avant), typecheck strict propre, et deux parties complètes jouées contre un
+`wrangler dev` réel avec 3 clients WebSocket (12/12 puis 17/17 vérifications).
+
+### Bugs corrigés
+
+1. **Boucle de reconnexion infinie entre deux onglets.** Le DO fermait l'ancien socket
+   avec le code 4002, mais le client se reconnectait sur *toute* fermeture : l'ancien
+   onglet revenait, éjectait le nouveau, qui revenait, etc. La décision de reconnexion
+   est maintenant une fonction pure testée (`decideOnClose` dans `ws-client.ts`) : on
+   abandonne sur 4002 (autre onglet) et 4003 (kick).
+2. **Impossible de revenir dans une room après en avoir rejoint une autre.** Le
+   `playerToken` était une clé localStorage globale, écrasée à chaque nouvelle room ; le
+   retour sur la première donnait `ERROR` + close 4001, donc (bug n°1) une boucle. L'identité
+   est désormais **par room** (`quiproquo:playerId:<code>` / `:playerToken:<code>`), et un
+   token refusé déclenche une nouvelle identité une seule fois au lieu d'être re-proposé
+   en boucle.
+3. **Une partie sans questions démarrait quand même** (banque non seedée, ou thème sans
+   question) : `buildDeck` remplissait les slots avec `undefined` derrière un `!`, la
+   partie tournait sur un écran vide. Le deck ne dépasse plus le nombre de questions
+   réellement tirées, et `START_GAME` renvoie « Aucune question disponible pour ces
+   thèmes. » au lieu de démarrer dans le vide.
+4. **`HOST_KICK` ne kickait personne.** Le joueur était retiré de l'état mais son socket
+   restait ouvert : un `HELLO` le faisait revenir aussitôt. Nouvel effet
+   `CLOSE_PLAYER_SOCKETS` (close 4003). Et si l'hôte se kickait lui-même, `hostPlayerId`
+   pointait sur un fantôme et la room devenait indirigeable — la main passe maintenant au
+   plus ancien joueur connecté.
+5. **Les rooms `FINISHED` n'étaient jamais nettoyées** : `computeNextAlarmTs` excluait
+   cette phase du timeout d'inactivité, donc plus aucune alarme n'était planifiée et le
+   storage du DO survivait indéfiniment. L'exclusion est levée.
+6. **Une manche figeait si le dernier joueur attendu se déconnectait** — on attendait le
+   timer complet (45 s en `CHAIN_DRAW`) alors que tous les joueurs restants avaient fini.
+   `advanceIfStepComplete` réévalue l'étape à chaque changement d'effectif (déconnexion,
+   kick), sans jamais faire défiler les phases d'une room vide.
+
+### Points structurels
+
+- **Les dessins sortent de `GameState`.** L'état entier est réécrit dans une seule valeur
+  de storage à chaque transition et rediffusé à chaque socket : y garder des PNG base64
+  réécrivait des centaines de Ko par soumission. `chain.drawings` ne garde qu'un booléen,
+  les octets vivent dans des clés `chain:drawing:<originId>` (effets `STORE_CHAIN_DRAWING`
+  / `CLEAR_CHAIN_DRAWINGS`, cache mémoire réhydraté dans le constructeur du DO).
+- **Dessins compressés côté client** : WebP q0.7, repli JPEG pour les Safari sans encodeur
+  WebP (`DrawingCanvas`), et le plafond protocole passe de 200 000 à 60 000 caractères
+  (`MAX_DRAWING_DATA_URL_LENGTH`, partagé client/serveur) avec un contrôle de type MIME.
+- **`buildDeck` ne charge plus toute la banque en mémoire** : `ORDER BY RANDOM() LIMIT ?`
+  côté SQLite au lieu d'un `SELECT *` complet suivi d'un shuffle en JS (le brief vise 8000
+  questions).
+- **Matching de la manche chaîne réécrit** (`isChainMatch`). L'ancien seuil de distance
+  globale à 0.15 refusait « chat qui danse » pour « un chat qui danse » ; simplement le
+  desserrer faisait matcher « p2 qui danse » avec « host qui danse » (constaté en test
+  réel). On compare maintenant les **mots significatifs** : les mots outils sont gratuits,
+  chaque mot porteur doit être retrouvé.
+- **Allocation de code de room atomique** : `INSERT ... ON CONFLICT DO UPDATE ... WHERE
+  expires_at < ?` en une requête, au lieu d'un lire-puis-écrire où deux créations
+  simultanées pouvaient obtenir le même code.
+- **Rate limit WS par socket** au lieu d'un bucket `"anonymous"` partagé, qu'un seul client
+  bruyant pouvait saturer pour bloquer les `HELLO` de tout le monde.
+- **Questions média filtrées quand R2 n'est pas branché** : sans binding, `/media/:key`
+  renvoie 404 et la question s'affichait avec un lecteur muet et aucun moyen de répondre.
+  `buildDeck` les exclut tant que `env.MEDIA` est absent.
+- **Nouveau `GET /api/themes`** : la banque locale n'a que 10 des 12 thèmes de l'interface
+  (`animaux`/`cuisine` sont audio-only et jamais seedés). Le sélecteur de thèmes n'affiche
+  plus que ceux qui ont réellement des questions jouables.
+- **Seed idempotent** : migration `0002` (dédoublonnage + index unique sur
+  `(prompt, answer)`, index `(verified, theme)`) et `INSERT OR IGNORE`. Re-seeder ne
+  duplique plus la banque — vérifié, 360 questions avant et après.
+- **CI GitHub Actions** (`.github/workflows/ci.yml`) : typecheck + tests + build web.
+
+### ESLint + Prettier (ajoutés après coup)
+
+- **Prettier** (`printWidth: 120`, aligné sur le style réel du code — p99 des lignes = 119,
+  donc 576 lignes touchées seulement). `endOfLine: auto` pour ne pas convertir les CRLF du
+  poste. Les `.md` sont exclus : la prose française est retaillée à la main, la reflower
+  enterrerait les vrais diffs.
+- **ESLint 10 en flat config** avec `typescript-eslint` **type-checked**, `react-hooks` et
+  `react-refresh`. Règles durcies au-delà du recommandé : `no-explicit-any` en erreur (la
+  règle du projet), `no-floating-promises` et `no-misused-promises` (une promesse lâchée
+  dans le DO = une écriture de storage ou un broadcast perdu).
+- `pnpm lint`, `pnpm lint:fix`, `pnpm format`, `pnpm format:check` ; les deux checks sont
+  branchés en CI avant le typecheck.
+
+**Ce que le lint a réellement trouvé** (tout corrigé, 0 erreur / 0 warning) :
+
+- `levenshteinDistance` utilisait `new Array(n)`, typé `any[]` — ce qui **neutralisait
+  `noUncheckedIndexedAccess`** dans la fonction la plus chaude du projet. Une fois typé
+  `number[]`, TypeScript a sorti 3 accès non gardés.
+- `blockConcurrencyWhile` non awaité dans le constructeur du DO, `JSON.parse` non typé sur
+  les messages WebSocket (client et écran hôte), `navigate()` et `clipboard.writeText()`
+  dont les promesses étaient lâchées.
+- `setPlayerId` appelé directement dans un `useEffect` (`react-hooks/set-state-in-effect`) —
+  code que j'avais écrit dans la passe précédente : rendu en cascade à chaque montage,
+  remplacé par un ajustement pendant le rendu.
+- Imports morts laissés par le refactor (`DeckItem`, `CHAIN_GUESS_DURATION_MS`).
+- **Les scripts (`seed.ts`, `media-add.ts`) et `vite.config.ts` n'étaient couverts par aucun
+  tsconfig, donc jamais typecheckés.** Deux configs dédiées
+  (`apps/server/tsconfig.scripts.json`, `apps/web/tsconfig.node.json`) les rattachent, et
+  `pnpm typecheck` les couvre désormais.
+- Données d'avatars sorties de `Avatar.tsx` vers `lib/avatars.ts` : mélanger constantes et
+  composant dans un module casse le Fast Refresh.
+
+### Laissé de côté, volontairement
+
+- **Le rate limit de création de room reste par isolate** (`createRoomLimiter` est un
+  global de module dans le Worker, donc dupliqué à chaque isolate : la limite de 10/min/IP
+  ne tient pas vraiment en prod). Le corriger proprement demande soit un DO dédié, soit le
+  binding Rate Limiting de Cloudflare — ni l'un ni l'autre ne se teste en local, et ça
+  engage la structure du projet. À trancher avant déploiement réel.
+- ~~Pas d'ESLint/Prettier~~ — **fait dans un second temps** (voir ci-dessous).
+- **Wrangler v3 → v4** toujours pas fait (avertissement à chaque `dev`).
+
 ## Ce qui marche, testé pour de vrai (pas juste "ça compile")
 
 Testé à la fois par 53 tests Vitest **et** en conditions réelles (`wrangler dev` + navigateur
@@ -62,9 +175,9 @@ Chrome piloté, room jouée de bout en bout, capture d'écran à l'appui) :
   salon temps réel, WebSocket Hibernation API (`ctx.acceptWebSocket`, restauration via
   `ctx.getWebSockets()`), ping/pong gratuit via `ctx.setWebSocketAutoResponse()` (le client
   envoie "PING" en texte brut toutes les 30s, la réponse "PONG" ne réveille pas le DO).
-- **Boucle de jeu complète** — LOBBY → QUESTION → REVEAL → JUDGING → SCOREBOARD → QUESTION/FINISHED,
+- **Boucle de jeu complète** — LOBBY → QUESTION → (chaîne) → HOST_REVIEW → FINISHED,
   entièrement dirigée par le serveur (Alarms API, aucun `setTimeout`/`setInterval` dans le DO).
-  Jouée de bout en bout dans un vrai navigateur avec les 200 questions de la banque réelle.
+  Jouée de bout en bout avec 3 clients WebSocket réels sur la banque locale.
 - **Auto-validation des réponses** — normalisation (accents, articles, ponctuation) +
   Levenshtein normalisé, seuils 0.15/0.5, zone grise détectée correctement.
 - **JUDGING** — vote de la room sur les réponses en zone grise, le concerné ne vote pas sur sa
@@ -100,9 +213,9 @@ Chrome piloté, room jouée de bout en bout, capture d'écran à l'appui) :
    `wrangler r2 bucket create quiproquo-media`, remplacer le `database_id` placeholder dans
    `apps/server/wrangler.toml`, relancer `pnpm --filter server db:migrate:local` en `--remote`,
    reseed en remote (`pnpm --filter server seed -- --remote`).
-2. **Assets Workers** — le bloc `[assets]` de `wrangler.toml` est commenté (sinon `wrangler dev`
-   refuse de démarrer tant que `apps/web/dist` n'existe pas). Une fois `pnpm --filter web build`
-   fait, décommenter pour servir le front depuis le même Worker en prod.
+2. **Assets Workers** — fait. Le bloc `[assets]` est actif et `pnpm --filter server dev` crée
+   un `apps/web/dist/index.html` placeholder au démarrage (`scripts/ensure-assets.mjs`) pour que
+   wrangler démarre sur un clone frais ; `pnpm --filter web build` l'écrase par le vrai front.
 3. **Back-office `/admin`** (phase 7 du brief) — pas commencé. Prévu : ajout/édition/suppression
    de questions, import CSV (le script `seed.ts` sait déjà lire un CSV, la logique de parsing
    est réutilisable), marquer vérifié, prévisualiser le média.
