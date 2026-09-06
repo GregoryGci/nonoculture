@@ -16,8 +16,24 @@ Tout est commité dans git, un commit par étape logique — `git log --oneline`
   avec glow et micro-animations au hover, transitions d'entrée de phase.
 - **Avatars** : set original de 12 visages en SVG (grands yeux, coiffures/expressions
   variées) remplaçant les emojis — pas d'images externes.
-- Non fait aujourd'hui : recherche de sons courts (mp3) pour des questions audio à
-  thème (demandée en fin de session, à traiter ensuite).
+- **15 questions audio** (nouveaux thèmes `animaux` × 9, `cuisine` × 6) : sons courts CC0
+  récupérés via l'API officielle de Freesound.org (clé perso requise, voir
+  `apps/server/scripts/fetch-freesound.mjs`), compressés/uploadés via `pnpm media:add`,
+  testés en conditions réelles (question tirée, média servi par `/media/:key`,
+  content-type correct). **Pixabay écarté** : son bouton de téléchargement est protégé
+  par un challenge anti-bot Cloudflare Turnstile — je n'ai pas essayé de l'automatiser.
+  ⚠️ Les fichiers mp3 sources ne sont pas commités dans git (binaires, gitignore
+  `apps/server/seed/downloads/`) — pour les régénérer : `FREESOUND_TOKEN=<ta clé>
+  pnpm --filter server sounds:fetch` puis `pnpm --filter server media:add <fichier>`
+  pour chacun, puis `pnpm --filter server seed seed/audio-questions.json`.
+- **Pas fait, sur demande explicite** : vrais openings d'anime / génériques de films en
+  MP3. Ce sont des œuvres musicales protégées par le droit d'auteur (studios, labels) —
+  contrairement aux bruitages CC0 ci-dessus, il n'existe pas de source légale gratuite
+  pour de la vraie musique de licence commerciale. Je n'ai pas cherché à les scraper
+  depuis YouTube ou des sources non autorisées. Si tu veux ce type de question, la voie
+  légale est d'utiliser tes propres fichiers (médias que tu possèdes légalement, usage
+  privé) via `pnpm media:add`, ou des pistes "inspirées de" libres de droits (pas les
+  vrais titres) trouvables sur les mêmes plateformes CC0.
 
 ## Ce qui marche, testé pour de vrai (pas juste "ça compile")
 

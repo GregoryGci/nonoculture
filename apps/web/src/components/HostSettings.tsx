@@ -1,6 +1,17 @@
 import type { GameSettings } from "@quiproquo/shared";
 
-const ALL_THEMES = ["histoire", "geo", "sciences", "cinema", "musique", "gaming", "sport", "insolite"];
+const ALL_THEMES = [
+  "histoire",
+  "geo",
+  "sciences",
+  "cinema",
+  "musique",
+  "gaming",
+  "sport",
+  "insolite",
+  "animaux",
+  "cuisine",
+];
 
 export function HostSettings({
   settings,

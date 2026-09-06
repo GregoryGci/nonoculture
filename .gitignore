@@ -11,3 +11,4 @@ build/
 coverage/
 *.sqlite
 *.sqlite3
+apps/server/seed/downloads/

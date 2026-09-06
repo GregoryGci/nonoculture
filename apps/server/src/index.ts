@@ -43,12 +43,26 @@ app.get("/api/rooms/:code/ws", async (c) => {
   return stub.fetch(new Request(url, c.req.raw));
 });
 
+const CONTENT_TYPE_BY_EXT: Record<string, string> = {
+  webp: "image/webp",
+  png: "image/png",
+  jpg: "image/jpeg",
+  jpeg: "image/jpeg",
+  mp3: "audio/mpeg",
+  mp4: "video/mp4",
+};
+
 // Public question media (images/audio/video), uploaded via `pnpm media:add`.
 app.get("/media/:key", async (c) => {
-  const object = await c.env.MEDIA.get(c.req.param("key"));
+  const key = c.req.param("key");
+  const object = await c.env.MEDIA.get(key);
   if (!object) return c.notFound();
   const headers = new Headers();
   object.writeHttpMetadata(headers);
+  if (!headers.get("Content-Type")) {
+    const ext = key.split(".").pop()?.toLowerCase() ?? "";
+    headers.set("Content-Type", CONTENT_TYPE_BY_EXT[ext] ?? "application/octet-stream");
+  }
   headers.set("Cache-Control", "public, max-age=31536000, immutable");
   return new Response(object.body, { headers });
 });

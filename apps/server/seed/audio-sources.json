@@ -1,0 +1,170 @@
+[
+  {
+    "query": "lion roar",
+    "require": ["lion"],
+    "theme": "animaux",
+    "answer": "un lion",
+    "aliases": ["lion"],
+    "freesoundId": 467762,
+    "freesoundName": "lion.wav",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "file": "animaux-un_lion.mp3"
+  },
+  {
+    "query": "dog bark",
+    "require": ["dog", "bark"],
+    "theme": "animaux",
+    "answer": "un chien",
+    "aliases": ["chien"],
+    "freesoundId": 396307,
+    "freesoundName": "Dog play.WAV",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "file": "animaux-un_chien.mp3"
+  },
+  {
+    "query": "cow moo",
+    "require": ["cow", "moo"],
+    "theme": "animaux",
+    "answer": "une vache",
+    "aliases": ["vache"],
+    "freesoundId": 847404,
+    "freesoundName": "Bovines - Cattle; Cow Mooing, Take 3",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "file": "animaux-une_vache.mp3"
+  },
+  {
+    "query": "rooster crow",
+    "require": ["rooster", "cock", "crow"],
+    "theme": "animaux",
+    "answer": "un coq",
+    "aliases": ["coq"],
+    "freesoundId": 556913,
+    "freesoundName": "Rooster Crowing",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "file": "animaux-un_coq.mp3"
+  },
+  {
+    "query": "cat meow",
+    "require": ["cat", "meow"],
+    "theme": "animaux",
+    "answer": "un chat",
+    "aliases": ["chat"],
+    "freesoundId": 730100,
+    "freesoundName": "Cat meowing for food 3",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "file": "animaux-un_chat.mp3"
+  },
+  {
+    "query": "elephant trumpet",
+    "require": ["elephant"],
+    "preferId": 819668,
+    "theme": "animaux",
+    "answer": "un éléphant",
+    "aliases": ["éléphant", "elephant"],
+    "freesoundId": 819668,
+    "freesoundName": "Elephant sound",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "file": "animaux-un_l_phant.mp3"
+  },
+  {
+    "query": "duck quack",
+    "require": ["duck", "quack"],
+    "theme": "animaux",
+    "answer": "un canard",
+    "aliases": ["canard"],
+    "freesoundId": 719115,
+    "freesoundName": "Ducks Quacking To Each Other",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "file": "animaux-un_canard.mp3"
+  },
+  {
+    "query": "horse neigh",
+    "require": ["horse", "neigh"],
+    "theme": "animaux",
+    "answer": "un cheval",
+    "aliases": ["cheval"],
+    "freesoundId": 826753,
+    "freesoundName": "Renill de cavall / Horse Neigh",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "file": "animaux-un_cheval.mp3"
+  },
+  {
+    "query": "sheep bleat",
+    "require": ["sheep", "bleat", "baa"],
+    "theme": "animaux",
+    "answer": "un mouton",
+    "aliases": ["mouton", "brebis"],
+    "freesoundId": 677221,
+    "freesoundName": "Ewe baa",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "file": "animaux-un_mouton.mp3"
+  },
+  {
+    "query": "frying pan sizzle",
+    "require": ["fry", "frying", "sizzle", "pan"],
+    "theme": "cuisine",
+    "answer": "de la friture",
+    "aliases": ["friture", "poêle qui grésille", "grésillement"],
+    "freesoundId": 540080,
+    "freesoundName": "Sizzler",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "file": "cuisine-de_la_friture.mp3"
+  },
+  {
+    "query": "chopping vegetables",
+    "require": ["chop", "cutting", "knife", "cut"],
+    "preferId": 634119,
+    "theme": "cuisine",
+    "answer": "on découpe des légumes",
+    "aliases": ["découper des légumes", "couper des légumes", "découpe"],
+    "freesoundId": 634119,
+    "freesoundName": "Cutting a Carrot",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "file": "cuisine-on_d_coupe_des_l_gumes.mp3"
+  },
+  {
+    "query": "water boiling bubbling pot",
+    "require": ["boil", "bubbl", "water"],
+    "theme": "cuisine",
+    "answer": "de l'eau qui bout",
+    "aliases": ["ébullition", "eau bouillante", "eau qui bout"],
+    "freesoundId": 862443,
+    "freesoundName": "Hot Water Spilling out while Boiling Eggs",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "file": "cuisine-de_l_eau_qui_bout.mp3"
+  },
+  {
+    "query": "blender kitchen",
+    "require": ["blend"],
+    "theme": "cuisine",
+    "answer": "un mixeur",
+    "aliases": ["blender", "mixeur électrique"],
+    "freesoundId": 232915,
+    "freesoundName": "Blender.mp3",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "file": "cuisine-un_mixeur.mp3"
+  },
+  {
+    "query": "kettle whistle",
+    "require": ["kettle"],
+    "theme": "cuisine",
+    "answer": "une bouilloire",
+    "aliases": ["bouilloire", "bouilloire qui siffle"],
+    "freesoundId": 234309,
+    "freesoundName": "kettle short.wav",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "file": "cuisine-une_bouilloire.mp3"
+  },
+  {
+    "query": "popcorn popping",
+    "require": ["popcorn"],
+    "preferId": 91262,
+    "theme": "cuisine",
+    "answer": "du popcorn",
+    "aliases": ["pop-corn", "pop corn"],
+    "freesoundId": 91262,
+    "freesoundName": "Popcorn Real.wav",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "file": "cuisine-du_popcorn.mp3"
+  }
+]
