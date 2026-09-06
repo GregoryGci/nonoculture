@@ -14,6 +14,12 @@ export const HelloMsg = z.object({
   roomCode,
 });
 
+/** For the read-only "host screen" TV view — never becomes a player, never votes/answers. */
+export const ObserveMsg = z.object({
+  type: z.literal("OBSERVE"),
+  roomCode,
+});
+
 export const SetProfileMsg = z.object({
   type: z.literal("SET_PROFILE"),
   nickname,
@@ -58,6 +64,7 @@ export const PlayAgainMsg = z.object({
 
 export const ClientMessage = z.discriminatedUnion("type", [
   HelloMsg,
+  ObserveMsg,
   SetProfileMsg,
   StartGameMsg,
   SubmitAnswerMsg,
@@ -75,6 +82,7 @@ export type ClientMessage = z.infer<typeof ClientMessage>;
 // here since they're only ever produced by the server, never parsed from user input)
 
 export type ServerMessageType =
+  | "HELLO_OK"
   | "STATE_SYNC"
   | "PHASE_CHANGE"
   | "PLAYER_JOINED"

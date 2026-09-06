@@ -76,5 +76,8 @@ export interface RoomStateSync {
   phaseDeadlineTs: number | null; // absolute server timestamp, null = no countdown
   youHaveAnswered: boolean;
   revealedAnswers: RevealedAnswer[] | null;
+  /** The expected answer text, shown from REVEAL onward for the question just played. */
+  revealedCorrectAnswer: string | null;
+  revealedExplanation: string | null;
   judgePrompt: JudgePromptItem | null;
 }

@@ -15,9 +15,7 @@ interface Env {
   ADMIN_SECRET: string;
 }
 
-interface SocketAttachment {
-  playerId: string;
-}
+type SocketAttachment = { playerId: string } | { observer: true };
 
 const STORAGE_KEY = "state";
 const MESSAGE_RATE_LIMIT = { maxHits: 20, windowMs: 10_000 };
@@ -60,7 +58,7 @@ export class RoomDO extends DurableObject<Env> {
   private socketsFor(playerId: string): WebSocket[] {
     return this.ctx.getWebSockets().filter((ws) => {
       const meta = ws.deserializeAttachment() as SocketAttachment | null;
-      return meta?.playerId === playerId;
+      return meta && "playerId" in meta && meta.playerId === playerId;
     });
   }
 
@@ -69,7 +67,8 @@ export class RoomDO extends DurableObject<Env> {
     for (const ws of this.ctx.getWebSockets()) {
       const meta = ws.deserializeAttachment() as SocketAttachment | null;
       if (!meta) continue;
-      send(ws, "STATE_SYNC", buildStateSync(this.gameState, meta.playerId));
+      const forPlayerId = "playerId" in meta ? meta.playerId : "";
+      send(ws, "STATE_SYNC", buildStateSync(this.gameState, forPlayerId));
     }
   }
 
@@ -125,7 +124,7 @@ export class RoomDO extends DurableObject<Env> {
     if (typeof message !== "string" || !this.gameState) return;
 
     const meta = ws.deserializeAttachment() as SocketAttachment | null;
-    const limiterKey = meta?.playerId ?? "anonymous";
+    const limiterKey = meta && "playerId" in meta ? meta.playerId : "anonymous";
     if (!this.messageLimiter.check(limiterKey, Date.now())) return;
 
     let raw: unknown;
@@ -149,7 +148,7 @@ export class RoomDO extends DurableObject<Env> {
         return;
       }
       const existing = this.gameState.players[parsed.playerId];
-      if (existing && parsed.playerToken && existing.playerToken !== parsed.playerToken) {
+      if (existing && existing.playerToken !== parsed.playerToken) {
         send(ws, "ERROR", { message: "invalid token" });
         ws.close(4001, "invalid token");
         return;
@@ -158,8 +157,9 @@ export class RoomDO extends DurableObject<Env> {
       for (const other of this.socketsFor(parsed.playerId)) {
         if (other !== ws) other.close(4002, "replaced by a newer connection");
       }
-      const playerToken = existing?.playerToken ?? parsed.playerToken ?? crypto.randomUUID();
+      const playerToken = existing?.playerToken ?? crypto.randomUUID();
       ws.serializeAttachment({ playerId: parsed.playerId } satisfies SocketAttachment);
+      send(ws, "HELLO_OK", { playerToken });
       await this.dispatch(
         { kind: "PLAYER_JOIN", playerId: parsed.playerId, playerToken, roomCode: parsed.roomCode, now },
         ws,
@@ -167,7 +167,17 @@ export class RoomDO extends DurableObject<Env> {
       return;
     }
 
-    if (!meta) {
+    if (parsed.type === "OBSERVE") {
+      if (parsed.roomCode !== this.gameState.roomCode) {
+        send(ws, "ERROR", { message: "wrong room" });
+        return;
+      }
+      ws.serializeAttachment({ observer: true } satisfies SocketAttachment);
+      send(ws, "STATE_SYNC", buildStateSync(this.gameState, ""));
+      return;
+    }
+
+    if (!meta || !("playerId" in meta)) {
       send(ws, "ERROR", { message: "send HELLO first" });
       return;
     }
@@ -222,7 +232,7 @@ export class RoomDO extends DurableObject<Env> {
 
   override async webSocketClose(ws: WebSocket): Promise<void> {
     const meta = ws.deserializeAttachment() as SocketAttachment | null;
-    if (!meta || !this.gameState) return;
+    if (!meta || !("playerId" in meta) || !this.gameState) return;
     // Ignore if this socket was already replaced by a newer one for the same player.
     if (this.socketsFor(meta.playerId).some((s) => s !== ws)) return;
     await this.dispatch({ kind: "PLAYER_DISCONNECT", playerId: meta.playerId, now: Date.now() });

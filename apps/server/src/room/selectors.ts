@@ -73,6 +73,8 @@ export function buildStateSync(
     phaseDeadlineTs: state.phaseDeadlineTs,
     youHaveAnswered: state.answers.some((a) => a.playerId === forPlayerId),
     revealedAnswers,
+    revealedCorrectAnswer: REVEAL_VISIBLE_PHASES.has(state.phase) ? (question?.answer ?? null) : null,
+    revealedExplanation: REVEAL_VISIBLE_PHASES.has(state.phase) ? (question?.explanation ?? null) : null,
     judgePrompt,
   };
 }
