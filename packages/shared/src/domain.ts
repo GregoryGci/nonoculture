@@ -73,6 +73,8 @@ export interface RoomStateSync {
   questionIndex: number; // 0-based
   questionTotal: number;
   currentQuestion: QuestionPublic | null;
+  /** Set only during SCOREBOARD so the client can preload the next question's media in advance. */
+  nextQuestionMedia: { type: QuestionType; url: string } | null;
   phaseDeadlineTs: number | null; // absolute server timestamp, null = no countdown
   youHaveAnswered: boolean;
   revealedAnswers: RevealedAnswer[] | null;

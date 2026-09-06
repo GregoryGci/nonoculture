@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useRoomConnection } from "../hooks/useRoomConnection";
 import { ReconnectBanner } from "../components/ReconnectBanner";
@@ -10,6 +11,7 @@ import { RevealList } from "../components/RevealList";
 import { JudgeVotePanel } from "../components/JudgeVotePanel";
 import { Scoreboard } from "../components/Scoreboard";
 import { Podium } from "../components/Podium";
+import type { QuestionPublic } from "@quiproquo/shared";
 
 export function Room() {
   const { code } = useParams<{ code: string }>();
@@ -68,6 +70,7 @@ export function Room() {
         <>
           <QuestionHeader index={state.questionIndex} total={state.questionTotal} deadline={state.phaseDeadlineTs} />
           <p className="text-center text-xl font-semibold">{state.currentQuestion.prompt}</p>
+          <QuestionMedia question={state.currentQuestion} />
           <AnswerForm
             alreadyAnswered={state.youHaveAnswered}
             onSubmit={(answer) => send({ type: "SUBMIT_ANSWER", questionId: state.currentQuestion!.id, answer })}
@@ -104,6 +107,7 @@ export function Room() {
         <>
           <QuestionHeader index={state.questionIndex} total={state.questionTotal} deadline={state.phaseDeadlineTs} />
           <Scoreboard players={state.players} />
+          <MediaPreloader media={state.nextQuestionMedia} />
           {isHost && (
             <button
               onClick={() => send({ type: "HOST_NEXT" })}
@@ -154,6 +158,44 @@ function RoomCodeHeader({ code }: { code: string }) {
       </button>
     </div>
   );
+}
+
+/** Warms the browser cache for the next question's media during SCOREBOARD, so QUESTION never waits on it. */
+function MediaPreloader({ media }: { media: { type: string; url: string } | null }) {
+  useEffect(() => {
+    if (!media) return;
+    if (media.type === "image") {
+      const img = new Image();
+      img.src = media.url;
+    } else {
+      const el = document.createElement(media.type === "video" ? "video" : "audio");
+      el.preload = "auto";
+      el.src = media.url;
+    }
+  }, [media?.url]);
+  return null;
+}
+
+function QuestionMedia({ question }: { question: QuestionPublic }) {
+  if (!question.mediaUrl) return null;
+  const style = { background: "var(--color-surface)", border: "1px solid var(--color-border)" };
+  if (question.type === "image") {
+    return <img src={question.mediaUrl} alt="" className="mx-auto max-h-64 rounded-[var(--radius-card)]" style={style} />;
+  }
+  if (question.type === "audio") {
+    return <audio src={question.mediaUrl} controls className="w-full" />;
+  }
+  if (question.type === "video") {
+    return (
+      <video
+        src={question.mediaUrl}
+        controls
+        className="mx-auto max-h-64 rounded-[var(--radius-card)]"
+        style={style}
+      />
+    );
+  }
+  return null;
 }
 
 function QuestionHeader({ index, total, deadline }: { index: number; total: number; deadline: number | null }) {

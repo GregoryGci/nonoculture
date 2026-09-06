@@ -39,6 +39,12 @@ export function buildStateSync(
       }
     : null;
 
+  const nextQuestion = state.questions[state.questionIndex + 1] ?? null;
+  const nextQuestionMedia =
+    state.phase === "SCOREBOARD" && nextQuestion?.mediaKey
+      ? { type: nextQuestion.type, url: resolveMediaUrl(nextQuestion.mediaKey) }
+      : null;
+
   const nicknameOf = (playerId: string) => state.players[playerId]?.nickname ?? "?";
 
   const revealedAnswers: RevealedAnswer[] | null = REVEAL_VISIBLE_PHASES.has(state.phase)
@@ -70,6 +76,7 @@ export function buildStateSync(
     questionIndex: state.questionIndex,
     questionTotal: state.questions.length,
     currentQuestion,
+    nextQuestionMedia,
     phaseDeadlineTs: state.phaseDeadlineTs,
     youHaveAnswered: state.answers.some((a) => a.playerId === forPlayerId),
     revealedAnswers,

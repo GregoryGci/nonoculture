@@ -28,6 +28,10 @@ function send(ws: WebSocket, type: ServerMessageType, payload: unknown): void {
   }
 }
 
+function resolveMediaUrl(mediaKey: string): string {
+  return `/media/${mediaKey}`;
+}
+
 export class RoomDO extends DurableObject<Env> {
   private gameState: GameState | null = null;
   private readonly messageLimiter = new RateLimiter(MESSAGE_RATE_LIMIT.maxHits, MESSAGE_RATE_LIMIT.windowMs);
@@ -68,7 +72,7 @@ export class RoomDO extends DurableObject<Env> {
       const meta = ws.deserializeAttachment() as SocketAttachment | null;
       if (!meta) continue;
       const forPlayerId = "playerId" in meta ? meta.playerId : "";
-      send(ws, "STATE_SYNC", buildStateSync(this.gameState, forPlayerId));
+      send(ws, "STATE_SYNC", buildStateSync(this.gameState, forPlayerId, resolveMediaUrl));
     }
   }
 
@@ -173,7 +177,7 @@ export class RoomDO extends DurableObject<Env> {
         return;
       }
       ws.serializeAttachment({ observer: true } satisfies SocketAttachment);
-      send(ws, "STATE_SYNC", buildStateSync(this.gameState, ""));
+      send(ws, "STATE_SYNC", buildStateSync(this.gameState, "", resolveMediaUrl));
       return;
     }
 

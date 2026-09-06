@@ -43,4 +43,14 @@ app.get("/api/rooms/:code/ws", async (c) => {
   return stub.fetch(new Request(url, c.req.raw));
 });
 
+// Public question media (images/audio/video), uploaded via `pnpm media:add`.
+app.get("/media/:key", async (c) => {
+  const object = await c.env.MEDIA.get(c.req.param("key"));
+  if (!object) return c.notFound();
+  const headers = new Headers();
+  object.writeHttpMetadata(headers);
+  headers.set("Cache-Control", "public, max-age=31536000, immutable");
+  return new Response(object.body, { headers });
+});
+
 export default app;
