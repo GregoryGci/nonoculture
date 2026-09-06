@@ -1,0 +1,20 @@
+{
+  "name": "quiproquo",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@12.3.4",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "pnpm --parallel --filter ./apps/* dev",
+    "build": "pnpm --filter ./apps/* build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "pnpm -r --filter ./apps/* --filter ./packages/* exec tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "vitest": "^3.0.5"
+  }
+}
