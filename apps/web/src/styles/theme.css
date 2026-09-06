@@ -8,8 +8,8 @@
   --color-border-strong: #2c3a5c;
   --color-text: #e7f3ff;
   --color-text-muted: #6b7b99;
-  --color-accent: #2de2ff;
-  --color-accent-contrast: #001318;
+  --color-accent: #f5d90a;
+  --color-accent-contrast: #171200;
   --color-accent-2: #ff2e9a;
 
   --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
@@ -37,7 +37,11 @@ body,
 
 body {
   background:
-    radial-gradient(ellipse 70% 45% at 50% -10%, color-mix(in srgb, var(--color-accent) 10%, transparent), transparent 60%),
+    radial-gradient(
+      ellipse 70% 45% at 50% -10%,
+      color-mix(in srgb, var(--color-accent) 10%, transparent),
+      transparent 60%
+    ),
     var(--color-bg);
   background-attachment: fixed;
   color: var(--color-text);
