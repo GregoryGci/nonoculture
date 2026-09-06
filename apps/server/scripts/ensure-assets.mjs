@@ -12,7 +12,7 @@ if (!existsSync(index)) {
   mkdirSync(dist, { recursive: true });
   writeFileSync(
     index,
-    "<!doctype html><meta charset=utf-8><title>Quiproquo</title>" +
+    "<!doctype html><meta charset=utf-8><title>Nono Culture</title>" +
       "<p>Placeholder. En dev le front tourne sur Vite (pnpm --filter web dev). " +
       "Pour servir le vrai front depuis le Worker : pnpm --filter web build.</p>",
     "utf-8",

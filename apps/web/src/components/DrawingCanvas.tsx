@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { MAX_DRAWING_DATA_URL_LENGTH } from "@quiproquo/shared";
+import { MAX_DRAWING_DATA_URL_LENGTH } from "@nonoculture/shared";
 
 const WIDTH = 720;
 const HEIGHT = 540;

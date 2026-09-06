@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AnimatePresence, motion } from "motion/react";
-import type { RoomStateSync } from "@quiproquo/shared";
+import type { RoomStateSync } from "@nonoculture/shared";
 import { Timer } from "../components/Timer";
 import { Scoreboard } from "../components/Scoreboard";
 import { Podium } from "../components/Podium";
@@ -42,7 +42,7 @@ export function HostScreen() {
         <span className="eyebrow">
           {state.questionIndex >= 0 && state.questionTotal > 0
             ? `${state.questionIndex + 1} / ${state.questionTotal}`
-            : "Quiproquo"}
+            : "Nono Culture"}
         </span>
         <Timer deadlineTs={state.phaseDeadlineTs} total={state.settings.questionDurationSec} />
       </header>

@@ -35,7 +35,7 @@ export function Home() {
       <div className="stagger flex flex-col items-center text-center">
         <p className="eyebrow">Quiz party</p>
 
-        <h1 className="display mt-5 text-[clamp(3rem,14vw,4.5rem)]">Quiproquo</h1>
+        <h1 className="display mt-5 text-[clamp(2.5rem,12vw,4.5rem)]">Nono Culture</h1>
 
         <p className="mt-5 max-w-xs text-[17px] leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
           Réponses libres, corrigées par l&apos;hôte. Tout le monde voit tout à la fin.
@@ -68,7 +68,7 @@ export function Home() {
             maxLength={5}
             placeholder="Code"
             aria-label="Code de la partie"
-            className="input-cyber h-14 flex-1 rounded-[var(--radius-control)] px-5 text-center text-2xl font-medium tracking-[0.3em]"
+            className="input-cyber h-14 w-full min-w-0 flex-1 rounded-[var(--radius-control)] px-4 text-center text-2xl font-medium tracking-[0.2em]"
           />
           <button type="submit" disabled={joinCode.length < 4} className="btn btn-secondary h-14">
             Rejoindre

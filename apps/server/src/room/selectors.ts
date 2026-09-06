@@ -1,4 +1,4 @@
-import { isChainMatch } from "@quiproquo/shared";
+import { isChainMatch } from "@nonoculture/shared";
 import type {
   ChainResult,
   ChainTask,
@@ -6,7 +6,7 @@ import type {
   QuestionPublic,
   ReviewQuestion,
   RoomStateSync,
-} from "@quiproquo/shared";
+} from "@nonoculture/shared";
 import { originForRole } from "./state-machine.js";
 import { CHAIN_POINTS } from "./types.js";
 import type { GameState, InternalQuestion } from "./types.js";

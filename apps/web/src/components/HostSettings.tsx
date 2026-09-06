@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { GameSettings } from "@quiproquo/shared";
+import type { GameSettings } from "@nonoculture/shared";
 import { fetchPlayableThemes } from "../lib/api";
 
 const ALL_THEMES: { id: string; label: string }[] = [

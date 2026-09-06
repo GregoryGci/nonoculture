@@ -15,7 +15,7 @@ import { ChainPromptForm } from "../components/ChainPromptForm";
 import { DrawingCanvas } from "../components/DrawingCanvas";
 import { ChainGuessForm } from "../components/ChainGuessForm";
 import { ChainRevealSlideshow } from "../components/ChainRevealSlideshow";
-import type { QuestionPublic } from "@quiproquo/shared";
+import type { QuestionPublic } from "@nonoculture/shared";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 

@@ -67,7 +67,7 @@ Audit complet du projet puis correction de tout ce qu'il a remonté. **76 tests 
 2. **Impossible de revenir dans une room après en avoir rejoint une autre.** Le
    `playerToken` était une clé localStorage globale, écrasée à chaque nouvelle room ; le
    retour sur la première donnait `ERROR` + close 4001, donc (bug n°1) une boucle. L'identité
-   est désormais **par room** (`quiproquo:playerId:<code>` / `:playerToken:<code>`), et un
+   est désormais **par room** (`nonoculture:playerId:<code>` / `:playerToken:<code>`), et un
    token refusé déclenche une nouvelle identité une seule fois au lieu d'être re-proposé
    en boucle.
 3. **Une partie sans questions démarrait quand même** (banque non seedée, ou thème sans

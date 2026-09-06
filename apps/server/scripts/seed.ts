@@ -97,7 +97,7 @@ function main() {
   console.log(`Seeding ${questions.length} questions from ${filePath} (${remote ? "remote" : "local"})...`);
 
   const sql = toInsertStatements(questions);
-  const tmpDir = mkdtempSync(join(tmpdir(), "quiproquo-seed-"));
+  const tmpDir = mkdtempSync(join(tmpdir(), "nonoculture-seed-"));
   const sqlFile = join(tmpDir, "seed.sql");
   writeFileSync(sqlFile, sql, "utf-8");
 

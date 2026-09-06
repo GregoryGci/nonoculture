@@ -1,6 +1,6 @@
 import { DurableObject } from "cloudflare:workers";
-import { parseClientMessage } from "@quiproquo/shared";
-import type { GameSettings, ServerMessageType } from "@quiproquo/shared";
+import { parseClientMessage } from "@nonoculture/shared";
+import type { GameSettings, ServerMessageType } from "@nonoculture/shared";
 import { buildDeck } from "../lib/questions.js";
 import { sanitizeNickname, sanitizeText } from "../lib/sanitize.js";
 import { setRoomCodeExpiry } from "../lib/room-code.js";

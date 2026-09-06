@@ -1,4 +1,4 @@
-import type { GameSettings, Grade, Phase, QuestionType } from "@quiproquo/shared";
+import type { GameSettings, Grade, Phase, QuestionType } from "@nonoculture/shared";
 
 /** Full question record as stored in D1 — includes the secret answer/aliases. */
 export interface InternalQuestion {

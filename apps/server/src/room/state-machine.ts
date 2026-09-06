@@ -1,5 +1,5 @@
-import { DEFAULT_SETTINGS, isChainMatch } from "@quiproquo/shared";
-import type { GameSettings, Grade } from "@quiproquo/shared";
+import { DEFAULT_SETTINGS, isChainMatch } from "@nonoculture/shared";
+import type { GameSettings, Grade } from "@nonoculture/shared";
 import {
   CHAIN_DRAW_DURATION_MS,
   CHAIN_GUESS_DURATION_MS,

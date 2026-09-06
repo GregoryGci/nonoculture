@@ -1,4 +1,4 @@
-import type { ClientMessage, RoomStateSync } from "@quiproquo/shared";
+import type { ClientMessage, RoomStateSync } from "@nonoculture/shared";
 import { getOrCreatePlayerId, getPlayerToken, migrateLegacyKeys, resetRoomIdentity, setPlayerToken } from "./storage";
 
 export type ConnectionStatus = "connecting" | "connected" | "reconnecting" | "closed" | "rejected";

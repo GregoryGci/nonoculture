@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import type { ChainResult } from "@quiproquo/shared";
+import type { ChainResult } from "@nonoculture/shared";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 

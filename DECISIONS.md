@@ -4,10 +4,10 @@ Le brief demandait de proposer 5 noms et 2-3 couleurs d'accent avant de trancher
 Comme le travail a été fait de nuit sans validation possible, j'ai tranché moi-même
 pour ne pas bloquer le projet. Tout est facilement changeable — voir "Comment changer" en bas.
 
-## Nom du projet : **Quiproquo**
+## Nom du projet : **Nono Culture**
 
 Candidats proposés :
-1. **Quiproquo** ✅ (retenu) — mot français existant qui désigne un malentendu comique :
+1. **Nono Culture** ✅ (retenu) — mot français existant qui désigne un malentendu comique :
    colle parfaitement au concept central (tout le monde voit les réponses de tout le
    monde, y compris les plus à côté de la plaque). Court, mémorable, pas de trademark
    connu dans le jeu vidéo/party game.
@@ -16,7 +16,7 @@ Candidats proposés :
 4. Culture Chaos — correct mais générique, sonne comme 50 autres quiz apps.
 5. Savant Faux — jeu de mots (savant fou / faux), trop subtil à l'oral.
 
-Slug technique utilisé partout dans le code : `quiproquo`.
+Slug technique utilisé partout dans le code : `nonoculture`.
 
 ## Direction artistique : **cyberpunk minimaliste** (demande explicite, remplace le choix ci-dessous)
 
@@ -43,7 +43,7 @@ autonomie. Remplacée sur demande explicite par une direction cyberpunk :
 
 ## Comment changer ces choix
 
-- Nom : chercher/remplacer `Quiproquo` / `quiproquo` dans le repo (peu d'occurrences,
+- Nom : chercher/remplacer `Nono Culture` / `nonoculture` dans le repo (peu d'occurrences,
   concentrées dans `apps/web/index.html`, `apps/web/src/app.tsx`, `package.json` racine,
   `CLAUDE.md`).
 - Couleur/thème : tokens `--color-*` et `--font-*` dans `apps/web/src/styles/theme.css`.

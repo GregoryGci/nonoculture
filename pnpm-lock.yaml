@@ -151,7 +151,7 @@ importers:
 
   apps/server:
     dependencies:
-      '@quiproquo/shared':
+      '@nonoculture/shared':
         specifier: workspace:*
         version: link:../../packages/shared
       hono:
@@ -179,7 +179,7 @@ importers:
 
   apps/web:
     dependencies:
-      '@quiproquo/shared':
+      '@nonoculture/shared':
         specifier: workspace:*
         version: link:../../packages/shared
       motion:

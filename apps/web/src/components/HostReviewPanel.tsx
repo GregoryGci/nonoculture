@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import type { Grade, ReviewQuestion } from "@quiproquo/shared";
+import type { Grade, ReviewQuestion } from "@nonoculture/shared";
 
 const GRADES: { grade: Grade; label: string }[] = [
   { grade: 0, label: "Nul" },

@@ -1,4 +1,4 @@
-import type { GameSettings } from "@quiproquo/shared";
+import type { GameSettings } from "@nonoculture/shared";
 import type { DeckItem, InternalQuestion } from "../room/types.js";
 
 interface QuestionRow {

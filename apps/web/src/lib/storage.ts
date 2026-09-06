@@ -1,6 +1,6 @@
-const PLAYER_ID_PREFIX = "quiproquo:playerId:";
-const PLAYER_TOKEN_PREFIX = "quiproquo:playerToken:";
-const LEGACY_KEYS = ["quiproquo:playerId", "quiproquo:playerToken"];
+const PLAYER_ID_PREFIX = "nonoculture:playerId:";
+const PLAYER_TOKEN_PREFIX = "nonoculture:playerToken:";
+const LEGACY_KEYS = ["nonoculture:playerId", "nonoculture:playerToken"];
 
 // Identity is scoped per room. Each room's Durable Object mints its own token, so a
 // single shared token key would be overwritten on joining a second room and lock the

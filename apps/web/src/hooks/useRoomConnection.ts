@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import type { ClientMessage, RoomStateSync } from "@quiproquo/shared";
+import type { ClientMessage, RoomStateSync } from "@nonoculture/shared";
 import { RoomConnection, type ConnectionStatus } from "../lib/ws-client";
 import { getOrCreatePlayerId } from "../lib/storage";
 

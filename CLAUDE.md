@@ -1,4 +1,4 @@
-# Quiproquo — quiz party game multijoueur
+# Nono Culture — quiz party game multijoueur
 
 Party game de quiz en temps réel, réponses libres (pas de QCM), jouable entre amis sans
 compte. Brief original : `docs/brief.md`. Décisions prises en autonomie (nom, couleur) :

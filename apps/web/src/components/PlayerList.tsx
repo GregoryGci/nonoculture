@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "motion/react";
-import type { PlayerPublic } from "@quiproquo/shared";
+import type { PlayerPublic } from "@nonoculture/shared";
 import { Avatar } from "./Avatar";
 
 /**
