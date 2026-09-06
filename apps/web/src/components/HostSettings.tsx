@@ -11,6 +11,8 @@ const ALL_THEMES = [
   "insolite",
   "animaux",
   "cuisine",
+  "litterature",
+  "technologie",
 ];
 
 export function HostSettings({
