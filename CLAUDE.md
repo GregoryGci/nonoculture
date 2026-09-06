@@ -36,12 +36,28 @@ premier** en reprenant ce projet, c'est la source de vérité sur ce qui est fai
 ## Machine à états (dans `apps/server/src/room/`)
 
 ```
-LOBBY → QUESTION → REVEAL → JUDGING → SCOREBOARD → (QUESTION | FINISHED)
+LOBBY → QUESTION → REVEAL → JUDGING → SCOREBOARD → (QUESTION | CHAIN_PROMPT | FINISHED)
 ```
 
 `JUDGING` est sauté si aucune réponse n'est en zone grise après l'auto-validation
 (Levenshtein normalisé ≤ 0.15 = validé auto, très éloigné = refusé auto). Détail complet
 dans `docs/brief.md` section 6.
+
+Le deck (`GameState.deck`) mélange des questions trivia et des manches "téléphone
+dessiné" (~2 sur 15 slots, voir `apps/server/src/lib/questions.ts#buildDeck`) :
+
+```
+CHAIN_PROMPT → CHAIN_DRAW → CHAIN_GUESS → CHAIN_REVEAL → SCOREBOARD
+```
+
+Tous les joueurs connectés sont pris en rotation (`GameState.chain.order`, snapshotté au
+lancement) : chacun écrit un prompt, dessine le prompt du joueur précédent, puis devine le
+dessin du joueur encore avant — 3 chaînes de longueur 3 tournent en parallèle. Sauté si
+moins de 3 joueurs sont connectés à ce moment (`CHAIN_MIN_PLAYERS`). Scoring : la
+proposition finale est comparée au prompt d'origine avec la même logique
+`classifyAnswer` que les questions texte ; si ça matche, origine + dessinateur + devineur
+touchent chacun `CHAIN_POINTS`. Voir `state-machine.ts` (`originForRole`,
+`resolveChain`) et ses tests pour la logique de rotation.
 
 ## Commandes
 

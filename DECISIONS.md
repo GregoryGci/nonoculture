@@ -18,21 +18,32 @@ Candidats proposés :
 
 Slug technique utilisé partout dans le code : `quiproquo`.
 
-## Couleur d'accent : **Ambre chaud `#F0A93F`**
+## Direction artistique : **cyberpunk minimaliste** (demande explicite, remplace le choix ci-dessous)
 
-Options considérées :
-1. **Ambre `#F0A93F`** ✅ (retenu) — évoque le buzzer/le projecteur de jeu télévisé,
-   chaud sans être criard, excellent contraste sur fond `#0B0D12` (ratio ~9:1), se
-   distingue bien du texte secondaire gris-bleu.
-2. Corail `#FF6B4A` — très bien aussi, un poil plus "app ludique/enfantine".
-3. Violet électrique `#7C5CFC` — look plus "tech/SaaS", moins "soirée entre potes".
+Palette initiale (nuit 1) : ambre chaud `#F0A93F` sur fond neutre `#0B0D12`, retenue en
+autonomie. Remplacée sur demande explicite par une direction cyberpunk :
+- Fond quasi noir teinté bleu `#05070C`, grille de fond subtile, vignette radiale cyan en
+  haut de page.
+- Accent unique : cyan électrique `#2DE2FF` (glow sur boutons/inputs/timer/bordures
+  actives), + un accent secondaire `#FF2E9A` utilisé avec parcimonie (langue tirée d'un
+  avatar, erreurs).
+- Typo : **Space Grotesk** (titres/boutons) + **JetBrains Mono** (code de room, scores,
+  timer — look "terminal").
+- Effets : boutons avec glow + léger scale au hover (`.btn`/`.btn-primary`/`.btn-secondary`
+  dans `theme.css`), panneaux à coins coupés (`.panel-notched`) sur le code de room,
+  transitions d'entrée de phase (`.phase-enter`), pulsation du timer sous 5s
+  (`.timer-urgent`).
+- Avatars : set original de 12 visages générés en SVG (gros yeux, coiffures/expressions
+  variées, petite marque néon "cyber") dans `apps/web/src/components/Avatar.tsx` — pas
+  d'images externes, pas de souci de droits d'auteur.
 
 ## Comment changer ces choix
 
 - Nom : chercher/remplacer `Quiproquo` / `quiproquo` dans le repo (peu d'occurrences,
   concentrées dans `apps/web/index.html`, `apps/web/src/app.tsx`, `package.json` racine,
   `CLAUDE.md`).
-- Couleur : une seule variable CSS `--accent` dans `apps/web/src/styles/theme.css`.
+- Couleur/thème : tokens `--color-*` et `--font-*` dans `apps/web/src/styles/theme.css`.
+- Avatars : tableau `AVATARS` dans `apps/web/src/components/Avatar.tsx`.
 
 ## Autres arbitrages pris de nuit
 

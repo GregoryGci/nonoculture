@@ -1,8 +1,23 @@
-# État d'avancement — nuit du 2026-09-05 au 2026-09-06
+# État d'avancement — nuit du 2026-09-05 au 2026-09-06 + journée du 2026-09-06
 
 Travail fait en autonomie pendant que tu dormais, sans validation intermédiaire (voir
 `DECISIONS.md` pour les choix tranchés à ta place : nom, couleur, découpage des phases).
 Tout est commité dans git, un commit par étape logique — `git log --oneline` pour l'historique.
+
+## Ajouts du 2026-09-06 (sur demande explicite, en session)
+
+- **Manche "téléphone dessiné"** (~2 questions sur 15) : nouvelle machine à états
+  `CHAIN_PROMPT → CHAIN_DRAW → CHAIN_GUESS → CHAIN_REVEAL`, rotation à 3 maillons entre
+  tous les joueurs connectés, scoring par comparaison texte (même moteur que les
+  questions classiques). 8 nouveaux tests + smoke test réel à 3 clients WebSocket
+  simultanés (rotation et scoring vérifiés en conditions réelles). Voir `CLAUDE.md`.
+- **Refonte visuelle cyberpunk minimaliste** : palette néon cyan/magenta sur fond
+  quasi-noir avec grille, typographies Space Grotesk + JetBrains Mono, boutons/inputs
+  avec glow et micro-animations au hover, transitions d'entrée de phase.
+- **Avatars** : set original de 12 visages en SVG (grands yeux, coiffures/expressions
+  variées) remplaçant les emojis — pas d'images externes.
+- Non fait aujourd'hui : recherche de sons courts (mp3) pour des questions audio à
+  thème (demandée en fin de session, à traiter ensuite).
 
 ## Ce qui marche, testé pour de vrai (pas juste "ça compile")
 
