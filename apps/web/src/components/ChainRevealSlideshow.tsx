@@ -6,10 +6,10 @@ export function ChainRevealSlideshow({ chains }: { chains: ChainResult[] }) {
       {chains.map((c) => (
         <div
           key={c.originPlayerId}
-          className="flex flex-col gap-2 rounded-[var(--radius-card)] p-4 transition-all duration-300"
+          className="panel pop-in flex flex-col gap-2 p-4"
           style={{
-            background: "var(--color-surface)",
-            border: `1px solid ${c.matched ? "var(--color-accent)" : "var(--color-border)"}`,
+            borderColor: c.matched ? "var(--color-accent)" : "var(--color-border)",
+            boxShadow: c.matched ? "0 0 20px -6px var(--color-accent)" : "none",
           }}
         >
           <p className="text-sm" style={{ color: "var(--color-text-muted)" }}>

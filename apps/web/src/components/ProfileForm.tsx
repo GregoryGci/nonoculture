@@ -1,10 +1,9 @@
 import { useState } from "react";
-
-const AVATARS = ["🦊", "🐼", "🐸", "🦉", "🐙", "🦄", "🐯", "🐧", "🦁", "🐨", "🐵", "🦖"];
+import { AVATARS, Avatar } from "./Avatar";
 
 export function ProfileForm({ onSubmit }: { onSubmit: (nickname: string, avatar: string) => void }) {
   const [nickname, setNickname] = useState("");
-  const [avatar, setAvatar] = useState(AVATARS[0]!);
+  const [avatar, setAvatar] = useState(AVATARS[0]!.id);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -14,38 +13,37 @@ export function ProfileForm({ onSubmit }: { onSubmit: (nickname: string, avatar:
 
   return (
     <form onSubmit={handleSubmit} className="flex w-full max-w-sm flex-col gap-4">
+      <h2 className="font-mono text-center text-xl" style={{ color: "var(--color-text-muted)" }}>
+        Crée ton personnage
+      </h2>
       <input
         autoFocus
         value={nickname}
         onChange={(e) => setNickname(e.target.value)}
         maxLength={16}
         placeholder="Ton pseudo"
-        className="min-h-11 rounded-[var(--radius-control)] px-4 text-center text-lg outline-none"
-        style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)", color: "var(--color-text)" }}
+        className="input-cyber min-h-11 rounded-[var(--radius-control)] px-4 text-center text-lg"
       />
-      <div className="grid grid-cols-6 gap-2">
+      <div className="grid grid-cols-4 gap-3">
         {AVATARS.map((a) => (
           <button
-            key={a}
+            key={a.id}
             type="button"
-            onClick={() => setAvatar(a)}
-            className="min-h-11 rounded-[var(--radius-control)] text-2xl"
+            onClick={() => setAvatar(a.id)}
+            className="avatar-pick p-2"
             style={{
               background: "var(--color-surface)",
-              border: `2px solid ${a === avatar ? "var(--color-accent)" : "var(--color-border)"}`,
+              border: `2px solid ${a.id === avatar ? "var(--color-accent)" : "var(--color-border)"}`,
+              boxShadow: a.id === avatar ? "0 0 14px color-mix(in srgb, var(--color-accent) 55%, transparent)" : "none",
             }}
-            aria-pressed={a === avatar}
+            aria-pressed={a.id === avatar}
+            title={a.label}
           >
-            {a}
+            <Avatar id={a.id} size={44} />
           </button>
         ))}
       </div>
-      <button
-        type="submit"
-        disabled={!nickname.trim()}
-        className="min-h-11 rounded-[var(--radius-control)] px-6 font-bold disabled:opacity-40"
-        style={{ background: "var(--color-accent)", color: "var(--color-accent-contrast)" }}
-      >
+      <button type="submit" disabled={!nickname.trim()} className="btn btn-primary">
         Entrer dans le salon
       </button>
     </form>

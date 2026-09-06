@@ -35,8 +35,13 @@ export function HostScreen() {
     <div className="mx-auto flex min-h-dvh max-w-4xl flex-col items-center justify-center gap-10 px-10 py-10 text-center">
       {state.phase === "LOBBY" && (
         <>
-          <span className="tabular text-8xl font-extrabold tracking-widest">{state.roomCode}</span>
-          <p className="text-2xl" style={{ color: "var(--color-text-muted)" }}>
+          <span
+            className="tabular panel panel-notched px-12 py-6 text-8xl font-bold tracking-widest"
+            style={{ color: "var(--color-accent)", textShadow: "0 0 40px color-mix(in srgb, var(--color-accent) 70%, transparent)" }}
+          >
+            {state.roomCode}
+          </span>
+          <p className="font-mono text-2xl" style={{ color: "var(--color-text-muted)" }}>
             Rejoignez sur votre téléphone
           </p>
         </>

@@ -12,10 +12,11 @@ export function Timer({ deadlineTs }: { deadlineTs: number | null }) {
   if (deadlineTs === null) return null;
   const secondsLeft = Math.max(0, Math.ceil((deadlineTs - now) / 1000));
 
+  const urgent = secondsLeft <= 5;
   return (
     <div
-      className="tabular text-3xl font-extrabold"
-      style={{ color: secondsLeft <= 5 ? "var(--color-accent)" : "var(--color-text)" }}
+      className={`tabular text-3xl font-bold ${urgent ? "timer-urgent" : ""}`}
+      style={{ color: urgent ? "var(--color-accent)" : "var(--color-text)" }}
       aria-live="polite"
     >
       {secondsLeft}s

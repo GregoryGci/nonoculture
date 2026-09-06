@@ -24,10 +24,10 @@ export function RevealList({
         {answers.map((a) => (
           <li
             key={a.playerId}
-            className="flex items-center justify-between gap-3 rounded-[var(--radius-control)] px-3 py-2 transition-all duration-200"
+            className="panel pop-in flex items-center justify-between gap-3 px-3 py-2"
             style={{
-              background: "var(--color-surface)",
-              border: `1px solid ${a.accepted === true ? "var(--color-accent)" : "var(--color-border)"}`,
+              borderColor: a.accepted === true ? "var(--color-accent)" : "var(--color-border)",
+              boxShadow: a.accepted === true ? "0 0 12px -3px var(--color-accent)" : "none",
             }}
           >
             <span className="truncate font-medium">{a.nickname}</span>

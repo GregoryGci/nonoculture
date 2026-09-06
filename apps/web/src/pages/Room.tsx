@@ -47,163 +47,154 @@ export function Room() {
         </Centered>
       )}
 
-      {you?.nickname && state.phase === "LOBBY" && (
-        <>
-          <RoomCodeHeader code={state.roomCode} />
-          <PlayerList players={state.players} youId={playerId} />
-          {isHost ? (
+      {you?.nickname && (
+        <div key={state.phase} className="phase-enter flex flex-col gap-6">
+          {state.phase === "LOBBY" && (
             <>
-              <HostSettings settings={state.settings} onChange={(settings) => send({ type: "HOST_SETTINGS", ...settings })} />
-              <button
-                onClick={() => send({ type: "START_GAME" })}
-                className="min-h-11 rounded-[var(--radius-card)] py-3 text-lg font-bold"
-                style={{ background: "var(--color-accent)", color: "var(--color-accent-contrast)" }}
-              >
-                Lancer la partie
-              </button>
+              <RoomCodeHeader code={state.roomCode} />
+              <PlayerList players={state.players} youId={playerId} />
+              {isHost ? (
+                <>
+                  <HostSettings
+                    settings={state.settings}
+                    onChange={(settings) => send({ type: "HOST_SETTINGS", ...settings })}
+                  />
+                  <button onClick={() => send({ type: "START_GAME" })} className="btn btn-primary py-3 text-lg">
+                    Lancer la partie
+                  </button>
+                </>
+              ) : (
+                <p className="text-center" style={{ color: "var(--color-text-muted)" }}>
+                  En attente que l'hôte lance la partie…
+                </p>
+              )}
             </>
-          ) : (
-            <p className="text-center" style={{ color: "var(--color-text-muted)" }}>
-              En attente que l'hôte lance la partie…
-            </p>
           )}
-        </>
-      )}
 
-      {you?.nickname && state.phase === "QUESTION" && state.currentQuestion && (
-        <>
-          <QuestionHeader index={state.questionIndex} total={state.questionTotal} deadline={state.phaseDeadlineTs} />
-          <p className="text-center text-xl font-semibold">{state.currentQuestion.prompt}</p>
-          <QuestionMedia question={state.currentQuestion} />
-          <AnswerForm
-            alreadyAnswered={state.youHaveAnswered}
-            onSubmit={(answer) => send({ type: "SUBMIT_ANSWER", questionId: state.currentQuestion!.id, answer })}
-          />
-          <PlayerList players={state.players} youId={playerId} />
-        </>
-      )}
-
-      {you?.nickname && state.phase === "REVEAL" && (
-        <>
-          <QuestionHeader index={state.questionIndex} total={state.questionTotal} deadline={state.phaseDeadlineTs} />
-          <RevealList
-            answers={state.revealedAnswers ?? []}
-            correctAnswer={state.revealedCorrectAnswer}
-            explanation={state.revealedExplanation}
-          />
-        </>
-      )}
-
-      {you?.nickname && state.phase === "JUDGING" && (
-        <>
-          <QuestionHeader index={state.questionIndex} total={state.questionTotal} deadline={state.phaseDeadlineTs} />
-          {state.judgePrompt && (
-            <JudgeVotePanel
-              prompt={state.judgePrompt}
-              isOwnAnswer={state.judgePrompt.playerId === playerId}
-              onVote={(vote) => send({ type: "CAST_JUDGE_VOTE", answerId: state.judgePrompt!.answerId, vote })}
-            />
+          {state.phase === "QUESTION" && state.currentQuestion && (
+            <>
+              <QuestionHeader index={state.questionIndex} total={state.questionTotal} deadline={state.phaseDeadlineTs} />
+              <p className="text-center text-xl font-semibold">{state.currentQuestion.prompt}</p>
+              <QuestionMedia question={state.currentQuestion} />
+              <AnswerForm
+                alreadyAnswered={state.youHaveAnswered}
+                onSubmit={(answer) => send({ type: "SUBMIT_ANSWER", questionId: state.currentQuestion!.id, answer })}
+              />
+              <PlayerList players={state.players} youId={playerId} />
+            </>
           )}
-        </>
-      )}
 
-      {you?.nickname && state.phase === "CHAIN_PROMPT" && (
-        <>
-          <ChainHeader deadline={state.phaseDeadlineTs} />
-          {state.chainTask ? (
-            <ChainPromptForm
-              alreadySubmitted={state.chainTask.alreadySubmitted}
-              onSubmit={(text) => send({ type: "SUBMIT_CHAIN_PROMPT", text })}
-            />
-          ) : (
-            <NotParticipating />
+          {state.phase === "REVEAL" && (
+            <>
+              <QuestionHeader index={state.questionIndex} total={state.questionTotal} deadline={state.phaseDeadlineTs} />
+              <RevealList
+                answers={state.revealedAnswers ?? []}
+                correctAnswer={state.revealedCorrectAnswer}
+                explanation={state.revealedExplanation}
+              />
+            </>
           )}
-        </>
-      )}
 
-      {you?.nickname && state.phase === "CHAIN_DRAW" && (
-        <>
-          <ChainHeader deadline={state.phaseDeadlineTs} />
-          {state.chainTask ? (
-            state.chainTask.alreadySubmitted ? (
-              <p className="text-center" style={{ color: "var(--color-text-muted)" }}>
-                Dessin envoyé, en attente des autres…
-              </p>
-            ) : (
-              <>
-                <p className="text-center text-xl font-semibold">Dessine : « {state.chainTask.content} »</p>
-                <DrawingCanvas onSubmit={(dataUrl) => send({ type: "SUBMIT_CHAIN_DRAWING", dataUrl })} />
-              </>
-            )
-          ) : (
-            <NotParticipating />
+          {state.phase === "JUDGING" && (
+            <>
+              <QuestionHeader index={state.questionIndex} total={state.questionTotal} deadline={state.phaseDeadlineTs} />
+              {state.judgePrompt && (
+                <JudgeVotePanel
+                  prompt={state.judgePrompt}
+                  isOwnAnswer={state.judgePrompt.playerId === playerId}
+                  onVote={(vote) => send({ type: "CAST_JUDGE_VOTE", answerId: state.judgePrompt!.answerId, vote })}
+                />
+              )}
+            </>
           )}
-        </>
-      )}
 
-      {you?.nickname && state.phase === "CHAIN_GUESS" && (
-        <>
-          <ChainHeader deadline={state.phaseDeadlineTs} />
-          {state.chainTask ? (
-            <ChainGuessForm
-              drawingDataUrl={state.chainTask.content ?? ""}
-              alreadySubmitted={state.chainTask.alreadySubmitted}
-              onSubmit={(text) => send({ type: "SUBMIT_CHAIN_GUESS", text })}
-            />
-          ) : (
-            <NotParticipating />
+          {state.phase === "CHAIN_PROMPT" && (
+            <>
+              <ChainHeader deadline={state.phaseDeadlineTs} />
+              {state.chainTask ? (
+                <ChainPromptForm
+                  alreadySubmitted={state.chainTask.alreadySubmitted}
+                  onSubmit={(text) => send({ type: "SUBMIT_CHAIN_PROMPT", text })}
+                />
+              ) : (
+                <NotParticipating />
+              )}
+            </>
           )}
-        </>
-      )}
 
-      {you?.nickname && state.phase === "CHAIN_REVEAL" && (
-        <>
-          <ChainHeader deadline={state.phaseDeadlineTs} />
-          <ChainRevealSlideshow chains={state.chainReveal ?? []} />
-          {isHost && (
-            <button
-              onClick={() => send({ type: "HOST_NEXT" })}
-              className="min-h-11 rounded-[var(--radius-control)] font-semibold"
-              style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}
-            >
-              Suivant
-            </button>
+          {state.phase === "CHAIN_DRAW" && (
+            <>
+              <ChainHeader deadline={state.phaseDeadlineTs} />
+              {state.chainTask ? (
+                state.chainTask.alreadySubmitted ? (
+                  <p className="text-center" style={{ color: "var(--color-text-muted)" }}>
+                    Dessin envoyé, en attente des autres…
+                  </p>
+                ) : (
+                  <>
+                    <p className="text-center text-xl font-semibold">Dessine : « {state.chainTask.content} »</p>
+                    <DrawingCanvas onSubmit={(dataUrl) => send({ type: "SUBMIT_CHAIN_DRAWING", dataUrl })} />
+                  </>
+                )
+              ) : (
+                <NotParticipating />
+              )}
+            </>
           )}
-        </>
-      )}
 
-      {you?.nickname && state.phase === "SCOREBOARD" && (
-        <>
-          <QuestionHeader index={state.questionIndex} total={state.questionTotal} deadline={state.phaseDeadlineTs} />
-          <Scoreboard players={state.players} />
-          <MediaPreloader media={state.nextQuestionMedia} />
-          {isHost && (
-            <button
-              onClick={() => send({ type: "HOST_NEXT" })}
-              className="min-h-11 rounded-[var(--radius-control)] font-semibold"
-              style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}
-            >
-              Suivant
-            </button>
+          {state.phase === "CHAIN_GUESS" && (
+            <>
+              <ChainHeader deadline={state.phaseDeadlineTs} />
+              {state.chainTask ? (
+                <ChainGuessForm
+                  drawingDataUrl={state.chainTask.content ?? ""}
+                  alreadySubmitted={state.chainTask.alreadySubmitted}
+                  onSubmit={(text) => send({ type: "SUBMIT_CHAIN_GUESS", text })}
+                />
+              ) : (
+                <NotParticipating />
+              )}
+            </>
           )}
-        </>
-      )}
 
-      {you?.nickname && state.phase === "FINISHED" && (
-        <>
-          <h2 className="text-center text-2xl font-extrabold">Partie terminée 🎉</h2>
-          <Podium players={state.players} />
-          <Scoreboard players={state.players} />
-          {isHost && (
-            <button
-              onClick={() => send({ type: "PLAY_AGAIN" })}
-              className="min-h-11 rounded-[var(--radius-card)] py-3 text-lg font-bold"
-              style={{ background: "var(--color-accent)", color: "var(--color-accent-contrast)" }}
-            >
-              Rejouer
-            </button>
+          {state.phase === "CHAIN_REVEAL" && (
+            <>
+              <ChainHeader deadline={state.phaseDeadlineTs} />
+              <ChainRevealSlideshow chains={state.chainReveal ?? []} />
+              {isHost && (
+                <button onClick={() => send({ type: "HOST_NEXT" })} className="btn btn-secondary">
+                  Suivant
+                </button>
+              )}
+            </>
           )}
-        </>
+
+          {state.phase === "SCOREBOARD" && (
+            <>
+              <QuestionHeader index={state.questionIndex} total={state.questionTotal} deadline={state.phaseDeadlineTs} />
+              <Scoreboard players={state.players} />
+              <MediaPreloader media={state.nextQuestionMedia} />
+              {isHost && (
+                <button onClick={() => send({ type: "HOST_NEXT" })} className="btn btn-secondary">
+                  Suivant
+                </button>
+              )}
+            </>
+          )}
+
+          {state.phase === "FINISHED" && (
+            <>
+              <h2 className="font-mono text-center text-2xl font-bold">Partie terminée 🎉</h2>
+              <Podium players={state.players} />
+              <Scoreboard players={state.players} />
+              {isHost && (
+                <button onClick={() => send({ type: "PLAY_AGAIN" })} className="btn btn-primary py-3 text-lg">
+                  Rejouer
+                </button>
+              )}
+            </>
+          )}
+        </div>
       )}
     </div>
   );
@@ -216,13 +207,14 @@ function Centered({ children }: { children: React.ReactNode }) {
 function RoomCodeHeader({ code }: { code: string }) {
   const link = `${location.origin}/join/${code}`;
   return (
-    <div className="flex flex-col items-center gap-2 text-center">
-      <span className="tabular text-5xl font-extrabold tracking-widest">{code}</span>
-      <button
-        onClick={() => navigator.clipboard.writeText(link)}
-        className="min-h-11 rounded-[var(--radius-control)] px-4 text-sm font-medium"
-        style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}
+    <div className="flex flex-col items-center gap-3 text-center">
+      <span
+        className="tabular panel panel-notched px-8 py-4 text-5xl font-bold tracking-widest"
+        style={{ color: "var(--color-accent)", textShadow: "0 0 20px color-mix(in srgb, var(--color-accent) 60%, transparent)" }}
       >
+        {code}
+      </span>
+      <button onClick={() => navigator.clipboard.writeText(link)} className="btn btn-ghost text-sm">
         Copier le lien d'invitation
       </button>
     </div>
@@ -247,22 +239,14 @@ function MediaPreloader({ media }: { media: { type: string; url: string } | null
 
 function QuestionMedia({ question }: { question: QuestionPublic }) {
   if (!question.mediaUrl) return null;
-  const style = { background: "var(--color-surface)", border: "1px solid var(--color-border)" };
   if (question.type === "image") {
-    return <img src={question.mediaUrl} alt="" className="mx-auto max-h-64 rounded-[var(--radius-card)]" style={style} />;
+    return <img src={question.mediaUrl} alt="" className="panel pop-in mx-auto max-h-64" />;
   }
   if (question.type === "audio") {
-    return <audio src={question.mediaUrl} controls className="w-full" />;
+    return <audio src={question.mediaUrl} controls className="pop-in w-full" />;
   }
   if (question.type === "video") {
-    return (
-      <video
-        src={question.mediaUrl}
-        controls
-        className="mx-auto max-h-64 rounded-[var(--radius-card)]"
-        style={style}
-      />
-    );
+    return <video src={question.mediaUrl} controls className="panel pop-in mx-auto max-h-64" />;
   }
   return null;
 }

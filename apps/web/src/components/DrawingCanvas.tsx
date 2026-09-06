@@ -75,24 +75,14 @@ export function DrawingCanvas({ onSubmit }: { onSubmit: (dataUrl: string) => voi
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerLeave={handlePointerUp}
-        className="touch-none rounded-[var(--radius-card)] shadow-[0_0_24px_-8px_var(--color-accent)]"
-        style={{ border: "1px solid var(--color-border)", width: "100%", maxWidth: WIDTH }}
+        className="panel panel-glow touch-none"
+        style={{ width: "100%", maxWidth: WIDTH }}
       />
       <div className="flex gap-2">
-        <button
-          onClick={clear}
-          disabled={submitted}
-          className="min-h-11 rounded-[var(--radius-control)] px-4 font-medium disabled:opacity-40"
-          style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}
-        >
+        <button onClick={clear} disabled={submitted} className="btn btn-secondary">
           Effacer
         </button>
-        <button
-          onClick={submit}
-          disabled={submitted || strokeCount === 0}
-          className="min-h-11 rounded-[var(--radius-control)] px-6 font-semibold disabled:opacity-40"
-          style={{ background: "var(--color-accent)", color: "var(--color-accent-contrast)" }}
-        >
+        <button onClick={submit} disabled={submitted || strokeCount === 0} className="btn btn-primary">
           {submitted ? "Envoyé" : "Valider le dessin"}
         </button>
       </div>

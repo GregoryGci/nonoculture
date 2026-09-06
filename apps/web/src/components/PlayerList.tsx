@@ -1,4 +1,5 @@
 import type { PlayerPublic } from "@quiproquo/shared";
+import { Avatar } from "./Avatar";
 
 export function PlayerList({ players, youId }: { players: PlayerPublic[]; youId: string }) {
   const ranked = [...players].sort((a, b) => b.score - a.score);
@@ -7,16 +8,10 @@ export function PlayerList({ players, youId }: { players: PlayerPublic[]; youId:
       {ranked.map((p) => (
         <li
           key={p.playerId}
-          className="flex items-center gap-3 rounded-[var(--radius-control)] px-3 py-2 transition-opacity"
-          style={{
-            background: "var(--color-surface)",
-            border: "1px solid var(--color-border)",
-            opacity: p.connected ? 1 : 0.45,
-          }}
+          className="panel panel-hover flex items-center gap-3 px-3 py-2 transition-opacity"
+          style={{ opacity: p.connected ? 1 : 0.45 }}
         >
-          <span className="text-xl" aria-hidden>
-            {p.avatar || "🙂"}
-          </span>
+          <Avatar id={p.avatar} size={32} />
           <span className="flex-1 truncate font-medium">
             {p.nickname || "…"}
             {p.playerId === youId && <span style={{ color: "var(--color-text-muted)" }}> (toi)</span>}

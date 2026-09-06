@@ -27,8 +27,7 @@ export function ChainGuessForm({
         <img
           src={drawingDataUrl}
           alt="Dessin à deviner"
-          className="max-w-full rounded-[var(--radius-card)]"
-          style={{ border: "1px solid var(--color-border)" }}
+          className="panel panel-glow pop-in max-w-full"
         />
       ) : (
         <p style={{ color: "var(--color-text-muted)" }}>(personne n'a dessiné à temps)</p>
@@ -41,15 +40,9 @@ export function ChainGuessForm({
           onChange={(e) => setValue(e.target.value)}
           maxLength={80}
           placeholder="Ta proposition…"
-          className="min-h-11 flex-1 rounded-[var(--radius-control)] px-4 outline-none"
-          style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)", color: "var(--color-text)" }}
+          className="input-cyber min-h-11 flex-1 rounded-[var(--radius-control)] px-4"
         />
-        <button
-          type="submit"
-          disabled={locked || !value.trim()}
-          className="min-h-11 rounded-[var(--radius-control)] px-5 font-semibold disabled:opacity-40"
-          style={{ background: "var(--color-accent)", color: "var(--color-accent-contrast)" }}
-        >
+        <button type="submit" disabled={locked || !value.trim()} className="btn btn-primary">
           {locked ? "Envoyé" : "Valider"}
         </button>
       </form>

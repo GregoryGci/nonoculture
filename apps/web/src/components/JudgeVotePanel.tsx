@@ -28,20 +28,10 @@ export function JudgeVotePanel({
         <p style={{ color: "var(--color-text-muted)" }}>C'est ta réponse, tu ne peux pas voter dessus.</p>
       ) : (
         <div className="flex gap-3">
-          <button
-            onClick={() => vote("valid")}
-            disabled={voted}
-            className="min-h-11 rounded-[var(--radius-control)] px-6 font-semibold disabled:opacity-40"
-            style={{ background: "var(--color-accent)", color: "var(--color-accent-contrast)" }}
-          >
+          <button onClick={() => vote("valid")} disabled={voted} className="btn btn-primary px-6">
             Valide
           </button>
-          <button
-            onClick={() => vote("invalid")}
-            disabled={voted}
-            className="min-h-11 rounded-[var(--radius-control)] px-6 font-semibold disabled:opacity-40"
-            style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}
-          >
+          <button onClick={() => vote("invalid")} disabled={voted} className="btn btn-secondary px-6">
             Pas valide
           </button>
         </div>

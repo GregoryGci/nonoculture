@@ -49,12 +49,7 @@ export function HostSettings({
                 key={theme}
                 type="button"
                 onClick={() => toggleTheme(theme)}
-                className="min-h-11 rounded-[var(--radius-control)] px-3 text-sm font-medium capitalize"
-                style={{
-                  background: active ? "var(--color-accent)" : "var(--color-surface)",
-                  color: active ? "var(--color-accent-contrast)" : "var(--color-text)",
-                  border: "1px solid var(--color-border)",
-                }}
+                className={`btn ${active ? "btn-primary" : "btn-secondary"} px-3 text-sm capitalize`}
               >
                 {theme}
               </button>

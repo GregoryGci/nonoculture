@@ -31,8 +31,8 @@ export function Home() {
   }
 
   return (
-    <div className="mx-auto flex min-h-dvh max-w-sm flex-col items-center justify-center gap-8 px-6 text-center">
-      <h1 className="text-4xl font-extrabold">
+    <div className="phase-enter mx-auto flex min-h-dvh max-w-sm flex-col items-center justify-center gap-8 px-6 text-center">
+      <h1 className="font-mono text-4xl font-bold tracking-tight">
         Qui<span style={{ color: "var(--color-accent)" }}>pro</span>quo
       </h1>
       <p style={{ color: "var(--color-text-muted)" }}>Le quiz entre potes où on voit toutes vos réponses.</p>
@@ -40,8 +40,7 @@ export function Home() {
       <button
         onClick={handleCreate}
         disabled={creating}
-        className="min-h-11 w-full rounded-[var(--radius-card)] px-6 py-3 text-lg font-bold disabled:opacity-60"
-        style={{ background: "var(--color-accent)", color: "var(--color-accent-contrast)" }}
+        className="btn btn-primary w-full py-3 text-lg"
       >
         {creating ? "Création…" : "Créer une partie"}
       </button>
@@ -53,19 +52,14 @@ export function Home() {
           inputMode="numeric"
           maxLength={5}
           placeholder="Code"
-          className="min-h-11 flex-1 rounded-[var(--radius-control)] px-4 text-center text-lg tracking-widest outline-none"
-          style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)", color: "var(--color-text)" }}
+          className="input-cyber font-mono min-h-11 flex-1 rounded-[var(--radius-control)] px-4 text-center text-lg tracking-widest"
         />
-        <button
-          type="submit"
-          className="min-h-11 rounded-[var(--radius-control)] px-6 font-semibold"
-          style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}
-        >
+        <button type="submit" className="btn btn-secondary">
           Rejoindre
         </button>
       </form>
 
-      {error && <p style={{ color: "var(--color-accent)" }}>{error}</p>}
+      {error && <p style={{ color: "var(--color-accent-2)" }}>{error}</p>}
     </div>
   );
 }
