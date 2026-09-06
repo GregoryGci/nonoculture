@@ -1,31 +1,30 @@
 /**
- * Avatars are drawn locally as SVG spheres — a cold radial gradient per identity.
+ * The twelve player avatars: illustrated character heads, DiceBear's "lorelei" style (CC0,
+ * no attribution required).
  *
- * They replace the illustrated cartoon faces that were fetched from DiceBear's public API:
- * those clashed with the interface, and they made a self-contained project depend on a third
- * party being up. Hues are fixed rather than hashed so the twelve stay evenly spread and
- * visibly distinct in the picker, and they stay inside the cold half of the wheel so nothing
- * fights the monochrome palette.
+ * They are generated once into apps/web/public/avatars/*.svg by
+ * apps/server/scripts/generate-avatars.mjs and committed, so the app ships finished files.
+ * The previous version called DiceBear's public HTTP API at render time, which made a
+ * self-contained project depend on a third party staying up.
  */
 export interface AvatarSpec {
   id: string;
   label: string;
-  hue: number;
 }
 
 export const AVATARS: AvatarSpec[] = [
-  { id: "neko", label: "Cyan", hue: 188 },
-  { id: "volt", label: "Azur", hue: 200 },
-  { id: "glitch", label: "Ciel", hue: 210 },
-  { id: "raven", label: "Océan", hue: 219 },
-  { id: "nova", label: "Cobalt", hue: 228 },
-  { id: "byte", label: "Outremer", hue: 237 },
-  { id: "ember", label: "Indigo", hue: 246 },
-  { id: "frost", label: "Iris", hue: 255 },
-  { id: "chrome", label: "Violet", hue: 266 },
-  { id: "pixel", label: "Améthyste", hue: 277 },
-  { id: "hex", label: "Orchidée", hue: 288 },
-  { id: "cipher", label: "Magenta", hue: 300 },
+  { id: "kuro", label: "Kuro" },
+  { id: "aoi", label: "Aoi" },
+  { id: "sora", label: "Sora" },
+  { id: "mizu", label: "Mizu" },
+  { id: "hoshi", label: "Hoshi" },
+  { id: "yuki", label: "Yuki" },
+  { id: "kaze", label: "Kaze" },
+  { id: "tsuki", label: "Tsuki" },
+  { id: "hana", label: "Hana" },
+  { id: "akari", label: "Akari" },
+  { id: "rin", label: "Rin" },
+  { id: "kage", label: "Kage" },
 ];
 
 const byId = new Map(AVATARS.map((a) => [a.id, a]));
@@ -34,14 +33,13 @@ export function avatarSpec(id: string): AvatarSpec | undefined {
   return byId.get(id);
 }
 
-/** Legacy ids (and empty ones) still need a colour rather than a hole in the layout. */
-export function avatarHue(id: string): number {
-  const known = byId.get(id);
-  if (known) return known.hue;
+/** Players carrying an id from an older set still need a face rather than a hole. */
+export function avatarSrc(id: string): string {
+  if (byId.has(id)) return `/avatars/${id}.svg`;
   let h = 2166136261;
   for (let i = 0; i < id.length; i++) {
     h ^= id.charCodeAt(i);
     h = Math.imul(h, 16777619);
   }
-  return 188 + ((h >>> 0) % 112);
+  return `/avatars/${AVATARS[(h >>> 0) % AVATARS.length]!.id}.svg`;
 }

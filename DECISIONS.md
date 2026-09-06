@@ -33,10 +33,13 @@ autonomie. Remplacée sur demande explicite par une direction cyberpunk :
   dans `theme.css`), panneaux à coins coupés (`.panel-notched`) sur le code de room,
   transitions d'entrée de phase (`.phase-enter`), pulsation du timer sous 5s
   (`.timer-urgent`).
-- Avatars : 12 sphères SVG dessinées localement, un dégradé froid par identité
-  (`apps/web/src/lib/avatars.ts`, rendu dans `Avatar.tsx`). Elles remplacent les visages
-  illustrés servis par l'API publique DiceBear, qui juraient avec la direction artistique
-  et faisaient dépendre un projet autonome d'un tiers. Pas d'images externes.
+- Avatars : 12 têtes de personnages en trait manga, style **lorelei** de DiceBear (CC0,
+  aucune attribution requise). Générées **hors ligne** par
+  `apps/server/scripts/generate-avatars.mjs` (paquets npm `@dicebear/core` +
+  `@dicebear/collection`, en devDependencies) vers `apps/web/public/avatars/*.svg`, qui
+  sont commitées. L'app sert donc des fichiers finis : plus d'appel à l'API publique
+  DiceBear au rendu, plus de dépendance à un tiers. Fonds froids désaturés pour rester
+  dans la palette. Relancer le script uniquement pour changer le jeu d'avatars.
 
 ## Comment changer ces choix
 

@@ -18,6 +18,8 @@
     "typecheck": "pnpm -r --filter ./apps/* --filter ./packages/* exec tsc --noEmit && tsc -p apps/server/tsconfig.scripts.json && tsc -p apps/web/tsconfig.node.json"
   },
   "devDependencies": {
+    "@dicebear/collection": "9.4.2",
+    "@dicebear/core": "9.4.2",
     "@eslint/js": "10.0.1",
     "@types/node": "26.4.1",
     "eslint": "10.10.0",
