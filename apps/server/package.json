@@ -4,13 +4,13 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "wrangler dev --local --persist-to=.wrangler/state",
+    "dev": "node scripts/ensure-assets.mjs && wrangler dev --local --persist-to=.wrangler/state",
     "deploy": "wrangler deploy",
     "test": "vitest run",
     "seed": "tsx scripts/seed.ts",
     "media:add": "tsx scripts/media-add.ts",
     "sounds:fetch": "node scripts/fetch-freesound.mjs",
-    "db:migrate:local": "wrangler d1 migrations apply quiproquo-db --local"
+    "db:migrate:local": "wrangler d1 migrations apply quiproquo-db --local --persist-to=.wrangler/state"
   },
   "dependencies": {
     "@quiproquo/shared": "workspace:*",

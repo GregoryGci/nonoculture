@@ -33,7 +33,7 @@ function parseCsv(content: string): SeedQuestion[] {
         prompt: record.prompt!,
         media_key: record.media_key || null,
         answer: record.answer!,
-        aliases: record.aliases ? JSON.parse(record.aliases) : [],
+        aliases: record.aliases ? (JSON.parse(record.aliases) as string[]) : [],
         explanation: record.explanation || null,
         source: record.source || null,
         verified: record.verified === "0" ? 0 : 1,
@@ -49,7 +49,18 @@ function sqlString(value: string | null | undefined): string {
 function toInsertStatements(questions: SeedQuestion[]): string {
   return questions
     .map((q) => {
-      const cols = ["theme", "difficulty", "type", "prompt", "media_key", "answer", "aliases", "explanation", "source", "verified"];
+      const cols = [
+        "theme",
+        "difficulty",
+        "type",
+        "prompt",
+        "media_key",
+        "answer",
+        "aliases",
+        "explanation",
+        "source",
+        "verified",
+      ];
       const values = [
         sqlString(q.theme),
         q.difficulty,
@@ -62,7 +73,9 @@ function toInsertStatements(questions: SeedQuestion[]): string {
         sqlString(q.source ?? null),
         q.verified ?? 1,
       ];
-      return `INSERT INTO questions (${cols.join(", ")}) VALUES (${values.join(", ")});`;
+      // OR IGNORE + the unique (prompt, answer) index from migration 0002 makes re-seeding
+      // a no-op instead of duplicating the whole bank.
+      return `INSERT OR IGNORE INTO questions (${cols.join(", ")}) VALUES (${values.join(", ")});`;
     })
     .join("\n");
 }
@@ -74,7 +87,12 @@ function main() {
   const filePath = fileArg ?? join(import.meta.dirname, "..", "seed", "questions.json");
 
   const content = readFileSync(filePath, "utf-8");
-  const questions: SeedQuestion[] = filePath.endsWith(".csv") ? parseCsv(content) : JSON.parse(content);
+  const questions: SeedQuestion[] = filePath.endsWith(".csv")
+    ? parseCsv(content)
+    : (JSON.parse(content) as SeedQuestion[]);
+  if (!Array.isArray(questions)) {
+    throw new Error(`${filePath} should contain a JSON array of questions`);
+  }
 
   console.log(`Seeding ${questions.length} questions from ${filePath} (${remote ? "remote" : "local"})...`);
 
@@ -83,11 +101,13 @@ function main() {
   const sqlFile = join(tmpDir, "seed.sql");
   writeFileSync(sqlFile, sql, "utf-8");
 
-  execFileSync(
-    "wrangler",
-    ["d1", "execute", "quiproquo-db", remote ? "--remote" : "--local", `--file=${sqlFile}`],
-    { stdio: "inherit", shell: true },
-  );
+  // Same --persist-to as `pnpm dev` and `db:migrate:local`, so all three agree on which
+  // local Miniflare database they're talking to.
+  const target = remote ? ["--remote"] : ["--local", "--persist-to=.wrangler/state"];
+  execFileSync("wrangler", ["d1", "execute", "quiproquo-db", ...target, `--file=${sqlFile}`], {
+    stdio: "inherit",
+    shell: true,
+  });
 
   console.log("Done.");
 }

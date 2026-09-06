@@ -4,13 +4,13 @@ compatibility_date = "2025-01-01"
 compatibility_flags = ["nodejs_compat"]
 
 # --- Static front-end (built apps/web/dist), served by Workers Assets in prod.
-# Re-enable once apps/web has a build: `wrangler dev` refuses to boot if the
-# assets directory doesn't exist yet, and the web app runs on its own Vite dev
-# server locally anyway. See docs/PROGRESS.md.
-# [assets]
-# directory = "../web/dist"
-# binding = "ASSETS"
-# not_found_handling = "single-page-application"
+# Needs `pnpm --filter web build` to have run first — if apps/web/dist is missing,
+# `wrangler dev`/`deploy` will refuse to start. The web app runs on its own Vite dev
+# server locally instead, so this only matters for `wrangler deploy`.
+[assets]
+directory = "../web/dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
 
 # --- Durable Object: 1 instance per room, adressed by idFromName(roomCode).
 [[durable_objects.bindings]]
@@ -22,20 +22,18 @@ tag = "v1"
 new_sqlite_classes = ["RoomDO"]
 
 # --- D1: question bank + room-code registry.
-# PLACEHOLDER database_id: replace after `wrangler d1 create quiproquo-db`
-# (see DECISIONS.md — no real Cloudflare account connected yet, dev runs on
-# the local Miniflare D1 emulation regardless of this id).
 [[d1_databases]]
 binding = "DB"
 database_name = "quiproquo-db"
-database_id = "00000000-0000-0000-0000-000000000000"
+database_id = "c0a7dbc3-95a6-4135-89a2-cd97e56b3434"
 migrations_dir = "migrations"
 
-# --- R2: question media (images/audio/video).
-# PLACEHOLDER bucket, create with `wrangler r2 bucket create quiproquo-media`.
-[[r2_buckets]]
-binding = "MEDIA"
-bucket_name = "quiproquo-media"
+# --- R2: question media (images/audio/video). Not enabled on the account yet —
+# the 15 audio questions (thèmes animaux/cuisine) are inert without it, everything
+# else works fine. Uncomment once `wrangler r2 bucket create quiproquo-media` succeeds.
+# [[r2_buckets]]
+# binding = "MEDIA"
+# bucket_name = "quiproquo-media"
 
 [vars]
 ADMIN_SECRET = "dev-secret-change-me"
