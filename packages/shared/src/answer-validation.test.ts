@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   classifyAnswer,
+  isChainMatch,
   levenshteinDistance,
   normalizeAnswer,
   normalizedLevenshtein,
@@ -42,9 +43,7 @@ describe("levenshteinDistance", () => {
   });
 
   it("is symmetric", () => {
-    expect(levenshteinDistance("kitten", "sitting")).toBe(
-      levenshteinDistance("sitting", "kitten"),
-    );
+    expect(levenshteinDistance("kitten", "sitting")).toBe(levenshteinDistance("sitting", "kitten"));
   });
 });
 
@@ -89,5 +88,48 @@ describe("classifyAnswer", () => {
     // "berlim" vs "berlin": distance 1 / 6 = 0.166, above 0.15 threshold
     const result = classifyAnswer("berlim", "berlin");
     expect(result.classification).toBe("grey_zone");
+  });
+});
+
+describe("isChainMatch", () => {
+  it("accepts an exact match, ignoring case and accents", () => {
+    expect(isChainMatch("Un Château", "un chateau")).toBe(true);
+  });
+
+  it("accepts a guess that drops or adds filler words around the same idea", () => {
+    // The point of the round is whether the drawing carried the idea across, not whether
+    // the guesser reproduced the article — classifyAnswer's 0.15 threshold rejects these.
+    expect(isChainMatch("chat qui danse", "un chat qui danse")).toBe(true);
+    expect(isChainMatch("un gros chien qui dort", "chien qui dort")).toBe(true);
+  });
+
+  it("tolerates a typo on a short prompt", () => {
+    expect(isChainMatch("banana", "banane")).toBe(true);
+  });
+
+  it("still rejects an unrelated guess", () => {
+    expect(isChainMatch("voiture", "un chat qui danse")).toBe(false);
+    expect(isChainMatch("nimportequoi", "banane")).toBe(false);
+  });
+
+  it("rejects phrases that only share their filler words", () => {
+    // These sit within ~0.3 normalized edit distance of each other, which is exactly why a
+    // plain distance threshold can't be used here.
+    expect(isChainMatch("un chien qui danse", "un chat qui danse")).toBe(false);
+    expect(isChainMatch("marie qui court", "julie qui court")).toBe(false);
+  });
+
+  it("rejects a guess that only picks up one word of a longer prompt", () => {
+    expect(isChainMatch("danse", "un chat qui danse")).toBe(false);
+  });
+
+  it("accepts a guess missing one non-essential word", () => {
+    expect(isChainMatch("chat qui danse", "un gros chat qui danse")).toBe(true);
+  });
+
+  it("rejects empty input on either side", () => {
+    expect(isChainMatch("", "banane")).toBe(false);
+    expect(isChainMatch("banane", "")).toBe(false);
+    expect(isChainMatch("   ", "banane")).toBe(false);
   });
 });

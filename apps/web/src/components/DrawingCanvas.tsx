@@ -1,13 +1,35 @@
 import { useEffect, useRef, useState } from "react";
+import { MAX_DRAWING_DATA_URL_LENGTH } from "@quiproquo/shared";
 
 const WIDTH = 360;
 const HEIGHT = 270;
+
+/** Lossy formats, best first. WebP is much smaller but its canvas *encoder* is missing on
+ *  older iOS Safari, where toDataURL silently falls back to PNG — hence the check on what
+ *  actually came back, and the JPEG step (the canvas has an opaque background, so dropping
+ *  the alpha channel costs nothing). */
+const ENCODINGS: { mime: string; quality: number }[] = [
+  { mime: "image/webp", quality: 0.7 },
+  { mime: "image/jpeg", quality: 0.75 },
+  { mime: "image/jpeg", quality: 0.5 },
+];
+
+/** Encodes the doodle as small as it reasonably goes, staying under the protocol's ceiling. */
+function encode(canvas: HTMLCanvasElement): string | null {
+  for (const { mime, quality } of ENCODINGS) {
+    const dataUrl = canvas.toDataURL(mime, quality);
+    if (!dataUrl.startsWith(`data:${mime}`)) continue; // encoder unsupported, browser gave us PNG
+    if (dataUrl.length <= MAX_DRAWING_DATA_URL_LENGTH) return dataUrl;
+  }
+  return null;
+}
 
 export function DrawingCanvas({ onSubmit }: { onSubmit: (dataUrl: string) => void }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const drawing = useRef(false);
   const [strokeCount, setStrokeCount] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -57,10 +79,16 @@ export function DrawingCanvas({ onSubmit }: { onSubmit: (dataUrl: string) => voi
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(0, 0, WIDTH, HEIGHT);
     setStrokeCount(0);
+    setError(null);
   }
 
   function submit() {
-    const dataUrl = canvasRef.current!.toDataURL("image/png");
+    const dataUrl = encode(canvasRef.current!);
+    if (!dataUrl) {
+      setError("Dessin trop chargé pour être envoyé — simplifie-le un peu.");
+      return;
+    }
+    setError(null);
     onSubmit(dataUrl);
     setSubmitted(true);
   }
@@ -78,6 +106,11 @@ export function DrawingCanvas({ onSubmit }: { onSubmit: (dataUrl: string) => voi
         className="panel panel-glow touch-none"
         style={{ width: "100%", maxWidth: WIDTH }}
       />
+      {error && (
+        <p className="text-center text-sm" style={{ color: "var(--color-accent-2)" }}>
+          {error}
+        </p>
+      )}
       <div className="flex gap-2">
         <button onClick={clear} disabled={submitted} className="btn btn-secondary">
           Effacer

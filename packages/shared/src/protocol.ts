@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { MAX_DRAWING_DATA_URL_LENGTH } from "./domain.js";
 
 const nickname = z.string().trim().min(1).max(16);
 const uuid = z.string().uuid();
@@ -71,10 +72,14 @@ export const SubmitChainPromptMsg = z.object({
   text: z.string().min(1).max(80),
 });
 
-/** A small compressed PNG/WebP data URL — the client keeps the canvas tiny to stay under this. */
+/** A small compressed WebP/JPEG data URL — the client compresses to stay well under this. */
 export const SubmitChainDrawingMsg = z.object({
   type: z.literal("SUBMIT_CHAIN_DRAWING"),
-  dataUrl: z.string().min(1).max(200_000),
+  dataUrl: z
+    .string()
+    .min(1)
+    .max(MAX_DRAWING_DATA_URL_LENGTH)
+    .regex(/^data:image\/(webp|jpeg|png);base64,/),
 });
 
 export const SubmitChainGuessMsg = z.object({

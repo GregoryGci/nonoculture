@@ -16,19 +16,29 @@ async function isCodeFree(db: D1Database, code: string, now: number): Promise<bo
   return !row || row.expires_at < now;
 }
 
+/**
+ * Claims a code in a single statement, so two simultaneous room creations can't both read
+ * "free" and then both write the same code. Returns whether this caller got it: the upsert
+ * only overwrites a row whose reservation has already lapsed.
+ */
+async function tryClaimCode(db: D1Database, code: string, now: number, expiresAt: number): Promise<boolean> {
+  const result = await db
+    .prepare(
+      "INSERT INTO room_codes (code, created_at, expires_at) VALUES (?1, ?2, ?3) " +
+        "ON CONFLICT(code) DO UPDATE SET created_at = ?2, expires_at = ?3 " +
+        "WHERE room_codes.expires_at < ?2",
+    )
+    .bind(code, now, expiresAt)
+    .run();
+  return (result.meta.changes ?? 0) > 0;
+}
+
 /** Allocates a fresh, unused room code (4 digits, falling back to 5 if the pool is saturated). */
 export async function allocateRoomCode(db: D1Database, now = Date.now()): Promise<string> {
   for (const digits of [4, 5]) {
     for (let attempt = 0; attempt < MAX_ATTEMPTS_PER_LENGTH; attempt++) {
       const code = randomCode(digits);
-      if (await isCodeFree(db, code, now)) {
-        await db
-          .prepare(
-            "INSERT INTO room_codes (code, created_at, expires_at) VALUES (?, ?, ?) " +
-              "ON CONFLICT(code) DO UPDATE SET created_at = excluded.created_at, expires_at = excluded.expires_at",
-          )
-          .bind(code, now, now + DEFAULT_RESERVATION_MS)
-          .run();
+      if (await tryClaimCode(db, code, now, now + DEFAULT_RESERVATION_MS)) {
         return code;
       }
     }

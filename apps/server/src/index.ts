@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { listPlayableThemes } from "./lib/questions.js";
 import { allocateRoomCode, isRoomCodeActive } from "./lib/room-code.js";
 import { RateLimiter } from "./lib/rate-limit.js";
 import { RoomDO } from "./room/RoomDO.js";
@@ -7,9 +8,10 @@ export { RoomDO };
 
 interface Env {
   DB: D1Database;
-  MEDIA: R2Bucket;
+  MEDIA?: R2Bucket;
   ADMIN_SECRET: string;
   ROOM: DurableObjectNamespace<RoomDO>;
+  ASSETS?: { fetch: typeof fetch };
 }
 
 const app = new Hono<{ Bindings: Env }>();
@@ -23,6 +25,11 @@ app.post("/api/rooms", async (c) => {
   }
   const code = await allocateRoomCode(c.env.DB);
   return c.json({ roomCode: code });
+});
+
+app.get("/api/themes", async (c) => {
+  const themes = await listPlayableThemes(c.env.DB, c.env.MEDIA !== undefined);
+  return c.json({ themes });
 });
 
 app.get("/api/rooms/:code", async (c) => {
@@ -54,6 +61,7 @@ const CONTENT_TYPE_BY_EXT: Record<string, string> = {
 
 // Public question media (images/audio/video), uploaded via `pnpm media:add`.
 app.get("/media/:key", async (c) => {
+  if (!c.env.MEDIA) return c.notFound();
   const key = c.req.param("key");
   const object = await c.env.MEDIA.get(key);
   if (!object) return c.notFound();
@@ -65,6 +73,12 @@ app.get("/media/:key", async (c) => {
   }
   headers.set("Cache-Control", "public, max-age=31536000, immutable");
   return new Response(object.body, { headers });
+});
+
+// Everything else (the built React app) is served as static assets in production.
+app.get("*", async (c) => {
+  if (!c.env.ASSETS) return c.notFound();
+  return c.env.ASSETS.fetch(c.req.raw);
 });
 
 export default app;

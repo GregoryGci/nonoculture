@@ -14,6 +14,14 @@ export type Phase = (typeof PHASES)[number];
 export const QUESTION_TYPES = ["text", "image", "audio", "video"] as const;
 export type QuestionType = (typeof QUESTION_TYPES)[number];
 
+/**
+ * Hard ceiling on one chain drawing, as data-URL characters (~45 KB of image).
+ * Every drawing of a round is broadcast inside STATE_SYNC and kept in the room's Durable
+ * Object storage, so this is a budget, not just an anti-abuse check: the client compresses
+ * to land far below it (see DrawingCanvas), and anything above is refused outright.
+ */
+export const MAX_DRAWING_DATA_URL_LENGTH = 60_000;
+
 /** A manual grade the host assigns to one player's answer during HOST_REVIEW. */
 export const GRADES = [0, 0.5, 1] as const;
 export type Grade = (typeof GRADES)[number];

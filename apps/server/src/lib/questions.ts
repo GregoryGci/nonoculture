@@ -16,15 +16,6 @@ interface QuestionRow {
 /** Roughly 2 chain ("téléphone dessiné") rounds per 15 slots, per the game design. */
 const CHAIN_ROUND_RATIO = 2 / 15;
 
-function shuffle<T>(items: T[]): T[] {
-  const result = [...items];
-  for (let i = result.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [result[i], result[j]] = [result[j]!, result[i]!];
-  }
-  return result;
-}
-
 function toInternal(row: QuestionRow): InternalQuestion {
   return {
     id: row.id,
@@ -39,16 +30,43 @@ function toInternal(row: QuestionRow): InternalQuestion {
   };
 }
 
-async function fetchTriviaQuestions(db: D1Database, settings: GameSettings, limit: number): Promise<InternalQuestion[]> {
+/**
+ * Draws `limit` random questions. The sampling is done by SQLite (ORDER BY RANDOM() LIMIT)
+ * rather than by pulling the table into the Worker and shuffling: the bank is meant to grow
+ * to several thousand rows, and materialising all of them per game would cost a full scan
+ * plus the memory for every row we then throw away.
+ */
+async function fetchTriviaQuestions(
+  db: D1Database,
+  settings: GameSettings,
+  limit: number,
+  mediaAvailable: boolean,
+): Promise<InternalQuestion[]> {
   if (limit <= 0) return [];
-  const useThemeFilter = settings.themes.length > 0;
-  const query = useThemeFilter
-    ? `SELECT * FROM questions WHERE verified = 1 AND theme IN (${settings.themes.map(() => "?").join(",")})`
-    : "SELECT * FROM questions WHERE verified = 1";
-  const stmt = useThemeFilter ? db.prepare(query).bind(...settings.themes) : db.prepare(query);
+  const themes = settings.themes;
+  const clauses = ["verified = 1"];
+  if (themes.length > 0) clauses.push(`theme IN (${themes.map(() => "?").join(",")})`);
+  // Without an R2 binding, /media/:key can't serve anything: an image or audio question
+  // would show an empty player with no way to answer it. Leave them out of the draw.
+  if (!mediaAvailable) clauses.push("media_key IS NULL");
+  const stmt = db
+    .prepare(`SELECT * FROM questions WHERE ${clauses.join(" AND ")} ORDER BY RANDOM() LIMIT ?`)
+    .bind(...themes, limit);
   const { results } = await stmt.all<QuestionRow>();
-  const shuffled = shuffle(results ?? []);
-  return shuffled.slice(0, limit).map(toInternal);
+  return (results ?? []).map(toInternal);
+}
+
+/**
+ * Themes the bank can actually field a question on right now. The host settings screen only
+ * offers these: a theme with nothing behind it (never seeded, or media-only while R2 is
+ * unbound) would otherwise look selectable and then produce an empty game.
+ */
+export async function listPlayableThemes(db: D1Database, mediaAvailable: boolean): Promise<string[]> {
+  const mediaClause = mediaAvailable ? "" : " AND media_key IS NULL";
+  const { results } = await db
+    .prepare(`SELECT DISTINCT theme FROM questions WHERE verified = 1${mediaClause} ORDER BY theme`)
+    .all<{ theme: string }>();
+  return (results ?? []).map((row) => row.theme);
 }
 
 /** Spreads `count` chain slots evenly across the deck, never as the very first or last slot. */
@@ -70,21 +88,30 @@ function pickChainPositions(totalSlots: number, count: number): Set<number> {
  * Builds the full game deck: trivia questions drawn from D1 plus a handful of chain
  * ("téléphone dessiné") rounds spread through it, per docs/brief.md's game design.
  */
-export async function buildDeck(db: D1Database, settings: GameSettings): Promise<DeckItem[]> {
+export async function buildDeck(
+  db: D1Database,
+  settings: GameSettings,
+  { mediaAvailable }: { mediaAvailable: boolean },
+): Promise<DeckItem[]> {
   const requestedChainCount = Math.round(settings.questionCount * CHAIN_ROUND_RATIO);
   const requestedTriviaCount = Math.max(0, settings.questionCount - requestedChainCount);
 
-  const questions = await fetchTriviaQuestions(db, settings, requestedTriviaCount);
+  const questions = await fetchTriviaQuestions(db, settings, requestedTriviaCount, mediaAvailable);
+  // The bank may hold fewer questions than asked for (narrow theme filter, unseeded DB).
+  // Only ever lay out as many trivia slots as we actually drew — filling the gap with
+  // undefined would build a deck of blank questions that plays out as an empty screen.
+  if (questions.length === 0) return [];
   const totalSlots = questions.length + requestedChainCount;
   const chainPositions = pickChainPositions(totalSlots, requestedChainCount);
 
   const deck: DeckItem[] = [];
   let triviaIdx = 0;
   for (let i = 0; i < totalSlots; i++) {
-    if (chainPositions.has(i)) {
+    const question = questions[triviaIdx];
+    if (chainPositions.has(i) || !question) {
       deck.push({ kind: "chain" });
     } else {
-      deck.push({ kind: "trivia", question: questions[triviaIdx]! });
+      deck.push({ kind: "trivia", question });
       triviaIdx++;
     }
   }
