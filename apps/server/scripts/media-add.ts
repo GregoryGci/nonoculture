@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { existsSync, mkdtempSync, statSync } from "node:fs";
+import { copyFileSync, existsSync, mkdirSync, mkdtempSync, statSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { basename, extname, join } from "node:path";
 
@@ -65,10 +65,11 @@ const SIZE_LIMITS: Record<MediaKind, number> = {
 function main() {
   const args = process.argv.slice(2);
   const remote = args.includes("--remote");
+  const toR2 = args.includes("--r2");
   const inputPath = args.find((a) => !a.startsWith("--"));
   const keyOverrideArg = args.find((a) => a.startsWith("--key="));
   if (!inputPath || !existsSync(inputPath)) {
-    console.error("Usage: pnpm media:add <fichier> [--remote] [--key=<r2-key-sans-extension>]");
+    console.error("Usage: pnpm media:add <fichier> [--r2 [--remote]] [--key=<cle-sans-extension>]");
     process.exit(1);
   }
 
@@ -93,15 +94,27 @@ function main() {
     console.log(`Output size: ${(sizeBytes / 1024).toFixed(0)} KB (within budget).`);
   }
 
-  const r2Key = basename(outPath);
-  console.log(`Uploading to R2 as "${r2Key}" (${remote ? "remote" : "local"})...`);
-  execFileSync(
-    "wrangler",
-    ["r2", "object", "put", `quiproquo-media/${r2Key}`, `--file=${outPath}`, remote ? "--remote" : "--local"],
-    { stdio: "inherit", shell: true },
-  );
+  const mediaKey = basename(outPath);
 
-  console.log(`\nDone. Use this as the question's media_key:\n  ${r2Key}`);
+  if (toR2) {
+    console.log(`Uploading to R2 as "${mediaKey}" (${remote ? "remote" : "local"})...`);
+    execFileSync(
+      "wrangler",
+      ["r2", "object", "put", `quiproquo-media/${mediaKey}`, `--file=${outPath}`, remote ? "--remote" : "--local"],
+      { stdio: "inherit", shell: true },
+    );
+  } else {
+    // Default: ship it with the front-end build as a Workers static asset. R2 has to be
+    // switched on in the dashboard and wants a card on file; static assets do not, and a
+    // handful of short clips sits far inside the per-file and per-project limits.
+    const staticDir = join(import.meta.dirname, "..", "..", "web", "public", "media");
+    mkdirSync(staticDir, { recursive: true });
+    copyFileSync(outPath, join(staticDir, mediaKey));
+    console.log(`Copied to apps/web/public/media/${mediaKey}`);
+    console.log("It ships on the next `pnpm --filter web build` + `wrangler deploy`.");
+  }
+
+  console.log(`\nDone. Use this as the media_key of the question:\n  ${mediaKey}`);
 }
 
 main();

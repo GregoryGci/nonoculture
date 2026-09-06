@@ -59,12 +59,18 @@ const CONTENT_TYPE_BY_EXT: Record<string, string> = {
   mp4: "video/mp4",
 };
 
-// Public question media (images/audio/video), uploaded via `pnpm media:add`.
+/**
+ * Public question media (images/audio/video).
+ *
+ * Two sources, in order: the R2 bucket when one is bound, then the Worker's own static
+ * assets (apps/web/public/media/*, shipped with the front-end build). The static path is
+ * what makes media work on a plain free account — R2 has to be switched on in the
+ * dashboard and asks for a card on file, while Workers assets do not.
+ */
 app.get("/media/:key", async (c) => {
-  if (!c.env.MEDIA) return c.notFound();
   const key = c.req.param("key");
-  const object = await c.env.MEDIA.get(key);
-  if (!object) return c.notFound();
+  const object = c.env.MEDIA ? await c.env.MEDIA.get(key) : null;
+  if (!object) return c.env.ASSETS ? c.env.ASSETS.fetch(c.req.raw) : c.notFound();
   const headers = new Headers();
   object.writeHttpMetadata(headers);
   if (!headers.get("Content-Type")) {

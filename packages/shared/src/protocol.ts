@@ -56,7 +56,7 @@ export const HostKickMsg = z.object({
 
 export const HostSettingsMsg = z.object({
   type: z.literal("HOST_SETTINGS"),
-  questionCount: z.number().int().min(20).max(40).optional(),
+  questionCount: z.number().int().min(5).max(40).optional(),
   questionDurationSec: z.number().int().min(15).max(30).optional(),
   themes: z.array(z.string()).optional(),
 });

@@ -27,7 +27,7 @@ export const GRADES = [0, 0.5, 1] as const;
 export type Grade = (typeof GRADES)[number];
 
 export interface GameSettings {
-  questionCount: number; // 20-40
+  questionCount: number; // 5-40
   questionDurationSec: number; // 15-30
   themes: string[]; // empty = all themes
 }

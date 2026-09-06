@@ -13,8 +13,13 @@ interface QuestionRow {
   explanation: string | null;
 }
 
-/** Roughly 2 chain ("téléphone dessiné") rounds per 15 slots, per the game design. */
-const CHAIN_ROUND_RATIO = 2 / 15;
+/**
+ * Deck composition, expressed per 15 slots: 1 drawing round, 4 audio questions, the rest
+ * plain text. These are quotas, not probabilities — audio questions are drawn from their
+ * own query so a game reliably contains them instead of depending on what RANDOM() picked.
+ */
+const CHAIN_ROUNDS_PER_15 = 1;
+const AUDIO_QUESTIONS_PER_15 = 4;
 
 function toInternal(row: QuestionRow): InternalQuestion {
   return {
@@ -36,19 +41,19 @@ function toInternal(row: QuestionRow): InternalQuestion {
  * to several thousand rows, and materialising all of them per game would cost a full scan
  * plus the memory for every row we then throw away.
  */
-async function fetchTriviaQuestions(
+async function fetchQuestions(
   db: D1Database,
   settings: GameSettings,
   limit: number,
-  mediaAvailable: boolean,
+  kind: "audio" | "text",
 ): Promise<InternalQuestion[]> {
   if (limit <= 0) return [];
   const themes = settings.themes;
   const clauses = ["verified = 1"];
   if (themes.length > 0) clauses.push(`theme IN (${themes.map(() => "?").join(",")})`);
-  // Without an R2 binding, /media/:key can't serve anything: an image or audio question
-  // would show an empty player with no way to answer it. Leave them out of the draw.
-  if (!mediaAvailable) clauses.push("media_key IS NULL");
+  // "text" means "needs no media to be playable", which is also what makes it safe to serve
+  // with no R2 binding; "audio" is the quota bucket the deck fills separately.
+  clauses.push(kind === "audio" ? "type = 'audio' AND media_key IS NOT NULL" : "media_key IS NULL");
   const stmt = db
     .prepare(`SELECT * FROM questions WHERE ${clauses.join(" AND ")} ORDER BY RANDOM() LIMIT ?`)
     .bind(...themes, limit);
@@ -84,21 +89,40 @@ function pickChainPositions(totalSlots: number, count: number): Set<number> {
   return positions;
 }
 
+function shuffle<T>(items: T[]): T[] {
+  const result = [...items];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j]!, result[i]!];
+  }
+  return result;
+}
+
 /**
- * Builds the full game deck: trivia questions drawn from D1 plus a handful of chain
- * ("téléphone dessiné") rounds spread through it, per docs/brief.md's game design.
+ * Builds the full game deck to the quotas above: a few drawing rounds, a guaranteed share of
+ * audio questions, the rest text, all shuffled together so the audio ones aren't clustered.
+ *
+ * Every quota degrades gracefully. Audio needs an R2 binding to be playable at all, and the
+ * bank may simply hold fewer audio questions than the quota asks for; either way the shortfall
+ * is taken up by text questions so the game still has the length the host chose.
  */
 export async function buildDeck(
   db: D1Database,
   settings: GameSettings,
   { mediaAvailable }: { mediaAvailable: boolean },
 ): Promise<DeckItem[]> {
-  const requestedChainCount = Math.round(settings.questionCount * CHAIN_ROUND_RATIO);
-  const requestedTriviaCount = Math.max(0, settings.questionCount - requestedChainCount);
+  const total = settings.questionCount;
+  const requestedChainCount = Math.round((total * CHAIN_ROUNDS_PER_15) / 15);
+  const questionSlots = Math.max(0, total - requestedChainCount);
+  const audioQuota = mediaAvailable ? Math.round((total * AUDIO_QUESTIONS_PER_15) / 15) : 0;
 
-  const questions = await fetchTriviaQuestions(db, settings, requestedTriviaCount, mediaAvailable);
+  const audio = await fetchQuestions(db, settings, Math.min(audioQuota, questionSlots), "audio");
+  // Whatever audio couldn't supply falls back to text, so the deck keeps its intended length.
+  const text = await fetchQuestions(db, settings, questionSlots - audio.length, "text");
+  const questions = shuffle([...audio, ...text]);
+
   // The bank may hold fewer questions than asked for (narrow theme filter, unseeded DB).
-  // Only ever lay out as many trivia slots as we actually drew — filling the gap with
+  // Only ever lay out as many question slots as we actually drew — filling the gap with
   // undefined would build a deck of blank questions that plays out as an empty screen.
   if (questions.length === 0) return [];
   const totalSlots = questions.length + requestedChainCount;

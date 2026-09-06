@@ -21,7 +21,7 @@ export interface TransitionResult {
 function clampSettings(partial: Partial<GameSettings>, base: GameSettings): GameSettings {
   return {
     questionCount:
-      partial.questionCount !== undefined ? Math.min(40, Math.max(20, partial.questionCount)) : base.questionCount,
+      partial.questionCount !== undefined ? Math.min(40, Math.max(5, partial.questionCount)) : base.questionCount,
     questionDurationSec:
       partial.questionDurationSec !== undefined
         ? Math.min(30, Math.max(15, partial.questionDurationSec))
