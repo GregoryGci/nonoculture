@@ -21,8 +21,7 @@ export function ChainPromptForm({
   return (
     <div className="flex flex-col items-center gap-4 text-center">
       <p style={{ color: "var(--color-text-muted)" }}>
-        Donne quelque chose à dessiner à ton voisin — un mot, une expression, tout ce qui te passe
-        par la tête.
+        Donne quelque chose à dessiner à ton voisin — un mot, une expression, tout ce qui te passe par la tête.
       </p>
       <form onSubmit={handleSubmit} className="flex w-full max-w-sm gap-2">
         <input

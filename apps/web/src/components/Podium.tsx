@@ -24,7 +24,11 @@ export function Podium({ players }: { players: PlayerPublic[] }) {
             </span>
             <div
               className={`panel w-20 rounded-t-[var(--radius-control)] ${heights[slot]}`}
-              style={first ? { borderColor: "var(--color-accent)", boxShadow: "0 0 20px -4px var(--color-accent)" } : undefined}
+              style={
+                first
+                  ? { borderColor: "var(--color-accent)", boxShadow: "0 0 20px -4px var(--color-accent)" }
+                  : undefined
+              }
             />
           </div>
         );

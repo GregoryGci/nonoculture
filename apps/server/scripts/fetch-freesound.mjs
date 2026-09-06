@@ -28,16 +28,67 @@ const TARGETS = [
   { query: "cow moo", require: ["cow", "moo"], theme: "animaux", answer: "une vache", aliases: ["vache"] },
   { query: "rooster crow", require: ["rooster", "cock", "crow"], theme: "animaux", answer: "un coq", aliases: ["coq"] },
   { query: "cat meow", require: ["cat", "meow"], theme: "animaux", answer: "un chat", aliases: ["chat"] },
-  { query: "elephant trumpet", require: ["elephant"], preferId: 819668, theme: "animaux", answer: "un éléphant", aliases: ["éléphant", "elephant"] },
+  {
+    query: "elephant trumpet",
+    require: ["elephant"],
+    preferId: 819668,
+    theme: "animaux",
+    answer: "un éléphant",
+    aliases: ["éléphant", "elephant"],
+  },
   { query: "duck quack", require: ["duck", "quack"], theme: "animaux", answer: "un canard", aliases: ["canard"] },
   { query: "horse neigh", require: ["horse", "neigh"], theme: "animaux", answer: "un cheval", aliases: ["cheval"] },
-  { query: "sheep bleat", require: ["sheep", "bleat", "baa"], theme: "animaux", answer: "un mouton", aliases: ["mouton", "brebis"] },
-  { query: "frying pan sizzle", require: ["fry", "frying", "sizzle", "pan"], theme: "cuisine", answer: "de la friture", aliases: ["friture", "poêle qui grésille", "grésillement"] },
-  { query: "chopping vegetables", require: ["chop", "cutting", "knife", "cut"], preferId: 634119, theme: "cuisine", answer: "on découpe des légumes", aliases: ["découper des légumes", "couper des légumes", "découpe"] },
-  { query: "water boiling bubbling pot", require: ["boil", "bubbl", "water"], theme: "cuisine", answer: "de l'eau qui bout", aliases: ["ébullition", "eau bouillante", "eau qui bout"] },
-  { query: "blender kitchen", require: ["blend"], theme: "cuisine", answer: "un mixeur", aliases: ["blender", "mixeur électrique"] },
-  { query: "kettle whistle", require: ["kettle"], theme: "cuisine", answer: "une bouilloire", aliases: ["bouilloire", "bouilloire qui siffle"] },
-  { query: "popcorn popping", require: ["popcorn"], preferId: 91262, theme: "cuisine", answer: "du popcorn", aliases: ["pop-corn", "pop corn"] },
+  {
+    query: "sheep bleat",
+    require: ["sheep", "bleat", "baa"],
+    theme: "animaux",
+    answer: "un mouton",
+    aliases: ["mouton", "brebis"],
+  },
+  {
+    query: "frying pan sizzle",
+    require: ["fry", "frying", "sizzle", "pan"],
+    theme: "cuisine",
+    answer: "de la friture",
+    aliases: ["friture", "poêle qui grésille", "grésillement"],
+  },
+  {
+    query: "chopping vegetables",
+    require: ["chop", "cutting", "knife", "cut"],
+    preferId: 634119,
+    theme: "cuisine",
+    answer: "on découpe des légumes",
+    aliases: ["découper des légumes", "couper des légumes", "découpe"],
+  },
+  {
+    query: "water boiling bubbling pot",
+    require: ["boil", "bubbl", "water"],
+    theme: "cuisine",
+    answer: "de l'eau qui bout",
+    aliases: ["ébullition", "eau bouillante", "eau qui bout"],
+  },
+  {
+    query: "blender kitchen",
+    require: ["blend"],
+    theme: "cuisine",
+    answer: "un mixeur",
+    aliases: ["blender", "mixeur électrique"],
+  },
+  {
+    query: "kettle whistle",
+    require: ["kettle"],
+    theme: "cuisine",
+    answer: "une bouilloire",
+    aliases: ["bouilloire", "bouilloire qui siffle"],
+  },
+  {
+    query: "popcorn popping",
+    require: ["popcorn"],
+    preferId: 91262,
+    theme: "cuisine",
+    answer: "du popcorn",
+    aliases: ["pop-corn", "pop corn"],
+  },
 ];
 
 async function fetchById(id) {
@@ -91,7 +142,13 @@ async function main() {
     console.log(
       `OK  ${target.query.padEnd(24)} -> "${sound.name}" (id=${sound.id}, ${sound.duration.toFixed(1)}s, ${sound.license}) -> ${filename}`,
     );
-    manifest.push({ ...target, freesoundId: sound.id, freesoundName: sound.name, license: sound.license, file: filename });
+    manifest.push({
+      ...target,
+      freesoundId: sound.id,
+      freesoundName: sound.name,
+      license: sound.license,
+      file: filename,
+    });
   }
   await writeFile(join(OUT_DIR, "manifest.json"), JSON.stringify(manifest, null, 2));
   console.log(`\nDone. ${manifest.length}/${TARGETS.length} sounds downloaded to ${OUT_DIR}.`);

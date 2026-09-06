@@ -8,12 +8,12 @@ export function Home() {
   const [creating, setCreating] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  async function handleCreate() {
+  async function handleCreate(): Promise<void> {
     setCreating(true);
     setError(null);
     try {
       const code = await createRoom();
-      navigate(`/room/${code}`);
+      void navigate(`/room/${code}`);
     } catch {
       setError("Impossible de créer la partie, réessaie.");
       setCreating(false);
@@ -24,7 +24,7 @@ export function Home() {
     e.preventDefault();
     const code = joinCode.trim();
     if (/^\d{4,5}$/.test(code)) {
-      navigate(`/room/${code}`);
+      void navigate(`/room/${code}`);
     } else {
       setError("Code invalide (4 ou 5 chiffres).");
     }
@@ -37,11 +37,7 @@ export function Home() {
       </h1>
       <p style={{ color: "var(--color-text-muted)" }}>Le quiz entre potes où on voit toutes vos réponses.</p>
 
-      <button
-        onClick={handleCreate}
-        disabled={creating}
-        className="btn btn-primary w-full py-3 text-lg"
-      >
+      <button onClick={() => void handleCreate()} disabled={creating} className="btn btn-primary w-full py-3 text-lg">
         {creating ? "Création…" : "Créer une partie"}
       </button>
 

@@ -16,8 +16,9 @@ export function HostScreen() {
     const ws = new WebSocket(`${protocol}//${location.host}/api/rooms/${code}/ws`);
     wsRef.current = ws;
     ws.addEventListener("open", () => ws.send(JSON.stringify({ type: "OBSERVE", roomCode: code })));
-    ws.addEventListener("message", (event) => {
-      const envelope = JSON.parse(event.data) as { type: string; payload: unknown };
+    ws.addEventListener("message", (event: MessageEvent<unknown>) => {
+      if (typeof event.data !== "string") return;
+      const envelope = JSON.parse(event.data) as { type?: string; payload?: unknown };
       if (envelope.type === "STATE_SYNC") setState(envelope.payload as RoomStateSync);
     });
     return () => ws.close();
@@ -37,7 +38,10 @@ export function HostScreen() {
         <>
           <span
             className="tabular panel panel-notched px-12 py-6 text-8xl font-bold tracking-widest"
-            style={{ color: "var(--color-accent)", textShadow: "0 0 40px color-mix(in srgb, var(--color-accent) 70%, transparent)" }}
+            style={{
+              color: "var(--color-accent)",
+              textShadow: "0 0 40px color-mix(in srgb, var(--color-accent) 70%, transparent)",
+            }}
           >
             {state.roomCode}
           </span>
@@ -49,7 +53,10 @@ export function HostScreen() {
 
       {state.phase === "QUESTION" && state.currentQuestion && (
         <>
-          <div className="flex w-full items-center justify-between text-xl" style={{ color: "var(--color-text-muted)" }}>
+          <div
+            className="flex w-full items-center justify-between text-xl"
+            style={{ color: "var(--color-text-muted)" }}
+          >
             <span>
               Question {state.questionIndex + 1}/{state.questionTotal}
             </span>

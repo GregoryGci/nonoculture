@@ -22,7 +22,10 @@ export function ChainRevealSlideshow({ chains }: { chains: ChainResult[] }) {
             <strong>{c.drawerNickname}</strong> a dessiné ça, et <strong>{c.guesserNickname}</strong> a deviné :
           </p>
           <p className="text-center text-lg font-bold">« {c.guess || "…"} »</p>
-          <p className="text-center font-semibold" style={{ color: c.matched ? "var(--color-accent)" : "var(--color-text-muted)" }}>
+          <p
+            className="text-center font-semibold"
+            style={{ color: c.matched ? "var(--color-accent)" : "var(--color-text-muted)" }}
+          >
             {c.matched ? `Deviné ! +${c.points} pour les 3` : "Raté"}
           </p>
         </div>

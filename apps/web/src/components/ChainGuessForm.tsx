@@ -24,11 +24,7 @@ export function ChainGuessForm({
     <div className="flex flex-col items-center gap-4 text-center">
       <p style={{ color: "var(--color-text-muted)" }}>Devine ce que ton voisin a dessiné.</p>
       {drawingDataUrl ? (
-        <img
-          src={drawingDataUrl}
-          alt="Dessin à deviner"
-          className="panel panel-glow pop-in max-w-full"
-        />
+        <img src={drawingDataUrl} alt="Dessin à deviner" className="panel panel-glow pop-in max-w-full" />
       ) : (
         <p style={{ color: "var(--color-text-muted)" }}>(personne n'a dessiné à temps)</p>
       )}

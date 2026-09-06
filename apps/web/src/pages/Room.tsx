@@ -72,7 +72,11 @@ export function Room() {
 
           {state.phase === "QUESTION" && state.currentQuestion && (
             <>
-              <QuestionHeader index={state.questionIndex} total={state.questionTotal} deadline={state.phaseDeadlineTs} />
+              <QuestionHeader
+                index={state.questionIndex}
+                total={state.questionTotal}
+                deadline={state.phaseDeadlineTs}
+              />
               <p className="text-center text-2xl font-semibold">{state.currentQuestion.prompt}</p>
               <QuestionMedia question={state.currentQuestion} />
               <AnswerForm
@@ -185,11 +189,14 @@ function RoomCodeHeader({ code }: { code: string }) {
     <div className="flex flex-col items-center gap-3 text-center">
       <span
         className="tabular panel panel-notched px-8 py-4 text-5xl font-bold tracking-widest"
-        style={{ color: "var(--color-accent)", textShadow: "0 0 20px color-mix(in srgb, var(--color-accent) 60%, transparent)" }}
+        style={{
+          color: "var(--color-accent)",
+          textShadow: "0 0 20px color-mix(in srgb, var(--color-accent) 60%, transparent)",
+        }}
       >
         {code}
       </span>
-      <button onClick={() => navigator.clipboard.writeText(link)} className="btn btn-ghost text-sm">
+      <button onClick={() => void navigator.clipboard.writeText(link)} className="btn btn-ghost text-sm">
         Copier le lien d'invitation
       </button>
     </div>
@@ -208,7 +215,7 @@ function MediaPreloader({ media }: { media: { type: string; url: string } | null
       el.preload = "auto";
       el.src = media.url;
     }
-  }, [media?.url]);
+  }, [media]);
   return null;
 }
 

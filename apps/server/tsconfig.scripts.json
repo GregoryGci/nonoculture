@@ -1,0 +1,15 @@
+{
+  // The seed / media-add / freesound scripts are real code paths (they write to D1 and R2)
+  // but sit outside the Worker's tsconfig, whose rootDir is "src". Without this they were
+  // never typechecked at all.
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "types": ["node"],
+    "lib": ["ES2022"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "allowJs": true
+  },
+  "include": ["scripts"]
+}

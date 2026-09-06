@@ -1,0 +1,10 @@
+node_modules/
+dist/
+build/
+.wrangler/
+coverage/
+pnpm-lock.yaml
+# Hand-wrapped French prose; reflowing it would bury the real diffs.
+*.md
+# Generated question bank — one question per line on purpose, stays diffable.
+apps/server/seed/*.json
