@@ -1,4 +1,5 @@
-const INITIAL_ARTICLES = /^(le|la|les|l'|l’|un|une|the)\s+/i;
+// "l'" elides directly onto the next word (no space), unlike "le "/"la "/etc.
+const INITIAL_ARTICLES = /^(le|la|les|un|une|the)\s+|^l['’]\s*/i;
 
 /**
  * Lowercase, strip accents/punctuation, collapse whitespace, drop a leading article.
