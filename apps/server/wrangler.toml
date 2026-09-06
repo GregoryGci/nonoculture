@@ -4,11 +4,13 @@ compatibility_date = "2025-01-01"
 compatibility_flags = ["nodejs_compat"]
 
 # --- Static front-end (built apps/web/dist), served by Workers Assets in prod.
-# Not used by `wrangler dev` in this repo (web runs on its own Vite dev server locally).
-[assets]
-directory = "../web/dist"
-binding = "ASSETS"
-not_found_handling = "single-page-application"
+# Re-enable once apps/web has a build: `wrangler dev` refuses to boot if the
+# assets directory doesn't exist yet, and the web app runs on its own Vite dev
+# server locally anyway. See docs/PROGRESS.md.
+# [assets]
+# directory = "../web/dist"
+# binding = "ASSETS"
+# not_found_handling = "single-page-application"
 
 # --- Durable Object: 1 instance per room, adressed by idFromName(roomCode).
 [[durable_objects.bindings]]
