@@ -13,9 +13,13 @@
  *    within its own family: something in the top third of its family is common knowledge.
  *  - Subjects with several valid answers (Bolivia has two capitals) keep the first as the
  *    answer and the rest as accepted aliases, instead of being silently half-wrong.
+ *  - A question that contains its own answer is dropped (see lib/answer-leak.mjs). A
+ *    template that reads fine on one row gives the game away on the next: "Dans quelle
+ *    ville joue le club Spartak Moscou ?" was 71% of that family.
  */
 import { writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { answerLeaksIntoPrompt } from "./lib/answer-leak.mjs";
 
 const ENDPOINT = "https://query.wikidata.org/sparql";
 const UA = "NonoCulture-quiz/1.0 (educational party game; contact via github.com/GregoryGci)";
@@ -205,6 +209,33 @@ const FAMILIES = [
     }`,
   },
   {
+    // Sport is the theme players pick most and the one with the fewest templates, so it
+    // needs the most of them: with only three, a fifteen-question sport run repeated the
+    // same phrasing five times however well the deck rotated between families.
+    id: "club-pays",
+    theme: "sport",
+    prompt: (subject) => `Dans quel pays joue le club ${subject} ?`,
+    query: `SELECT ?subject ?answer ?sitelinks WHERE {
+      ?c wdt:P31 wd:Q476028; wdt:P17 ?p; wikibase:sitelinks ?sitelinks.
+      FILTER(?sitelinks > 45)
+      ?c rdfs:label ?subject. FILTER(lang(?subject) = "fr")
+      ?p rdfs:label ?answer. FILTER(lang(?answer) = "fr")
+    }`,
+    limit: 300,
+  },
+  {
+    id: "poste-joueur",
+    theme: "sport",
+    prompt: (subject) => `À quel poste joue ${subject} ?`,
+    query: `SELECT ?subject ?answer ?sitelinks WHERE {
+      ?h wdt:P31 wd:Q5; wdt:P106 wd:Q937857; wdt:P413 ?poste; wikibase:sitelinks ?sitelinks.
+      FILTER(?sitelinks > 70)
+      ?h rdfs:label ?subject. FILTER(lang(?subject) = "fr")
+      ?poste rdfs:label ?answer. FILTER(lang(?answer) = "fr")
+    }`,
+    limit: 250,
+  },
+  {
     id: "club-ville",
     theme: "sport",
     prompt: (subject) => `Dans quelle ville joue le club ${subject} ?`,
@@ -310,12 +341,19 @@ for (const family of FAMILIES) {
     .map(([subject, { sitelinks, answers }]) => ({ subject, sitelinks, answers }));
   assignDifficulties(entries);
 
+  let leaked = 0;
   for (const { subject, answers, difficulty } of entries) {
+    const prompt = family.prompt(subject);
+    // Self-answering questions are invisible in the row count and obvious at the table.
+    if (answerLeaksIntoPrompt(prompt, answers[0])) {
+      leaked++;
+      continue;
+    }
     questions.push({
       theme: family.theme,
       difficulty,
       type: "text",
-      prompt: family.prompt(subject),
+      prompt,
       answer: answers[0],
       aliases: answers.slice(1),
       source: `Wikidata (CC0) — ${family.id}`,
@@ -323,8 +361,11 @@ for (const family of FAMILIES) {
       answer_kind: family.answerKind ?? "text",
     });
   }
-  const kept = entries.length;
-  console.log(`${family.id.padEnd(12)} ${String(kept).padStart(4)} questions (${family.theme})`);
+  const kept = entries.length - leaked;
+  console.log(
+    `${family.id.padEnd(14)} ${String(kept).padStart(4)} questions (${family.theme})` +
+      (leaked ? `  — ${leaked} rejetées, réponse dans l'énoncé` : ""),
+  );
   await new Promise((r) => setTimeout(r, 900)); // stay polite with a public endpoint
 }
 

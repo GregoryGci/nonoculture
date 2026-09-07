@@ -21,24 +21,26 @@ deploy` réel. Historique détaillé : `git log --oneline`.
 
 | answer_kind | type  |    n |
 | ----------- | ----- | ---: |
-| text        | text  | 3527 |
+| text        | text  | 4122 |
 | number      | text  |  561 |
 | list        | text  |  705 |
 | text        | image |   90 |
 | text        | audio |   15 |
-| **total**   |       | 4898 |
+| **total**   |       | 5493 |
 
-Réparties sur **21 familles** (`family`), la plus grosse à 345 questions. La colonne
+Réparties sur **23 familles** (`family`), la plus grosse à 488 questions. La colonne
 `family` existe pour une raison précise : sans elle, choisir le thème « sport » sortait
 quinze fois « quel sport pratique X ? » d'affilée. Le tirage fait maintenant un round-robin
 entre familles (`diversify()` dans `apps/server/src/lib/questions.ts`).
 
 Générateurs (tous relançables, tous sur des sources CC0) :
 
-- `apps/server/scripts/generate-questions.mjs` — 16 familles depuis **Wikidata** (SPARQL,
+- `apps/server/scripts/generate-questions.mjs` — 19 familles depuis **Wikidata** (SPARQL,
   CC0). Difficulté calculée en **rang percentile à l'intérieur de la famille**, pas par
   seuil absolu : tous les pays ont un nombre de sitelinks proche, un seuil fixe classait
-  Avarua en « facile ».
+  Avarua en « facile ». Chaque question passe par `lib/answer-leak.mjs`, qui rejette celles
+  qui contiennent leur propre réponse (16 % du premier jet — « Dans quelle ville joue le
+  club Spartak Moscou ? »).
 - `apps/server/scripts/generate-lists.mjs` — 705 questions « citez… » (~22 réponses
   acceptées chacune), la matière première des duels.
 - `apps/server/scripts/fetch-freesound.mjs` — sons CC0 via l'API Freesound (clé perso,
@@ -90,7 +92,7 @@ sont sautées si la room est trop petite au moment où le slot arrive.
 - **Dessin** : `<canvas>` + Pointer Events, 6 couleurs, 3 épaisseurs, gomme, envoi
   automatique 1,2 s avant la fin du temps même sans valider. Les octets ne transitent jamais
   par `GameState` (clés de storage séparées).
-- **Qualité** : ESLint + Prettier + CI, TypeScript strict sans `any`, **91 tests** Vitest.
+- **Qualité** : ESLint + Prettier + CI, TypeScript strict sans `any`, **99 tests** Vitest.
   Les scripts `.mjs` et les `vite.config.ts` sont couverts par `tsconfig.scripts.json` /
   `tsconfig.node.json` — ils ne l'étaient pas et n'étaient donc jamais typecheckés.
 
@@ -101,14 +103,16 @@ sont sautées si la room est trop petite au moment où le slot arrive.
 2. **Wrangler v3 → v4** — la v3 avertit qu'elle est dépassée. À faire au calme, ça touche la
    config qui déploie.
 3. **Sons d'ambiance / musique** — pas fait.
-4. **Plus de médias** — 15 audio et 90 images, c'est peu face à 4 800 questions texte.
+4. **Plus de médias** — 15 audio et 90 images (uniquement des drapeaux), c'est peu face à
+   5 400 questions texte, et une seule famille d'images ramène le motif répétitif qu'on
+   vient de corriger ailleurs.
 
 ## Reprendre la main
 
 ```
 pnpm install
 pnpm dev                        # web sur :5173, server (wrangler --local) sur :8787
-pnpm test                       # 91 tests
+pnpm test                       # 99 tests
 pnpm --filter server seed       # recharge la banque dans le D1 local
 ```
 
