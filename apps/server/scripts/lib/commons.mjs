@@ -79,12 +79,13 @@ export const licenceOf = (licences, file) => licences.get(file) ?? licences.get(
  * unusable. Commons throttles a burst of image requests much harder than a batched API call.
  */
 export async function downloadFile(file, width = 640, attempts = 4) {
+  const sized = width > 0 ? `?width=${width}` : "";
   let last;
   for (let attempt = 1; attempt <= attempts; attempt++) {
-    const res = await fetch(
-      `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(file)}?width=${width}`,
-      { headers: { "User-Agent": UA }, redirect: "follow" },
-    );
+    const res = await fetch(`https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(file)}${sized}`, {
+      headers: { "User-Agent": UA },
+      redirect: "follow",
+    });
     if (res.ok) return Buffer.from(await res.arrayBuffer());
     last = new Error(`téléchargement ${res.status}`);
     // A 404 will not become a 200 by waiting; a 429 will.
