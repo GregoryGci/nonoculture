@@ -71,16 +71,30 @@ export async function licencesFor(files) {
 /** Commons normalises underscores to spaces in the title it echoes back. */
 export const licenceOf = (licences, file) => licences.get(file) ?? licences.get(file.replace(/_/g, " ")) ?? "inconnue";
 
-export async function downloadFile(file, width = 640) {
-  const res = await fetch(
-    `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(file)}?width=${width}`,
-    {
-      headers: { "User-Agent": UA },
-      redirect: "follow",
-    },
-  );
-  if (!res.ok) throw new Error(`téléchargement ${res.status}`);
-  return Buffer.from(await res.arrayBuffer());
+/**
+ * Downloads one file, retrying on the rate limit.
+ *
+ * The metadata calls had backoff and the downloads did not, which cost a fifth of the first
+ * painting run: nineteen perfectly free images lost to 429s and reported as if the files were
+ * unusable. Commons throttles a burst of image requests much harder than a batched API call.
+ */
+export async function downloadFile(file, width = 640, attempts = 4) {
+  let last;
+  for (let attempt = 1; attempt <= attempts; attempt++) {
+    const res = await fetch(
+      `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(file)}?width=${width}`,
+      { headers: { "User-Agent": UA }, redirect: "follow" },
+    );
+    if (res.ok) return Buffer.from(await res.arrayBuffer());
+    last = new Error(`téléchargement ${res.status}`);
+    // A 404 will not become a 200 by waiting; a 429 will.
+    if (res.status !== 429 && res.status < 500) throw last;
+    if (attempt === attempts) break;
+    const wait = attempt * 8000;
+    console.log(`   ...${res.status} sur ${file.slice(0, 40)}, pause ${wait / 1000}s`);
+    await sleep(wait);
+  }
+  throw last;
 }
 
 export const slugify = (s) =>

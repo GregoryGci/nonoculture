@@ -302,6 +302,31 @@ async function sparql(query, attempts = 3) {
   return [];
 }
 
+/**
+ * Caps how many questions of a family may share one answer.
+ *
+ * The `family` column stopped the same *question* repeating; this stops the same *answer*
+ * repeating, which is the same flaw seen from the other side. 77% of "Quel sport pratique
+ * X ?" answered "football" and 68% of "De quelle nationalité est X ?" answered "États-Unis":
+ * at those rates a player who knows nothing scores by guessing the base rate, which means
+ * the question was never really asked.
+ *
+ * Entries arrive best-known first, so the fifteen kept are the recognisable ones and the
+ * hundredth obscure footballer is what goes.
+ */
+const MAX_PER_ANSWER = 15;
+
+function capPerAnswer(entries) {
+  const used = new Map();
+  return entries.filter(({ answers }) => {
+    const key = answers[0];
+    const n = used.get(key) ?? 0;
+    if (n >= MAX_PER_ANSWER) return false;
+    used.set(key, n + 1);
+    return true;
+  });
+}
+
 /** Rejects rows a player could never reasonably answer, or that read as noise. */
 function usable({ subject, answer }) {
   if (!subject || !answer) return false;
@@ -335,10 +360,14 @@ for (const family of FAMILIES) {
     bySubject.set(row.subject, entry);
   }
 
-  const entries = [...bySubject]
-    // More than a couple of valid answers means the question is genuinely ambiguous.
-    .filter(([, { answers }]) => answers.length <= 3)
-    .map(([subject, { sitelinks, answers }]) => ({ subject, sitelinks, answers }));
+  const entries = capPerAnswer(
+    [...bySubject]
+      // More than a couple of valid answers means the question is genuinely ambiguous.
+      .filter(([, { answers }]) => answers.length <= 3)
+      .map(([subject, { sitelinks, answers }]) => ({ subject, sitelinks, answers }))
+      // Best-known first, so the cap below keeps the recognisable subjects.
+      .sort((a, b) => b.sitelinks - a.sitelinks),
+  );
   assignDifficulties(entries);
 
   let leaked = 0;

@@ -19,7 +19,7 @@
  * Output: apps/web/public/media/art-*.webp + seed/questions-paintings.json
  */
 import { execFileSync } from "node:child_process";
-import { mkdirSync, mkdtempSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, statSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { downloadFile, fileNameOf, isFree, licenceOf, licencesFor, slugify, sparql } from "./lib/commons.mjs";
@@ -33,6 +33,24 @@ const OUT_JSON = join(import.meta.dirname, "..", "seed", "questions-paintings.js
 const ICONIC_SITELINKS = 45;
 /** Below this, the painter is not famous enough for "who painted this?" to be fair. */
 const MIN_PAINTER_SITELINKS = 40;
+
+/**
+ * Ways to ask who painted something.
+ *
+ * Not decoration: the bank's unique index is on (prompt, answer), and every painter question
+ * would otherwise share one prompt. Eight Van Goghs would have collapsed to one row on
+ * INSERT OR IGNORE — silently, since seeding reports nothing. One phrasing per painting of
+ * the same painter keeps them distinct, and caps that painter at three questions, which is
+ * also as many as anyone wants in one game.
+ */
+const PAINTER_PROMPTS = [
+  "Qui a peint ce tableau ?",
+  "De quel peintre est cette œuvre ?",
+  "Qui est l'auteur de cette toile ?",
+];
+
+/** Titles are unique on their own, so these are only here for variety. */
+const TITLE_PROMPTS = ["Quel est le titre de ce tableau ?", "Comment s'appelle cette œuvre ?"];
 
 const QUERY = `SELECT ?title ?painter ?img ?sl ?painterSl WHERE {
   ?w wdt:P31 wd:Q3305213; wdt:P18 ?img; wdt:P170 ?p; wikibase:sitelinks ?sl.
@@ -62,6 +80,9 @@ const licences = await licencesFor(unique.map((r) => r.file));
 
 const questions = [];
 const skipped = [];
+/** How many questions this painter has already supplied, i.e. which phrasing comes next. */
+const perPainter = new Map();
+let titleIndex = 0;
 
 for (const row of unique) {
   const licence = licenceOf(licences, row.file);
@@ -76,23 +97,41 @@ for (const row of unique) {
     continue;
   }
 
-  let bytes;
-  try {
-    bytes = await downloadFile(row.file, 640);
-  } catch (err) {
-    skipped.push(`${row.title} (${err.message})`);
+  const used = perPainter.get(row.painter) ?? 0;
+  if (!iconic && used >= PAINTER_PROMPTS.length) {
+    skipped.push(`${row.title} (${row.painter} a déjà ses ${PAINTER_PROMPTS.length} questions)`);
     continue;
   }
 
   const key = `art-${slugify(row.title)}.webp`;
-  const raw = join(tmp, `${slugify(row.title)}.img`);
-  writeFileSync(raw, bytes);
-  // Same spec as the rest of the media pipeline: WebP, capped width, quality 80.
-  execFileSync(
-    "ffmpeg",
-    ["-y", "-i", raw, "-vf", "scale='min(640,iw)':-1", "-c:v", "libwebp", "-quality", "80", join(MEDIA_DIR, key)],
-    { stdio: "pipe" },
-  );
+  const target = join(MEDIA_DIR, key);
+
+  // Commons throttles hard, so a re-run leans on what the last one already fetched.
+  if (!existsSync(target)) {
+    let bytes;
+    try {
+      bytes = await downloadFile(row.file, 640);
+    } catch (err) {
+      skipped.push(`${row.title} (${err.message})`);
+      continue;
+    }
+    const raw = join(tmp, `${slugify(row.title)}.img`);
+    writeFileSync(raw, bytes);
+    // Same spec as the rest of the media pipeline: WebP, capped width, quality 80.
+    execFileSync(
+      "ffmpeg",
+      ["-y", "-i", raw, "-vf", "scale='min(640,iw)':-1", "-c:v", "libwebp", "-quality", "80", target],
+      { stdio: "pipe" },
+    );
+    // A burst of image requests is what triggers the throttling; a second between them
+    // costs two minutes over the whole run and loses nothing.
+    await new Promise((r) => setTimeout(r, 1000));
+  }
+
+  const prompt = iconic
+    ? TITLE_PROMPTS[titleIndex++ % TITLE_PROMPTS.length]
+    : PAINTER_PROMPTS[used % PAINTER_PROMPTS.length];
+  if (!iconic) perPainter.set(row.painter, used + 1);
 
   questions.push({
     theme: "art",
@@ -100,16 +139,15 @@ for (const row of unique) {
     difficulty: iconic ? (row.sitelinks > 80 ? 1 : 2) : 3,
     type: "image",
     family: iconic ? "tableau-titre" : "tableau-peintre",
-    prompt: iconic ? "Quel est le titre de ce tableau ?" : "Qui a peint ce tableau ?",
+    prompt,
     media_key: key,
     answer: iconic ? row.title : row.painter,
     aliases: [],
     source: `Wikimedia Commons — ${row.file} (${licence})`,
   });
 
-  const kb = Math.round(statSync(join(MEDIA_DIR, key)).size / 1024);
+  const kb = Math.round(statSync(target).size / 1024);
   console.log(`  ${(iconic ? "titre " : "peintre").padEnd(8)} ${row.title.slice(0, 40).padEnd(42)} ${kb} Ko`);
-  await new Promise((r) => setTimeout(r, 250)); // polite with Commons
 }
 
 writeFileSync(OUT_JSON, JSON.stringify(questions, null, 2) + "\n", "utf-8");
