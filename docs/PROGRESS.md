@@ -45,8 +45,14 @@ Générateurs (tous relançables, tous sur des sources CC0) :
   acceptées chacune), la matière première des duels.
 - `apps/server/scripts/fetch-freesound.mjs` — sons CC0 via l'API Freesound (clé perso,
   passée en variable d'environnement, jamais écrite sur disque).
-- Les images (drapeaux) passent par une vérification de licence **fichier par fichier** via
-  l'API Commons, pas au niveau du site.
+- `apps/server/scripts/generate-paintings.mjs` — 105 questions image sur des tableaux
+  (thème **Art**). Une sonde de licence sur cinq familles candidates (tableaux, portraits,
+  armoiries, monuments, animaux) a donné 97 % de domaine public pour les tableaux contre
+  85 % pour les autres : l'art ancien est hors droits par construction.
+- `apps/server/scripts/generate-flags.mjs` — 90 drapeaux.
+- Les images passent par une vérification de licence **fichier par fichier** via l'API
+  Commons, jamais au niveau du site : la licence d'un fichier ne se déduit pas de celle
+  de la plateforme qui l'héberge.
 
 ## Modes de jeu
 
@@ -103,9 +109,9 @@ sont sautées si la room est trop petite au moment où le slot arrive.
 2. **Wrangler v3 → v4** — la v3 avertit qu'elle est dépassée. À faire au calme, ça touche la
    config qui déploie.
 3. **Sons d'ambiance / musique** — pas fait.
-4. **Plus de médias** — 15 audio et 90 images (uniquement des drapeaux), c'est peu face à
-   5 400 questions texte, et une seule famille d'images ramène le motif répétitif qu'on
-   vient de corriger ailleurs.
+4. **Plus d'audio** — 15 sons seulement, tous animaux/cuisine. Les images sont mieux
+   loties depuis les tableaux (195 en deux familles). Relancer `sounds:fetch` demande une
+   clé Freesound personnelle.
 
 ## Reprendre la main
 

@@ -152,5 +152,7 @@ for (const row of unique) {
 
 writeFileSync(OUT_JSON, JSON.stringify(questions, null, 2) + "\n", "utf-8");
 const titres = questions.filter((q) => q.family === "tableau-titre").length;
-console.log(`\n${questions.length} tableaux -> ${OUT_JSON} (${titres} par titre, ${questions.length - titres} par peintre)`);
+console.log(
+  `\n${questions.length} tableaux -> ${OUT_JSON} (${titres} par titre, ${questions.length - titres} par peintre)`,
+);
 if (skipped.length) console.log(`écartés : ${skipped.length}\n  ${skipped.slice(0, 20).join("\n  ")}`);
