@@ -63,11 +63,17 @@ async function fetchQuestions(
   limit: number,
   kind: "audio" | "rest" | "numeric" | "list",
   mediaAvailable: boolean,
+  /** Ids already placed in this deck. Two buckets can draw from the same pool — bluff rounds
+   *  and ordinary questions both come from "rest" — and two independent ORDER BY RANDOM()
+   *  queries happily return the same row, which put the same question in one game twice. */
+  exclude: ReadonlySet<number> = new Set(),
 ): Promise<InternalQuestion[]> {
   if (limit <= 0) return [];
   const themes = settings.themes;
   const clauses = ["verified = 1"];
   if (themes.length > 0) clauses.push(`theme IN (${themes.map(() => "?").join(",")})`);
+  const excluded = [...exclude];
+  if (excluded.length > 0) clauses.push(`id NOT IN (${excluded.map(() => "?").join(",")})`);
   if (kind === "numeric") {
     // Scored by proximity, so a wrong-but-close answer still counts for something.
     clauses.push("answer_kind = 'number'");
@@ -88,7 +94,7 @@ async function fetchQuestions(
   // Over-drawn on purpose: diversify() needs spare rows in each family to spread across.
   const stmt = db
     .prepare(`SELECT * FROM questions WHERE ${clauses.join(" AND ")} ORDER BY RANDOM() LIMIT ?`)
-    .bind(...themes, Math.min(limit * 6, 600));
+    .bind(...themes, ...excluded, Math.min(limit * 6, 600));
   const { results } = await stmt.all<QuestionRow>();
   return diversify((results ?? []).map(toInternal), limit);
 }
@@ -192,35 +198,24 @@ export async function buildDeck(
   // Bluff and duel each need a question of their own, drawn first so the slot count can
   // shrink to what the bank can actually supply — a duel needs a list question, and there
   // may be none for the chosen themes.
-  const bluffQuestions = await fetchQuestions(db, settings, bluffWanted, "rest", mediaAvailable);
-  const duelQuestions = await fetchQuestions(db, settings, duelWanted, "list", mediaAvailable);
+  const drawn = new Set<number>();
+  const take = async (n: number, kind: Parameters<typeof fetchQuestions>[3]) => {
+    const rows = await fetchQuestions(db, settings, n, kind, mediaAvailable, drawn);
+    for (const row of rows) drawn.add(row.id);
+    return rows;
+  };
+
+  const bluffQuestions = await take(bluffWanted, "rest");
+  const duelQuestions = await take(duelWanted, "list");
 
   const specialSlots = chainCount + reflexCount + bluffQuestions.length + duelQuestions.length;
   const questionSlots = Math.max(0, total - specialSlots);
   const audioQuota = mediaAvailable ? Math.round((total * AUDIO_QUESTIONS_PER_15) / 15) : 0;
 
-  const numeric = await fetchQuestions(
-    db,
-    settings,
-    Math.min(settings.numericRounds, questionSlots),
-    "numeric",
-    mediaAvailable,
-  );
-  const audio = await fetchQuestions(
-    db,
-    settings,
-    Math.min(audioQuota, Math.max(0, questionSlots - numeric.length)),
-    "audio",
-    mediaAvailable,
-  );
+  const numeric = await take(Math.min(settings.numericRounds, questionSlots), "numeric");
+  const audio = await take(Math.min(audioQuota, Math.max(0, questionSlots - numeric.length)), "audio");
   // Whatever the quotas could not supply is taken up here, so the deck keeps its length.
-  const rest = await fetchQuestions(
-    db,
-    settings,
-    questionSlots - audio.length - numeric.length,
-    "rest",
-    mediaAvailable,
-  );
+  const rest = await take(questionSlots - audio.length - numeric.length, "rest");
   const questions = shuffle([...audio, ...numeric, ...rest]);
 
   // The bank may hold fewer questions than asked for (narrow theme filter, unseeded DB).

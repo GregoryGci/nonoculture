@@ -261,7 +261,9 @@ function resolveDuel(state: GameState, now: number): GameState {
  *  Chain slots are skipped (recursively) if too few players are connected to run one. */
 function startDeckSlot(state: GameState, index: number, now: number): GameState {
   if (index >= state.deck.length) {
-    return { ...state, phase: "HOST_REVIEW", deckIndex: index, ...CLEARED, phaseDeadlineTs: null };
+    // reviewIndex resets here rather than only on PLAY_AGAIN: the correction always opens on
+    // its first card, whatever the previous game left behind.
+    return { ...state, phase: "HOST_REVIEW", deckIndex: index, ...CLEARED, reviewIndex: 0, phaseDeadlineTs: null };
   }
   const item = state.deck[index];
   if (!item) return startDeckSlot(state, index + 1, now); // defensive: a malformed deck slot
@@ -551,6 +553,7 @@ export function createRoom(roomCode: string, now: number): GameState {
     answers: [],
     answerLog: {},
     grades: {},
+    reviewIndex: 0,
     chain: null,
     bluff: null,
     duel: null,
@@ -719,6 +722,13 @@ export function transition(state: GameState, event: GameEvent): TransitionResult
       break;
     }
 
+    case "HOST_REVIEW_GOTO": {
+      if (state.phase !== "HOST_REVIEW" || event.playerId !== state.hostPlayerId) break;
+      if (event.index === state.reviewIndex) break;
+      next = { ...state, reviewIndex: event.index };
+      break;
+    }
+
     case "SUBMIT_HOST_GRADE": {
       if (state.phase !== "HOST_REVIEW" || event.playerId !== state.hostPlayerId) break;
       const answered = state.answerLog[event.deckIndex]?.some((a) => a.playerId === event.targetPlayerId);
@@ -872,9 +882,10 @@ export function transition(state: GameState, event: GameEvent): TransitionResult
         answers: [],
         answerLog: {},
         grades: {},
-        chain: null,
-        bluff: null,
-        duel: null,
+        reviewIndex: 0,
+        // Spread rather than listed one by one: adding the reflex round left this reset stale,
+        // so a new game started with the previous round's state still attached.
+        ...CLEARED,
         phaseDeadlineTs: null,
       };
       break;

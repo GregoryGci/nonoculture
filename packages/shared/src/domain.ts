@@ -203,11 +203,25 @@ export interface BluffView {
   results: { nickname: string; votedText: string; correct: boolean }[] | null;
 }
 
+/** One thing a duellist typed, and whether it landed. */
+export interface DuelAttempt {
+  text: string;
+  hit: boolean;
+}
+
 /** What a player sees during a duel round. */
 export interface DuelView {
   step: "predict" | "answer" | "reveal";
   prompt: string;
-  contestants: { playerId: string; nickname: string; found: number }[];
+  /**
+   * The two fighters, with what they have typed so far.
+   *
+   * `attempts` is deliberately everything they submitted, valid or not, in order: spectators
+   * were only shown a score climbing, which is not a duel to watch. Seeing the misses is most
+   * of the fun, and there is nothing to protect — the answers are the other player's, not the
+   * question's, and only these two can submit anyway.
+   */
+  contestants: { playerId: string; nickname: string; found: number; attempts: DuelAttempt[] }[];
   /** True when you are one of the two fighting. */
   youAreContestant: boolean;
   /** The contestant you backed, if you are a spectator who has called it. */
@@ -260,6 +274,9 @@ export interface RoomStateSync {
   bluff: BluffView | null;
   duel: DuelView | null;
   reflex: ReflexView | null;
-  /** Every trivia question and answer of the game, for the host's end-of-game review — set only during HOST_REVIEW. */
+  /** Every trivia question and answer of the game, sent to the whole room during HOST_REVIEW
+   *  so everyone watches the host grade. Only the host's grades are accepted. */
   reviewQuestions: ReviewQuestion[] | null;
+  /** Which review card the room is on. Driven by the host, followed by everyone. */
+  reviewIndex: number;
 }

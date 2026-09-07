@@ -62,11 +62,14 @@ questions**, pour rester fluide. Chaque réponse est archivée (`GameState.answe
 par index de deck) pendant toute la partie. Une fois le deck épuisé, la partie passe en
 `HOST_REVIEW` (pas de timer, `phaseDeadlineTs: null`) : l'hôte note chaque réponse de
 chaque joueur à chaque question via `SUBMIT_HOST_GRADE` (Nul=0 / Presque=0.5 / Good=1).
-**La liste de correction n'est envoyée qu'à l'hôte** (`buildStateSync` la met à `null`
-pour tous les autres, voir `selectors.test.ts`) : les autres joueurs voient un écran
-d'attente du podium avec le classement qui se réordonne en direct. Le score est appliqué
-immédiatement et peut être corrigé (re-noter écrase l'ancienne note, pas de cumul). Le
-host clique "Voir le podium" (`HOST_NEXT`) quand il a fini pour passer à `FINISHED`.
+**La liste de correction est envoyée à toute la room**, mais seul l’hôte peut noter :
+`SUBMIT_HOST_GRADE` et `HOST_REVIEW_GOTO` sont refusés pour tout le monde sauf lui. Elle a été
+host-only un temps, avec les autres joueurs sur un podium provisoire — ce qui obligeait l’hôte
+à partager son écran pour que la room suive quoi que ce soit. La carte affichée vit dans
+`GameState.reviewIndex` et non dans le state local du panneau : sinon chaque client pagine de
+son côté et personne ne suit personne. Le score est appliqué immédiatement et peut être corrigé
+(re-noter écrase l’ancienne note, pas de cumul). L’hôte clique "Voir le podium" (`HOST_NEXT`)
+quand il a fini, pour passer à `FINISHED`.
 
 Le deck (`GameState.deck`) est composé à partir des **compteurs choisis par l'hôte**
 (`chainRounds`, `bluffRounds`, `duelRounds`, `numericRounds` dans `GameSettings`), plus un
@@ -81,6 +84,12 @@ banque sait fournir au lieu de produire des questions vides.
 produite). `fetchQuestions` sur-tire (`limit × 6`) puis `diversify()` fait un round-robin
 entre familles. Sans ça, choisir le thème « sport » sortait quinze fois « quel sport
 pratique X ? » d'affilée — c'est le bug qui a motivé la colonne.
+
+`buildDeck` transmet en plus à chaque tirage l’ensemble des ids déjà placés. Les manches de
+bluff et les questions ordinaires puisent dans le même vivier, et deux `ORDER BY RANDOM()`
+indépendants renvoyaient volontiers la même ligne : la partie posait une question, puis
+demandait d’inventer une fausse réponse à cette même question. Couvert par
+`apps/server/src/lib/questions.test.ts`.
 
 Chaque manche spéciale est sautée si la room compte moins de 3 joueurs connectés au moment
 où son slot arrive (`CHAIN_MIN_PLAYERS`, `BLUFF_MIN_PLAYERS`, `DUEL_MIN_PLAYERS`).

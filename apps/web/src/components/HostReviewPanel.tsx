@@ -10,17 +10,29 @@ const GRADES: { grade: Grade; label: string }[] = [
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-/** Host-only. Everyone else waits on the podium, so there is no read-only mode here. */
+/**
+ * The end-of-game correction, shown to the whole room.
+ *
+ * Only the host can grade or turn the page — everyone else gets the same card, live, so the
+ * host no longer has to share their screen for anyone to follow. The page number comes from
+ * the server for exactly that reason: local pagination would put every player on a different
+ * question.
+ */
 export function HostReviewPanel({
   reviewQuestions,
+  index,
+  canGrade,
   onGrade,
+  onNavigate,
   onFinish,
 }: {
   reviewQuestions: ReviewQuestion[];
+  index: number;
+  canGrade: boolean;
   onGrade: (deckIndex: number, playerId: string, grade: Grade) => void;
+  onNavigate: (index: number) => void;
   onFinish: () => void;
 }) {
-  const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const total = reviewQuestions.length;
   const clampedIndex = Math.min(index, Math.max(0, total - 1));
@@ -29,7 +41,7 @@ export function HostReviewPanel({
 
   function go(delta: number) {
     setDirection(delta);
-    setIndex((i) => Math.max(0, Math.min(total - 1, i + delta)));
+    onNavigate(Math.max(0, Math.min(total - 1, clampedIndex + delta)));
   }
 
   if (total === 0 || !q) {
@@ -38,9 +50,11 @@ export function HostReviewPanel({
         <p className="text-[17px]" style={{ color: "var(--color-text-muted)" }}>
           Aucune réponse à corriger.
         </p>
-        <button onClick={onFinish} className="btn btn-primary h-14 w-full">
-          Voir le podium
-        </button>
+        {canGrade && (
+          <button onClick={onFinish} className="btn btn-primary h-14 w-full">
+            Voir le podium
+          </button>
+        )}
       </div>
     );
   }
@@ -84,13 +98,15 @@ export function HostReviewPanel({
           <hr className="divider" />
 
           {/* The common case by far: everyone got it. One tap beats N taps. */}
-          <button
-            onClick={() => q.answers.forEach((a) => onGrade(q.deckIndex, a.playerId, 1))}
-            disabled={q.answers.every((a) => a.grade === 1)}
-            className="btn btn-secondary h-11 w-full text-[13px]"
-          >
-            Tout accepter
-          </button>
+          {canGrade && (
+            <button
+              onClick={() => q.answers.forEach((a) => onGrade(q.deckIndex, a.playerId, 1))}
+              disabled={q.answers.every((a) => a.grade === 1)}
+              className="btn btn-secondary h-11 w-full text-[13px]"
+            >
+              Tout accepter
+            </button>
+          )}
 
           <ul className="flex flex-col gap-4">
             {q.answers.map((a) => (
@@ -110,11 +126,15 @@ export function HostReviewPanel({
                         key={label}
                         onClick={() => onGrade(q.deckIndex, a.playerId, grade)}
                         aria-pressed={on}
+                        disabled={!canGrade}
                         className="h-9 flex-1 rounded-full text-[13px] font-medium transition-all duration-300"
                         style={{
                           background: on ? "var(--color-accent)" : "transparent",
+                          // Spectators see the host's choices land; they just cannot make them.
                           color: on ? "var(--color-accent-contrast)" : "var(--color-text-muted)",
                           border: `1px solid ${on ? "var(--color-accent)" : "var(--color-border)"}`,
+                          opacity: canGrade || on ? 1 : 0.45,
+                          cursor: canGrade ? "pointer" : "default",
                         }}
                       >
                         {label}
@@ -128,7 +148,11 @@ export function HostReviewPanel({
         </motion.div>
       </AnimatePresence>
 
-      <div className="flex items-center gap-2">
+      {!canGrade && (
+        <p className="waiting text-center text-[13px] font-medium">L'hôte corrige — vous suivez en direct.</p>
+      )}
+
+      <div className="flex items-center gap-2" hidden={!canGrade}>
         <button onClick={() => go(-1)} disabled={clampedIndex === 0} className="btn btn-secondary flex-1">
           Précédente
         </button>

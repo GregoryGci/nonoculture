@@ -312,6 +312,9 @@ export class RoomDO extends DurableObject<Env> {
           ws,
         );
         break;
+      case "HOST_REVIEW_GOTO":
+        await this.dispatch({ kind: "HOST_REVIEW_GOTO", playerId, index: parsed.index, now }, ws);
+        break;
       case "HOST_NEXT":
         await this.dispatch({ kind: "HOST_NEXT", playerId, now }, ws);
         break;

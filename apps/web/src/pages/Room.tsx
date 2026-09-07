@@ -18,7 +18,7 @@ import { ChainRevealSlideshow } from "../components/ChainRevealSlideshow";
 import { BluffRound } from "../components/BluffRound";
 import { DuelRound } from "../components/DuelRound";
 import { ReflexRound } from "../components/ReflexRound";
-import { themeLabel, type QuestionPublic, type RoomStateSync } from "@nonoculture/shared";
+import { themeLabel, type QuestionPublic } from "@nonoculture/shared";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -204,18 +204,18 @@ export function Room() {
               </button>
             )}
 
-          {state.phase === "HOST_REVIEW" &&
-            (isHost ? (
-              <HostReviewPanel
-                reviewQuestions={state.reviewQuestions ?? []}
-                onGrade={(deckIndex, targetPlayerId, grade) =>
-                  send({ type: "SUBMIT_HOST_GRADE", deckIndex, playerId: targetPlayerId, grade })
-                }
-                onFinish={() => send({ type: "HOST_NEXT" })}
-              />
-            ) : (
-              <WaitingForPodium players={state.players} />
-            ))}
+          {state.phase === "HOST_REVIEW" && (
+            <HostReviewPanel
+              reviewQuestions={state.reviewQuestions ?? []}
+              index={state.reviewIndex}
+              canGrade={isHost}
+              onGrade={(deckIndex, targetPlayerId, grade) =>
+                send({ type: "SUBMIT_HOST_GRADE", deckIndex, playerId: targetPlayerId, grade })
+              }
+              onNavigate={(index) => send({ type: "HOST_REVIEW_GOTO", index })}
+              onFinish={() => send({ type: "HOST_NEXT" })}
+            />
+          )}
 
           {state.phase === "FINISHED" && (
             <>
@@ -319,20 +319,6 @@ function RoomCode({ code }: { code: string }) {
 }
 
 /** What everyone but the host sees while grading happens: scores moving, live. */
-function WaitingForPodium({ players }: { players: RoomStateSync["players"] }) {
-  return (
-    <div className="flex flex-col gap-8">
-      {/* No eyebrow: the page header already reads "Correction". */}
-      <div className="flex flex-col items-center gap-3 text-center">
-        <h1 className="display text-[clamp(1.5rem,6vw,2.25rem)]">L’hôte note les réponses</h1>
-        <p className="waiting text-[15px] font-medium">Le podium arrive…</p>
-      </div>
-      {/* Not a dead wait: the ranking reorders as the host grades. */}
-      <Scoreboard players={players} />
-    </div>
-  );
-}
-
 /** Shared frame for the special rounds: a small label, the prompt, then the round's own UI. */
 function SpecialStep({ label, title, children }: { label: string; title: string; children: React.ReactNode }) {
   return (

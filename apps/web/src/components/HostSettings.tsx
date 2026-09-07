@@ -171,7 +171,6 @@ export function HostSettings({
   // media-only while no media source is bound). Offering them would let the host start an
   // empty game.
   const [playable, setPlayable] = useState<string[] | null>(null);
-  const [themesOpen, setThemesOpen] = useState(false);
   useEffect(() => {
     let alive = true;
     void fetchPlayableThemes().then((themes) => {
@@ -243,7 +242,7 @@ export function HostSettings({
         {skippedRounds.length > 0 && (
           <p
             className="rounded-[var(--radius-control)] px-3.5 py-2.5 text-[13px] leading-snug"
-            style={{ background: "rgba(255,159,10,0.1)", color: "var(--color-text-muted)" }}
+            style={{ background: "rgba(255,69,58,0.12)", color: "var(--color-text-muted)" }}
           >
             Vous êtes {connectedPlayers} : {skippedRounds.join(", ")}{" "}
             {skippedRounds.length > 1 ? "seront sautées" : "sera sautée"} tant qu'il n'y a pas assez de monde.
@@ -266,7 +265,7 @@ export function HostSettings({
                       <span
                         aria-label="sautée, pas assez de joueurs"
                         className="size-1.5 shrink-0 rounded-full"
-                        style={{ background: "#ff9f0a" }}
+                        style={{ background: "var(--color-danger)" }}
                       />
                     )}
                   </span>
@@ -287,55 +286,32 @@ export function HostSettings({
       </Section>
 
       <Section title="Thèmes" aside={selectedLabel}>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
+          {/* "Tous" is a chip like the rest, and reads as selected when nothing is filtered —
+              which is exactly what an empty themes list means to the server. */}
           <button
             type="button"
-            onClick={() => setThemesOpen((o) => !o)}
-            aria-expanded={themesOpen}
-            className="btn btn-secondary h-11 flex-1 text-[15px]"
+            onClick={() => onChange({ themes: [] })}
+            aria-pressed={settings.themes.length === 0}
+            className={`chip${settings.themes.length === 0 ? " chip-on" : ""}`}
           >
-            {themesOpen ? "Replier" : "Choisir les thèmes"}
+            Tous
           </button>
-          {settings.themes.length > 0 && (
-            <button
-              type="button"
-              onClick={() => onChange({ themes: [] })}
-              className="btn btn-ghost h-11 px-4 text-[15px]"
-            >
-              Tout
-            </button>
-          )}
+          {themes.map(({ id, label }) => {
+            const active = settings.themes.includes(id);
+            return (
+              <button
+                key={id}
+                type="button"
+                onClick={() => toggleTheme(id)}
+                aria-pressed={active}
+                className={`chip${active ? " chip-on" : ""}`}
+              >
+                {label}
+              </button>
+            );
+          })}
         </div>
-
-        {themesOpen && (
-          <div className="flex flex-wrap gap-2">
-            {themes.map(({ id, label }) => {
-              const active = settings.themes.includes(id);
-              return (
-                <button
-                  key={id}
-                  type="button"
-                  onClick={() => toggleTheme(id)}
-                  aria-pressed={active}
-                  className="h-9 rounded-full px-4 text-[13px] font-medium transition-all duration-300"
-                  style={{
-                    background: active ? "var(--color-accent)" : "transparent",
-                    color: active ? "var(--color-accent-contrast)" : "var(--color-text-muted)",
-                    border: `1px solid ${active ? "var(--color-accent)" : "var(--color-border)"}`,
-                  }}
-                >
-                  {label}
-                </button>
-              );
-            })}
-          </div>
-        )}
-
-        {!themesOpen && settings.themes.length > 0 && (
-          <p className="text-[13px] leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
-            {settings.themes.map((id) => THEME_LABELS[id] ?? id).join(" · ")}
-          </p>
-        )}
       </Section>
     </div>
   );

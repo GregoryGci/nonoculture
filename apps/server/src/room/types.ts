@@ -124,6 +124,14 @@ export interface GameState {
   answerLog: Record<number, SubmittedAnswer[]>;
   /** Host-assigned grades, keyed by `${deckIndex}:${playerId}`. */
   grades: Record<string, Grade>;
+  /**
+   * Which review card the room is looking at.
+   *
+   * Server-side rather than local to the host's screen: the whole point of showing the
+   * correction to everyone is that they follow along, and they cannot follow along if each
+   * client paginates on its own.
+   */
+  reviewIndex: number;
   chain: ChainRoundState | null; // set only while playing a chain slot
   bluff: BluffRoundState | null; // set only while playing a bluff slot
   duel: DuelRoundState | null; // set only while playing a duel slot
@@ -141,6 +149,7 @@ export type GameEvent =
   | { kind: "START_GAME"; playerId: string; now: number; deck: DeckItem[] }
   | { kind: "SUBMIT_ANSWER"; playerId: string; questionId: number; raw: string; now: number }
   | { kind: "SUBMIT_HOST_GRADE"; playerId: string; deckIndex: number; targetPlayerId: string; grade: Grade }
+  | { kind: "HOST_REVIEW_GOTO"; playerId: string; index: number; now: number }
   | { kind: "SUBMIT_CHAIN_PROMPT"; playerId: string; text: string; now: number }
   | { kind: "SUBMIT_CHAIN_DRAWING"; playerId: string; dataUrl: string; now: number }
   | { kind: "SUBMIT_CHAIN_GUESS"; playerId: string; text: string; now: number }

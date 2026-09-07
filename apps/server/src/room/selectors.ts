@@ -116,8 +116,7 @@ function computeReflex(state: GameState, forPlayerId: string, nicknameOf: (id: s
   };
 }
 
-/** The duel as one player sees it — contestants see their own hits, nobody sees the other’s. */
-/** The duel as one player sees it — contestants see their own hits, nobody sees the other's. */
+/** The duel as one player sees it — including, for everyone, what both fighters are typing. */
 function computeDuel(state: GameState, forPlayerId: string, nicknameOf: (id: string) => string): DuelView | null {
   const duel = state.duel;
   const question = questionAt(state, state.deckIndex);
@@ -133,11 +132,23 @@ function computeDuel(state: GameState, forPlayerId: string, nicknameOf: (id: str
   if (!step) return null;
 
   const accepted = [question.answer, ...question.aliases].filter((a) => normalizeAnswer(a).length > 0);
-  const counts = duel.contestants.map((id) => ({
-    playerId: id,
-    nickname: nicknameOf(id),
-    found: duel.found[id]?.length ?? 0,
-  }));
+  const youAreContestant = duel.contestants.includes(forPlayerId);
+  const counts = duel.contestants.map((id) => {
+    const found = new Set(duel.found[id] ?? []);
+    // Everything typed, in order, so spectators watch the duel happen instead of watching a
+    // counter — misses included, since those are the part worth shouting at.
+    //
+    // Except to the opponent. A duellist who could read the other's list in the network tab
+    // would simply retype it, which is the same leak as broadcasting answers during a
+    // question. Contestants see their own list and their rival's score, nothing more.
+    const visible = !youAreContestant || id === forPlayerId;
+    return {
+      playerId: id,
+      nickname: nicknameOf(id),
+      found: found.size,
+      attempts: visible ? (duel.attempts[id] ?? []).map((text) => ({ text, hit: found.has(text) })) : [],
+    };
+  });
 
   const [a, b] = duel.contestants;
   const winner =
@@ -229,12 +240,22 @@ function computeChainReveal(
  * podium instead, and shipping every answer to a client that never displays them only puts
  * them in reach of the network inspector.
  */
+/**
+ * The end-of-game correction, sent to everyone.
+ *
+ * It was host-only for a while, with the other players parked on a provisional podium. That
+ * turned out to mean the host had to screen-share to let anyone follow, so the list goes to
+ * the whole room again — read-only, since `SUBMIT_HOST_GRADE` is refused for anyone but the
+ * host, and every grade re-broadcasts the state. Nothing secret is exposed: by this point the
+ * game is over and the answers were going to be read out loud anyway.
+ */
 function computeReviewQuestions(
   state: GameState,
   forPlayerId: string,
   nicknameOf: (id: string) => string,
 ): ReviewQuestion[] | null {
-  if (state.phase !== "HOST_REVIEW" || forPlayerId !== state.hostPlayerId) return null;
+  if (state.phase !== "HOST_REVIEW") return null;
+  void forPlayerId;
   return Object.entries(state.answerLog)
     .map(([deckIndexStr, answers]) => {
       const deckIndex = Number(deckIndexStr);
@@ -313,5 +334,6 @@ export function buildStateSync(
     duel: computeDuel(state, forPlayerId, nicknameOf),
     reflex: computeReflex(state, forPlayerId, nicknameOf),
     reviewQuestions: computeReviewQuestions(state, forPlayerId, nicknameOf),
+    reviewIndex: state.reviewIndex,
   };
 }

@@ -59,22 +59,45 @@ export function DuelRound({
 
   if (duel.step === "answer") {
     if (!duel.youAreContestant) {
+      // Spectators used to get two numbers going up, which is not a duel you can watch.
+      // Every attempt lands here as it is typed, misses included — those are the good part.
       return (
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-5">
           <p className="waiting text-center text-[15px] font-medium">Duel en cours…</p>
-          <div className="flex gap-3">
+          <div className="grid grid-cols-2 gap-3">
             {duel.contestants.map((c) => (
-              <div key={c.playerId} className="panel flex-1 px-4 py-5 text-center">
-                <p className="text-[15px] font-medium">{c.nickname}</p>
-                <motion.p
-                  key={c.found}
-                  initial={{ scale: 1.3, opacity: 0.5 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.35, ease: EASE }}
-                  className="tabular mt-1 text-[28px] font-semibold"
-                >
-                  {c.found}
-                </motion.p>
+              <div key={c.playerId} className="panel flex min-w-0 flex-col gap-3 p-4">
+                <div className="flex items-baseline justify-between gap-2">
+                  <span className="min-w-0 truncate text-[15px] font-medium">{c.nickname}</span>
+                  <motion.span
+                    key={c.found}
+                    initial={{ scale: 1.35, opacity: 0.4 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.35, ease: EASE }}
+                    className="tabular text-[22px] font-semibold"
+                  >
+                    {c.found}
+                  </motion.span>
+                </div>
+                <ul className="flex flex-col-reverse gap-1.5">
+                  <AnimatePresence initial={false}>
+                    {c.attempts.map((a, i) => (
+                      <motion.li
+                        key={`${i}-${a.text}`}
+                        initial={{ opacity: 0, y: -6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3, ease: EASE }}
+                        className="truncate text-[13px]"
+                        style={{
+                          color: a.hit ? "var(--color-success)" : "var(--color-text-faint)",
+                          textDecoration: a.hit ? "none" : "line-through",
+                        }}
+                      >
+                        {a.text}
+                      </motion.li>
+                    ))}
+                  </AnimatePresence>
+                </ul>
               </div>
             ))}
           </div>

@@ -354,3 +354,37 @@ describe("maths questions", () => {
     expect(state.players.b?.score).toBe(0);
   });
 });
+
+describe("review navigation", () => {
+  const deck: DeckItem[] = [{ kind: "trivia", question: question() }];
+
+  function inReview(): GameState {
+    let state = room(["a", "b", "c"], deck);
+    for (const id of ["a", "b", "c"]) {
+      state = transition(state, {
+        kind: "SUBMIT_ANSWER",
+        playerId: id,
+        questionId: 1,
+        raw: "Paris",
+        now: T0 + 200,
+      }).state;
+    }
+    expect(state.phase).toBe("HOST_REVIEW");
+    return state;
+  }
+
+  it("opens the correction on its first card", () => {
+    expect(inReview().reviewIndex).toBe(0);
+  });
+
+  it("lets the host move the whole room to another card", () => {
+    const state = transition(inReview(), { kind: "HOST_REVIEW_GOTO", playerId: "a", index: 3, now: T0 + 300 }).state;
+    expect(state.reviewIndex).toBe(3);
+  });
+
+  it("refuses to be paged by anyone but the host", () => {
+    // Otherwise every player scrolls their own way and nobody is following anybody.
+    const state = transition(inReview(), { kind: "HOST_REVIEW_GOTO", playerId: "b", index: 3, now: T0 + 300 }).state;
+    expect(state.reviewIndex).toBe(0);
+  });
+});

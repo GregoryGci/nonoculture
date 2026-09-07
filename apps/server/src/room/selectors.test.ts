@@ -59,18 +59,24 @@ describe("buildStateSync during HOST_REVIEW", () => {
     expect(sync.reviewQuestions?.[0]?.answers).toHaveLength(2);
   });
 
-  it("withholds it from every other player", () => {
-    // They wait on the podium instead, so shipping them every answer would only expose it
-    // in the network inspector for a screen that never renders it.
+  it("sends the same list to every other player, so they follow the correction live", () => {
+    // It was host-only, with everyone else on a provisional podium — which meant the host had
+    // to share their screen for the room to see anything. Grading stays host-only; watching
+    // does not.
     const state = roomInReview();
-    expect(buildStateSync(state, "p2").reviewQuestions).toBeNull();
+    expect(buildStateSync(state, "p2").reviewQuestions).toHaveLength(1);
   });
 
-  it("withholds it from observers on the host screen", () => {
-    expect(buildStateSync(roomInReview(), "").reviewQuestions).toBeNull();
+  it("sends it to the observer screen too", () => {
+    expect(buildStateSync(roomInReview(), "").reviewQuestions).toHaveLength(1);
   });
 
-  it("still reports every player's score, so the waiting room can rank live", () => {
+  it("puts the whole room on the same card", () => {
+    const state = roomInReview();
+    expect(buildStateSync(state, "host").reviewIndex).toBe(buildStateSync(state, "p2").reviewIndex);
+  });
+
+  it("still reports every player's score, so the ranking updates live", () => {
     const state = roomInReview();
     const sync = buildStateSync(state, "p2");
     expect(sync.players.map((p) => p.playerId).sort()).toEqual(["host", "p2"]);

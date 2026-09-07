@@ -45,6 +45,12 @@ export const SubmitHostGradeMsg = z.object({
   grade: z.union([z.literal(0), z.literal(0.5), z.literal(1)]),
 });
 
+/** Host-only: moves the whole room to another card of the end-of-game correction. */
+export const HostReviewGotoMsg = z.object({
+  type: z.literal("HOST_REVIEW_GOTO"),
+  index: z.number().int().min(0).max(200),
+});
+
 export const HostNextMsg = z.object({
   type: z.literal("HOST_NEXT"),
 });
@@ -135,6 +141,7 @@ export const ClientMessage = z.discriminatedUnion("type", [
   StartGameMsg,
   SubmitAnswerMsg,
   SubmitHostGradeMsg,
+  HostReviewGotoMsg,
   HostNextMsg,
   HostKickMsg,
   HostSettingsMsg,
