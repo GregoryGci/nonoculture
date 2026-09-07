@@ -5,6 +5,12 @@ export const PHASES = [
   "CHAIN_DRAW",
   "CHAIN_GUESS",
   "CHAIN_REVEAL",
+  "BLUFF_WRITE",
+  "BLUFF_VOTE",
+  "BLUFF_REVEAL",
+  "DUEL_PREDICT",
+  "DUEL_ANSWER",
+  "DUEL_REVEAL",
   "HOST_REVIEW",
   "FINISHED",
 ] as const;
@@ -36,12 +42,30 @@ export type Grade = (typeof GRADES)[number];
 export interface GameSettings {
   questionCount: number; // 5-40
   questionDurationSec: number; // 15-30
-  /** Drawing rounds in the deck, 0-6. They count towards questionCount. */
+  /** Special rounds in the deck. Each counts towards questionCount. */
   chainRounds: number;
+  bluffRounds: number;
+  duelRounds: number;
+  /** Ordinary questions scored by proximity instead of by the host. */
+  numericRounds: number;
   themes: string[]; // empty = all themes
 }
 
 export const MAX_CHAIN_ROUNDS = 6;
+export const MAX_SPECIAL_ROUNDS = 6;
+
+/** A bluff round needs enough fake answers to hide the real one among. */
+export const BLUFF_MIN_PLAYERS = 3;
+/** A duel needs two contestants and at least one spectator to make predictions worthwhile. */
+export const DUEL_MIN_PLAYERS = 3;
+
+/** Points awarded by the self-scoring rounds. */
+export const BLUFF_POINTS_FOUND = 2; // you spotted the real answer
+export const BLUFF_POINTS_FOOLED = 1; // per player your fake caught
+export const DUEL_POINTS_WINNER = 3;
+export const DUEL_POINTS_PREDICTED = 1; // spectators who called it
+export const NUMERIC_POINTS_CLOSEST = 2;
+export const NUMERIC_POINTS_EXACT = 3;
 
 /** Theme ids the bank uses, with their display label. Shared so the settings screen and the
  *  question screen name a theme the same way. */
@@ -71,6 +95,9 @@ export const DEFAULT_SETTINGS: GameSettings = {
   questionCount: 20,
   questionDurationSec: 20,
   chainRounds: 1,
+  bluffRounds: 1,
+  duelRounds: 1,
+  numericRounds: 2,
   themes: [],
 };
 
@@ -92,6 +119,8 @@ export interface QuestionPublic {
   type: QuestionType;
   prompt: string;
   mediaUrl: string | null;
+  /** "number" means the closest answer wins and no host grading happens. */
+  answerKind: "text" | "number" | "list";
 }
 
 /**
@@ -139,6 +168,37 @@ export interface ReviewQuestion {
  * The full state a client needs to render itself from scratch — sent as STATE_SYNC.
  * No client-side guessing allowed: everything visible must be derivable from this alone.
  */
+/** What a player sees during a bluff round. */
+export interface BluffView {
+  step: "write" | "vote" | "reveal";
+  prompt: string;
+  /** During "write": whether you have already offered a lie. */
+  submitted: boolean;
+  /** During "vote" and "reveal": the shuffled options. Authors are withheld until reveal. */
+  options: { id: string; text: string; authorNickname: string | null; isReal: boolean }[];
+  /** The option you voted for, if any. */
+  yourVote: string | null;
+  /** During "reveal": who voted for what, and what it earned them. */
+  results: { nickname: string; votedText: string; correct: boolean }[] | null;
+}
+
+/** What a player sees during a duel round. */
+export interface DuelView {
+  step: "predict" | "answer" | "reveal";
+  prompt: string;
+  contestants: { playerId: string; nickname: string; found: number }[];
+  /** True when you are one of the two fighting. */
+  youAreContestant: boolean;
+  /** The contestant you backed, if you are a spectator who has called it. */
+  yourPrediction: string | null;
+  /** Your own accepted items, so a contestant can see what has landed. */
+  yourFound: string[];
+  /** During "reveal": each contestant's accepted items, and the winner. */
+  reveal: { nickname: string; found: string[]; winner: boolean }[] | null;
+  /** How many answers the question accepts in total, shown as a target. */
+  acceptedTotal: number;
+}
+
 export interface RoomStateSync {
   roomCode: string;
   phase: Phase;
@@ -154,6 +214,8 @@ export interface RoomStateSync {
   youHaveAnswered: boolean;
   chainTask: ChainTask | null;
   chainReveal: ChainResult[] | null;
+  bluff: BluffView | null;
+  duel: DuelView | null;
   /** Every trivia question and answer of the game, for the host's end-of-game review — set only during HOST_REVIEW. */
   reviewQuestions: ReviewQuestion[] | null;
 }

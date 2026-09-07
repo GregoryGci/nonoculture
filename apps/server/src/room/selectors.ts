@@ -1,7 +1,9 @@
-import { isChainMatch } from "@nonoculture/shared";
+import { isChainMatch, normalizeAnswer } from "@nonoculture/shared";
 import type {
+  BluffView,
   ChainResult,
   ChainTask,
+  DuelView,
   PlayerPublic,
   QuestionPublic,
   ReviewQuestion,
@@ -14,6 +16,109 @@ import type { GameState, InternalQuestion } from "./types.js";
 function triviaAt(state: GameState, index: number): InternalQuestion | null {
   const item = state.deck[index];
   return item?.kind === "trivia" ? item.question : null;
+}
+
+/** The question behind whichever slot is in play, trivia or special. */
+function questionAt(state: GameState, index: number): InternalQuestion | null {
+  const item = state.deck[index];
+  if (!item || item.kind === "chain") return null;
+  return item.question;
+}
+
+/**
+ * The bluff round as one player sees it.
+ *
+ * Authorship is withheld until the reveal — sending it during the vote would put the answer
+ * in the network inspector, which is the whole game.
+ */
+function computeBluff(state: GameState, forPlayerId: string, nicknameOf: (id: string) => string): BluffView | null {
+  const bluff = state.bluff;
+  const question = questionAt(state, state.deckIndex);
+  if (!bluff || !question) return null;
+  const step =
+    state.phase === "BLUFF_WRITE"
+      ? "write"
+      : state.phase === "BLUFF_VOTE"
+        ? "vote"
+        : state.phase === "BLUFF_REVEAL"
+          ? "reveal"
+          : null;
+  if (!step) return null;
+
+  const revealing = step === "reveal";
+  const options = (step === "write" ? [] : bluff.options).map((o) => ({
+    id: o.id,
+    text: o.text,
+    authorNickname: revealing && o.authorId ? nicknameOf(o.authorId) : null,
+    isReal: revealing ? o.authorId === null : false,
+  }));
+
+  const byOption = new Map(bluff.options.map((o) => [o.id, o]));
+  const results = revealing
+    ? Object.entries(bluff.votes).map(([voterId, optionId]) => ({
+        nickname: nicknameOf(voterId),
+        votedText: byOption.get(optionId)?.text ?? "—",
+        correct: byOption.get(optionId)?.authorId === null,
+      }))
+    : null;
+
+  return {
+    step,
+    prompt: question.prompt,
+    submitted: bluff.fakes[forPlayerId] !== undefined,
+    options,
+    yourVote: bluff.votes[forPlayerId] ?? null,
+    results,
+  };
+}
+
+/** The duel as one player sees it — contestants see their own hits, nobody sees the other's. */
+function computeDuel(state: GameState, forPlayerId: string, nicknameOf: (id: string) => string): DuelView | null {
+  const duel = state.duel;
+  const question = questionAt(state, state.deckIndex);
+  if (!duel || !question) return null;
+  const step =
+    state.phase === "DUEL_PREDICT"
+      ? "predict"
+      : state.phase === "DUEL_ANSWER"
+        ? "answer"
+        : state.phase === "DUEL_REVEAL"
+          ? "reveal"
+          : null;
+  if (!step) return null;
+
+  const accepted = [question.answer, ...question.aliases].filter((a) => normalizeAnswer(a).length > 0);
+  const counts = duel.contestants.map((id) => ({
+    playerId: id,
+    nickname: nicknameOf(id),
+    found: duel.found[id]?.length ?? 0,
+  }));
+
+  const [a, b] = duel.contestants;
+  const winner =
+    (duel.found[a]?.length ?? 0) === (duel.found[b]?.length ?? 0)
+      ? null
+      : (duel.found[a]?.length ?? 0) > (duel.found[b]?.length ?? 0)
+        ? a
+        : b;
+
+  return {
+    step,
+    prompt: question.prompt,
+    contestants: counts,
+    youAreContestant: duel.contestants.includes(forPlayerId),
+    yourPrediction: duel.predictions[forPlayerId] ?? null,
+    yourFound: duel.found[forPlayerId] ?? [],
+    reveal:
+      step === "reveal"
+        ? duel.contestants.map((id) => ({
+            nickname: nicknameOf(id),
+            found: duel.found[id] ?? [],
+            winner: id === winner,
+          }))
+        : null,
+    acceptedTotal: accepted.length,
+  };
 }
 
 /** Looks up a chain drawing's data URL — the bytes live outside GameState (see ChainRoundState). */
@@ -132,6 +237,7 @@ export function buildStateSync(
         type: question.type,
         prompt: question.prompt,
         mediaUrl: question.mediaKey ? resolveMediaUrl(question.mediaKey) : null,
+        answerKind: question.answerKind,
       }
     : null;
 
@@ -158,6 +264,8 @@ export function buildStateSync(
     youHaveAnswered: state.answers.some((a) => a.playerId === forPlayerId),
     chainTask: computeChainTask(state, forPlayerId, resolveDrawing),
     chainReveal: computeChainReveal(state, nicknameOf, resolveDrawing),
+    bluff: computeBluff(state, forPlayerId, nicknameOf),
+    duel: computeDuel(state, forPlayerId, nicknameOf),
     reviewQuestions: computeReviewQuestions(state, forPlayerId, nicknameOf),
   };
 }

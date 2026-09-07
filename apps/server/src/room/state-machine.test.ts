@@ -16,6 +16,8 @@ function question(overrides: Partial<InternalQuestion> = {}): InternalQuestion {
   return {
     id: 1,
     theme: "geo",
+    family: null,
+    answerKind: "text",
     difficulty: 1,
     type: "text",
     prompt: "Capitale de la France ?",

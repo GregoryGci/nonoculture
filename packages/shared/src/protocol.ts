@@ -59,6 +59,9 @@ export const HostSettingsMsg = z.object({
   questionCount: z.number().int().min(5).max(40).optional(),
   questionDurationSec: z.number().int().min(15).max(30).optional(),
   chainRounds: z.number().int().min(0).max(6).optional(),
+  bluffRounds: z.number().int().min(0).max(6).optional(),
+  duelRounds: z.number().int().min(0).max(6).optional(),
+  numericRounds: z.number().int().min(0).max(6).optional(),
   themes: z.array(z.string()).optional(),
 });
 
@@ -88,6 +91,34 @@ export const SubmitChainGuessMsg = z.object({
   text: z.string().min(1).max(80),
 });
 
+// --- Bluff round ---
+
+/** The plausible-sounding lie a player offers in place of the real answer. */
+export const SubmitBluffMsg = z.object({
+  type: z.literal("SUBMIT_BLUFF"),
+  text: z.string().min(1).max(80),
+});
+
+/** Which of the shuffled options the player believes is the real answer. */
+export const SubmitBluffVoteMsg = z.object({
+  type: z.literal("SUBMIT_BLUFF_VOTE"),
+  optionId: z.string().min(1).max(64),
+});
+
+// --- Duel round ---
+
+/** A spectator calling which of the two contestants will win. */
+export const SubmitDuelPredictionMsg = z.object({
+  type: z.literal("SUBMIT_DUEL_PREDICTION"),
+  playerId: uuid,
+});
+
+/** One item towards a contestant's list. Sent per item, not as one block. */
+export const SubmitDuelAnswerMsg = z.object({
+  type: z.literal("SUBMIT_DUEL_ANSWER"),
+  text: z.string().min(1).max(60),
+});
+
 export const ClientMessage = z.discriminatedUnion("type", [
   HelloMsg,
   ObserveMsg,
@@ -102,6 +133,10 @@ export const ClientMessage = z.discriminatedUnion("type", [
   SubmitChainPromptMsg,
   SubmitChainDrawingMsg,
   SubmitChainGuessMsg,
+  SubmitBluffMsg,
+  SubmitBluffVoteMsg,
+  SubmitDuelPredictionMsg,
+  SubmitDuelAnswerMsg,
 ]);
 
 export type ClientMessage = z.infer<typeof ClientMessage>;

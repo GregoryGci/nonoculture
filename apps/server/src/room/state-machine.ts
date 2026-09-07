@@ -1,16 +1,45 @@
-import { CHAIN_MIN_PLAYERS, DEFAULT_SETTINGS, MAX_CHAIN_ROUNDS, isChainMatch } from "@nonoculture/shared";
+import {
+  BLUFF_MIN_PLAYERS,
+  BLUFF_POINTS_FOOLED,
+  BLUFF_POINTS_FOUND,
+  CHAIN_MIN_PLAYERS,
+  DEFAULT_SETTINGS,
+  DUEL_MIN_PLAYERS,
+  DUEL_POINTS_PREDICTED,
+  DUEL_POINTS_WINNER,
+  MAX_CHAIN_ROUNDS,
+  NUMERIC_POINTS_CLOSEST,
+  NUMERIC_POINTS_EXACT,
+  MAX_SPECIAL_ROUNDS,
+  isChainMatch,
+  normalizeAnswer,
+} from "@nonoculture/shared";
 import type { GameSettings, Grade } from "@nonoculture/shared";
 import {
   CHAIN_DRAW_DURATION_MS,
   CHAIN_GUESS_DURATION_MS,
   CHAIN_POINTS,
   CHAIN_PROMPT_DURATION_MS,
+  BLUFF_REVEAL_DURATION_MS,
+  BLUFF_VOTE_DURATION_MS,
+  BLUFF_WRITE_DURATION_MS,
   CHAIN_REVEAL_PER_ITEM_MS,
   CODE_RELEASE_DELAY_MS,
+  DUEL_ANSWER_DURATION_MS,
+  DUEL_PREDICT_DURATION_MS,
+  DUEL_REVEAL_DURATION_MS,
   DISCONNECT_GRACE_MS,
   ROOM_IDLE_TIMEOUT_MS,
 } from "./types.js";
-import type { ChainRoundState, Effect, GameEvent, GameState, InternalPlayer } from "./types.js";
+import type {
+  BluffRoundState,
+  ChainRoundState,
+  Effect,
+  GameEvent,
+  GameState,
+  InternalPlayer,
+  InternalQuestion,
+} from "./types.js";
 
 export interface TransitionResult {
   state: GameState;
@@ -29,6 +58,18 @@ function clampSettings(partial: Partial<GameSettings>, base: GameSettings): Game
       partial.chainRounds !== undefined
         ? Math.min(MAX_CHAIN_ROUNDS, Math.max(0, partial.chainRounds))
         : base.chainRounds,
+    bluffRounds:
+      partial.bluffRounds !== undefined
+        ? Math.min(MAX_SPECIAL_ROUNDS, Math.max(0, partial.bluffRounds))
+        : base.bluffRounds,
+    duelRounds:
+      partial.duelRounds !== undefined
+        ? Math.min(MAX_SPECIAL_ROUNDS, Math.max(0, partial.duelRounds))
+        : base.duelRounds,
+    numericRounds:
+      partial.numericRounds !== undefined
+        ? Math.min(MAX_SPECIAL_ROUNDS, Math.max(0, partial.numericRounds))
+        : base.numericRounds,
     themes: partial.themes ?? base.themes,
   };
 }
@@ -127,24 +168,125 @@ function advancePastChainGuess(state: GameState, now: number): GameState {
   return resolveChain({ ...state, chain }, now);
 }
 
+// ---------- Bluff round ----------
+
+/** Every accepted spelling of a question's answer, normalised for comparison. */
+function acceptedAnswers(question: InternalQuestion): string[] {
+  return [question.answer, ...question.aliases].map(normalizeAnswer).filter((a) => a.length > 0);
+}
+
+/**
+ * Builds what voters see: the real answer hidden among the fakes.
+ *
+ * A fake that happens to match the real answer is dropped rather than shown twice — its
+ * author was right, not deceptive, and two identical options would make the vote nonsense.
+ */
+function buildBluffOptions(question: InternalQuestion, fakes: Record<string, string>): BluffRoundState["options"] {
+  const accepted = acceptedAnswers(question);
+  const seen = new Set(accepted);
+  const options: BluffRoundState["options"] = [{ id: "real", text: question.answer, authorId: null }];
+  for (const [authorId, text] of Object.entries(fakes)) {
+    const norm = normalizeAnswer(text);
+    if (norm.length === 0 || seen.has(norm)) continue;
+    seen.add(norm);
+    options.push({ id: `f-${authorId}`, text, authorId });
+  }
+  // Deterministic shuffle is not needed; the order is snapshotted into state once.
+  for (let i = options.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [options[i], options[j]] = [options[j]!, options[i]!];
+  }
+  return options;
+}
+
+function resolveBluff(state: GameState, now: number): GameState {
+  const bluff = state.bluff!;
+  const scores = Object.fromEntries(Object.values(state.players).map((p) => [p.playerId, p.score]));
+  const byOption = new Map(bluff.options.map((o) => [o.id, o]));
+
+  for (const [voterId, optionId] of Object.entries(bluff.votes)) {
+    const option = byOption.get(optionId);
+    if (!option) continue;
+    if (option.authorId === null) {
+      scores[voterId] = (scores[voterId] ?? 0) + BLUFF_POINTS_FOUND;
+    } else if (option.authorId !== voterId) {
+      // You can't score off your own lie.
+      scores[option.authorId] = (scores[option.authorId] ?? 0) + BLUFF_POINTS_FOOLED;
+    }
+  }
+
+  const players = Object.fromEntries(
+    Object.entries(state.players).map(([id, p]) => [id, { ...p, score: scores[id] ?? p.score }]),
+  );
+  return { ...state, players, phase: "BLUFF_REVEAL", phaseDeadlineTs: now + BLUFF_REVEAL_DURATION_MS };
+}
+
+// ---------- Duel round ----------
+
+function resolveDuel(state: GameState, now: number): GameState {
+  const duel = state.duel!;
+  const [a, b] = duel.contestants;
+  const countA = duel.found[a]?.length ?? 0;
+  const countB = duel.found[b]?.length ?? 0;
+  const winner = countA === countB ? null : countA > countB ? a : b;
+
+  const scores = Object.fromEntries(Object.values(state.players).map((p) => [p.playerId, p.score]));
+  if (winner) {
+    scores[winner] = (scores[winner] ?? 0) + DUEL_POINTS_WINNER;
+    for (const [spectatorId, backed] of Object.entries(duel.predictions)) {
+      if (backed === winner) scores[spectatorId] = (scores[spectatorId] ?? 0) + DUEL_POINTS_PREDICTED;
+    }
+  }
+
+  const players = Object.fromEntries(
+    Object.entries(state.players).map(([id, p]) => [id, { ...p, score: scores[id] ?? p.score }]),
+  );
+  return { ...state, players, phase: "DUEL_REVEAL", phaseDeadlineTs: now + DUEL_REVEAL_DURATION_MS };
+}
+
 /** Enters the deck slot at `index`: a trivia QUESTION, a chain round, or HOST_REVIEW past the end.
  *  Chain slots are skipped (recursively) if too few players are connected to run one. */
 function startDeckSlot(state: GameState, index: number, now: number): GameState {
   if (index >= state.deck.length) {
-    return { ...state, phase: "HOST_REVIEW", deckIndex: index, chain: null, phaseDeadlineTs: null };
+    return { ...state, phase: "HOST_REVIEW", deckIndex: index, ...CLEARED, phaseDeadlineTs: null };
   }
   const item = state.deck[index];
   if (!item) return startDeckSlot(state, index + 1, now); // defensive: a malformed deck slot
-  const base = { ...state, deckIndex: index, answers: [] };
+  const base = { ...state, deckIndex: index, answers: [], ...CLEARED };
+  const participants = connectedPlayers(state);
+
   if (item.kind === "trivia") {
+    return { ...base, phase: "QUESTION", phaseDeadlineTs: now + state.settings.questionDurationSec * 1000 };
+  }
+
+  if (item.kind === "bluff") {
+    // Below the minimum there aren't enough lies to hide the real answer among.
+    if (participants.length < BLUFF_MIN_PLAYERS) return startDeckSlot(state, index + 1, now);
     return {
       ...base,
-      phase: "QUESTION",
-      chain: null,
-      phaseDeadlineTs: now + state.settings.questionDurationSec * 1000,
+      phase: "BLUFF_WRITE",
+      bluff: { fakes: {}, options: [], votes: {} },
+      phaseDeadlineTs: now + BLUFF_WRITE_DURATION_MS,
     };
   }
-  const participants = connectedPlayers(state);
+
+  if (item.kind === "duel") {
+    // Two contestants and at least one spectator, otherwise the predictions are empty.
+    if (participants.length < DUEL_MIN_PLAYERS) return startDeckSlot(state, index + 1, now);
+    // Whoever has duelled least often goes first, so the same two don't get picked all game.
+    const ranked = [...participants].sort((a, b) => a.duels - b.duels || Math.random() - 0.5);
+    const contestants: [string, string] = [ranked[0]!.playerId, ranked[1]!.playerId];
+    const players = { ...state.players };
+    for (const id of contestants) players[id] = { ...players[id]!, duels: players[id]!.duels + 1 };
+    return {
+      ...base,
+      players,
+      phase: "DUEL_PREDICT",
+      duel: { contestants, predictions: {}, found: {}, attempts: {} },
+      phaseDeadlineTs: now + DUEL_PREDICT_DURATION_MS,
+    };
+  }
+
   if (participants.length < CHAIN_MIN_PLAYERS) {
     return startDeckSlot(state, index + 1, now); // not enough players right now, skip this slot
   }
@@ -157,13 +299,85 @@ function startDeckSlot(state: GameState, index: number, now: number): GameState 
   };
 }
 
+/** Every special-round slate wiped, so a slot never inherits the previous one's state. */
+const CLEARED = { chain: null, bluff: null, duel: null } as const;
+
+/** The question attached to the slot currently in play, whatever kind it is. */
+function currentQuestion(state: GameState): InternalQuestion | null {
+  const item = state.deck[state.deckIndex];
+  if (!item) return null;
+  return item.kind === "chain" ? null : item.question;
+}
+
+function advancePastBluffWrite(state: GameState, now: number): GameState {
+  const question = currentQuestion(state);
+  if (!question) return state;
+  const options = buildBluffOptions(question, state.bluff!.fakes);
+  return {
+    ...state,
+    bluff: { ...state.bluff!, options },
+    phase: "BLUFF_VOTE",
+    phaseDeadlineTs: now + BLUFF_VOTE_DURATION_MS,
+  };
+}
+
 /** Moves on to the next deck slot (or HOST_REVIEW), with no scoreboard/reveal interlude. */
 function advanceDeck(state: GameState, now: number): GameState {
   return startDeckSlot(state, state.deckIndex + 1, now);
 }
 
-/** Archives the current question's answers for the end-of-game review, then advances. */
+/** The first number in a free-text answer, or null if there isn't one. */
+function parseNumber(raw: string): number | null {
+  const match = raw
+    .replace(/\s/g, "")
+    .replace(/,/g, ".")
+    .match(/-?\d+(\.\d+)?/);
+  if (!match) return null;
+  const value = Number(match[0]);
+  return Number.isFinite(value) ? value : null;
+}
+
+/**
+ * Scores a "closest wins" question the moment it closes.
+ *
+ * Exact hits score more than merely-closest, and a tie splits nothing — everyone equally
+ * close scores. Anyone who wrote no number at all simply doesn't place.
+ */
+function scoreNumericQuestion(state: GameState, question: InternalQuestion): GameState {
+  const target = parseNumber(question.answer);
+  if (target === null) return state;
+
+  const distances = state.answers
+    .map((a) => ({ playerId: a.playerId, value: parseNumber(a.raw) }))
+    .filter((a): a is { playerId: string; value: number } => a.value !== null)
+    .map((a) => ({ playerId: a.playerId, gap: Math.abs(a.value - target) }));
+  if (distances.length === 0) return state;
+
+  const best = Math.min(...distances.map((d) => d.gap));
+  const scores = Object.fromEntries(Object.values(state.players).map((p) => [p.playerId, p.score]));
+  for (const { playerId, gap } of distances) {
+    if (gap !== best) continue;
+    scores[playerId] = (scores[playerId] ?? 0) + (gap === 0 ? NUMERIC_POINTS_EXACT : NUMERIC_POINTS_CLOSEST);
+  }
+
+  const players = Object.fromEntries(
+    Object.entries(state.players).map(([id, p]) => [id, { ...p, score: scores[id] ?? p.score }]),
+  );
+  return { ...state, players };
+}
+
+/**
+ * Archives the current question's answers for the end-of-game review, then advances.
+ *
+ * A "closest wins" question is settled here instead and kept out of the review: it has an
+ * objective answer, so putting it in front of the host would be asking them to rubber-stamp
+ * arithmetic.
+ */
 function logAnswersAndAdvance(state: GameState, now: number): GameState {
+  const question = currentQuestion(state);
+  if (question?.answerKind === "number") {
+    return advanceDeck(scoreNumericQuestion(state, question), now);
+  }
   const answerLog =
     state.answers.length > 0 ? { ...state.answerLog, [state.deckIndex]: state.answers } : state.answerLog;
   return advanceDeck({ ...state, answerLog }, now);
@@ -174,12 +388,30 @@ function logAnswersAndAdvance(state: GameState, now: number): GameState {
  * last outstanding player disconnects sits there until its timer expires, even though
  * everyone still in the room is done.
  */
+/** True once every connected player has an entry — the usual "waiting on the room" test. */
+function allConnectedHaveKeys(state: GameState, entries: Record<string, unknown>): boolean {
+  const eligible = connectedPlayers(state);
+  if (eligible.length === 0) return false;
+  return eligible.every((p) => entries[p.playerId] !== undefined);
+}
+
+/** Contestants don't predict, so only the spectators are waited on. */
+function allSpectatorsPredicted(state: GameState): boolean {
+  const duel = state.duel;
+  if (!duel) return false;
+  const spectators = connectedPlayers(state).filter((p) => !duel.contestants.includes(p.playerId));
+  if (spectators.length === 0) return true;
+  return spectators.every((p) => duel.predictions[p.playerId] !== undefined);
+}
+
 function advanceIfStepComplete(state: GameState, now: number): GameState {
   // Only when someone is still around: an empty room shouldn't burn through phases.
   if (connectedPlayers(state).length === 0) return state;
   if (state.phase === "QUESTION") {
     return allConnectedAnswered(state) ? logAnswersAndAdvance(state, now) : state;
   }
+  const special = advanceIfSpecialComplete(state, now);
+  if (special !== state) return special;
   if (!state.chain) return state;
   if (state.phase === "CHAIN_PROMPT") {
     return allChainStepDone(state, state.chain.prompts, 0) ? advancePastChainPrompt(state, now) : state;
@@ -189,6 +421,23 @@ function advanceIfStepComplete(state: GameState, now: number): GameState {
   }
   if (state.phase === "CHAIN_GUESS") {
     return allChainStepDone(state, state.chain.guesses, 2) ? advancePastChainGuess(state, now) : state;
+  }
+  return state;
+}
+
+/** The same roster re-check for the rounds that wait on everyone. */
+function advanceIfSpecialComplete(state: GameState, now: number): GameState {
+  if (connectedPlayers(state).length === 0) return state;
+  if (state.phase === "BLUFF_WRITE" && state.bluff) {
+    return allConnectedHaveKeys(state, state.bluff.fakes) ? advancePastBluffWrite(state, now) : state;
+  }
+  if (state.phase === "BLUFF_VOTE" && state.bluff) {
+    return allConnectedHaveKeys(state, state.bluff.votes) ? resolveBluff(state, now) : state;
+  }
+  if (state.phase === "DUEL_PREDICT" && state.duel) {
+    return allSpectatorsPredicted(state)
+      ? { ...state, phase: "DUEL_ANSWER", phaseDeadlineTs: now + DUEL_ANSWER_DURATION_MS }
+      : state;
   }
   return state;
 }
@@ -206,6 +455,8 @@ export function createRoom(roomCode: string, now: number): GameState {
     answerLog: {},
     grades: {},
     chain: null,
+    bluff: null,
+    duel: null,
     phaseDeadlineTs: null,
     createdAt: now,
     lastActivityAt: now,
@@ -239,6 +490,7 @@ export function transition(state: GameState, event: GameEvent): TransitionResult
           connected: true,
           joinedAt: event.now,
           disconnectedAt: null,
+          duels: 0,
         };
         next = {
           ...state,
@@ -408,9 +660,77 @@ export function transition(state: GameState, event: GameEvent): TransitionResult
       break;
     }
 
+    case "SUBMIT_BLUFF": {
+      if (state.phase !== "BLUFF_WRITE" || !state.bluff) break;
+      if (!state.players[event.playerId]?.connected) break;
+      if (state.bluff.fakes[event.playerId] !== undefined) break; // locked
+      const bluff = { ...state.bluff, fakes: { ...state.bluff.fakes, [event.playerId]: event.text } };
+      next = { ...state, bluff };
+      effects.push({ kind: "SEND_ANSWER_RECEIVED", playerId: event.playerId });
+      if (allConnectedHaveKeys(next, bluff.fakes)) next = advancePastBluffWrite(next, event.now);
+      break;
+    }
+
+    case "SUBMIT_BLUFF_VOTE": {
+      if (state.phase !== "BLUFF_VOTE" || !state.bluff) break;
+      if (!state.players[event.playerId]?.connected) break;
+      if (state.bluff.votes[event.playerId] !== undefined) break; // locked
+      const option = state.bluff.options.find((o) => o.id === event.optionId);
+      // Voting for your own lie would be free points; there is nothing to work out.
+      if (!option || option.authorId === event.playerId) break;
+      const bluff = { ...state.bluff, votes: { ...state.bluff.votes, [event.playerId]: event.optionId } };
+      next = { ...state, bluff };
+      effects.push({ kind: "SEND_ANSWER_RECEIVED", playerId: event.playerId });
+      if (allConnectedHaveKeys(next, bluff.votes)) next = resolveBluff(next, event.now);
+      break;
+    }
+
+    case "SUBMIT_DUEL_PREDICTION": {
+      if (state.phase !== "DUEL_PREDICT" || !state.duel) break;
+      if (!state.players[event.playerId]?.connected) break;
+      // Contestants don't get to bet on themselves.
+      if (state.duel.contestants.includes(event.playerId)) break;
+      if (!state.duel.contestants.includes(event.targetId)) break;
+      if (state.duel.predictions[event.playerId] !== undefined) break; // locked
+      const duel = { ...state.duel, predictions: { ...state.duel.predictions, [event.playerId]: event.targetId } };
+      next = { ...state, duel };
+      effects.push({ kind: "SEND_ANSWER_RECEIVED", playerId: event.playerId });
+      if (allSpectatorsPredicted(next)) {
+        next = { ...next, phase: "DUEL_ANSWER", phaseDeadlineTs: event.now + DUEL_ANSWER_DURATION_MS };
+      }
+      break;
+    }
+
+    case "SUBMIT_DUEL_ANSWER": {
+      if (state.phase !== "DUEL_ANSWER" || !state.duel) break;
+      if (!state.duel.contestants.includes(event.playerId)) break;
+      const question = currentQuestion(state);
+      if (!question) break;
+
+      const attempts = [...(state.duel.attempts[event.playerId] ?? []), event.text];
+      const found = [...(state.duel.found[event.playerId] ?? [])];
+      const guess = normalizeAnswer(event.text);
+      const accepted = acceptedAnswers(question);
+      // Counted once each: repeating a hit shouldn't inflate the score.
+      const alreadyFound = new Set(found.map(normalizeAnswer));
+      if (guess.length > 0 && accepted.includes(guess) && !alreadyFound.has(guess)) found.push(event.text);
+
+      next = {
+        ...state,
+        duel: {
+          ...state.duel,
+          attempts: { ...state.duel.attempts, [event.playerId]: attempts },
+          found: { ...state.duel.found, [event.playerId]: found },
+        },
+      };
+      // A contestant who has named everything ends the round early for both.
+      if (found.length >= accepted.length) next = resolveDuel(next, event.now);
+      break;
+    }
+
     case "HOST_NEXT": {
       if (event.playerId !== state.hostPlayerId) break;
-      if (state.phase === "CHAIN_REVEAL") {
+      if (state.phase === "CHAIN_REVEAL" || state.phase === "BLUFF_REVEAL" || state.phase === "DUEL_REVEAL") {
         next = advanceDeck(state, event.now);
       } else if (state.phase === "HOST_REVIEW") {
         next = { ...state, phase: "FINISHED", phaseDeadlineTs: null };
@@ -420,7 +740,9 @@ export function transition(state: GameState, event: GameEvent): TransitionResult
 
     case "PLAY_AGAIN": {
       if (event.playerId !== state.hostPlayerId || state.phase !== "FINISHED") break;
-      const players = Object.fromEntries(Object.entries(state.players).map(([id, p]) => [id, { ...p, score: 0 }]));
+      const players = Object.fromEntries(
+        Object.entries(state.players).map(([id, p]) => [id, { ...p, score: 0, duels: 0 }]),
+      );
       next = {
         ...state,
         phase: "LOBBY",
@@ -431,6 +753,8 @@ export function transition(state: GameState, event: GameEvent): TransitionResult
         answerLog: {},
         grades: {},
         chain: null,
+        bluff: null,
+        duel: null,
         phaseDeadlineTs: null,
       };
       break;
@@ -493,6 +817,18 @@ function handleAlarm(state: GameState, now: number, effects: Effect[]): GameStat
     } else if (next.phase === "CHAIN_GUESS") {
       next = advancePastChainGuess(next, now);
     } else if (next.phase === "CHAIN_REVEAL") {
+      next = advanceDeck(next, now);
+    } else if (next.phase === "BLUFF_WRITE") {
+      next = advancePastBluffWrite(next, now);
+    } else if (next.phase === "BLUFF_VOTE") {
+      next = resolveBluff(next, now);
+    } else if (next.phase === "BLUFF_REVEAL") {
+      next = advanceDeck(next, now);
+    } else if (next.phase === "DUEL_PREDICT") {
+      next = { ...next, phase: "DUEL_ANSWER", phaseDeadlineTs: now + DUEL_ANSWER_DURATION_MS };
+    } else if (next.phase === "DUEL_ANSWER") {
+      next = resolveDuel(next, now);
+    } else if (next.phase === "DUEL_REVEAL") {
       next = advanceDeck(next, now);
     }
   }

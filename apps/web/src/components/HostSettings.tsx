@@ -1,5 +1,13 @@
 import { useEffect, useState } from "react";
-import { CHAIN_MIN_PLAYERS, MAX_CHAIN_ROUNDS, THEME_LABELS, type GameSettings } from "@nonoculture/shared";
+import {
+  BLUFF_MIN_PLAYERS,
+  CHAIN_MIN_PLAYERS,
+  DUEL_MIN_PLAYERS,
+  MAX_CHAIN_ROUNDS,
+  MAX_SPECIAL_ROUNDS,
+  THEME_LABELS,
+  type GameSettings,
+} from "@nonoculture/shared";
 import { fetchPlayableThemes } from "../lib/api";
 
 const ALL_THEMES = Object.entries(THEME_LABELS).map(([id, label]) => ({ id, label }));
@@ -76,6 +84,52 @@ export function HostSettings({
             Sautées : {CHAIN_MIN_PLAYERS} joueurs minimum (vous êtes {connectedPlayers})
           </p>
         )}
+      </Row>
+
+      <Row label="Manches de bluff" value={String(settings.bluffRounds)}>
+        <input
+          type="range"
+          min={0}
+          max={MAX_SPECIAL_ROUNDS}
+          step={1}
+          value={settings.bluffRounds}
+          aria-label="Nombre de manches de bluff"
+          onChange={(e) => onChange({ bluffRounds: Number(e.target.value) })}
+        />
+        {settings.bluffRounds > 0 && connectedPlayers < BLUFF_MIN_PLAYERS && (
+          <p className="text-[13px]" style={{ color: "var(--color-text-faint)" }}>
+            Sautées : {BLUFF_MIN_PLAYERS} joueurs minimum
+          </p>
+        )}
+      </Row>
+
+      <Row label="Duels" value={String(settings.duelRounds)}>
+        <input
+          type="range"
+          min={0}
+          max={MAX_SPECIAL_ROUNDS}
+          step={1}
+          value={settings.duelRounds}
+          aria-label="Nombre de duels"
+          onChange={(e) => onChange({ duelRounds: Number(e.target.value) })}
+        />
+        {settings.duelRounds > 0 && connectedPlayers < DUEL_MIN_PLAYERS && (
+          <p className="text-[13px]" style={{ color: "var(--color-text-faint)" }}>
+            Sautés : {DUEL_MIN_PLAYERS} joueurs minimum
+          </p>
+        )}
+      </Row>
+
+      <Row label="Questions au plus proche" value={String(settings.numericRounds)}>
+        <input
+          type="range"
+          min={0}
+          max={MAX_SPECIAL_ROUNDS}
+          step={1}
+          value={settings.numericRounds}
+          aria-label="Nombre de questions au plus proche"
+          onChange={(e) => onChange({ numericRounds: Number(e.target.value) })}
+        />
       </Row>
 
       <Row label="Temps par question" value={`${settings.questionDurationSec}s`}>

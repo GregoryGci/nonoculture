@@ -15,6 +15,8 @@ import { ChainPromptForm } from "../components/ChainPromptForm";
 import { DrawingCanvas } from "../components/DrawingCanvas";
 import { ChainGuessForm } from "../components/ChainGuessForm";
 import { ChainRevealSlideshow } from "../components/ChainRevealSlideshow";
+import { BluffRound } from "../components/BluffRound";
+import { DuelRound } from "../components/DuelRound";
 import { themeLabel, type QuestionPublic, type RoomStateSync } from "@nonoculture/shared";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -82,7 +84,10 @@ export function Room() {
           {state.phase === "QUESTION" && state.currentQuestion && (
             <>
               <div className="flex flex-col items-center gap-3 text-center">
-                <p className="eyebrow">{themeLabel(state.currentQuestion.theme)}</p>
+                <p className="eyebrow">
+                  {themeLabel(state.currentQuestion.theme)}
+                  {state.currentQuestion.answerKind === "number" && " · le plus proche gagne"}
+                </p>
                 <h1 className="display text-[clamp(1.5rem,6vw,2.25rem)]">{state.currentQuestion.prompt}</h1>
               </div>
               <QuestionMedia question={state.currentQuestion} />
@@ -149,6 +154,34 @@ export function Room() {
                 </button>
               )}
             </ChainStep>
+          )}
+
+          {/* The prompt stays up through every step: during the vote you are choosing an
+              answer to it, so hiding it would be asking people to guess blind. */}
+          {state.bluff && (
+            <SpecialStep label="Bluff" title={state.bluff.prompt}>
+              <BluffRound
+                bluff={state.bluff}
+                onWrite={(text) => send({ type: "SUBMIT_BLUFF", text })}
+                onVote={(optionId) => send({ type: "SUBMIT_BLUFF_VOTE", optionId })}
+              />
+            </SpecialStep>
+          )}
+
+          {state.duel && (
+            <SpecialStep label="Duel" title={state.duel.prompt}>
+              <DuelRound
+                duel={state.duel}
+                onPredict={(id) => send({ type: "SUBMIT_DUEL_PREDICTION", playerId: id })}
+                onAnswer={(text) => send({ type: "SUBMIT_DUEL_ANSWER", text })}
+              />
+            </SpecialStep>
+          )}
+
+          {(state.phase === "BLUFF_REVEAL" || state.phase === "DUEL_REVEAL") && isHost && (
+            <button onClick={() => send({ type: "HOST_NEXT" })} className="btn btn-primary h-14 w-full">
+              Continuer
+            </button>
           )}
 
           {state.phase === "HOST_REVIEW" &&
@@ -276,6 +309,19 @@ function WaitingForPodium({ players }: { players: RoomStateSync["players"] }) {
       </div>
       {/* Not a dead wait: the ranking reorders as the host grades. */}
       <Scoreboard players={players} />
+    </div>
+  );
+}
+
+/** Shared frame for the special rounds: a small label, the prompt, then the round's own UI. */
+function SpecialStep({ label, title, children }: { label: string; title: string; children: React.ReactNode }) {
+  return (
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-col items-center gap-2 text-center">
+        <p className="eyebrow">{label}</p>
+        <h1 className="display text-[clamp(1.35rem,5.5vw,2rem)]">{title}</h1>
+      </div>
+      {children}
     </div>
   );
 }

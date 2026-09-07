@@ -4,6 +4,8 @@ import type { DeckItem, InternalQuestion } from "../room/types.js";
 interface QuestionRow {
   id: number;
   theme: string;
+  family: string | null;
+  answer_kind: string;
   difficulty: number;
   type: string;
   prompt: string;
@@ -24,6 +26,8 @@ function toInternal(row: QuestionRow): InternalQuestion {
   return {
     id: row.id,
     theme: row.theme,
+    family: row.family,
+    answerKind: row.answer_kind === "number" || row.answer_kind === "list" ? row.answer_kind : "text",
     difficulty: row.difficulty as 1 | 2 | 3,
     type: row.type as InternalQuestion["type"],
     prompt: row.prompt,
@@ -44,28 +48,35 @@ async function fetchQuestions(
   db: D1Database,
   settings: GameSettings,
   limit: number,
-  kind: "audio" | "rest",
+  kind: "audio" | "rest" | "numeric" | "list",
   mediaAvailable: boolean,
 ): Promise<InternalQuestion[]> {
   if (limit <= 0) return [];
   const themes = settings.themes;
   const clauses = ["verified = 1"];
   if (themes.length > 0) clauses.push(`theme IN (${themes.map(() => "?").join(",")})`);
-  if (kind === "audio") {
+  if (kind === "numeric") {
+    // Scored by proximity, so a wrong-but-close answer still counts for something.
+    clauses.push("answer_kind = 'number'");
+  } else if (kind === "list") {
+    // A duel counts hits against a set, so it needs a question that carries one.
+    clauses.push("answer_kind = 'list'");
+  } else if (kind === "audio") {
     // The quota bucket, drawn separately so a game reliably contains some.
     clauses.push("type = 'audio' AND media_key IS NOT NULL");
   } else {
     // Everything else, images included. Splitting on "media_key IS NULL" instead made image
     // questions unreachable: they carry a media key but are not audio, so they fell through
     // both buckets and could never be drawn.
-    clauses.push("type <> 'audio'");
+    clauses.push("type <> 'audio' AND answer_kind = 'text'");
     if (!mediaAvailable) clauses.push("media_key IS NULL");
   }
+  // Over-drawn on purpose: diversify() needs spare rows in each family to spread across.
   const stmt = db
     .prepare(`SELECT * FROM questions WHERE ${clauses.join(" AND ")} ORDER BY RANDOM() LIMIT ?`)
-    .bind(...themes, limit);
+    .bind(...themes, Math.min(limit * 6, 600));
   const { results } = await stmt.all<QuestionRow>();
-  return (results ?? []).map(toInternal);
+  return diversify((results ?? []).map(toInternal), limit);
 }
 
 /**
@@ -96,6 +107,40 @@ function pickChainPositions(totalSlots: number, count: number): Set<number> {
   return positions;
 }
 
+/**
+ * Spreads a draw across question templates instead of letting one dominate.
+ *
+ * Families are generated in bulk — "Quel sport pratique X ?" alone has hundreds of rows — so
+ * a plain random draw on a themed game returned twenty rewordings of the same sentence.
+ * Taking one from each family in turn gives every template a share before any repeats.
+ * Hand-written questions carry no family and are each their own bucket, so they are never
+ * squeezed out by a large generated one.
+ */
+function diversify(rows: InternalQuestion[], limit: number): InternalQuestion[] {
+  const buckets = new Map<string, InternalQuestion[]>();
+  for (const q of rows) {
+    const key = q.family ?? `solo:${q.id}`;
+    const bucket = buckets.get(key);
+    if (bucket) bucket.push(q);
+    else buckets.set(key, [q]);
+  }
+
+  const ordered = shuffle([...buckets.values()]);
+  const out: InternalQuestion[] = [];
+  for (let round = 0; out.length < limit; round++) {
+    let tookAny = false;
+    for (const bucket of ordered) {
+      const q = bucket[round];
+      if (!q) continue;
+      out.push(q);
+      tookAny = true;
+      if (out.length >= limit) break;
+    }
+    if (!tookAny) break; // every bucket exhausted
+  }
+  return out;
+}
+
 function shuffle<T>(items: T[]): T[] {
   const result = [...items];
   for (let i = result.length - 1; i > 0; i--) {
@@ -119,36 +164,62 @@ export async function buildDeck(
   { mediaAvailable }: { mediaAvailable: boolean },
 ): Promise<DeckItem[]> {
   const total = settings.questionCount;
-  // At the 1-per-15 rate a short game rounds down to zero drawing rounds, which is exactly
-  // the length a host picks to try the mode out. Always keep one when the deck can hold it
-  // (a slot that is neither first nor last, so 3 slots minimum).
-  // A chain round is never the first or last slot, so a deck shorter than 3 can hold none.
-  const requestedChainCount = total >= 3 ? Math.min(settings.chainRounds, total - 2) : 0;
-  const questionSlots = Math.max(0, total - requestedChainCount);
+  // A special round is never the first or last slot, so a short deck holds fewer of them.
+  const specialBudget = total >= 3 ? total - 2 : 0;
+  const chainCount = Math.min(settings.chainRounds, specialBudget);
+  const bluffWanted = Math.min(settings.bluffRounds, Math.max(0, specialBudget - chainCount));
+  const duelWanted = Math.min(settings.duelRounds, Math.max(0, specialBudget - chainCount - bluffWanted));
+
+  // Bluff and duel each need a question of their own, drawn first so the slot count can
+  // shrink to what the bank can actually supply — a duel needs a list question, and there
+  // may be none for the chosen themes.
+  const bluffQuestions = await fetchQuestions(db, settings, bluffWanted, "rest", mediaAvailable);
+  const duelQuestions = await fetchQuestions(db, settings, duelWanted, "list", mediaAvailable);
+
+  const specialSlots = chainCount + bluffQuestions.length + duelQuestions.length;
+  const questionSlots = Math.max(0, total - specialSlots);
   const audioQuota = mediaAvailable ? Math.round((total * AUDIO_QUESTIONS_PER_15) / 15) : 0;
 
-  const audio = await fetchQuestions(db, settings, Math.min(audioQuota, questionSlots), "audio", mediaAvailable);
-  // Whatever audio couldn't supply is taken up here, so the deck keeps its intended length.
-  const rest = await fetchQuestions(db, settings, questionSlots - audio.length, "rest", mediaAvailable);
-  const questions = shuffle([...audio, ...rest]);
+  const numeric = await fetchQuestions(
+    db,
+    settings,
+    Math.min(settings.numericRounds, questionSlots),
+    "numeric",
+    mediaAvailable,
+  );
+  const audio = await fetchQuestions(
+    db,
+    settings,
+    Math.min(audioQuota, Math.max(0, questionSlots - numeric.length)),
+    "audio",
+    mediaAvailable,
+  );
+  // Whatever the quotas could not supply is taken up here, so the deck keeps its length.
+  const rest = await fetchQuestions(
+    db,
+    settings,
+    questionSlots - audio.length - numeric.length,
+    "rest",
+    mediaAvailable,
+  );
+  const questions = shuffle([...audio, ...numeric, ...rest]);
 
   // The bank may hold fewer questions than asked for (narrow theme filter, unseeded DB).
   // Only ever lay out as many question slots as we actually drew — filling the gap with
   // undefined would build a deck of blank questions that plays out as an empty screen.
   if (questions.length === 0) return [];
-  const totalSlots = questions.length + requestedChainCount;
-  const chainPositions = pickChainPositions(totalSlots, requestedChainCount);
 
-  const deck: DeckItem[] = [];
-  let triviaIdx = 0;
-  for (let i = 0; i < totalSlots; i++) {
-    const question = questions[triviaIdx];
-    if (chainPositions.has(i) || !question) {
-      deck.push({ kind: "chain" });
-    } else {
-      deck.push({ kind: "trivia", question });
-      triviaIdx++;
-    }
-  }
+  // Ordinary questions first, then the special rounds dropped into spread-out positions.
+  const deck: DeckItem[] = questions.map((question) => ({ kind: "trivia", question }));
+  const specials: DeckItem[] = shuffle([
+    ...Array.from({ length: chainCount }, (): DeckItem => ({ kind: "chain" })),
+    ...bluffQuestions.map((question): DeckItem => ({ kind: "bluff", question })),
+    ...duelQuestions.map((question): DeckItem => ({ kind: "duel", question })),
+  ]);
+  const positions = [...pickChainPositions(deck.length + specials.length, specials.length)].sort((a, b) => a - b);
+  positions.forEach((position, i) => {
+    const special = specials[i];
+    if (special) deck.splice(Math.min(position, deck.length), 0, special);
+  });
   return deck;
 }

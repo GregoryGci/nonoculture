@@ -1,45 +1,42 @@
-# Décisions prises en autonomie (à valider au réveil)
+# Décisions prises en autonomie
 
-Le brief demandait de proposer 5 noms et 2-3 couleurs d'accent avant de trancher.
-Comme le travail a été fait de nuit sans validation possible, j'ai tranché moi-même
-pour ne pas bloquer le projet. Tout est facilement changeable — voir "Comment changer" en bas.
+Ce fichier garde la trace des choix tranchés sans validation préalable, et de ceux que tu as
+tranchés depuis. Tout reste changeable — voir "Comment changer" en bas.
 
 ## Nom du projet : **Nono Culture**
 
-Candidats proposés :
-1. **Nono Culture** ✅ (retenu) — mot français existant qui désigne un malentendu comique :
-   colle parfaitement au concept central (tout le monde voit les réponses de tout le
-   monde, y compris les plus à côté de la plaque). Court, mémorable, pas de trademark
-   connu dans le jeu vidéo/party game.
-2. Bourde Party — sympa mais "bourde" tout seul est un peu négatif comme nom de marque.
-3. Cervolte — contraction cerveau/révolte, punchy mais moins clair au premier coup d'œil.
-4. Culture Chaos — correct mais générique, sonne comme 50 autres quiz apps.
-5. Savant Faux — jeu de mots (savant fou / faux), trop subtil à l'oral.
+Le projet s'est d'abord appelé **Quiproquo**, nom choisi en autonomie la première nuit
+(mot français pour un malentendu comique, qui collait au concept : tout le monde voit les
+réponses de tout le monde). Renommé **Nono Culture** sur ta demande — c'est le nom définitif.
+Les autres candidats proposés à l'époque : Bourde Party, Cervolte, Culture Chaos, Savant Faux.
 
-Slug technique utilisé partout dans le code : `nonoculture`.
+Slug technique utilisé partout dans le code : `nonoculture`. Le nom de la base D1 est resté
+`quiproquo-db` : la renommer voudrait dire recréer la base et re-seeder 4 900 questions, pour
+un identifiant que personne ne voit.
 
-## Direction artistique : **cyberpunk minimaliste** (demande explicite, remplace le choix ci-dessous)
+## Direction artistique : **premium sobre** (Apple / SpaceX / Starlink)
 
-Palette initiale (nuit 1) : ambre chaud `#F0A93F` sur fond neutre `#0B0D12`, retenue en
-autonomie. Remplacée sur demande explicite par une direction cyberpunk :
-- Fond quasi noir teinté bleu `#05070C`, grille de fond subtile, vignette radiale cyan en
-  haut de page.
-- Accent unique : cyan électrique `#2DE2FF` (glow sur boutons/inputs/timer/bordures
-  actives), + un accent secondaire `#FF2E9A` utilisé avec parcimonie (langue tirée d'un
-  avatar, erreurs).
-- Typo : **Space Grotesk** (titres/boutons) + **JetBrains Mono** (code de room, scores,
-  timer — look "terminal").
-- Effets : boutons avec glow + léger scale au hover (`.btn`/`.btn-primary`/`.btn-secondary`
-  dans `theme.css`), panneaux à coins coupés (`.panel-notched`) sur le code de room,
-  transitions d'entrée de phase (`.phase-enter`), pulsation du timer sous 5s
-  (`.timer-urgent`).
+Deux DA ont précédé celle-ci : ambre chaud sur fond neutre (nuit 1, en autonomie), puis
+cyberpunk néon cyan/magenta (sur demande). Remplacées par la direction actuelle, demandée
+explicitement :
+
+- Fond **noir pur** `#000000`, surfaces en blanc translucide (`rgba(255,255,255,0.04)` et
+  `0.07`) plutôt qu'en gris opaque — la profondeur vient de la transparence, pas des bordures.
+- Accent : **blanc** `#ffffff` sur texte noir pour l'action principale. Un seul accent rouge
+  `#ff453a` pour les erreurs. Pas de couleur décorative : la hiérarchie se fait au contraste
+  et à l'espacement.
+- Typo : **Inter** partout, y compris pour les chiffres (en `font-variant-numeric: tabular-nums`
+  pour que scores et timers ne sautent pas).
+- Rayons : 18px pour les cartes, 12px pour les contrôles.
+- Animations : librairie **motion**, courbe expo-out `cubic-bezier(0.16, 1, 0.3, 1)` partout —
+  entrée rapide, sortie longue. Respecte `prefers-reduced-motion`.
 - Avatars : 12 robots, style **bottts** de DiceBear par Pablo Stanley (libre pour usage
   personnel et commercial, aucune attribution requise). Générés **hors ligne** par
   `apps/server/scripts/generate-avatars.mjs` (paquets npm `@dicebear/core` +
   `@dicebear/collection`, en devDependencies) vers `apps/web/public/avatars/*.svg`, qui
   sont commitées. L'app sert donc des fichiers finis : plus d'appel à l'API publique
-  DiceBear au rendu, plus de dépendance à un tiers. Fonds froids désaturés pour rester
-  dans la palette. Relancer le script uniquement pour changer le jeu d'avatars.
+  DiceBear au rendu, plus de dépendance à un tiers. Relancer le script uniquement pour
+  changer le jeu d'avatars.
 
 ## Comment changer ces choix
 
@@ -49,13 +46,20 @@ autonomie. Remplacée sur demande explicite par une direction cyberpunk :
 - Couleur/thème : tokens `--color-*` et `--font-*` dans `apps/web/src/styles/theme.css`.
 - Avatars : tableau `AVATARS` dans `apps/web/src/components/Avatar.tsx`.
 
-## Autres arbitrages pris de nuit
+## Autres arbitrages
 
 - Phases 1 à 6 de la section 11 du brief enchaînées sans pause de validation
   intermédiaire, avec auto-vérification par les tests Vitest à chaque étape plutôt
-  que par ton retour humain. Phases 7 (back-office) et 8 (polish) laissées pour la
-  suite — voir `docs/PROGRESS.md` pour l'état exact à ton réveil.
-- Cloudflare : aucune ressource réelle créée (pas de compte connecté). Tout tourne en
-  local via l'émulation Wrangler (`--local` / Miniflare) : D1, R2 et les Durable
-  Objects sont simulés sur disque. Au réveil : `wrangler login`, puis `pnpm cf:setup`
-  (script à créer en phase Setup) pour créer les vraies ressources et déployer.
+  que par un retour humain. Phase 7 (back-office `/admin`) toujours pas commencée.
+- **Cloudflare : compte connecté, Worker déployé.** D1 `quiproquo-db` en production,
+  migrations appliquées, banque complète chargée.
+- **R2 écarté volontairement** : son activation demande une carte bancaire, ce que tu as
+  refusé. Les médias sont donc des fichiers statiques servis par le binding `ASSETS` du
+  Worker, à côté du front buildé. Le bloc `[[r2_buckets]]` reste commenté dans
+  `wrangler.toml` et le code teste `mediaAvailable` avant de tirer une question média.
+- **Scoring : manuel par défaut, automatique là où c'est de l'arithmétique.** L'hôte note
+  les réponses libres en fin de partie ; les questions numériques (le plus proche gagne),
+  les duels (comptage de touches) et les manches dessinées se scorent seuls.
+- **Sources de questions : CC0 uniquement.** Wikidata pour le texte, Freesound pour l'audio,
+  Commons pour les images — avec vérification de licence **fichier par fichier**, parce que
+  la licence d'un site ne dit rien de celle d'un fichier précis.

@@ -14,6 +14,10 @@ interface SeedQuestion {
   explanation?: string | null;
   source?: string | null;
   verified?: 0 | 1;
+  /** Which generator template produced it; lets the deck spread across templates. */
+  family?: string | null;
+  /** How the answer is judged: by the host, by proximity, or by counting list hits. */
+  answer_kind?: "text" | "number" | "list";
 }
 
 function parseCsv(content: string): SeedQuestion[] {
@@ -60,6 +64,8 @@ function toInsertStatements(questions: SeedQuestion[]): string {
         "explanation",
         "source",
         "verified",
+        "family",
+        "answer_kind",
       ];
       const values = [
         sqlString(q.theme),
@@ -72,6 +78,8 @@ function toInsertStatements(questions: SeedQuestion[]): string {
         sqlString(q.explanation ?? null),
         sqlString(q.source ?? null),
         q.verified ?? 1,
+        sqlString(q.family ?? null),
+        sqlString(q.answer_kind ?? "text"),
       ];
       // OR IGNORE + the unique (prompt, answer) index from migration 0002 makes re-seeding
       // a no-op instead of duplicating the whole bank.
@@ -96,18 +104,24 @@ function main() {
 
   console.log(`Seeding ${questions.length} questions from ${filePath} (${remote ? "remote" : "local"})...`);
 
-  const sql = toInsertStatements(questions);
   const tmpDir = mkdtempSync(join(tmpdir(), "nonoculture-seed-"));
-  const sqlFile = join(tmpDir, "seed.sql");
-  writeFileSync(sqlFile, sql, "utf-8");
-
   // Same --persist-to as `pnpm dev` and `db:migrate:local`, so all three agree on which
   // local Miniflare database they're talking to.
   const target = remote ? ["--remote"] : ["--local", "--persist-to=.wrangler/state"];
-  execFileSync("wrangler", ["d1", "execute", "quiproquo-db", ...target, `--file=${sqlFile}`], {
-    stdio: "inherit",
-    shell: true,
-  });
+
+  // Sent in batches: a single file of several thousand statements makes the local Miniflare
+  // D1 fall over, and the remote one is happier with bounded requests too.
+  const BATCH = 400;
+  for (let start = 0; start < questions.length; start += BATCH) {
+    const slice = questions.slice(start, start + BATCH);
+    const sqlFile = join(tmpDir, `seed-${start}.sql`);
+    writeFileSync(sqlFile, toInsertStatements(slice), "utf-8");
+    console.log(`  ${start + slice.length}/${questions.length}...`);
+    execFileSync("wrangler", ["d1", "execute", "quiproquo-db", ...target, `--file=${sqlFile}`], {
+      stdio: ["inherit", "ignore", "inherit"],
+      shell: true,
+    });
+  }
 
   console.log("Done.");
 }

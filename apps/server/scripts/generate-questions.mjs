@@ -101,6 +101,133 @@ const FAMILIES = [
     }`,
   },
   {
+    id: "nationalite",
+    theme: "geo",
+    prompt: (subject) => `De quelle nationalité est ${subject} ?`,
+    query: `SELECT ?subject ?answer ?sitelinks WHERE {
+      ?h wdt:P31 wd:Q5; wdt:P27 ?c; wikibase:sitelinks ?sitelinks.
+      FILTER(?sitelinks > 90)
+      ?h rdfs:label ?subject. FILTER(lang(?subject) = "fr")
+      ?c rdfs:label ?answer. FILTER(lang(?answer) = "fr")
+    }`,
+  },
+  {
+    id: "monnaie",
+    theme: "geo",
+    prompt: (subject) => `Dans quel pays paie-t-on en ${subject} ?`,
+    query: `SELECT ?subject ?answer ?sitelinks WHERE {
+      ?c wdt:P31 wd:Q6256; wdt:P38 ?cur; wikibase:sitelinks ?sitelinks.
+      FILTER(?sitelinks > 90)
+      ?c rdfs:label ?answer. FILTER(lang(?answer) = "fr")
+      ?cur rdfs:label ?subject. FILTER(lang(?subject) = "fr")
+    }`,
+  },
+  {
+    id: "interprete",
+    theme: "musique",
+    prompt: (subject) => `Qui interprète « ${subject} » ?`,
+    query: `SELECT ?subject ?answer ?sitelinks WHERE {
+      ?s wdt:P31 wd:Q7366; wdt:P175 ?a; wikibase:sitelinks ?sitelinks.
+      FILTER(?sitelinks > 20)
+      ?s rdfs:label ?subject. FILTER(lang(?subject) = "fr")
+      ?a rdfs:label ?answer. FILTER(lang(?answer) = "fr")
+    }`,
+  },
+  {
+    id: "album",
+    theme: "musique",
+    prompt: (subject) => `Quel artiste a sorti l'album « ${subject} » ?`,
+    query: `SELECT ?subject ?answer ?sitelinks WHERE {
+      ?al wdt:P31 wd:Q482994; wdt:P175 ?a; wikibase:sitelinks ?sitelinks.
+      FILTER(?sitelinks > 20)
+      ?al rdfs:label ?subject. FILTER(lang(?subject) = "fr")
+      ?a rdfs:label ?answer. FILTER(lang(?answer) = "fr")
+    }`,
+  },
+  {
+    id: "groupe-membre",
+    theme: "musique",
+    prompt: (subject) => `De quel groupe ${subject} fait-il ou faisait-il partie ?`,
+    query: `SELECT ?subject ?answer ?sitelinks WHERE {
+      ?h wdt:P31 wd:Q5; wdt:P463 ?b. ?b wdt:P31 wd:Q215380.
+      ?h wikibase:sitelinks ?sitelinks. FILTER(?sitelinks > 60)
+      ?h rdfs:label ?subject. FILTER(lang(?subject) = "fr")
+      ?b rdfs:label ?answer. FILTER(lang(?answer) = "fr")
+    }`,
+  },
+  {
+    id: "annee-film",
+    theme: "cinema",
+    answerKind: "number",
+    prompt: (subject) => `En quelle année est sorti « ${subject} » ?`,
+    query: `SELECT ?subject ?answer ?sitelinks WHERE {
+      ?f wdt:P31 wd:Q11424; wdt:P577 ?d; wikibase:sitelinks ?sitelinks.
+      FILTER(?sitelinks > 60)
+      BIND(STR(YEAR(?d)) AS ?answer)
+      ?f rdfs:label ?subject. FILTER(lang(?subject) = "fr")
+    }`,
+  },
+  {
+    id: "annee-naissance",
+    theme: "histoire",
+    answerKind: "number",
+    // Heavy: at 400 the endpoint times out and returns truncated JSON.
+    limit: 200,
+    prompt: (subject) => `En quelle année est né ${subject} ?`,
+    query: `SELECT ?subject ?answer ?sitelinks WHERE {
+      ?h wdt:P31 wd:Q5; wdt:P569 ?d; wikibase:sitelinks ?sitelinks.
+      FILTER(?sitelinks > 150)
+      BIND(STR(YEAR(?d)) AS ?answer)
+      ?h rdfs:label ?subject. FILTER(lang(?subject) = "fr")
+    }`,
+  },
+  {
+    id: "numero-atomique",
+    theme: "sciences",
+    answerKind: "number",
+    prompt: (subject) => `Quel est le numéro atomique de l'élément ${subject} ?`,
+    query: `SELECT ?subject ?answer ?sitelinks WHERE {
+      ?e wdt:P31 wd:Q11344; wdt:P1086 ?n; wikibase:sitelinks ?sitelinks.
+      BIND(STR(?n) AS ?answer)
+      ?e rdfs:label ?subject. FILTER(lang(?subject) = "fr")
+    }`,
+  },
+  {
+    id: "altitude",
+    theme: "geo",
+    answerKind: "number",
+    prompt: (subject) => `Quelle est l'altitude du ${subject}, en mètres ?`,
+    query: `SELECT ?subject ?answer ?sitelinks WHERE {
+      ?m wdt:P31 wd:Q8502; wdt:P2044 ?h; wikibase:sitelinks ?sitelinks.
+      FILTER(?sitelinks > 45)
+      BIND(STR(xsd:integer(?h)) AS ?answer)
+      ?m rdfs:label ?subject. FILTER(lang(?subject) = "fr")
+    }`,
+  },
+  {
+    id: "club-ville",
+    theme: "sport",
+    prompt: (subject) => `Dans quelle ville joue le club ${subject} ?`,
+    query: `SELECT ?subject ?answer ?sitelinks WHERE {
+      ?c wdt:P31 wd:Q476028; wdt:P159 ?v; wikibase:sitelinks ?sitelinks.
+      FILTER(?sitelinks > 45)
+      ?c rdfs:label ?subject. FILTER(lang(?subject) = "fr")
+      ?v rdfs:label ?answer. FILTER(lang(?answer) = "fr")
+    }`,
+  },
+  {
+    id: "epreuve-sport",
+    theme: "sport",
+    prompt: (subject) => `À quel sport se rattache l'épreuve « ${subject} » ?`,
+    query: `SELECT ?subject ?answer ?sitelinks WHERE {
+      ?e wdt:P31/wdt:P279* wd:Q13406554; wdt:P641 ?s; wikibase:sitelinks ?sitelinks.
+      FILTER(?sitelinks > 35)
+      ?e rdfs:label ?subject. FILTER(lang(?subject) = "fr")
+      ?s rdfs:label ?answer. FILTER(lang(?answer) = "fr")
+    }`,
+    limit: 250,
+  },
+  {
     id: "sport",
     theme: "sport",
     prompt: (subject) => `Quel sport pratique ${subject} ?`,
@@ -159,7 +286,7 @@ const questions = [];
 for (const family of FAMILIES) {
   let rows;
   try {
-    rows = await sparql(`${family.query} LIMIT ${limitArg}`);
+    rows = await sparql(`${family.query} LIMIT ${family.limit ?? limitArg}`);
   } catch (err) {
     console.log(`${family.id.padEnd(12)} ABANDONNÉ (${err.message})`);
     continue;
@@ -192,6 +319,8 @@ for (const family of FAMILIES) {
       answer: answers[0],
       aliases: answers.slice(1),
       source: `Wikidata (CC0) — ${family.id}`,
+      family: family.id,
+      answer_kind: family.answerKind ?? "text",
     });
   }
   const kept = entries.length;

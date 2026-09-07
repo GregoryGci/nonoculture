@@ -249,6 +249,9 @@ export class RoomDO extends DurableObject<Env> {
         if (parsed.questionCount !== undefined) settings.questionCount = parsed.questionCount;
         if (parsed.questionDurationSec !== undefined) settings.questionDurationSec = parsed.questionDurationSec;
         if (parsed.chainRounds !== undefined) settings.chainRounds = parsed.chainRounds;
+        if (parsed.bluffRounds !== undefined) settings.bluffRounds = parsed.bluffRounds;
+        if (parsed.duelRounds !== undefined) settings.duelRounds = parsed.duelRounds;
+        if (parsed.numericRounds !== undefined) settings.numericRounds = parsed.numericRounds;
         if (parsed.themes !== undefined) settings.themes = parsed.themes;
         await this.dispatch({ kind: "HOST_SETTINGS", playerId, settings }, ws);
         break;
@@ -307,6 +310,18 @@ export class RoomDO extends DurableObject<Env> {
         break;
       case "SUBMIT_CHAIN_GUESS":
         await this.dispatch({ kind: "SUBMIT_CHAIN_GUESS", playerId, text: sanitizeText(parsed.text, 80), now }, ws);
+        break;
+      case "SUBMIT_BLUFF":
+        await this.dispatch({ kind: "SUBMIT_BLUFF", playerId, text: sanitizeText(parsed.text, 80), now }, ws);
+        break;
+      case "SUBMIT_BLUFF_VOTE":
+        await this.dispatch({ kind: "SUBMIT_BLUFF_VOTE", playerId, optionId: parsed.optionId, now }, ws);
+        break;
+      case "SUBMIT_DUEL_PREDICTION":
+        await this.dispatch({ kind: "SUBMIT_DUEL_PREDICTION", playerId, targetId: parsed.playerId, now }, ws);
+        break;
+      case "SUBMIT_DUEL_ANSWER":
+        await this.dispatch({ kind: "SUBMIT_DUEL_ANSWER", playerId, text: sanitizeText(parsed.text, 60), now }, ws);
         break;
     }
   }
