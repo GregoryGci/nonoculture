@@ -132,7 +132,7 @@ for (const family of FAMILIES) {
         skipped.push(`${name} (transcodage impossible)`);
         continue;
       }
-      await new Promise((r) => setTimeout(r, 900));
+      await new Promise((r) => setTimeout(r, 3000));
     }
 
     questions.push({

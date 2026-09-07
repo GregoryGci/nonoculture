@@ -1,0 +1,76 @@
+[
+  {
+    "theme": "animaux",
+    "difficulty": 1,
+    "type": "audio",
+    "family": "son-animal",
+    "prompt": "Quel animal entend-on ?",
+    "media_key": "son-animal-lion.mp3",
+    "answer": "Lion",
+    "aliases": [
+      "Lion d'Afrique"
+    ],
+    "source": "Wikimedia Commons — Lion raring-sound1TamilNadu178.ogg (Public domain)"
+  },
+  {
+    "theme": "animaux",
+    "difficulty": 1,
+    "type": "audio",
+    "family": "son-animal",
+    "prompt": "Quel animal entend-on ?",
+    "media_key": "son-animal-loup.mp3",
+    "answer": "loup",
+    "aliases": [
+      "Loup gris",
+      "Loup commun",
+      "Loup vulgaire"
+    ],
+    "source": "Wikimedia Commons — Wolf howls.ogg (Public domain)"
+  },
+  {
+    "theme": "animaux",
+    "difficulty": 1,
+    "type": "audio",
+    "family": "son-animal",
+    "prompt": "Quel animal entend-on ?",
+    "media_key": "son-animal-ours-brun.mp3",
+    "answer": "Ours brun",
+    "aliases": [],
+    "source": "Wikimedia Commons — Yellowstone sound library - Grizzly Bear Eating - 002.mp3 (Public domain)"
+  },
+  {
+    "theme": "animaux",
+    "difficulty": 1,
+    "type": "audio",
+    "family": "son-animal",
+    "prompt": "Quel animal entend-on ?",
+    "media_key": "son-animal-pie-bavarde.mp3",
+    "answer": "Pie bavarde",
+    "aliases": [],
+    "source": "Wikimedia Commons — Pica pica.ogg (Public domain)"
+  },
+  {
+    "theme": "geo",
+    "difficulty": 1,
+    "type": "audio",
+    "family": "son-hymne",
+    "prompt": "De quel pays est cet hymne national ?",
+    "media_key": "son-hymne-france.mp3",
+    "answer": "France",
+    "aliases": [],
+    "source": "Wikimedia Commons — La Marseillaise.ogg (Public domain)"
+  },
+  {
+    "theme": "geo",
+    "difficulty": 1,
+    "type": "audio",
+    "family": "son-hymne",
+    "prompt": "De quel pays est cet hymne national ?",
+    "media_key": "son-hymne-grece.mp3",
+    "answer": "Grèce",
+    "aliases": [
+      "Chypre"
+    ],
+    "source": "Wikimedia Commons — Hymn to liberty instrumental.oga (Public domain)"
+  }
+]

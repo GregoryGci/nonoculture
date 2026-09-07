@@ -78,7 +78,7 @@ export const licenceOf = (licences, file) => licences.get(file) ?? licences.get(
  * painting run: nineteen perfectly free images lost to 429s and reported as if the files were
  * unusable. Commons throttles a burst of image requests much harder than a batched API call.
  */
-export async function downloadFile(file, width = 640, attempts = 4) {
+export async function downloadFile(file, width = 640, attempts = 6) {
   const sized = width > 0 ? `?width=${width}` : "";
   let last;
   for (let attempt = 1; attempt <= attempts; attempt++) {
@@ -91,7 +91,9 @@ export async function downloadFile(file, width = 640, attempts = 4) {
     // A 404 will not become a 200 by waiting; a 429 will.
     if (res.status !== 429 && res.status < 500) throw last;
     if (attempt === attempts) break;
-    const wait = attempt * 8000;
+    // Commons throttles audio far harder than images; a first run lost 58 anthems to 429s
+    // that were nothing to do with their licence.
+    const wait = attempt * 15000;
     console.log(`   ...${res.status} sur ${file.slice(0, 40)}, pause ${wait / 1000}s`);
     await sleep(wait);
   }
