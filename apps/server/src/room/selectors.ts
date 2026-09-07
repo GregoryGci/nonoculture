@@ -337,5 +337,6 @@ export function buildStateSync(
     reflex: computeReflex(state, forPlayerId, nicknameOf),
     reviewQuestions: computeReviewQuestions(state, forPlayerId, nicknameOf),
     reviewIndex: state.reviewIndex,
+    serverNowTs: Date.now(),
   };
 }

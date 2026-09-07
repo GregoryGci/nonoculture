@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import type { DuelView } from "@nonoculture/shared";
+import { useDeadlineFlush } from "../hooks/useDeadlineFlush";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -11,14 +12,30 @@ const EASE = [0.16, 1, 0.3, 1] as const;
  */
 export function DuelRound({
   duel,
+  deadlineTs,
+  clockOffset,
   onPredict,
   onAnswer,
 }: {
   duel: DuelView;
+  deadlineTs: number | null;
+  clockOffset: number;
   onPredict: (playerId: string) => void;
   onAnswer: (text: string) => void;
 }) {
   const [value, setValue] = useState("");
+
+  // The item half-typed when the buzzer goes still counts.
+  useDeadlineFlush({
+    deadlineTs,
+    clockOffset,
+    value,
+    locked: duel.step !== "answer" || !duel.youAreContestant,
+    onFlush: (text) => {
+      onAnswer(text);
+      setValue("");
+    },
+  });
 
   if (duel.step === "predict") {
     return (

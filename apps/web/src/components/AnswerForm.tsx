@@ -1,19 +1,35 @@
 import { useState } from "react";
 import { motion } from "motion/react";
+import { useDeadlineFlush } from "../hooks/useDeadlineFlush";
 
 export function AnswerForm({
   alreadyAnswered,
   numeric = false,
+  deadlineTs,
+  clockOffset,
   onSubmit,
 }: {
   alreadyAnswered: boolean;
   /** Maths questions: bring up the number pad on a phone, where the race is won or lost. */
   numeric?: boolean;
+  deadlineTs: number | null;
+  clockOffset: number;
   onSubmit: (answer: string) => void;
 }) {
   const [value, setValue] = useState("");
   const [justSubmitted, setJustSubmitted] = useState(false);
   const locked = alreadyAnswered || justSubmitted;
+
+  useDeadlineFlush({
+    deadlineTs,
+    clockOffset,
+    value,
+    locked: locked,
+    onFlush: (text) => {
+      onSubmit(text);
+      setJustSubmitted(true);
+    },
+  });
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import type { BluffView } from "@nonoculture/shared";
+import { useDeadlineFlush } from "../hooks/useDeadlineFlush";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -12,14 +13,27 @@ const EASE = [0.16, 1, 0.3, 1] as const;
  */
 export function BluffRound({
   bluff,
+  deadlineTs,
+  clockOffset,
   onWrite,
   onVote,
 }: {
   bluff: BluffView;
+  deadlineTs: number | null;
+  clockOffset: number;
   onWrite: (text: string) => void;
   onVote: (optionId: string) => void;
 }) {
   const [value, setValue] = useState("");
+
+  // A lie typed but never sent is a lie that never existed, and the round is poorer for it.
+  useDeadlineFlush({
+    deadlineTs,
+    clockOffset,
+    value,
+    locked: bluff.step !== "write" || bluff.submitted,
+    onFlush: onWrite,
+  });
 
   if (bluff.step === "write") {
     if (bluff.submitted) {

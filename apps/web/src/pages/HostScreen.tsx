@@ -13,6 +13,9 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 export function HostScreen() {
   const { code } = useParams<{ code: string }>();
   const [state, setState] = useState<RoomStateSync | null>(null);
+  // Measured when the sync lands, not during render: reading the clock while rendering is
+  // impure, and the value would drift between renders for no benefit.
+  const [clockOffset, setClockOffset] = useState(0);
   const wsRef = useRef<WebSocket | null>(null);
 
   useEffect(() => {
@@ -23,7 +26,11 @@ export function HostScreen() {
     ws.addEventListener("message", (event: MessageEvent<unknown>) => {
       if (typeof event.data !== "string") return;
       const envelope = JSON.parse(event.data) as { type?: string; payload?: unknown };
-      if (envelope.type === "STATE_SYNC") setState(envelope.payload as RoomStateSync);
+      if (envelope.type === "STATE_SYNC") {
+        const sync = envelope.payload as RoomStateSync;
+        setState(sync);
+        setClockOffset(sync.serverNowTs - Date.now());
+      }
     });
     return () => ws.close();
   }, [code]);
@@ -44,7 +51,11 @@ export function HostScreen() {
             ? `${state.questionIndex + 1} / ${state.questionTotal}`
             : "Nono Culture"}
         </span>
-        <Timer deadlineTs={state.phaseDeadlineTs} total={state.settings.questionDurationSec} />
+        <Timer
+          deadlineTs={state.phaseDeadlineTs}
+          clockOffset={clockOffset}
+          total={state.settings.questionDurationSec}
+        />
       </header>
 
       <AnimatePresence mode="wait" initial={false}>

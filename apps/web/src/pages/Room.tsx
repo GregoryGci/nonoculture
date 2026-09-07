@@ -24,7 +24,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function Room() {
   const { code } = useParams<{ code: string }>();
-  const { status, state, playerId, send, lastError } = useRoomConnection(code!);
+  const { status, state, playerId, send, lastError, clockOffset } = useRoomConnection(code!);
 
   if (!state) {
     return (
@@ -50,7 +50,7 @@ export function Room() {
     <div className="mx-auto flex min-h-dvh w-full max-w-xl flex-col px-5 py-8">
       <ReconnectBanner status={status} />
 
-      <Header state={state} />
+      <Header state={state} clockOffset={clockOffset} />
 
       <AnimatePresence mode="wait" initial={false}>
         <motion.main
@@ -107,6 +107,8 @@ export function Room() {
                 key={state.currentQuestion.id}
                 alreadyAnswered={state.youHaveAnswered}
                 numeric={state.currentQuestion.answerKind === "math"}
+                deadlineTs={state.phaseDeadlineTs}
+                clockOffset={clockOffset}
                 onSubmit={(answer) => send({ type: "SUBMIT_ANSWER", questionId: state.currentQuestion!.id, answer })}
               />
               <PlayerList players={state.players} youId={playerId} />
@@ -119,6 +121,8 @@ export function Room() {
               {state.chainTask ? (
                 <ChainPromptForm
                   alreadySubmitted={state.chainTask.alreadySubmitted}
+                  deadlineTs={state.phaseDeadlineTs}
+                  clockOffset={clockOffset}
                   onSubmit={(text) => send({ type: "SUBMIT_CHAIN_PROMPT", text })}
                 />
               ) : (
@@ -135,6 +139,7 @@ export function Room() {
                 ) : (
                   <DrawingCanvas
                     deadlineTs={state.phaseDeadlineTs}
+                    clockOffset={clockOffset}
                     onSubmit={(dataUrl) => send({ type: "SUBMIT_CHAIN_DRAWING", dataUrl })}
                   />
                 )
@@ -150,6 +155,8 @@ export function Room() {
                 <ChainGuessForm
                   drawingDataUrl={state.chainTask.content ?? ""}
                   alreadySubmitted={state.chainTask.alreadySubmitted}
+                  deadlineTs={state.phaseDeadlineTs}
+                  clockOffset={clockOffset}
                   onSubmit={(text) => send({ type: "SUBMIT_CHAIN_GUESS", text })}
                 />
               ) : (
@@ -181,6 +188,8 @@ export function Room() {
             <SpecialStep label="Bluff" title={state.bluff.prompt}>
               <BluffRound
                 bluff={state.bluff}
+                deadlineTs={state.phaseDeadlineTs}
+                clockOffset={clockOffset}
                 onWrite={(text) => send({ type: "SUBMIT_BLUFF", text })}
                 onVote={(optionId) => send({ type: "SUBMIT_BLUFF_VOTE", optionId })}
               />
@@ -191,6 +200,8 @@ export function Room() {
             <SpecialStep label="Duel" title={state.duel.prompt}>
               <DuelRound
                 duel={state.duel}
+                deadlineTs={state.phaseDeadlineTs}
+                clockOffset={clockOffset}
                 onPredict={(id) => send({ type: "SUBMIT_DUEL_PREDICTION", playerId: id })}
                 onAnswer={(text) => send({ type: "SUBMIT_DUEL_ANSWER", text })}
               />
@@ -265,7 +276,13 @@ function Shell({ children }: { children: React.ReactNode }) {
 }
 
 /** Persistent top bar: where you are in the deck, and how long is left. */
-function Header({ state }: { state: NonNullable<ReturnType<typeof useRoomConnection>["state"]> }) {
+function Header({
+  state,
+  clockOffset,
+}: {
+  state: NonNullable<ReturnType<typeof useRoomConnection>["state"]>;
+  clockOffset: number;
+}) {
   // Past the last slot the deck index keeps counting (it becomes the HOST_REVIEW marker),
   // so "16 / 15" is reachable unless the counter is bounded to the playing phases.
   const playing = state.phase !== "LOBBY" && state.phase !== "HOST_REVIEW" && state.phase !== "FINISHED";
@@ -286,7 +303,11 @@ function Header({ state }: { state: NonNullable<ReturnType<typeof useRoomConnect
     <header className="flex flex-col gap-3">
       <div className="flex h-11 items-center justify-between">
         <span className="eyebrow">{label}</span>
-        <Timer deadlineTs={state.phaseDeadlineTs} total={state.settings.questionDurationSec} />
+        <Timer
+          deadlineTs={state.phaseDeadlineTs}
+          clockOffset={clockOffset}
+          total={state.settings.questionDurationSec}
+        />
       </div>
       <div className="h-px w-full" style={{ background: "var(--color-border)" }}>
         <motion.div

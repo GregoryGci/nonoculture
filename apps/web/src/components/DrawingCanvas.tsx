@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { MAX_DRAWING_DATA_URL_LENGTH } from "@nonoculture/shared";
+import { FLUSH_MARGIN_MS } from "../hooks/useDeadlineFlush";
 
 const WIDTH = 720;
 const HEIGHT = 540;
@@ -32,11 +33,14 @@ function encode(canvas: HTMLCanvasElement): string | null {
 export function DrawingCanvas({
   onSubmit,
   deadlineTs,
+  clockOffset,
 }: {
   onSubmit: (dataUrl: string) => void;
   /** When the round ends. The drawing is sent on its own just before, so work in progress
    *  isn't thrown away just because nobody pressed the button in time. */
   deadlineTs: number | null;
+  /** Server clock minus browser clock — the deadline above is a server timestamp. */
+  clockOffset: number;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const drawing = useRef(false);
@@ -70,7 +74,7 @@ export function DrawingCanvas({
 
   useEffect(() => {
     if (deadlineTs === null) return;
-    const fireAt = deadlineTs - 1200 - Date.now();
+    const fireAt = deadlineTs - FLUSH_MARGIN_MS - (Date.now() + clockOffset);
     if (fireAt <= 0) return;
     const timer = setTimeout(() => {
       const canvas = canvasRef.current;
@@ -81,7 +85,7 @@ export function DrawingCanvas({
       setSubmitted(true);
     }, fireAt);
     return () => clearTimeout(timer);
-  }, [deadlineTs]);
+  }, [deadlineTs, clockOffset]);
 
   function pos(e: React.PointerEvent<HTMLCanvasElement>) {
     const rect = canvasRef.current!.getBoundingClientRect();

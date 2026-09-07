@@ -281,6 +281,16 @@ export interface RoomStateSync {
   /** Set during QUESTION so the client can preload the next question's media in advance. */
   nextQuestionMedia: { type: QuestionType; url: string } | null;
   phaseDeadlineTs: number | null; // absolute server timestamp, null = no countdown
+  /**
+   * The server's clock at the moment this state was built.
+   *
+   * `phaseDeadlineTs` is a server timestamp, and comparing it to the browser's `Date.now()`
+   * is only correct if the two clocks agree. They do not: a two-second skew showed a 15-second
+   * question counting down from 17, and made the "send what is typed just before time runs
+   * out" safety net fire *after* the round had already closed. Clients subtract the offset
+   * instead of trusting their own clock.
+   */
+  serverNowTs: number;
   youHaveAnswered: boolean;
   chainTask: ChainTask | null;
   chainReveal: ChainResult[] | null;

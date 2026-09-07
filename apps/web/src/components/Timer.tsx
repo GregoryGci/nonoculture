@@ -5,14 +5,24 @@ import { useEffect, useState } from "react";
  * shrinking); the number is the precise one. Under 5s it breathes on opacity — no colour
  * change, no glow, so urgency never breaks the monochrome.
  */
-export function Timer({ deadlineTs, total }: { deadlineTs: number | null; total?: number }) {
-  const [now, setNow] = useState(() => Date.now());
+export function Timer({
+  deadlineTs,
+  clockOffset,
+  total,
+}: {
+  deadlineTs: number | null;
+  /** Server clock minus browser clock. A skew of a couple of seconds had a fifteen-second
+   *  question counting down from seventeen. */
+  clockOffset: number;
+  total?: number;
+}) {
+  const [now, setNow] = useState(() => Date.now() + clockOffset);
 
   useEffect(() => {
     if (deadlineTs === null) return;
-    const interval = setInterval(() => setNow(Date.now()), 100);
+    const interval = setInterval(() => setNow(Date.now() + clockOffset), 100);
     return () => clearInterval(interval);
-  }, [deadlineTs]);
+  }, [deadlineTs, clockOffset]);
 
   if (deadlineTs === null) return null;
 

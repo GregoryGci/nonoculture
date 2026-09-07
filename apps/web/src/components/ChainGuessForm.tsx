@@ -1,18 +1,34 @@
 import { useState } from "react";
 import { motion } from "motion/react";
+import { useDeadlineFlush } from "../hooks/useDeadlineFlush";
 
 export function ChainGuessForm({
   drawingDataUrl,
   alreadySubmitted,
+  deadlineTs,
+  clockOffset,
   onSubmit,
 }: {
   drawingDataUrl: string;
   alreadySubmitted: boolean;
+  deadlineTs: number | null;
+  clockOffset: number;
   onSubmit: (text: string) => void;
 }) {
   const [value, setValue] = useState("");
   const [justSubmitted, setJustSubmitted] = useState(false);
   const locked = alreadySubmitted || justSubmitted;
+
+  useDeadlineFlush({
+    deadlineTs,
+    clockOffset,
+    value,
+    locked: locked,
+    onFlush: (text) => {
+      onSubmit(text);
+      setJustSubmitted(true);
+    },
+  });
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();

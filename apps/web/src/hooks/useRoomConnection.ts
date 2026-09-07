@@ -9,12 +9,22 @@ export interface RoomConnectionHandle {
   playerId: string;
   send: (message: ClientMessage) => void;
   lastError: string | null;
+  /**
+   * Server clock minus browser clock, in milliseconds.
+   *
+   * Add it to `Date.now()` before comparing anything to a server timestamp. Skipping it is not
+   * a rounding error: a two-second skew showed a fifteen-second question counting down from
+   * seventeen, and made the "send what is typed just before time runs out" safety net fire
+   * after the round had already closed, so nothing was ever sent.
+   */
+  clockOffset: number;
 }
 
 export function useRoomConnection(roomCode: string): RoomConnectionHandle {
   const [status, setStatus] = useState<ConnectionStatus>("connecting");
   const [state, setState] = useState<RoomStateSync | null>(null);
   const [lastError, setLastError] = useState<string | null>(null);
+  const [clockOffset, setClockOffset] = useState(0);
   // Adjusted during render rather than in the effect: setting it inside the effect body
   // costs an extra render pass on every mount (react-hooks/set-state-in-effect).
   const [identity, setIdentity] = useState(() => ({ roomCode, playerId: getOrCreatePlayerId(roomCode) }));
@@ -26,7 +36,12 @@ export function useRoomConnection(roomCode: string): RoomConnectionHandle {
   useEffect(() => {
     const connection = new RoomConnection(roomCode, {
       onStatus: setStatus,
-      onStateSync: setState,
+      onStateSync: (sync) => {
+        setState(sync);
+        // Re-measured on every sync rather than once: a laptop waking from sleep can jump its
+        // clock mid-game, and a stale offset is worse than none.
+        setClockOffset(sync.serverNowTs - Date.now());
+      },
       // The connection re-mints an identity if the room rejects our credentials, so the
       // "which player am I" answer has to follow it rather than be read once.
       onIdentity: (playerId) => setIdentity({ roomCode, playerId }),
@@ -47,5 +62,6 @@ export function useRoomConnection(roomCode: string): RoomConnectionHandle {
     playerId: identity.playerId,
     send: (message) => connectionRef.current?.send(message),
     lastError,
+    clockOffset,
   };
 }
