@@ -21,14 +21,15 @@ deploy` réel. Historique détaillé : `git log --oneline`.
 
 | answer_kind | type  |    n |
 | ----------- | ----- | ---: |
-| text        | text  | 4842 |
-| number      | text  |  561 |
+| text        | text  | 4253 |
+| number      | text  |  625 |
 | list        | text  |  705 |
-| text        | image |   90 |
+| math        | text  |  420 |
+| text        | image |  268 |
 | text        | audio |   15 |
-| **total**   |       | 6213 |
+| **total**   |       | 6286 |
 
-Réparties sur **22 thèmes** et **23 familles** (`family`), la plus grosse à 488 questions. La colonne
+Réparties sur **23 thèmes** et **40 familles** (`family`), la plus grosse à 488 questions. La colonne
 `family` existe pour une raison précise : sans elle, choisir le thème « sport » sortait
 quinze fois « quel sport pratique X ? » d'affilée. Le tirage fait maintenant un round-robin
 entre familles (`diversify()` dans `apps/server/src/lib/questions.ts`).
@@ -41,6 +42,10 @@ Générateurs (tous relançables, tous sur des sources CC0) :
   Avarua en « facile ». Chaque question passe par `lib/answer-leak.mjs`, qui rejette celles
   qui contiennent leur propre réponse (16 % du premier jet — « Dans quelle ville joue le
   club Spartak Moscou ? »).
+- `apps/server/scripts/generate-maths.mjs` — 420 questions d’arithmétique mentale sur 14
+  familles, sans réseau : la source de vérité est ici l’arithmétique.
+- `apps/server/scripts/generate-blasons.mjs` — 73 armoiries nationales, la seule famille
+  d’images encore constructible en licence libre (voir la sonde plus haut).
 - `apps/server/scripts/generate-lists.mjs` — 705 questions « citez… » (~22 réponses
   acceptées chacune), la matière première des duels.
 - `apps/server/scripts/fetch-freesound.mjs` — sons CC0 via l'API Freesound (clé perso,
@@ -70,6 +75,16 @@ l'hôte dans le lobby (`GameSettings`, `HostSettings.tsx`) :
 | `bluffRounds`   |      1 | manches bluff                                                |
 | `duelRounds`    |      1 | duels 1v1                                                    |
 | `reflexRounds`  |      1 | manches réflexe (le premier à taper au vert)                 |
+
+**« Tous les thèmes » exclut `lol` et `dofus`** (`OPT_IN_THEMES` dans `packages/shared`) : ce
+sont des questions sur un jeu précis, et une table dont la moitié n'y a jamais joué cesse d'être
+un quiz. Ils restent sélectionnables explicitement.
+
+**Images : ce que les licences permettent.** Affiches de films et jaquettes de jeux sont sous
+droits, sans recours. Sonde sur cinq familles Commons, 50 candidats chacune : blasons 86 % de
+domaine public, instruments 29 %, plats 12 %, monuments 0 %. Les photos modernes sont presque
+toutes en CC BY-SA, donc « devine ce monument / ce plat » n'est pas constructible librement.
+Les trois familles image en banque sont donc drapeaux, tableaux et blasons.
 | `numericRounds` |      2 | questions « le plus proche gagne »                           |
 
 Chaque manche spéciale consomme un slot ; jamais en première ni dernière position. Les
@@ -114,7 +129,7 @@ sont sautées si la room est trop petite au moment où le slot arrive.
 - **Dessin** : `<canvas>` + Pointer Events, 6 couleurs, 3 épaisseurs, gomme, envoi
   automatique 1,2 s avant la fin du temps même sans valider. Les octets ne transitent jamais
   par `GameState` (clés de storage séparées).
-- **Qualité** : ESLint + Prettier + CI, TypeScript strict sans `any`, **110 tests** Vitest.
+- **Qualité** : ESLint + Prettier + CI, TypeScript strict sans `any`, **121 tests** Vitest.
   Les scripts `.mjs` et les `vite.config.ts` sont couverts par `tsconfig.scripts.json` /
   `tsconfig.node.json` — ils ne l'étaient pas et n'étaient donc jamais typecheckés.
 
@@ -134,7 +149,7 @@ sont sautées si la room est trop petite au moment où le slot arrive.
 ```
 pnpm install
 pnpm dev                        # web sur :5173, server (wrangler --local) sur :8787
-pnpm test                       # 110 tests
+pnpm test                       # 121 tests
 pnpm --filter server seed       # recharge la banque dans le D1 local
 ```
 
