@@ -33,7 +33,7 @@ const FAMILIES = [
     prompt: "Quel animal entend-on ?",
     query: `SELECT ?name ?audio ?sl WHERE {
       ?t wdt:P31 wd:Q16521; wdt:P51 ?audio; wikibase:sitelinks ?sl.
-      FILTER(?sl > 25)
+      FILTER(?sl > 8)
       ?t wdt:P1843 ?name. FILTER(lang(?name) = "fr")
     } ORDER BY DESC(?sl)`,
   },
@@ -42,7 +42,8 @@ const FAMILIES = [
     theme: "musique",
     prompt: "Quel instrument de musique entend-on ?",
     query: `SELECT ?name ?audio ?sl WHERE {
-      ?i wdt:P31/wdt:P279* wd:Q34379; wdt:P51 ?audio; wikibase:sitelinks ?sl.
+      ?i wdt:P51 ?audio; wikibase:sitelinks ?sl.
+      { ?i wdt:P31 wd:Q34379 } UNION { ?i wdt:P31/wdt:P279 wd:Q34379 }
       ?i rdfs:label ?name. FILTER(lang(?name) = "fr")
     } ORDER BY DESC(?sl)`,
   },
