@@ -6,6 +6,7 @@ import type {
   DuelView,
   PlayerPublic,
   QuestionPublic,
+  ReflexView,
   ReviewQuestion,
   RoomStateSync,
 } from "@nonoculture/shared";
@@ -18,10 +19,10 @@ function triviaAt(state: GameState, index: number): InternalQuestion | null {
   return item?.kind === "trivia" ? item.question : null;
 }
 
-/** The question behind whichever slot is in play, trivia or special. */
+/** The question behind whichever slot is in play, or null for the slots that carry none. */
 function questionAt(state: GameState, index: number): InternalQuestion | null {
   const item = state.deck[index];
-  if (!item || item.kind === "chain") return null;
+  if (!item || item.kind === "chain" || item.kind === "reflex") return null;
   return item.question;
 }
 
@@ -72,6 +73,50 @@ function computeBluff(state: GameState, forPlayerId: string, nicknameOf: (id: st
   };
 }
 
+/**
+ * The reflex round as one player sees it.
+ *
+ * Note what is absent: `goAtTs`. The whole round rests on nobody being able to see the green
+ * light coming, so the schedule stays in the Durable Object and only the fact that it has
+ * *already* happened is ever sent.
+ */
+function computeReflex(state: GameState, forPlayerId: string, nicknameOf: (id: string) => string): ReflexView | null {
+  const reflex = state.reflex;
+  if (!reflex) return null;
+  const step =
+    state.phase === "REFLEX_WAIT"
+      ? "wait"
+      : state.phase === "REFLEX_GO"
+        ? "go"
+        : state.phase === "REFLEX_REVEAL"
+          ? "reveal"
+          : null;
+  if (!step) return null;
+
+  const falseStart = reflex.falseStarts.includes(forPlayerId);
+  const yourMs = reflex.times[forPlayerId] ?? null;
+
+  return {
+    step,
+    youTapped: yourMs !== null || falseStart,
+    falseStart,
+    yourMs,
+    results:
+      step === "reveal"
+        ? Object.values(state.players)
+            .map((p) => ({
+              nickname: nicknameOf(p.playerId),
+              ms: reflex.times[p.playerId] ?? null,
+              falseStart: reflex.falseStarts.includes(p.playerId),
+              points: reflex.points[p.playerId] ?? 0,
+            }))
+            // Fastest first; anyone who never registered a time trails behind.
+            .sort((a, b) => (a.ms ?? Number.MAX_SAFE_INTEGER) - (b.ms ?? Number.MAX_SAFE_INTEGER))
+        : null,
+  };
+}
+
+/** The duel as one player sees it — contestants see their own hits, nobody sees the other’s. */
 /** The duel as one player sees it — contestants see their own hits, nobody sees the other's. */
 function computeDuel(state: GameState, forPlayerId: string, nicknameOf: (id: string) => string): DuelView | null {
   const duel = state.duel;
@@ -266,6 +311,7 @@ export function buildStateSync(
     chainReveal: computeChainReveal(state, nicknameOf, resolveDrawing),
     bluff: computeBluff(state, forPlayerId, nicknameOf),
     duel: computeDuel(state, forPlayerId, nicknameOf),
+    reflex: computeReflex(state, forPlayerId, nicknameOf),
     reviewQuestions: computeReviewQuestions(state, forPlayerId, nicknameOf),
   };
 }

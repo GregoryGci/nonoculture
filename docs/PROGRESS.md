@@ -65,6 +65,7 @@ l'hôte dans le lobby (`GameSettings`, `HostSettings.tsx`) :
 | `chainRounds`   |      1 | manches « téléphone dessiné »                                |
 | `bluffRounds`   |      1 | manches bluff                                                |
 | `duelRounds`    |      1 | duels 1v1                                                    |
+| `reflexRounds`  |      1 | manches réflexe (le premier à taper au vert)                 |
 | `numericRounds` |      2 | questions « le plus proche gagne »                           |
 
 Chaque manche spéciale consomme un slot ; jamais en première ni dernière position. Les
@@ -80,6 +81,17 @@ sont sautées si la room est trop petite au moment où le slot arrive.
   s'affrontent sur une question liste (« citez des films réalisés par… »), les autres
   parient sur le gagnant. +3 au vainqueur, +1 à chaque spectateur qui a vu juste. Auto-scoré :
   la question porte son propre ensemble de réponses acceptées.
+- **Réflexe** (`REFLEX_WAIT` → `REFLEX_GO` → `REFLEX_REVEAL` 10s) — l’écran passe au vert
+  après un délai aléatoire de 2 à 7 s, le premier à taper gagne (+3), le deuxième +1, et
+  partir avant le vert élimine pour la manche. **Le moment du vert n’est jamais envoyé au
+  client** : il vit dans `reflex.goAtTs`, côté Durable Object, et `phaseDeadlineTs` reste
+  `null` pendant l’attente — un compte à rebours diffusé serait une réponse diffusée. Les
+  temps sont mesurés à l’arrivée sur le serveur, trajet réseau compris (~40 ms mesurés) :
+  face aux ~250 ms de temps de réaction humain, ce n’est pas ce qui décide la manche.
+- **Maths** (thème `maths`, `answer_kind = "math"`) — arithmétique mentale courte, réponse
+  exacte, **le plus rapide à répondre juste marque 3, les autres bonnes réponses 1**.
+  420 questions générées hors ligne sur 14 familles (addition, puissances, racines,
+  pourcentages, priorités opératoires…), sans réseau : la source de vérité est l’arithmétique.
 - **Le plus proche gagne** — questions `answer_kind = "number"`, scorées par distance
   arithmétique (+2 au plus proche, +3 en plein dans le mille, ex æquo tous récompensés).
   Ces réponses **ne remontent pas dans la review de l'hôte** : il n'y a rien à juger.
@@ -98,7 +110,7 @@ sont sautées si la room est trop petite au moment où le slot arrive.
 - **Dessin** : `<canvas>` + Pointer Events, 6 couleurs, 3 épaisseurs, gomme, envoi
   automatique 1,2 s avant la fin du temps même sans valider. Les octets ne transitent jamais
   par `GameState` (clés de storage séparées).
-- **Qualité** : ESLint + Prettier + CI, TypeScript strict sans `any`, **99 tests** Vitest.
+- **Qualité** : ESLint + Prettier + CI, TypeScript strict sans `any`, **110 tests** Vitest.
   Les scripts `.mjs` et les `vite.config.ts` sont couverts par `tsconfig.scripts.json` /
   `tsconfig.node.json` — ils ne l'étaient pas et n'étaient donc jamais typecheckés.
 
@@ -118,7 +130,7 @@ sont sautées si la room est trop petite au moment où le slot arrive.
 ```
 pnpm install
 pnpm dev                        # web sur :5173, server (wrangler --local) sur :8787
-pnpm test                       # 99 tests
+pnpm test                       # 110 tests
 pnpm --filter server seed       # recharge la banque dans le D1 local
 ```
 

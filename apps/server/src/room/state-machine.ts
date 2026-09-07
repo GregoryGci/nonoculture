@@ -7,9 +7,14 @@ import {
   DUEL_MIN_PLAYERS,
   DUEL_POINTS_PREDICTED,
   DUEL_POINTS_WINNER,
+  MATH_POINTS_CORRECT,
+  MATH_POINTS_FASTEST,
   MAX_CHAIN_ROUNDS,
   NUMERIC_POINTS_CLOSEST,
   NUMERIC_POINTS_EXACT,
+  REFLEX_MIN_PLAYERS,
+  REFLEX_POINTS_SECOND,
+  REFLEX_POINTS_WINNER,
   MAX_SPECIAL_ROUNDS,
   isChainMatch,
   normalizeAnswer,
@@ -29,6 +34,10 @@ import {
   DUEL_PREDICT_DURATION_MS,
   DUEL_REVEAL_DURATION_MS,
   DISCONNECT_GRACE_MS,
+  REFLEX_GO_DURATION_MS,
+  REFLEX_REVEAL_DURATION_MS,
+  REFLEX_WAIT_MAX_MS,
+  REFLEX_WAIT_MIN_MS,
   ROOM_IDLE_TIMEOUT_MS,
 } from "./types.js";
 import type {
@@ -66,6 +75,10 @@ function clampSettings(partial: Partial<GameSettings>, base: GameSettings): Game
       partial.duelRounds !== undefined
         ? Math.min(MAX_SPECIAL_ROUNDS, Math.max(0, partial.duelRounds))
         : base.duelRounds,
+    reflexRounds:
+      partial.reflexRounds !== undefined
+        ? Math.min(MAX_SPECIAL_ROUNDS, Math.max(0, partial.reflexRounds))
+        : base.reflexRounds,
     numericRounds:
       partial.numericRounds !== undefined
         ? Math.min(MAX_SPECIAL_ROUNDS, Math.max(0, partial.numericRounds))
@@ -287,6 +300,19 @@ function startDeckSlot(state: GameState, index: number, now: number): GameState 
     };
   }
 
+  if (item.kind === "reflex") {
+    // A race needs someone to race against.
+    if (participants.length < REFLEX_MIN_PLAYERS) return startDeckSlot(state, index + 1, now);
+    const wait = REFLEX_WAIT_MIN_MS + Math.floor(Math.random() * (REFLEX_WAIT_MAX_MS - REFLEX_WAIT_MIN_MS));
+    return {
+      ...base,
+      phase: "REFLEX_WAIT",
+      reflex: { goAtTs: now + wait, goTs: null, times: {}, falseStarts: [], points: {} },
+      // Null on purpose: the countdown to the green is the one thing nobody may see.
+      phaseDeadlineTs: null,
+    };
+  }
+
   if (participants.length < CHAIN_MIN_PLAYERS) {
     return startDeckSlot(state, index + 1, now); // not enough players right now, skip this slot
   }
@@ -300,13 +326,81 @@ function startDeckSlot(state: GameState, index: number, now: number): GameState 
 }
 
 /** Every special-round slate wiped, so a slot never inherits the previous one's state. */
-const CLEARED = { chain: null, bluff: null, duel: null } as const;
+const CLEARED = { chain: null, bluff: null, duel: null, reflex: null } as const;
+
+/**
+ * Closes a reflex round: fastest tap takes the round, second place gets a consolation point.
+ *
+ * A false start scores nothing however quick the follow-up would have been — otherwise the
+ * winning strategy is to mash the button, which is not a reaction test.
+ */
+function resolveReflex(state: GameState, now: number): GameState {
+  const reflex = state.reflex;
+  if (!reflex) return state;
+
+  const ranked = Object.entries(reflex.times)
+    .filter(([playerId]) => !reflex.falseStarts.includes(playerId))
+    .sort((a, b) => a[1] - b[1]);
+
+  const points: Record<string, number> = {};
+  if (ranked[0]) points[ranked[0][0]] = REFLEX_POINTS_WINNER;
+  if (ranked[1]) points[ranked[1][0]] = REFLEX_POINTS_SECOND;
+
+  const players = Object.fromEntries(
+    Object.entries(state.players).map(([id, p]) => [id, { ...p, score: p.score + (points[id] ?? 0) }]),
+  );
+  return {
+    ...state,
+    players,
+    reflex: { ...reflex, points },
+    phase: "REFLEX_REVEAL",
+    phaseDeadlineTs: now + REFLEX_REVEAL_DURATION_MS,
+  };
+}
+
+/** True once nobody is still expected to tap — everyone has a time or has burnt their start. */
+function allConnectedTapped(state: GameState): boolean {
+  const reflex = state.reflex;
+  if (!reflex) return false;
+  const eligible = connectedPlayers(state);
+  if (eligible.length === 0) return false;
+  return eligible.every((p) => reflex.times[p.playerId] !== undefined || reflex.falseStarts.includes(p.playerId));
+}
+
+/**
+ * Scores a maths question: everyone right scores, and the first one right scores properly.
+ *
+ * Unlike the free-text questions there is nothing for the host to weigh up — 7 × 8 is 56 or
+ * it isn't — so this settles on the spot and stays out of the review, same as "closest wins".
+ * Ranking is by arrival time at the server, which folds in each player's network latency;
+ * at ~40 ms against seconds of thinking, that is not what decides the round.
+ */
+function scoreMathQuestion(state: GameState, question: InternalQuestion): GameState {
+  const target = parseNumber(question.answer);
+  if (target === null) return state;
+
+  const correct = state.answers
+    .map((a) => ({ playerId: a.playerId, value: parseNumber(a.raw), at: a.submittedAt }))
+    .filter((a): a is { playerId: string; value: number; at: number } => a.value !== null && a.value === target)
+    .sort((a, b) => a.at - b.at);
+  if (correct.length === 0) return state;
+
+  const awarded: Record<string, number> = {};
+  correct.forEach(({ playerId }, rank) => {
+    awarded[playerId] = rank === 0 ? MATH_POINTS_FASTEST : MATH_POINTS_CORRECT;
+  });
+
+  const players = Object.fromEntries(
+    Object.entries(state.players).map(([id, p]) => [id, { ...p, score: p.score + (awarded[id] ?? 0) }]),
+  );
+  return { ...state, players };
+}
 
 /** The question attached to the slot currently in play, whatever kind it is. */
 function currentQuestion(state: GameState): InternalQuestion | null {
   const item = state.deck[state.deckIndex];
   if (!item) return null;
-  return item.kind === "chain" ? null : item.question;
+  return item.kind === "chain" || item.kind === "reflex" ? null : item.question;
 }
 
 function advancePastBluffWrite(state: GameState, now: number): GameState {
@@ -377,6 +471,9 @@ function logAnswersAndAdvance(state: GameState, now: number): GameState {
   const question = currentQuestion(state);
   if (question?.answerKind === "number") {
     return advanceDeck(scoreNumericQuestion(state, question), now);
+  }
+  if (question?.answerKind === "math") {
+    return advanceDeck(scoreMathQuestion(state, question), now);
   }
   const answerLog =
     state.answers.length > 0 ? { ...state.answerLog, [state.deckIndex]: state.answers } : state.answerLog;
@@ -457,6 +554,7 @@ export function createRoom(roomCode: string, now: number): GameState {
     chain: null,
     bluff: null,
     duel: null,
+    reflex: null,
     phaseDeadlineTs: null,
     createdAt: now,
     lastActivityAt: now,
@@ -596,6 +694,28 @@ export function transition(state: GameState, event: GameEvent): TransitionResult
       if (allConnectedAnswered(next)) {
         next = logAnswersAndAdvance(next, event.now);
       }
+      break;
+    }
+
+    case "SUBMIT_REFLEX_TAP": {
+      const reflex = state.reflex;
+      if (!reflex) break;
+      const player = state.players[event.playerId];
+      if (!player || !player.connected) break;
+      // One result each: a player who already has a time, or already burnt their start,
+      // cannot tap their way to a better one.
+      if (reflex.times[event.playerId] !== undefined || reflex.falseStarts.includes(event.playerId)) break;
+
+      if (state.phase === "REFLEX_WAIT") {
+        next = { ...state, reflex: { ...reflex, falseStarts: [...reflex.falseStarts, event.playerId] } };
+        if (allConnectedTapped(next)) next = resolveReflex(next, event.now);
+        break;
+      }
+
+      if (state.phase !== "REFLEX_GO" || reflex.goTs === null) break;
+      const times = { ...reflex.times, [event.playerId]: Math.max(0, event.now - reflex.goTs) };
+      next = { ...state, reflex: { ...reflex, times } };
+      if (allConnectedTapped(next)) next = resolveReflex(next, event.now);
       break;
     }
 
@@ -806,7 +926,18 @@ function handleAlarm(state: GameState, now: number, effects: Effect[]): GameStat
     return next;
   }
 
-  // 3. Phase deadline handling.
+  // 3. The reflex round’s green light, which has its own hidden schedule rather than a
+  //    broadcast deadline.
+  if (next.phase === "REFLEX_WAIT" && next.reflex && now >= next.reflex.goAtTs) {
+    next = {
+      ...next,
+      reflex: { ...next.reflex, goTs: now },
+      phase: "REFLEX_GO",
+      phaseDeadlineTs: now + REFLEX_GO_DURATION_MS,
+    };
+  }
+
+  // 4. Phase deadline handling.
   if (next.phaseDeadlineTs !== null && now >= next.phaseDeadlineTs) {
     if (next.phase === "QUESTION") {
       next = logAnswersAndAdvance(next, now);
@@ -830,6 +961,10 @@ function handleAlarm(state: GameState, now: number, effects: Effect[]): GameStat
       next = resolveDuel(next, now);
     } else if (next.phase === "DUEL_REVEAL") {
       next = advanceDeck(next, now);
+    } else if (next.phase === "REFLEX_GO") {
+      next = resolveReflex(next, now);
+    } else if (next.phase === "REFLEX_REVEAL") {
+      next = advanceDeck(next, now);
     }
   }
 
@@ -840,6 +975,9 @@ function handleAlarm(state: GameState, now: number, effects: Effect[]): GameStat
 export function computeNextAlarmTs(state: GameState): number | null {
   const candidates: number[] = [];
   if (state.phaseDeadlineTs !== null) candidates.push(state.phaseDeadlineTs);
+  // The green light is scheduled outside phaseDeadlineTs so it stays off the wire, which
+  // means it also has to be woken for explicitly.
+  if (state.phase === "REFLEX_WAIT" && state.reflex) candidates.push(state.reflex.goAtTs);
   for (const p of Object.values(state.players)) {
     if (!p.connected && p.disconnectedAt !== null) {
       candidates.push(p.disconnectedAt + DISCONNECT_GRACE_MS);

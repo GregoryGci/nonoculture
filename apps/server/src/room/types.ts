@@ -7,7 +7,7 @@ export interface InternalQuestion {
   /** Generator template it came from; null for hand-written questions. */
   family: string | null;
   /** How the answer is judged: by the host, by proximity, or by counting list hits. */
-  answerKind: "text" | "number" | "list";
+  answerKind: "text" | "number" | "list" | "math";
   difficulty: 1 | 2 | 3;
   type: QuestionType;
   prompt: string;
@@ -22,7 +22,8 @@ export type DeckItem =
   | { kind: "trivia"; question: InternalQuestion }
   | { kind: "chain" }
   | { kind: "bluff"; question: InternalQuestion }
-  | { kind: "duel"; question: InternalQuestion };
+  | { kind: "duel"; question: InternalQuestion }
+  | { kind: "reflex" };
 
 export interface InternalPlayer {
   playerId: string;
@@ -88,6 +89,28 @@ export interface DuelRoundState {
   attempts: Record<string, string[]>;
 }
 
+/**
+ * A reflex round in progress.
+ *
+ * `goTs` is the instant the screen turned green, set by the alarm handler and never sent to
+ * a client before that moment — the whole round is worthless if anyone can see it coming.
+ */
+export interface ReflexRoundState {
+  /**
+   * When the screen will turn green. Never leaves the Durable Object: it is deliberately not
+   * `phaseDeadlineTs`, because that field is broadcast, and a broadcast countdown is a
+   * broadcast answer. `computeNextAlarmTs` reads it so the DO still wakes up on time.
+   */
+  goAtTs: number;
+  goTs: number | null;
+  /** playerId -> milliseconds after the green, as timed on arrival at the server. */
+  times: Record<string, number>;
+  /** Players who tapped while the screen was still red. Out for this round. */
+  falseStarts: string[];
+  /** playerId -> points awarded, filled in at the reveal. */
+  points: Record<string, number>;
+}
+
 export interface GameState {
   roomCode: string;
   phase: Phase;
@@ -104,6 +127,7 @@ export interface GameState {
   chain: ChainRoundState | null; // set only while playing a chain slot
   bluff: BluffRoundState | null; // set only while playing a bluff slot
   duel: DuelRoundState | null; // set only while playing a duel slot
+  reflex: ReflexRoundState | null; // set only while playing a reflex slot
   phaseDeadlineTs: number | null;
   createdAt: number;
   lastActivityAt: number;
@@ -124,6 +148,7 @@ export type GameEvent =
   | { kind: "SUBMIT_BLUFF_VOTE"; playerId: string; optionId: string; now: number }
   | { kind: "SUBMIT_DUEL_PREDICTION"; playerId: string; targetId: string; now: number }
   | { kind: "SUBMIT_DUEL_ANSWER"; playerId: string; text: string; now: number }
+  | { kind: "SUBMIT_REFLEX_TAP"; playerId: string; now: number }
   | { kind: "HOST_NEXT"; playerId: string; now: number }
   | { kind: "HOST_KICK"; playerId: string; targetId: string; now: number }
   | { kind: "ALARM_FIRED"; now: number }
@@ -158,3 +183,10 @@ export const BLUFF_REVEAL_DURATION_MS = 12_000;
 export const DUEL_PREDICT_DURATION_MS = 15_000;
 export const DUEL_ANSWER_DURATION_MS = 45_000;
 export const DUEL_REVEAL_DURATION_MS = 12_000;
+
+/** The red screen lasts somewhere in this window, so nobody can learn the rhythm. */
+export const REFLEX_WAIT_MIN_MS = 2_000;
+export const REFLEX_WAIT_MAX_MS = 7_000;
+/** Long enough that a distracted player still registers a time, short enough to stay tense. */
+export const REFLEX_GO_DURATION_MS = 6_000;
+export const REFLEX_REVEAL_DURATION_MS = 10_000;

@@ -3,9 +3,12 @@ import { motion } from "motion/react";
 
 export function AnswerForm({
   alreadyAnswered,
+  numeric = false,
   onSubmit,
 }: {
   alreadyAnswered: boolean;
+  /** Maths questions: bring up the number pad on a phone, where the race is won or lost. */
+  numeric?: boolean;
   onSubmit: (answer: string) => void;
 }) {
   const [value, setValue] = useState("");
@@ -41,8 +44,9 @@ export function AnswerForm({
         value={value}
         onChange={(e) => setValue(e.target.value)}
         maxLength={200}
-        placeholder="Ta réponse…"
+        placeholder={numeric ? "Le résultat…" : "Ta réponse…"}
         aria-label="Ta réponse"
+        {...(numeric ? { inputMode: "numeric" as const, autoComplete: "off" } : {})}
         className="input-cyber h-14 flex-1 rounded-[var(--radius-control)] px-5 text-lg"
       />
       <button type="submit" disabled={!value.trim()} className="btn btn-primary h-14 px-7">

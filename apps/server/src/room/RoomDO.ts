@@ -28,6 +28,33 @@ const DRAWING_PREFIX = "chain:drawing:";
 // Generous enough for a host rapid-firing SUBMIT_HOST_GRADE through a long review list.
 const MESSAGE_RATE_LIMIT = { maxHits: 120, windowMs: 10_000 };
 
+/**
+ * Every host-adjustable setting, forwarded from the WS message to the state machine.
+ *
+ * This used to be a hand-written list of `if (parsed.x !== undefined)` lines, and adding
+ * `reflexRounds` to the protocol, the lobby slider and the deck builder without adding it
+ * here meant the slider did nothing at all — no error, no warning, the round simply never
+ * appeared. The `satisfies` below makes that omission a compile error instead.
+ */
+const SETTING_KEYS = [
+  "questionCount",
+  "questionDurationSec",
+  "chainRounds",
+  "bluffRounds",
+  "duelRounds",
+  "reflexRounds",
+  "numericRounds",
+  "themes",
+] as const satisfies readonly (keyof GameSettings)[];
+
+/** Fails to compile if a GameSettings field is missing from SETTING_KEYS. */
+type _EverySettingForwarded =
+  Exclude<keyof GameSettings, (typeof SETTING_KEYS)[number]> extends never
+    ? true
+    : ["réglage non transmis au serveur", Exclude<keyof GameSettings, (typeof SETTING_KEYS)[number]>];
+const _everySettingForwarded: _EverySettingForwarded = true;
+void _everySettingForwarded;
+
 function send(ws: WebSocket, type: ServerMessageType, payload: unknown): void {
   try {
     ws.send(JSON.stringify({ type, payload }));
@@ -245,13 +272,10 @@ export class RoomDO extends DurableObject<Env> {
         break;
       case "HOST_SETTINGS": {
         const settings: Partial<GameSettings> = {};
-        if (parsed.questionCount !== undefined) settings.questionCount = parsed.questionCount;
-        if (parsed.questionDurationSec !== undefined) settings.questionDurationSec = parsed.questionDurationSec;
-        if (parsed.chainRounds !== undefined) settings.chainRounds = parsed.chainRounds;
-        if (parsed.bluffRounds !== undefined) settings.bluffRounds = parsed.bluffRounds;
-        if (parsed.duelRounds !== undefined) settings.duelRounds = parsed.duelRounds;
-        if (parsed.numericRounds !== undefined) settings.numericRounds = parsed.numericRounds;
-        if (parsed.themes !== undefined) settings.themes = parsed.themes;
+        for (const key of SETTING_KEYS) {
+          const value = parsed[key];
+          if (value !== undefined) Object.assign(settings, { [key]: value });
+        }
         await this.dispatch({ kind: "HOST_SETTINGS", playerId, settings }, ws);
         break;
       }
@@ -321,6 +345,11 @@ export class RoomDO extends DurableObject<Env> {
         break;
       case "SUBMIT_DUEL_ANSWER":
         await this.dispatch({ kind: "SUBMIT_DUEL_ANSWER", playerId, text: sanitizeText(parsed.text, 60), now }, ws);
+        break;
+      case "SUBMIT_REFLEX_TAP":
+        // `now` is taken here, on arrival, and never from the client: a self-reported
+        // reaction time is a self-reported score.
+        await this.dispatch({ kind: "SUBMIT_REFLEX_TAP", playerId, now }, ws);
         break;
     }
   }

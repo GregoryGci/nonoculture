@@ -61,6 +61,7 @@ export const HostSettingsMsg = z.object({
   chainRounds: z.number().int().min(0).max(6).optional(),
   bluffRounds: z.number().int().min(0).max(6).optional(),
   duelRounds: z.number().int().min(0).max(6).optional(),
+  reflexRounds: z.number().int().min(0).max(6).optional(),
   numericRounds: z.number().int().min(0).max(6).optional(),
   themes: z.array(z.string()).optional(),
 });
@@ -119,6 +120,14 @@ export const SubmitDuelAnswerMsg = z.object({
   text: z.string().min(1).max(60),
 });
 
+// --- Reflex round ---
+
+/** A tap. Carries nothing: the server times it on arrival, because a client-supplied
+ *  timestamp is a client-supplied score. */
+export const SubmitReflexTapMsg = z.object({
+  type: z.literal("SUBMIT_REFLEX_TAP"),
+});
+
 export const ClientMessage = z.discriminatedUnion("type", [
   HelloMsg,
   ObserveMsg,
@@ -137,6 +146,7 @@ export const ClientMessage = z.discriminatedUnion("type", [
   SubmitBluffVoteMsg,
   SubmitDuelPredictionMsg,
   SubmitDuelAnswerMsg,
+  SubmitReflexTapMsg,
 ]);
 
 export type ClientMessage = z.infer<typeof ClientMessage>;

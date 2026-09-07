@@ -11,6 +11,9 @@ export const PHASES = [
   "DUEL_PREDICT",
   "DUEL_ANSWER",
   "DUEL_REVEAL",
+  "REFLEX_WAIT",
+  "REFLEX_GO",
+  "REFLEX_REVEAL",
   "HOST_REVIEW",
   "FINISHED",
 ] as const;
@@ -46,6 +49,8 @@ export interface GameSettings {
   chainRounds: number;
   bluffRounds: number;
   duelRounds: number;
+  /** Reaction-time duels: the screen turns green, first tap wins. */
+  reflexRounds: number;
   /** Ordinary questions scored by proximity instead of by the host. */
   numericRounds: number;
   themes: string[]; // empty = all themes
@@ -58,6 +63,8 @@ export const MAX_SPECIAL_ROUNDS = 6;
 export const BLUFF_MIN_PLAYERS = 3;
 /** A duel needs two contestants and at least one spectator to make predictions worthwhile. */
 export const DUEL_MIN_PLAYERS = 3;
+/** A reflex round is a race, so two is already a game. */
+export const REFLEX_MIN_PLAYERS = 2;
 
 /** Points awarded by the self-scoring rounds. */
 export const BLUFF_POINTS_FOUND = 2; // you spotted the real answer
@@ -66,6 +73,11 @@ export const DUEL_POINTS_WINNER = 3;
 export const DUEL_POINTS_PREDICTED = 1; // spectators who called it
 export const NUMERIC_POINTS_CLOSEST = 2;
 export const NUMERIC_POINTS_EXACT = 3;
+export const REFLEX_POINTS_WINNER = 3;
+export const REFLEX_POINTS_SECOND = 1;
+/** Maths questions reward being right, and reward being right first a lot more. */
+export const MATH_POINTS_CORRECT = 1;
+export const MATH_POINTS_FASTEST = 3;
 
 /** Theme ids the bank uses, with their display label. Shared so the settings screen and the
  *  question screen name a theme the same way. */
@@ -86,6 +98,7 @@ export const THEME_LABELS: Record<string, string> = {
   dofus: "Dofus",
   drapeaux: "Drapeaux",
   art: "Art",
+  maths: "Maths",
 };
 
 export function themeLabel(id: string): string {
@@ -98,6 +111,7 @@ export const DEFAULT_SETTINGS: GameSettings = {
   chainRounds: 1,
   bluffRounds: 1,
   duelRounds: 1,
+  reflexRounds: 1,
   numericRounds: 2,
   themes: [],
 };
@@ -120,8 +134,9 @@ export interface QuestionPublic {
   type: QuestionType;
   prompt: string;
   mediaUrl: string | null;
-  /** "number" means the closest answer wins and no host grading happens. */
-  answerKind: "text" | "number" | "list";
+  /** "number": closest answer wins. "math": exact answer, fastest correct one wins.
+   *  Neither reaches the host review — there is nothing to judge in arithmetic. */
+  answerKind: "text" | "number" | "list" | "math";
 }
 
 /**
@@ -200,6 +215,28 @@ export interface DuelView {
   acceptedTotal: number;
 }
 
+/**
+ * What a player sees during a reflex round.
+ *
+ * There is deliberately no "when does it turn green" field. The moment lives only in the
+ * Durable Object's alarm, and `phaseDeadlineTs` stays null while waiting — send the client a
+ * countdown and anyone with the network tab open wins every round.
+ *
+ * The times measured include the network round trip (~40 ms on a domestic connection), so
+ * they are not laboratory reaction times. Human reaction sits around 250 ms, which is where
+ * the differences that decide a round actually come from.
+ */
+export interface ReflexView {
+  step: "wait" | "go" | "reveal";
+  /** You have a result for this round, right or wrong. */
+  youTapped: boolean;
+  /** You tapped before it turned green, so you are out of this round. */
+  falseStart: boolean;
+  yourMs: number | null;
+  /** During "reveal": everyone's time, fastest first. */
+  results: { nickname: string; ms: number | null; falseStart: boolean; points: number }[] | null;
+}
+
 export interface RoomStateSync {
   roomCode: string;
   phase: Phase;
@@ -217,6 +254,7 @@ export interface RoomStateSync {
   chainReveal: ChainResult[] | null;
   bluff: BluffView | null;
   duel: DuelView | null;
+  reflex: ReflexView | null;
   /** Every trivia question and answer of the game, for the host's end-of-game review — set only during HOST_REVIEW. */
   reviewQuestions: ReviewQuestion[] | null;
 }

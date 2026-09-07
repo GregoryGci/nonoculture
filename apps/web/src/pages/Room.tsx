@@ -17,6 +17,7 @@ import { ChainGuessForm } from "../components/ChainGuessForm";
 import { ChainRevealSlideshow } from "../components/ChainRevealSlideshow";
 import { BluffRound } from "../components/BluffRound";
 import { DuelRound } from "../components/DuelRound";
+import { ReflexRound } from "../components/ReflexRound";
 import { themeLabel, type QuestionPublic, type RoomStateSync } from "@nonoculture/shared";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -87,13 +88,25 @@ export function Room() {
                 <p className="eyebrow">
                   {themeLabel(state.currentQuestion.theme)}
                   {state.currentQuestion.answerKind === "number" && " · le plus proche gagne"}
+                  {state.currentQuestion.answerKind === "math" && " · le plus rapide gagne"}
                 </p>
-                <h1 className="display text-[clamp(1.5rem,6vw,2.25rem)]">{state.currentQuestion.prompt}</h1>
+                <h1
+                  className="display"
+                  // Arithmetic reads better big and spaced out than a sentence does.
+                  style={
+                    state.currentQuestion.answerKind === "math"
+                      ? { fontSize: "clamp(2.2rem, 11vw, 4rem)", letterSpacing: "0.01em" }
+                      : { fontSize: "clamp(1.5rem, 6vw, 2.25rem)" }
+                  }
+                >
+                  {state.currentQuestion.prompt}
+                </h1>
               </div>
               <QuestionMedia question={state.currentQuestion} />
               <AnswerForm
                 key={state.currentQuestion.id}
                 alreadyAnswered={state.youHaveAnswered}
+                numeric={state.currentQuestion.answerKind === "math"}
                 onSubmit={(answer) => send({ type: "SUBMIT_ANSWER", questionId: state.currentQuestion!.id, answer })}
               />
               <PlayerList players={state.players} youId={playerId} />
@@ -178,11 +191,18 @@ export function Room() {
             </SpecialStep>
           )}
 
-          {(state.phase === "BLUFF_REVEAL" || state.phase === "DUEL_REVEAL") && isHost && (
-            <button onClick={() => send({ type: "HOST_NEXT" })} className="btn btn-primary h-14 w-full">
-              Continuer
-            </button>
+          {state.reflex && (
+            <SpecialStep label="Réflexe" title={state.reflex.step === "reveal" ? "Résultats" : "Prêt ?"}>
+              <ReflexRound reflex={state.reflex} onTap={() => send({ type: "SUBMIT_REFLEX_TAP" })} />
+            </SpecialStep>
           )}
+
+          {(state.phase === "BLUFF_REVEAL" || state.phase === "DUEL_REVEAL" || state.phase === "REFLEX_REVEAL") &&
+            isHost && (
+              <button onClick={() => send({ type: "HOST_NEXT" })} className="btn btn-primary h-14 w-full">
+                Continuer
+              </button>
+            )}
 
           {state.phase === "HOST_REVIEW" &&
             (isHost ? (

@@ -22,12 +22,25 @@ interface QuestionRow {
  */
 const AUDIO_QUESTIONS_PER_15 = 4;
 
+const ANSWER_KINDS = ["number", "list", "math"] as const;
+
+/**
+ * Reads the column, falling back to host-graded text for anything unrecognised.
+ *
+ * Written as a list rather than a chain of comparisons because the chain is where a new kind
+ * gets forgotten: "math" silently arrived as "text" the first time, which does not fail — it
+ * just quietly scores an arithmetic question as if a human had to judge it.
+ */
+function toAnswerKind(value: string): InternalQuestion["answerKind"] {
+  return (ANSWER_KINDS as readonly string[]).includes(value) ? (value as InternalQuestion["answerKind"]) : "text";
+}
+
 function toInternal(row: QuestionRow): InternalQuestion {
   return {
     id: row.id,
     theme: row.theme,
     family: row.family,
-    answerKind: row.answer_kind === "number" || row.answer_kind === "list" ? row.answer_kind : "text",
+    answerKind: toAnswerKind(row.answer_kind),
     difficulty: row.difficulty as 1 | 2 | 3,
     type: row.type as InternalQuestion["type"],
     prompt: row.prompt,
@@ -65,10 +78,11 @@ async function fetchQuestions(
     // The quota bucket, drawn separately so a game reliably contains some.
     clauses.push("type = 'audio' AND media_key IS NOT NULL");
   } else {
-    // Everything else, images included. Splitting on "media_key IS NULL" instead made image
-    // questions unreachable: they carry a media key but are not audio, so they fell through
-    // both buckets and could never be drawn.
-    clauses.push("type <> 'audio' AND answer_kind = 'text'");
+    // Everything else, images and maths included. Splitting on "media_key IS NULL" instead
+    // made image questions unreachable: they carry a media key but are not audio, so they
+    // fell through both buckets and could never be drawn. Maths questions are in here for
+    // the same reason — leave them out and picking the maths theme yields an empty game.
+    clauses.push("type <> 'audio' AND answer_kind IN ('text', 'math')");
     if (!mediaAvailable) clauses.push("media_key IS NULL");
   }
   // Over-drawn on purpose: diversify() needs spare rows in each family to spread across.
@@ -169,6 +183,11 @@ export async function buildDeck(
   const chainCount = Math.min(settings.chainRounds, specialBudget);
   const bluffWanted = Math.min(settings.bluffRounds, Math.max(0, specialBudget - chainCount));
   const duelWanted = Math.min(settings.duelRounds, Math.max(0, specialBudget - chainCount - bluffWanted));
+  // Reflex rounds carry no question of their own, so they only need budget, not bank.
+  const reflexCount = Math.min(
+    settings.reflexRounds,
+    Math.max(0, specialBudget - chainCount - bluffWanted - duelWanted),
+  );
 
   // Bluff and duel each need a question of their own, drawn first so the slot count can
   // shrink to what the bank can actually supply — a duel needs a list question, and there
@@ -176,7 +195,7 @@ export async function buildDeck(
   const bluffQuestions = await fetchQuestions(db, settings, bluffWanted, "rest", mediaAvailable);
   const duelQuestions = await fetchQuestions(db, settings, duelWanted, "list", mediaAvailable);
 
-  const specialSlots = chainCount + bluffQuestions.length + duelQuestions.length;
+  const specialSlots = chainCount + reflexCount + bluffQuestions.length + duelQuestions.length;
   const questionSlots = Math.max(0, total - specialSlots);
   const audioQuota = mediaAvailable ? Math.round((total * AUDIO_QUESTIONS_PER_15) / 15) : 0;
 
@@ -213,6 +232,7 @@ export async function buildDeck(
   const deck: DeckItem[] = questions.map((question) => ({ kind: "trivia", question }));
   const specials: DeckItem[] = shuffle([
     ...Array.from({ length: chainCount }, (): DeckItem => ({ kind: "chain" })),
+    ...Array.from({ length: reflexCount }, (): DeckItem => ({ kind: "reflex" })),
     ...bluffQuestions.map((question): DeckItem => ({ kind: "bluff", question })),
     ...duelQuestions.map((question): DeckItem => ({ kind: "duel", question })),
   ]);

@@ -3,6 +3,7 @@ import {
   BLUFF_MIN_PLAYERS,
   CHAIN_MIN_PLAYERS,
   DUEL_MIN_PLAYERS,
+  REFLEX_MIN_PLAYERS,
   MAX_CHAIN_ROUNDS,
   MAX_SPECIAL_ROUNDS,
   THEME_LABELS,
@@ -116,6 +117,23 @@ export function HostSettings({
         {settings.duelRounds > 0 && connectedPlayers < DUEL_MIN_PLAYERS && (
           <p className="text-[13px]" style={{ color: "var(--color-text-faint)" }}>
             Sautés : {DUEL_MIN_PLAYERS} joueurs minimum
+          </p>
+        )}
+      </Row>
+
+      <Row label="Manches réflexe" value={String(settings.reflexRounds)}>
+        <input
+          type="range"
+          min={0}
+          max={MAX_SPECIAL_ROUNDS}
+          step={1}
+          value={settings.reflexRounds}
+          aria-label="Nombre de manches réflexe"
+          onChange={(e) => onChange({ reflexRounds: Number(e.target.value) })}
+        />
+        {settings.reflexRounds > 0 && connectedPlayers < REFLEX_MIN_PLAYERS && (
+          <p className="text-[13px]" style={{ color: "var(--color-text-faint)" }}>
+            Sautées : {REFLEX_MIN_PLAYERS} joueurs minimum
           </p>
         )}
       </Row>

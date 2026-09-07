@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { createRoom, transition } from "./state-machine.js";
+import { computeNextAlarmTs, createRoom, transition } from "./state-machine.js";
 import type { DeckItem, GameState, InternalQuestion } from "./types.js";
 
 const T0 = 1_000_000;
@@ -231,5 +231,126 @@ describe("closest-wins questions", () => {
     }).state;
     expect(state.players.a?.score).toBe(0);
     expect(state.players.b?.score).toBe(2);
+  });
+});
+
+describe("reflex round", () => {
+  const deck: DeckItem[] = [{ kind: "reflex" }];
+
+  /** Walks the round up to the green light, which only an alarm can trigger. */
+  function afterGo(players = ["a", "b", "c"]): GameState {
+    const state = room(players, deck);
+    expect(state.phase).toBe("REFLEX_WAIT");
+    return transition(state, { kind: "ALARM_FIRED", now: state.reflex!.goAtTs }).state;
+  }
+
+  it("never puts the green light in phaseDeadlineTs, where every client would see it", () => {
+    const state = room(["a", "b", "c"], deck);
+    // The whole round depends on this: a broadcast countdown is a broadcast answer.
+    expect(state.phaseDeadlineTs).toBeNull();
+    expect(state.reflex?.goAtTs).toBeGreaterThan(T0);
+    expect(state.reflex?.goTs).toBeNull();
+  });
+
+  it("wakes the room up for the green light even though it has no phase deadline", () => {
+    const state = room(["a", "b", "c"], deck);
+    expect(computeNextAlarmTs(state)).toBe(state.reflex!.goAtTs);
+  });
+
+  it("times a tap from the moment it turned green, not from when the round started", () => {
+    let state = afterGo();
+    const goTs = state.reflex!.goTs!;
+    state = transition(state, { kind: "SUBMIT_REFLEX_TAP", playerId: "a", now: goTs + 213 }).state;
+    expect(state.reflex?.times.a).toBe(213);
+  });
+
+  it("scores the fastest, then the runner-up, and nothing for third", () => {
+    let state = afterGo();
+    const goTs = state.reflex!.goTs!;
+    state = transition(state, { kind: "SUBMIT_REFLEX_TAP", playerId: "b", now: goTs + 180 }).state;
+    state = transition(state, { kind: "SUBMIT_REFLEX_TAP", playerId: "c", now: goTs + 240 }).state;
+    state = transition(state, { kind: "SUBMIT_REFLEX_TAP", playerId: "a", now: goTs + 310 }).state;
+
+    expect(state.phase).toBe("REFLEX_REVEAL");
+    expect(state.players.b?.score).toBe(3);
+    expect(state.players.c?.score).toBe(1);
+    expect(state.players.a?.score).toBe(0);
+  });
+
+  it("burns a player who taps before the green, whatever they do next", () => {
+    let state = room(["a", "b", "c"], deck);
+    state = transition(state, { kind: "SUBMIT_REFLEX_TAP", playerId: "a", now: T0 + 150 }).state;
+    expect(state.reflex?.falseStarts).toContain("a");
+
+    state = transition(state, { kind: "ALARM_FIRED", now: state.reflex!.goAtTs }).state;
+    const goTs = state.reflex!.goTs!;
+    // Mashing the button is not a reaction test: the second tap must not register a time.
+    state = transition(state, { kind: "SUBMIT_REFLEX_TAP", playerId: "a", now: goTs + 5 }).state;
+    expect(state.reflex?.times.a).toBeUndefined();
+
+    state = transition(state, { kind: "SUBMIT_REFLEX_TAP", playerId: "b", now: goTs + 400 }).state;
+    state = transition(state, { kind: "SUBMIT_REFLEX_TAP", playerId: "c", now: goTs + 500 }).state;
+    expect(state.phase).toBe("REFLEX_REVEAL");
+    expect(state.players.a?.score).toBe(0);
+    expect(state.players.b?.score).toBe(3);
+  });
+
+  it("keeps the first time a player registers, not their best", () => {
+    let state = afterGo();
+    const goTs = state.reflex!.goTs!;
+    state = transition(state, { kind: "SUBMIT_REFLEX_TAP", playerId: "a", now: goTs + 400 }).state;
+    state = transition(state, { kind: "SUBMIT_REFLEX_TAP", playerId: "a", now: goTs + 100 }).state;
+    expect(state.reflex?.times.a).toBe(400);
+  });
+
+  it("settles on the timer when someone never taps at all", () => {
+    let state = afterGo();
+    const goTs = state.reflex!.goTs!;
+    state = transition(state, { kind: "SUBMIT_REFLEX_TAP", playerId: "a", now: goTs + 260 }).state;
+    expect(state.phase).toBe("REFLEX_GO");
+    state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state;
+    expect(state.phase).toBe("REFLEX_REVEAL");
+    expect(state.players.a?.score).toBe(3);
+  });
+
+  it("skips the round below two players rather than running a race of one", () => {
+    const state = room(["a"], deck);
+    expect(state.phase).not.toBe("REFLEX_WAIT");
+  });
+});
+
+describe("maths questions", () => {
+  const maths = question({ answerKind: "math", theme: "maths", prompt: "7 × 8 = ?", answer: "56" });
+  const deck: DeckItem[] = [{ kind: "trivia", question: maths }];
+
+  function answer(state: GameState, playerId: string, raw: string, at: number): GameState {
+    return transition(state, { kind: "SUBMIT_ANSWER", playerId, questionId: 1, raw, now: at }).state;
+  }
+
+  it("pays the first correct answer more than the later ones", () => {
+    let state = room(["a", "b", "c"], deck);
+    state = answer(state, "a", "56", T0 + 900); // right, but second
+    state = answer(state, "b", "56", T0 + 400); // right, and first
+    state = answer(state, "c", "54", T0 + 300); // fast and wrong, which is worth nothing
+    expect(state.players.b?.score).toBe(3);
+    expect(state.players.a?.score).toBe(1);
+    expect(state.players.c?.score).toBe(0);
+  });
+
+  it("ranks on when the answer arrived, not on the order it was processed", () => {
+    let state = room(["a", "b"], deck);
+    state = answer(state, "a", "56", T0 + 800);
+    state = answer(state, "b", "56", T0 + 200);
+    expect(state.players.b?.score).toBe(3);
+    expect(state.players.a?.score).toBe(1);
+  });
+
+  it("keeps arithmetic out of the host review — there is nothing to judge", () => {
+    let state = room(["a", "b"], deck);
+    state = answer(state, "a", "56", T0 + 300);
+    state = answer(state, "b", "pas la moindre idée", T0 + 400);
+    expect(state.phase).toBe("HOST_REVIEW");
+    expect(state.answerLog).toEqual({});
+    expect(state.players.b?.score).toBe(0);
   });
 });
