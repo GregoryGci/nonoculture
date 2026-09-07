@@ -21,14 +21,14 @@ deploy` réel. Historique détaillé : `git log --oneline`.
 
 | answer_kind | type  |    n |
 | ----------- | ----- | ---: |
-| text        | text  | 4122 |
+| text        | text  | 4842 |
 | number      | text  |  561 |
 | list        | text  |  705 |
 | text        | image |   90 |
 | text        | audio |   15 |
-| **total**   |       | 5493 |
+| **total**   |       | 6213 |
 
-Réparties sur **23 familles** (`family`), la plus grosse à 488 questions. La colonne
+Réparties sur **22 thèmes** et **23 familles** (`family`), la plus grosse à 488 questions. La colonne
 `family` existe pour une raison précise : sans elle, choisir le thème « sport » sortait
 quinze fois « quel sport pratique X ? » d'affilée. Le tirage fait maintenant un round-robin
 entre familles (`diversify()` dans `apps/server/src/lib/questions.ts`).
@@ -45,6 +45,10 @@ Générateurs (tous relançables, tous sur des sources CC0) :
   acceptées chacune), la matière première des duels.
 - `apps/server/scripts/fetch-freesound.mjs` — sons CC0 via l'API Freesound (clé perso,
   passée en variable d'environnement, jamais écrite sur disque).
+- `apps/server/scripts/check-seed.mjs` — contrôle les fichiers écrits à la main avant tout
+  chargement : doublons internes, collisions avec le reste de la banque, champs manquants et
+  réponse dans l’énoncé. Il a attrapé 21 fuites sur le premier jet des questions Dofus et 41
+  dans les fichiers historiques, déjà en ligne.
 - `apps/server/scripts/generate-paintings.mjs` — 105 questions image sur des tableaux
   (thème **Art**). Une sonde de licence sur cinq familles candidates (tableaux, portraits,
   armoiries, monuments, animaux) a donné 97 % de domaine public pour les tableaux contre

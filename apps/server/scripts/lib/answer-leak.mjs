@@ -49,9 +49,86 @@ const STOPWORDS = new Set([
 
 /**
  * Words that name what the question is asking for rather than identifying the answer.
- * When one of these is shared between question and answer it is grammar, not a giveaway.
+ *
+ * When one of these is shared between question and answer it is grammar, not a giveaway:
+ * "Quel nuage sphérique… ?" answered by "le nuage de Oort" hides everything that mattered.
+ * The alternative — only flagging when *every* word of the answer is in the prompt — was
+ * tried and is worse: it lets "Quel pays a pour capitale São Tomé ?" / "Sao Tomé-et-Principe"
+ * straight through. So the list is the mechanism, and it grows as new domains are added.
  */
 const CATEGORY_NOUNS = new Set([
+  // added with the space, series and mythology banks
+  "station",
+  "nuage",
+  "ceinture",
+  "nebuleuse",
+  "matiere",
+  "tache",
+  "mission",
+  "satellite",
+  "satellites",
+  "telescope",
+  "sonde",
+  "navette",
+  "galaxie",
+  "comete",
+  "cratere",
+  "constellation",
+  "energie",
+  "horizon",
+  "rayonnement",
+  "unite",
+  "distance",
+  "theorie",
+  "reaction",
+  "phenomene",
+  "agence",
+  "programme",
+  "createur",
+  "acteur",
+  "actrice",
+  "actrices",
+  "acteurs",
+  "personnage",
+  "personnages",
+  "heros",
+  "heroine",
+  "dieu",
+  "deesse",
+  "dieux",
+  "titan",
+  "creature",
+  "creatures",
+  "monstre",
+  "geant",
+  "geante",
+  "royaume",
+  "cite",
+  "ile",
+  "metier",
+  "classe",
+  "caracteristique",
+  "sort",
+  "objet",
+  "arme",
+  "monture",
+  "familier",
+  "familiers",
+  "donjon",
+  "quete",
+  "mode",
+  "carte",
+  "manche",
+  "saison",
+  "episode",
+  "chaine",
+  "studio",
+  "auteur",
+  "mangaka",
+  "pouvoir",
+  "pouvoirs",
+  "equipe",
+  "organisation",
   "guerre",
   "guerres",
   "traite",
@@ -166,9 +243,10 @@ export function answerLeaksIntoPrompt(prompt, answer) {
   const identifying = identifyingWords(answer).filter((w) => !/^\d+$/.test(w));
   if (identifying.length === 0) return false;
 
+  // Word against word, never against the raw prompt: a plain substring search finds "lane"
+  // inside "planet" and rejects "Quelle journaliste du Daily Planet… ?" / "Lois Lane".
   const promptWords = words(prompt);
-  return identifying.some(
-    (word) =>
-      p.includes(word) || promptWords.some((other) => word.slice(0, ROOT_LENGTH) === other.slice(0, ROOT_LENGTH)),
+  return identifying.some((word) =>
+    promptWords.some((other) => word === other || word.slice(0, ROOT_LENGTH) === other.slice(0, ROOT_LENGTH)),
   );
 }

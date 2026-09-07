@@ -1,0 +1,924 @@
+[
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "prompt": "Combien de classes de personnages le jeu comptait-il à l'origine ?",
+    "answer": "12",
+    "aliases": [
+      "douze"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "prompt": "De quelle couleur est le Bouftou de base croisé par tous les débutants ?",
+    "answer": "blanc",
+    "aliases": []
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "prompt": "Sur quoi les combats se déroulent-ils, contrairement à la plupart des MMO ?",
+    "answer": "une grille de cases",
+    "aliases": [
+      "une grille",
+      "un damier",
+      "des cases",
+      "au tour par tour"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "prompt": "Quelle caractéristique augmente les dégâts des sorts de feu ?",
+    "answer": "l'intelligence",
+    "aliases": [
+      "intelligence",
+      "intel"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "prompt": "Quelle caractéristique augmente les dégâts des sorts de terre ?",
+    "answer": "la force",
+    "aliases": [
+      "force"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "prompt": "Quelle caractéristique augmente les dégâts des sorts d'air ?",
+    "answer": "l'agilité",
+    "aliases": [
+      "agilité"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "prompt": "Quelle caractéristique augmente les dégâts des sorts d'eau ?",
+    "answer": "la chance",
+    "aliases": [
+      "chance"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "prompt": "Quelle caractéristique détermine le nombre de points de vie d'un personnage ?",
+    "answer": "la vitalité",
+    "aliases": [
+      "vitalité",
+      "vita"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "prompt": "Combien d'éléments différents le système de combat compte-t-il ?",
+    "answer": "4",
+    "aliases": [
+      "quatre"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "prompt": "Comment appelle-t-on un groupe de joueurs organisé sous un même blason ?",
+    "answer": "une guilde",
+    "aliases": [
+      "guilde"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "prompt": "Comment appelle-t-on le fait de fabriquer un objet à partir de ressources ?",
+    "answer": "le craft",
+    "aliases": [
+      "craft",
+      "crafter",
+      "l'artisanat"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "prompt": "Comment appelle-t-on un ensemble d'équipements qui donne un bonus quand on les porte ensemble ?",
+    "answer": "une panoplie",
+    "aliases": [
+      "panoplie"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "prompt": "Combien de points de mouvement un personnage possède-t-il de base ?",
+    "answer": "3",
+    "aliases": [
+      "trois"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "prompt": "Combien de points d'action un personnage possède-t-il de base ?",
+    "answer": "6",
+    "aliases": [
+      "six"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "prompt": "Avec combien de points de vie un personnage tout neuf commence-t-il ?",
+    "answer": "50",
+    "aliases": [
+      "cinquante"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Quel métier transforme le minerai en lingots ?",
+    "answer": "mineur",
+    "aliases": [
+      "le mineur"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Quel métier transforme les céréales en pain ?",
+    "answer": "boulanger",
+    "aliases": [
+      "le boulanger"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Quel métier récolte les céréales dans les champs ?",
+    "answer": "paysan",
+    "aliases": [
+      "le paysan"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Quel métier fabrique les épées et les haches ?",
+    "answer": "forgeron",
+    "aliases": [
+      "le forgeron"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Quel métier fabrique les capes et les sacs à dos ?",
+    "answer": "tailleur",
+    "aliases": [
+      "le tailleur"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Quel métier fabrique les anneaux et les amulettes ?",
+    "answer": "bijoutier",
+    "aliases": [
+      "le bijoutier"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Quel métier récolte les plantes pour en faire des potions ?",
+    "answer": "alchimiste",
+    "aliases": [
+      "l'alchimiste"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Quel métier consiste à sortir des poissons de l'eau ?",
+    "answer": "pêcheur",
+    "aliases": [
+      "le pêcheur"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Quelle classe affaiblit ses adversaires avec des mots blessants ?",
+    "answer": "Eniripsa",
+    "aliases": []
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Quelle classe repousse ses ennemis à distance avec un arc ?",
+    "answer": "Crâ",
+    "aliases": [
+      "Cra"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Quelle classe se blesse elle-même pour frapper plus fort ?",
+    "answer": "Sacrieur",
+    "aliases": []
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Quelle classe vole des points d'action en manipulant le temps ?",
+    "answer": "Xélor",
+    "aliases": [
+      "Xelor"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Quelle classe fait tomber des pièces sur ses ennemis et cherche les trésors ?",
+    "answer": "Enutrof",
+    "aliases": []
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Quelle classe pose des pièges invisibles sur le terrain ?",
+    "answer": "Sram",
+    "aliases": []
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Quelle classe combat entourée de créatures qu'elle a appelées ?",
+    "answer": "Osamodas",
+    "aliases": []
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Quelle classe protège ses alliés derrière des armures et des glyphes ?",
+    "answer": "Féca",
+    "aliases": [
+      "Feca"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Quelle classe porte physiquement ses alliés pour les déplacer sur le terrain ?",
+    "answer": "Pandawa",
+    "aliases": []
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Quelle classe envoie des poupées de bois se battre à sa place ?",
+    "answer": "Sadida",
+    "aliases": []
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Quelle classe féline joue au hasard avec des pièces de monnaie ?",
+    "answer": "Ecaflip",
+    "aliases": []
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Quelle classe fonce au contact sans aucune subtilité ?",
+    "answer": "Iop",
+    "aliases": []
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Comment appelle-t-on les combats en arène à trois contre trois, accessibles partout ?",
+    "answer": "le Kolizéum",
+    "aliases": [
+      "Kolizéum",
+      "Kolizeum"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Où les joueurs revendent-ils leurs objets entre eux contre des kamas ?",
+    "answer": "l'hôtel de vente",
+    "aliases": [
+      "hôtel de vente",
+      "HDV"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Quelle est la ville de départ historique, avant l'ajout d'Incarnam ?",
+    "answer": "Astrub",
+    "aliases": []
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Que faut-il vaincre au fond d'un donjon pour le terminer ?",
+    "answer": "le boss",
+    "aliases": [
+      "boss",
+      "le gardien"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle la version tactile du jeu, éditée pour téléphones et tablettes ?",
+    "answer": "Dofus Touch",
+    "aliases": [
+      "Touch"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Sous quel nom Ankama a-t-il annoncé la refonte complète du jeu sur un nouveau moteur ?",
+    "answer": "Dofus Unity",
+    "aliases": [
+      "Unity"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Quel œuf primordial porte le nom d'une pierre rouge sang ?",
+    "answer": "le Pourpre",
+    "aliases": [
+      "Dofus Pourpre",
+      "Pourpre",
+      "le Dofus Pourpre"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Quel œuf primordial porte un nom qui évoque l'or et la terre jaune ?",
+    "answer": "l'Ocre",
+    "aliases": [
+      "Dofus Ocre",
+      "Ocre",
+      "le Dofus Ocre"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Quel œuf primordial porte le nom d'une pierre bleu-vert ?",
+    "answer": "le Turquoise",
+    "aliases": [
+      "Dofus Turquoise",
+      "Turquoise",
+      "le Dofus Turquoise"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Quel œuf primordial porte le nom d'une matière blanche et précieuse ?",
+    "answer": "l'Ivoire",
+    "aliases": [
+      "Dofus Ivoire",
+      "Ivoire",
+      "le Dofus Ivoire"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Quel œuf primordial porte un nom orangé qui rappelle un légume ?",
+    "answer": "le Cawotte",
+    "aliases": [
+      "Dofus Cawotte",
+      "Cawotte",
+      "le Dofus Cawotte"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Combien de dieux le panthéon du Monde des Douze compte-t-il ?",
+    "answer": "12",
+    "aliases": [
+      "douze"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Quelle cité maritime du sud donne son nom à une nation de marins et de savants ?",
+    "answer": "Sufokia",
+    "aliases": []
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Comment s'appelle la région de départ historique qui entoure Astrub ?",
+    "answer": "Amakna",
+    "aliases": []
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Quels lapins colorés et farceurs ont leur propre île et leur propre donjon ?",
+    "answer": "les Wabbits",
+    "aliases": [
+      "Wabbits",
+      "Wabbit"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Quel calamar géant donne son nom à un donjon célèbre des débuts du jeu ?",
+    "answer": "le Kralamoure",
+    "aliases": [
+      "Kralamoure"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on les points gagnés en accomplissant des exploits, affichés sur le profil ?",
+    "answer": "les succès",
+    "aliases": [
+      "succès"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on le palier qui permet à un personnage 200 de continuer à progresser ?",
+    "answer": "l'oméga",
+    "aliases": [
+      "oméga",
+      "omega",
+      "niveau oméga"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Quelle série animée d'Ankama raconte l'enfance d'un vieil Ecaflip conteur ?",
+    "answer": "Kérubim",
+    "aliases": [
+      "Les Aventures de Kérubim",
+      "Kerubim"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Quel jeune héros aux cheveux bleus est le personnage principal de la série Wakfu ?",
+    "answer": "Yugo",
+    "aliases": []
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "À quel peuple ailé et créateur de portails Yugo appartient-il ?",
+    "answer": "les Éliatropes",
+    "aliases": [
+      "Éliatrope",
+      "Eliatrope",
+      "les Eliatropes"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Quel compagnon Iop bagarreur suit Yugo dans toutes ses aventures ?",
+    "answer": "Tristepin",
+    "aliases": [
+      "Pinpin",
+      "Tristepin de Percedal",
+      "Percedal"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Quelle princesse Sadida fait partie du groupe de Yugo ?",
+    "answer": "Amalia",
+    "aliases": []
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Quel vieil Enutrof radin accompagne le groupe de Yugo ?",
+    "answer": "Ruel",
+    "aliases": [
+      "Ruel Stroud"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Quelle archère blonde du groupe de Yugo est une Crâ ?",
+    "answer": "Evangelyne",
+    "aliases": [
+      "Eva",
+      "Evangeline"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Comment s'appelle la bande de héros que forment Yugo et ses amis ?",
+    "answer": "la Confrérie du Tofu",
+    "aliases": [
+      "Confrérie du Tofu"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Dans quelle ville du nord de la France Ankama a-t-il été fondé ?",
+    "answer": "Roubaix",
+    "aliases": []
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Comment s'appelle le jeu de cartes qu'Ankama a tiré de son univers ?",
+    "answer": "Krosmaga",
+    "aliases": []
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Comment s'appelle le jeu de figurines tactique qu'Ankama a tiré de son univers ?",
+    "answer": "Krosmaster",
+    "aliases": [
+      "Krosmaster Arena"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Quel MMO d'Ankama se déroule mille ans après les événements du premier ?",
+    "answer": "Wakfu",
+    "aliases": []
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Quelle énergie créatrice donne son nom au MMO successeur ?",
+    "answer": "le Wakfu",
+    "aliases": [
+      "Wakfu"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Quelle énergie destructrice s'oppose au Wakfu dans la cosmologie d'Ankama ?",
+    "answer": "la Stasis",
+    "aliases": [
+      "Stasis",
+      "le Stasis"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on l'art de modifier les statistiques d'un équipement avec des runes ?",
+    "answer": "la forgemagie",
+    "aliases": [
+      "forgemagie",
+      "FM"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Quel artisan spécialisé améliore les statistiques des objets des autres joueurs ?",
+    "answer": "le forgemage",
+    "aliases": [
+      "forgemage",
+      "un forgemage"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on les personnages non joueurs qui distribuent les quêtes ?",
+    "answer": "les PNJ",
+    "aliases": [
+      "PNJ"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on le fait de contrôler plusieurs personnages en même temps ?",
+    "answer": "le multicompte",
+    "aliases": [
+      "multicompte",
+      "le multi"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Quelle caractéristique augmente les chances de trouver du butin rare sur les monstres ?",
+    "answer": "la prospection",
+    "aliases": [
+      "prospection",
+      "PP"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Quelle caractéristique détermine qui joue en premier dans un combat ?",
+    "answer": "l'initiative",
+    "aliases": [
+      "initiative"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on le fait d'attaquer un autre joueur en pleine carte, hors arène ?",
+    "answer": "une agression",
+    "aliases": [
+      "agression",
+      "agresser"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on les objets à usage unique qui augmentent définitivement une caractéristique ?",
+    "answer": "les parchemins",
+    "aliases": [
+      "parchemins",
+      "parcho",
+      "parchos"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on le fait de monter un personnage en le faisant aider par un joueur bien plus fort ?",
+    "answer": "le powerlevel",
+    "aliases": [
+      "powerlevel",
+      "power level",
+      "PL"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on les petites créatures que l'on nourrit pour qu'elles donnent des bonus ?",
+    "answer": "les familiers",
+    "aliases": [
+      "familiers",
+      "un familier"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on la caractéristique qui protège du vol de points d'action ?",
+    "answer": "l'esquive",
+    "aliases": [
+      "esquive",
+      "esquive PA"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Où un joueur range-t-il ses ressources en sécurité chez lui ?",
+    "answer": "dans un coffre",
+    "aliases": [
+      "un coffre",
+      "le coffre"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on le grand rassemblement annuel qu'organise Ankama à Lille ?",
+    "answer": "la convention",
+    "aliases": [
+      "Ankama Convention",
+      "la Ankama Convention"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Quel type de serveur interdit de contrôler plusieurs personnages à la fois ?",
+    "answer": "mono-compte",
+    "aliases": [
+      "les serveurs mono-compte",
+      "monocompte"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Quel métier fabrique les baguettes et les bâtons ?",
+    "answer": "sculpteur",
+    "aliases": [
+      "le sculpteur"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Quel métier confectionne les coiffes que l'on porte sur la tête ?",
+    "answer": "chapelier",
+    "aliases": [
+      "le chapelier"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Quel métier fabrique les bottes ?",
+    "answer": "cordonnier",
+    "aliases": [
+      "le cordonnier"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Quel métier prépare la viande des animaux chassés ?",
+    "answer": "boucher",
+    "aliases": [
+      "le boucher"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Quel métier prépare en cuisine ce que le pêcheur rapporte ?",
+    "answer": "poissonnier",
+    "aliases": [
+      "le poissonnier"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Quel niveau maximum un métier peut-il atteindre ?",
+    "answer": "200",
+    "aliases": [
+      "deux cents"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Combien de personnages un groupe peut-il compter au maximum en combat ?",
+    "answer": "8",
+    "aliases": [
+      "huit"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Comment appelle-t-on les affrontements entre joueurs, par opposition aux combats contre les monstres ?",
+    "answer": "le PvP",
+    "aliases": [
+      "PvP",
+      "joueur contre joueur"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Comment appelle-t-on les combats contre les monstres, par opposition à ceux entre joueurs ?",
+    "answer": "le PvM",
+    "aliases": [
+      "PvM",
+      "PvE"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "prompt": "Que faut-il posséder pour ouvrir la porte de certains donjons ?",
+    "answer": "une clé",
+    "aliases": [
+      "la clé",
+      "clé"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Comment s'appelle la catastrophe qui a noyé le Monde des Douze sous les larmes d'un ogre ?",
+    "answer": "le Chaos d'Ogrest",
+    "aliases": [
+      "Chaos d'Ogrest",
+      "le chaos"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Au sommet de quel pic Ogrest pleure-t-il depuis des siècles ?",
+    "answer": "le mont Zinit",
+    "aliases": [
+      "Zinit",
+      "mont Zinit"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Comment s'appelle la vaste région de plaines et de montagnes au nord d'Amakna ?",
+    "answer": "Cania",
+    "aliases": [
+      "les plaines de Cania"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Quelle divinité féline protège les joueurs qui misent tout sur la chance ?",
+    "answer": "Ecaflip",
+    "aliases": [
+      "le dieu Ecaflip"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Quel dieu du panthéon protège les archers ?",
+    "answer": "Crâ",
+    "aliases": [
+      "Cra",
+      "la déesse Crâ"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Quel dieu du panthéon protège les guerriers au corps à corps ?",
+    "answer": "Iop",
+    "aliases": [
+      "le dieu Iop"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on l'expérience nécessaire pour faire progresser un personnage ?",
+    "answer": "l'XP",
+    "aliases": [
+      "XP",
+      "l'expérience",
+      "expérience"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on la zone d'un donjon où l'on affronte le gardien final ?",
+    "answer": "la salle du boss",
+    "aliases": [
+      "salle du boss",
+      "la dernière salle"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Quelle classe manie les quatre éléments grâce à des runes qu'elle combine ?",
+    "answer": "Huppermage",
+    "aliases": []
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "prompt": "Quelle classe canine traque sa proie et entre en rage au combat ?",
+    "answer": "Ouginak",
+    "aliases": []
+  }
+]

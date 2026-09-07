@@ -99,6 +99,11 @@ export const THEME_LABELS: Record<string, string> = {
   drapeaux: "Drapeaux",
   art: "Art",
   maths: "Maths",
+  espace: "Espace",
+  mythologie: "Mythologie",
+  series: "Séries TV",
+  anime: "Anime & Manga",
+  heros: "Super-héros",
 };
 
 export function themeLabel(id: string): string {

@@ -1,89 +1,833 @@
 [
-  {"theme":"lol","difficulty":1,"type":"text","prompt":"Quel studio développe League of Legends ?","answer":"Riot Games","aliases":["Riot"]},
-  {"theme":"lol","difficulty":1,"type":"text","prompt":"Comment s'appelle la carte principale de League of Legends ?","answer":"la Faille de l'invocateur","aliases":["Faille de l'invocateur","Summoner's Rift","la faille"]},
-  {"theme":"lol","difficulty":1,"type":"text","prompt":"Combien de joueurs composent une équipe sur la Faille de l'invocateur ?","answer":"5","aliases":["cinq"]},
-  {"theme":"lol","difficulty":1,"type":"text","prompt":"Quel bâtiment faut-il détruire pour gagner la partie ?","answer":"le Nexus","aliases":["Nexus"]},
-  {"theme":"lol","difficulty":1,"type":"text","prompt":"Combien de couloirs compte la Faille de l'invocateur ?","answer":"3","aliases":["trois"]},
-  {"theme":"lol","difficulty":1,"type":"text","prompt":"Quel sort d'invocateur permet de franchir un mur en un clin d'œil ?","answer":"Flash","aliases":["saut éclair"]},
-  {"theme":"lol","difficulty":1,"type":"text","prompt":"Quel sort d'invocateur est indispensable pour jouer la jungle ?","answer":"Châtiment","aliases":["Smite"]},
-  {"theme":"lol","difficulty":1,"type":"text","prompt":"Quel monstre épique de la rivière donne le buff d'équipe le plus puissant ?","answer":"Baron Nashor","aliases":["le Baron","Nashor"]},
-  {"theme":"lol","difficulty":1,"type":"text","prompt":"Quel yordle empoisonne ses ennemis en semant des champignons ?","answer":"Teemo","aliases":[]},
-  {"theme":"lol","difficulty":1,"type":"text","prompt":"Quelle archère de glace tire une flèche de cristal à travers toute la carte ?","answer":"Ashe","aliases":[]},
-  {"theme":"lol","difficulty":1,"type":"text","prompt":"Quelle est la ressource dépensée en boutique pendant la partie ?","answer":"l'or","aliases":["or","gold","les pièces d'or"]},
-  {"theme":"lol","difficulty":1,"type":"text","prompt":"Comment s'appelle la série animée Netflix tirée de League of Legends ?","answer":"Arcane","aliases":[]},
-  {"theme":"lol","difficulty":1,"type":"text","prompt":"Dans Arcane, quelle championne est la sœur de Vi ?","answer":"Jinx","aliases":["Powder"]},
-  {"theme":"lol","difficulty":1,"type":"text","prompt":"Quel est le niveau maximum qu'un champion peut atteindre en partie ?","answer":"18","aliases":["dix-huit","niveau 18"]},
-
-  {"theme":"lol","difficulty":2,"type":"text","prompt":"De quel royaume à l'armure blanche et dorée vient Garen ?","answer":"Demacia","aliases":[]},
-  {"theme":"lol","difficulty":2,"type":"text","prompt":"Quel empire militaire est le grand rival de Demacia ?","answer":"Noxus","aliases":[]},
-  {"theme":"lol","difficulty":2,"type":"text","prompt":"De quelle région viennent Yasuo, Zed et Ahri ?","answer":"Ionia","aliases":[]},
-  {"theme":"lol","difficulty":2,"type":"text","prompt":"Quelle cité souterraine et polluée s'étend sous Piltover ?","answer":"Zaun","aliases":[]},
-  {"theme":"lol","difficulty":2,"type":"text","prompt":"Quel objet met son porteur en stase, invulnérable et intouchable ?","answer":"le Sablier de Zhonya","aliases":["Zhonya","Sablier de Zhonya","Zhonya's Hourglass"]},
-  {"theme":"lol","difficulty":2,"type":"text","prompt":"Quel objet ressuscite son porteur une fois après sa mort ?","answer":"l'Ange gardien","aliases":["Ange gardien","Guardian Angel","GA"]},
-  {"theme":"lol","difficulty":2,"type":"text","prompt":"Quel chapeau augmente massivement la puissance magique ?","answer":"le Chapeau mortel de Rabadon","aliases":["Rabadon","Chapeau de Rabadon","Rabadon's Deathcap"]},
-  {"theme":"lol","difficulty":2,"type":"text","prompt":"Quel moine aveugle combat aux arts martiaux et voit par le son ?","answer":"Lee Sin","aliases":[]},
-  {"theme":"lol","difficulty":2,"type":"text","prompt":"Quel gardien de prison attrape ses victimes avec une chaîne et pose une lanterne ?","answer":"Thresh","aliases":[]},
-  {"theme":"lol","difficulty":2,"type":"text","prompt":"Quel monstre épique laisse un œil que l'on invoque pour défoncer les tourelles ?","answer":"le Héraut de la Faille","aliases":["Héraut de la Faille","Rift Herald","le héraut"]},
-  {"theme":"lol","difficulty":2,"type":"text","prompt":"Combien de tourelles protègent chaque couloir avant l'inhibiteur ?","answer":"3","aliases":["trois"]},
-  {"theme":"lol","difficulty":2,"type":"text","prompt":"Combien de dragons élémentaires faut-il tuer pour obtenir l'Âme du Dragon ?","answer":"4","aliases":["quatre"]},
-  {"theme":"lol","difficulty":2,"type":"text","prompt":"Quel empire désertique l'empereur Azir cherche-t-il à faire renaître ?","answer":"Shurima","aliases":[]},
-  {"theme":"lol","difficulty":2,"type":"text","prompt":"Comment s'appelle le tournoi annuel qui couronne le meilleur club du monde ?","answer":"les Worlds","aliases":["Worlds","le championnat du monde","Championnat du monde"]},
-
-  {"theme":"lol","difficulty":3,"type":"text","prompt":"En quelle année League of Legends est-il sorti ?","answer":"2009","aliases":[]},
-  {"theme":"lol","difficulty":3,"type":"text","prompt":"Quelle équipe a remporté le tout premier Championnat du monde, en 2011 ?","answer":"Fnatic","aliases":[]},
-  {"theme":"lol","difficulty":3,"type":"text","prompt":"Quelle équipe coréenne a remporté le plus de Championnats du monde ?","answer":"T1","aliases":["SKT","SK Telecom T1","SKT T1"]},
-  {"theme":"lol","difficulty":3,"type":"text","prompt":"Quel joueur est surnommé « The Unkillable Demon King » ?","answer":"Faker","aliases":["Lee Sang-hyeok"]},
-  {"theme":"lol","difficulty":3,"type":"text","prompt":"Quel archipel maudit et brumeux est peuplé de spectres ?","answer":"les Îles Obscures","aliases":["Îles Obscures","Shadow Isles"]},
-  {"theme":"lol","difficulty":3,"type":"text","prompt":"Sur quelle montagne les Aspects célestes descendent-ils parmi les mortels ?","answer":"le mont Targon","aliases":["Targon","mont Targon"]},
-  {"theme":"lol","difficulty":3,"type":"text","prompt":"Dans Arcane, qui règne sur les bas-fonds de Zaun ?","answer":"Silco","aliases":[]},
-  {"theme":"lol","difficulty":3,"type":"text","prompt":"Quel co-inventeur de l'Hextech transforme peu à peu son corps en machine ?","answer":"Viktor","aliases":[]},
-  {"theme":"lol","difficulty":3,"type":"text","prompt":"Quel yordle inventeur est professeur à l'académie de Piltover ?","answer":"Heimerdinger","aliases":["Heimer"]},
-  {"theme":"lol","difficulty":3,"type":"text","prompt":"Quel est le nom complet de Lux, la Dame de Lumière ?","answer":"Luxanna Crownguard","aliases":["Luxanna"]},
-  {"theme":"lol","difficulty":3,"type":"text","prompt":"Dans Arcane, quel inventeur de Piltover crée l'Hextech avec Viktor ?","answer":"Jayce","aliases":["Jayce Talis"]},
-  {"theme":"lol","difficulty":3,"type":"text","prompt":"Quel champion est le Bouclier de Demacia, frère de Lux ?","answer":"Garen","aliases":["Garen Crownguard"]},
-
-  {"theme":"dofus","difficulty":1,"type":"text","prompt":"Quel studio français développe Dofus ?","answer":"Ankama","aliases":["Ankama Games"]},
-  {"theme":"dofus","difficulty":1,"type":"text","prompt":"Comment s'appelle la monnaie de Dofus ?","answer":"les kamas","aliases":["kamas","kama"]},
-  {"theme":"dofus","difficulty":1,"type":"text","prompt":"Que sont les Dofus dans l'univers du jeu ?","answer":"des œufs de dragon","aliases":["œufs de dragon","des oeufs de dragon","oeufs de dragon","des œufs de dragons"]},
-  {"theme":"dofus","difficulty":1,"type":"text","prompt":"Comment s'appelle le monde dans lequel se déroule Dofus ?","answer":"le Monde des Douze","aliases":["Monde des Douze"]},
-  {"theme":"dofus","difficulty":1,"type":"text","prompt":"Combien existe-t-il de Dofus primordiaux ?","answer":"6","aliases":["six"]},
-  {"theme":"dofus","difficulty":1,"type":"text","prompt":"Quelle classe est le guerrier bourrin au corps à corps, tout en force ?","answer":"Iop","aliases":["le Iop"]},
-  {"theme":"dofus","difficulty":1,"type":"text","prompt":"Quelle classe est l'archère à distance de Dofus ?","answer":"Crâ","aliases":["Cra","la Crâ"]},
-  {"theme":"dofus","difficulty":1,"type":"text","prompt":"Quelle classe soigne ses alliés avec des mots magiques ?","answer":"Eniripsa","aliases":["l'Eniripsa","Eni"]},
-  {"theme":"dofus","difficulty":1,"type":"text","prompt":"Comment s'appelle la zone où arrivent tous les nouveaux personnages ?","answer":"Incarnam","aliases":[]},
-  {"theme":"dofus","difficulty":1,"type":"text","prompt":"Quelle cité incarne le camp du bien, face à Brâkmar ?","answer":"Bonta","aliases":[]},
-  {"theme":"dofus","difficulty":1,"type":"text","prompt":"Quelle cité incarne le camp du mal, face à Bonta ?","answer":"Brâkmar","aliases":["Brakmar"]},
-  {"theme":"dofus","difficulty":1,"type":"text","prompt":"Que signifient les initiales PA en combat ?","answer":"points d'action","aliases":["Points d'Action"]},
-  {"theme":"dofus","difficulty":1,"type":"text","prompt":"Que signifient les initiales PM en combat ?","answer":"points de mouvement","aliases":["Points de Mouvement"]},
-  {"theme":"dofus","difficulty":1,"type":"text","prompt":"Quel est le niveau maximum d'un personnage sur Dofus ?","answer":"200","aliases":["niveau 200","deux cents"]},
-
-  {"theme":"dofus","difficulty":2,"type":"text","prompt":"Quelle classe encaisse et se sacrifie pour protéger son équipe ?","answer":"Sacrieur","aliases":["le Sacrieur","Sacri"]},
-  {"theme":"dofus","difficulty":2,"type":"text","prompt":"Quelle classe manipule le temps et les horloges ?","answer":"Xélor","aliases":["Xelor","le Xélor"]},
-  {"theme":"dofus","difficulty":2,"type":"text","prompt":"Quelle classe invoque des créatures pour combattre à sa place ?","answer":"Osamodas","aliases":["l'Osamodas","Osa"]},
-  {"theme":"dofus","difficulty":2,"type":"text","prompt":"Quelle classe protège son équipe avec des glyphes et des armures ?","answer":"Féca","aliases":["Feca","le Féca"]},
-  {"theme":"dofus","difficulty":2,"type":"text","prompt":"Quelle classe est l'assassin invisible qui pose des pièges ?","answer":"Sram","aliases":["le Sram"]},
-  {"theme":"dofus","difficulty":2,"type":"text","prompt":"Quelle classe est obsédée par les trésors et la prospection ?","answer":"Enutrof","aliases":["l'Enutrof","Enu"]},
-  {"theme":"dofus","difficulty":2,"type":"text","prompt":"Quelle classe est un panda qui porte ses alliés et carbure à l'alcool ?","answer":"Pandawa","aliases":["le Pandawa","Panda"]},
-  {"theme":"dofus","difficulty":2,"type":"text","prompt":"Quelle classe invoque des poupées et puise sa force dans la nature ?","answer":"Sadida","aliases":["le Sadida","Sadi"]},
-  {"theme":"dofus","difficulty":2,"type":"text","prompt":"Quelle classe féline mise tout sur la chance et le hasard ?","answer":"Ecaflip","aliases":["l'Ecaflip","Eca"]},
-  {"theme":"dofus","difficulty":2,"type":"text","prompt":"Quelle ville sert de grand carrefour aux joueurs débutants ?","answer":"Astrub","aliases":[]},
-  {"theme":"dofus","difficulty":2,"type":"text","prompt":"Comment s'appelle la série animée d'Ankama située après Dofus ?","answer":"Wakfu","aliases":[]},
-  {"theme":"dofus","difficulty":2,"type":"text","prompt":"Quel petit mouton coloré est le monstre emblématique des débutants ?","answer":"le Bouftou","aliases":["Bouftou","bouftous"]},
-  {"theme":"dofus","difficulty":2,"type":"text","prompt":"Quelle petite créature jaune à bec est la mascotte du jeu ?","answer":"le Tofu","aliases":["Tofu"]},
-  {"theme":"dofus","difficulty":2,"type":"text","prompt":"Comment s'appellent les créatures porcines et guerrières à la peau bleue ?","answer":"les Bworks","aliases":["Bwork","Bworks"]},
-
-  {"theme":"dofus","difficulty":3,"type":"text","prompt":"Quel ogre a noyé le Monde des Douze sous ses larmes ?","answer":"Ogrest","aliases":[]},
-  {"theme":"dofus","difficulty":3,"type":"text","prompt":"Comment s'appelle l'île glaciale où règne le comte Harebourg ?","answer":"Frigost","aliases":[]},
-  {"theme":"dofus","difficulty":3,"type":"text","prompt":"Quel comte règne sur l'île gelée de Frigost ?","answer":"le comte Harebourg","aliases":["Harebourg","comte Harebourg"]},
-  {"theme":"dofus","difficulty":3,"type":"text","prompt":"Comment s'appelle l'univers global d'Ankama qui réunit Dofus et Wakfu ?","answer":"le Krosmoz","aliases":["Krosmoz"]},
-  {"theme":"dofus","difficulty":3,"type":"text","prompt":"Quelle entité une guilde pose-t-elle pour récolter les ressources d'une zone ?","answer":"le percepteur","aliases":["percepteur","perco"]},
-  {"theme":"dofus","difficulty":3,"type":"text","prompt":"Quel savant excentrique protège la nature depuis son île et son laboratoire ?","answer":"Otomai","aliases":[]},
-  {"theme":"dofus","difficulty":3,"type":"text","prompt":"Quelle classe combat en changeant de masque ?","answer":"Zobal","aliases":["le Zobal"]},
-  {"theme":"dofus","difficulty":3,"type":"text","prompt":"Quelle classe se déplace en créant des portails ?","answer":"Éliotrope","aliases":["Eliotrope","l'Éliotrope"]},
-  {"theme":"dofus","difficulty":3,"type":"text","prompt":"Quelle classe combine les quatre éléments à l'aide de runes ?","answer":"Huppermage","aliases":["le Huppermage","Huppe"]},
-  {"theme":"dofus","difficulty":3,"type":"text","prompt":"Quelle classe canine traque sa proie et entre en rage ?","answer":"Ouginak","aliases":["l'Ouginak","Ougi"]},
-  {"theme":"dofus","difficulty":3,"type":"text","prompt":"Quelle classe manie la vapeur et les armes à feu ?","answer":"Steamer","aliases":["le Steamer","Roublard Steamer"]},
-  {"theme":"dofus","difficulty":3,"type":"text","prompt":"Quelle classe pose des bombes pour créer des murs d'explosions ?","answer":"Roublard","aliases":["le Roublard","Roub"]},
-  {"theme":"dofus","difficulty":3,"type":"text","prompt":"En quelle année Dofus est-il sorti officiellement ?","answer":"2004","aliases":[]},
-  {"theme":"dofus","difficulty":3,"type":"text","prompt":"Citez un des six Dofus primordiaux.","answer":"le Dofus Émeraude","aliases":["Dofus Émeraude","Émeraude","Dofus Pourpre","Pourpre","Dofus Ocre","Ocre","Dofus Turquoise","Turquoise","Dofus Ébène","Ébène","Dofus Vulbis","Vulbis"]}
+  {
+    "theme": "lol",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Quel studio développe League of Legends ?",
+    "answer": "Riot Games",
+    "aliases": [
+      "Riot"
+    ]
+  },
+  {
+    "theme": "lol",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Comment s'appelle la carte principale de League of Legends ?",
+    "answer": "la Faille de l'invocateur",
+    "aliases": [
+      "Faille de l'invocateur",
+      "Summoner's Rift",
+      "la faille"
+    ]
+  },
+  {
+    "theme": "lol",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Combien de joueurs composent une équipe sur la Faille de l'invocateur ?",
+    "answer": "5",
+    "aliases": [
+      "cinq"
+    ]
+  },
+  {
+    "theme": "lol",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Quel bâtiment faut-il détruire pour gagner la partie ?",
+    "answer": "le Nexus",
+    "aliases": [
+      "Nexus"
+    ]
+  },
+  {
+    "theme": "lol",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Combien de couloirs compte la Faille de l'invocateur ?",
+    "answer": "3",
+    "aliases": [
+      "trois"
+    ]
+  },
+  {
+    "theme": "lol",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Quel sort d'invocateur permet de franchir un mur en un clin d'œil ?",
+    "answer": "Flash",
+    "aliases": [
+      "saut éclair"
+    ]
+  },
+  {
+    "theme": "lol",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Quel sort d'invocateur est indispensable pour jouer la jungle ?",
+    "answer": "Châtiment",
+    "aliases": [
+      "Smite"
+    ]
+  },
+  {
+    "theme": "lol",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Quel monstre épique de la rivière donne le buff d'équipe le plus puissant ?",
+    "answer": "Baron Nashor",
+    "aliases": [
+      "le Baron",
+      "Nashor"
+    ]
+  },
+  {
+    "theme": "lol",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Quel yordle empoisonne ses ennemis en semant des champignons ?",
+    "answer": "Teemo",
+    "aliases": []
+  },
+  {
+    "theme": "lol",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Quelle archère de glace tire une flèche de cristal à travers toute la carte ?",
+    "answer": "Ashe",
+    "aliases": []
+  },
+  {
+    "theme": "lol",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Quelle est la ressource dépensée en boutique pendant la partie ?",
+    "answer": "l'or",
+    "aliases": [
+      "or",
+      "gold",
+      "les pièces d'or"
+    ]
+  },
+  {
+    "theme": "lol",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Comment s'appelle la série animée Netflix tirée de League of Legends ?",
+    "answer": "Arcane",
+    "aliases": []
+  },
+  {
+    "theme": "lol",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Dans Arcane, quelle championne est la sœur de Vi ?",
+    "answer": "Jinx",
+    "aliases": [
+      "Powder"
+    ]
+  },
+  {
+    "theme": "lol",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Quel est le niveau maximum qu'un champion peut atteindre en partie ?",
+    "answer": "18",
+    "aliases": [
+      "dix-huit",
+      "niveau 18"
+    ]
+  },
+  {
+    "theme": "lol",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "De quel royaume à l'armure blanche et dorée vient Garen ?",
+    "answer": "Demacia",
+    "aliases": []
+  },
+  {
+    "theme": "lol",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "Quel empire militaire est le grand rival de Demacia ?",
+    "answer": "Noxus",
+    "aliases": []
+  },
+  {
+    "theme": "lol",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "De quelle région viennent Yasuo, Zed et Ahri ?",
+    "answer": "Ionia",
+    "aliases": []
+  },
+  {
+    "theme": "lol",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "Quelle cité souterraine et polluée s'étend sous Piltover ?",
+    "answer": "Zaun",
+    "aliases": []
+  },
+  {
+    "theme": "lol",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "Quel objet met son porteur en stase, invulnérable et intouchable ?",
+    "answer": "le Sablier de Zhonya",
+    "aliases": [
+      "Zhonya",
+      "Sablier de Zhonya",
+      "Zhonya's Hourglass"
+    ]
+  },
+  {
+    "theme": "lol",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "Quel objet ressuscite son porteur une fois après sa mort ?",
+    "answer": "l'Ange gardien",
+    "aliases": [
+      "Ange gardien",
+      "Guardian Angel",
+      "GA"
+    ]
+  },
+  {
+    "theme": "lol",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "Quel objet emblématique augmente massivement la puissance magique de son porteur ?",
+    "answer": "le Chapeau mortel de Rabadon",
+    "aliases": [
+      "Rabadon",
+      "Chapeau de Rabadon",
+      "Rabadon's Deathcap"
+    ]
+  },
+  {
+    "theme": "lol",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "Quel moine aveugle combat aux arts martiaux et voit par le son ?",
+    "answer": "Lee Sin",
+    "aliases": []
+  },
+  {
+    "theme": "lol",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "Quel gardien de prison attrape ses victimes avec une chaîne et pose une lanterne ?",
+    "answer": "Thresh",
+    "aliases": []
+  },
+  {
+    "theme": "lol",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "Quel monstre épique laisse un œil que l'on invoque pour défoncer les tourelles ?",
+    "answer": "le Héraut de la Faille",
+    "aliases": [
+      "Héraut de la Faille",
+      "Rift Herald",
+      "le héraut"
+    ]
+  },
+  {
+    "theme": "lol",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "Combien de tourelles protègent chaque couloir avant l'inhibiteur ?",
+    "answer": "3",
+    "aliases": [
+      "trois"
+    ]
+  },
+  {
+    "theme": "lol",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "Combien de dragons élémentaires faut-il tuer pour obtenir l'Âme du Dragon ?",
+    "answer": "4",
+    "aliases": [
+      "quatre"
+    ]
+  },
+  {
+    "theme": "lol",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "Quel empire désertique l'empereur Azir cherche-t-il à faire renaître ?",
+    "answer": "Shurima",
+    "aliases": []
+  },
+  {
+    "theme": "lol",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "Comment s'appelle le tournoi annuel qui couronne le meilleur club du monde ?",
+    "answer": "les Worlds",
+    "aliases": [
+      "Worlds",
+      "le championnat du monde",
+      "Championnat du monde"
+    ]
+  },
+  {
+    "theme": "lol",
+    "difficulty": 3,
+    "type": "text",
+    "prompt": "En quelle année League of Legends est-il sorti ?",
+    "answer": "2009",
+    "aliases": []
+  },
+  {
+    "theme": "lol",
+    "difficulty": 3,
+    "type": "text",
+    "prompt": "Quelle équipe a remporté le tout premier Championnat du monde, en 2011 ?",
+    "answer": "Fnatic",
+    "aliases": []
+  },
+  {
+    "theme": "lol",
+    "difficulty": 3,
+    "type": "text",
+    "prompt": "Quelle équipe coréenne a remporté le plus de Championnats du monde ?",
+    "answer": "T1",
+    "aliases": [
+      "SKT",
+      "SK Telecom T1",
+      "SKT T1"
+    ]
+  },
+  {
+    "theme": "lol",
+    "difficulty": 3,
+    "type": "text",
+    "prompt": "Quel joueur est surnommé « The Unkillable Demon King » ?",
+    "answer": "Faker",
+    "aliases": [
+      "Lee Sang-hyeok"
+    ]
+  },
+  {
+    "theme": "lol",
+    "difficulty": 3,
+    "type": "text",
+    "prompt": "Quel archipel maudit et brumeux est peuplé de spectres ?",
+    "answer": "les Îles Obscures",
+    "aliases": [
+      "Îles Obscures",
+      "Shadow Isles"
+    ]
+  },
+  {
+    "theme": "lol",
+    "difficulty": 3,
+    "type": "text",
+    "prompt": "Sur quelle montagne les Aspects célestes descendent-ils parmi les mortels ?",
+    "answer": "le mont Targon",
+    "aliases": [
+      "Targon",
+      "mont Targon"
+    ]
+  },
+  {
+    "theme": "lol",
+    "difficulty": 3,
+    "type": "text",
+    "prompt": "Dans Arcane, qui règne sur les bas-fonds de Zaun ?",
+    "answer": "Silco",
+    "aliases": []
+  },
+  {
+    "theme": "lol",
+    "difficulty": 3,
+    "type": "text",
+    "prompt": "Quel co-inventeur de l'Hextech transforme peu à peu son corps en machine ?",
+    "answer": "Viktor",
+    "aliases": []
+  },
+  {
+    "theme": "lol",
+    "difficulty": 3,
+    "type": "text",
+    "prompt": "Quel yordle inventeur est professeur à l'académie de Piltover ?",
+    "answer": "Heimerdinger",
+    "aliases": [
+      "Heimer"
+    ]
+  },
+  {
+    "theme": "lol",
+    "difficulty": 3,
+    "type": "text",
+    "prompt": "Quel est le nom complet de Lux, la Dame de Lumière ?",
+    "answer": "Luxanna Crownguard",
+    "aliases": [
+      "Luxanna"
+    ]
+  },
+  {
+    "theme": "lol",
+    "difficulty": 3,
+    "type": "text",
+    "prompt": "Dans Arcane, quel inventeur de Piltover crée l'Hextech avec Viktor ?",
+    "answer": "Jayce",
+    "aliases": [
+      "Jayce Talis"
+    ]
+  },
+  {
+    "theme": "lol",
+    "difficulty": 3,
+    "type": "text",
+    "prompt": "Quel champion est le Bouclier de Demacia, frère de Lux ?",
+    "answer": "Garen",
+    "aliases": [
+      "Garen Crownguard"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Quel studio français développe Dofus ?",
+    "answer": "Ankama",
+    "aliases": [
+      "Ankama Games"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Comment s'appelle la monnaie de Dofus ?",
+    "answer": "les kamas",
+    "aliases": [
+      "kamas",
+      "kama"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Que sont les Dofus dans l'univers du jeu ?",
+    "answer": "des œufs de dragon",
+    "aliases": [
+      "œufs de dragon",
+      "des oeufs de dragon",
+      "oeufs de dragon",
+      "des œufs de dragons"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Comment s'appelle l'univers dans lequel se déroule Dofus ?",
+    "answer": "le Monde des Douze",
+    "aliases": [
+      "Monde des Douze"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Combien existe-t-il de Dofus primordiaux ?",
+    "answer": "6",
+    "aliases": [
+      "six"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Quelle classe est le guerrier bourrin au corps à corps, tout en force ?",
+    "answer": "Iop",
+    "aliases": [
+      "le Iop"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Quelle classe est l'archère à distance de Dofus ?",
+    "answer": "Crâ",
+    "aliases": [
+      "Cra",
+      "la Crâ"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Quelle classe soigne ses alliés avec des mots magiques ?",
+    "answer": "Eniripsa",
+    "aliases": [
+      "l'Eniripsa",
+      "Eni"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Comment s'appelle la zone où arrivent tous les nouveaux personnages ?",
+    "answer": "Incarnam",
+    "aliases": []
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Quelle cité incarne le camp du bien, face à Brâkmar ?",
+    "answer": "Bonta",
+    "aliases": []
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Quelle cité incarne le camp du mal, face à Bonta ?",
+    "answer": "Brâkmar",
+    "aliases": [
+      "Brakmar"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Que signifient les initiales PA en combat ?",
+    "answer": "points d'action",
+    "aliases": [
+      "Points d'Action"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Que signifient les initiales PM en combat ?",
+    "answer": "points de mouvement",
+    "aliases": [
+      "Points de Mouvement"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 1,
+    "type": "text",
+    "prompt": "Quel est le niveau maximum d'un personnage sur Dofus ?",
+    "answer": "200",
+    "aliases": [
+      "niveau 200",
+      "deux cents"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "Quelle classe encaisse les coups et se met en danger pour protéger les siens ?",
+    "answer": "Sacrieur",
+    "aliases": [
+      "le Sacrieur",
+      "Sacri"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "Quelle classe manipule le temps et les horloges ?",
+    "answer": "Xélor",
+    "aliases": [
+      "Xelor",
+      "le Xélor"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "Quelle classe invoque des créatures pour combattre à sa place ?",
+    "answer": "Osamodas",
+    "aliases": [
+      "l'Osamodas",
+      "Osa"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "Quelle classe protège son équipe avec des glyphes et des armures ?",
+    "answer": "Féca",
+    "aliases": [
+      "Feca",
+      "le Féca"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "Quelle classe est l'assassin invisible qui pose des pièges ?",
+    "answer": "Sram",
+    "aliases": [
+      "le Sram"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "Quelle classe est obsédée par les trésors et la prospection ?",
+    "answer": "Enutrof",
+    "aliases": [
+      "l'Enutrof",
+      "Enu"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "Quelle classe est un ursidé qui porte ses alliés et carbure à la boisson ?",
+    "answer": "Pandawa",
+    "aliases": [
+      "le Pandawa",
+      "Panda"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "Quelle classe invoque des poupées et puise sa force dans la nature ?",
+    "answer": "Sadida",
+    "aliases": [
+      "le Sadida",
+      "Sadi"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "Quelle classe féline mise tout sur la chance et le hasard ?",
+    "answer": "Ecaflip",
+    "aliases": [
+      "l'Ecaflip",
+      "Eca"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "Quelle ville sert de grand carrefour aux joueurs débutants ?",
+    "answer": "Astrub",
+    "aliases": []
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "Comment s'appelle la série animée d'Ankama située après Dofus ?",
+    "answer": "Wakfu",
+    "aliases": []
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "Quel petit mouton coloré est le monstre emblématique des débutants ?",
+    "answer": "le Bouftou",
+    "aliases": [
+      "Bouftou",
+      "bouftous"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "Quelle petite créature jaune à bec est la mascotte du jeu ?",
+    "answer": "le Tofu",
+    "aliases": [
+      "Tofu"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 2,
+    "type": "text",
+    "prompt": "Comment s'appellent les créatures porcines et guerrières à la peau bleue ?",
+    "answer": "les Bworks",
+    "aliases": [
+      "Bwork",
+      "Bworks"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "type": "text",
+    "prompt": "Quel ogre a noyé le Monde des Douze sous ses larmes ?",
+    "answer": "Ogrest",
+    "aliases": []
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "type": "text",
+    "prompt": "Comment s'appelle l'île glaciale où règne le comte Harebourg ?",
+    "answer": "Frigost",
+    "aliases": []
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "type": "text",
+    "prompt": "Quel noble règne sur l'île gelée de Frigost ?",
+    "answer": "le comte Harebourg",
+    "aliases": [
+      "Harebourg",
+      "comte Harebourg"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "type": "text",
+    "prompt": "Comment s'appelle l'univers global d'Ankama qui réunit Dofus et Wakfu ?",
+    "answer": "le Krosmoz",
+    "aliases": [
+      "Krosmoz"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "type": "text",
+    "prompt": "Quelle entité une guilde pose-t-elle pour récolter les ressources d'une zone ?",
+    "answer": "le percepteur",
+    "aliases": [
+      "percepteur",
+      "perco"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "type": "text",
+    "prompt": "Quel savant excentrique protège la nature depuis son île et son laboratoire ?",
+    "answer": "Otomai",
+    "aliases": []
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "type": "text",
+    "prompt": "Quelle classe combat en changeant de masque ?",
+    "answer": "Zobal",
+    "aliases": [
+      "le Zobal"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "type": "text",
+    "prompt": "Quelle classe se déplace en créant des portails ?",
+    "answer": "Éliotrope",
+    "aliases": [
+      "Eliotrope",
+      "l'Éliotrope"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "type": "text",
+    "prompt": "Quelle classe combine les quatre éléments à l'aide de runes ?",
+    "answer": "Huppermage",
+    "aliases": [
+      "le Huppermage",
+      "Huppe"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "type": "text",
+    "prompt": "Quelle classe canine traque sa proie et entre en rage ?",
+    "answer": "Ouginak",
+    "aliases": [
+      "l'Ouginak",
+      "Ougi"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "type": "text",
+    "prompt": "Quelle classe manie la vapeur et les armes à feu ?",
+    "answer": "Steamer",
+    "aliases": [
+      "le Steamer",
+      "Roublard Steamer"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "type": "text",
+    "prompt": "Quelle classe pose des bombes pour créer des murs d'explosions ?",
+    "answer": "Roublard",
+    "aliases": [
+      "le Roublard",
+      "Roub"
+    ]
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "type": "text",
+    "prompt": "En quelle année Dofus est-il sorti officiellement ?",
+    "answer": "2004",
+    "aliases": []
+  },
+  {
+    "theme": "dofus",
+    "difficulty": 3,
+    "type": "text",
+    "prompt": "Citez un des six œufs primordiaux du Monde des Douze.",
+    "answer": "le Dofus Émeraude",
+    "aliases": [
+      "Dofus Émeraude",
+      "Émeraude",
+      "Dofus Pourpre",
+      "Pourpre",
+      "Dofus Ocre",
+      "Ocre",
+      "Dofus Turquoise",
+      "Turquoise",
+      "Dofus Ébène",
+      "Ébène",
+      "Dofus Vulbis",
+      "Vulbis"
+    ]
+  }
 ]

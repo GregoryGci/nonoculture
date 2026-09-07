@@ -1,0 +1,780 @@
+[
+  {
+    "theme": "heros",
+    "difficulty": 1,
+    "prompt": "Quel justicier de Gotham City n'a aucun super-pouvoir ?",
+    "answer": "Batman",
+    "aliases": []
+  },
+  {
+    "theme": "heros",
+    "difficulty": 1,
+    "prompt": "Quel héros venu de Krypton porte un S sur la poitrine ?",
+    "answer": "Superman",
+    "aliases": []
+  },
+  {
+    "theme": "heros",
+    "difficulty": 1,
+    "prompt": "Quel adolescent new-yorkais se balance de gratte-ciel en gratte-ciel après une morsure ?",
+    "answer": "Spider-Man",
+    "aliases": [
+      "Spiderman",
+      "l'Homme-Araignée"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 1,
+    "prompt": "Quel milliardaire porte une armure rouge et or qu'il a conçue lui-même ?",
+    "answer": "Iron Man",
+    "aliases": [
+      "Tony Stark"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 1,
+    "prompt": "Quel scientifique devient un colosse vert quand il s'énerve ?",
+    "answer": "Hulk",
+    "aliases": [
+      "l'incroyable Hulk"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 1,
+    "prompt": "Quelle princesse amazone se bat au lasso de vérité ?",
+    "answer": "Wonder Woman",
+    "aliases": []
+  },
+  {
+    "theme": "heros",
+    "difficulty": 1,
+    "prompt": "Quel héros surgelé pendant des décennies porte un bouclier étoilé ?",
+    "answer": "Captain America",
+    "aliases": [
+      "Steve Rogers"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 1,
+    "prompt": "Quel mutant possède des griffes rétractables en adamantium ?",
+    "answer": "Wolverine",
+    "aliases": [
+      "Logan",
+      "Serval"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 1,
+    "prompt": "Quel héros court plus vite que la lumière avec un costume rouge ?",
+    "answer": "Flash",
+    "aliases": [
+      "The Flash"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 1,
+    "prompt": "Quelle est la ville que Spider-Man protège ?",
+    "answer": "New York",
+    "aliases": [
+      "Manhattan"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 1,
+    "prompt": "Quelle ville Batman protège-t-il ?",
+    "answer": "Gotham",
+    "aliases": [
+      "Gotham City"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 1,
+    "prompt": "Quelle ville Superman protège-t-il ?",
+    "answer": "Metropolis",
+    "aliases": []
+  },
+  {
+    "theme": "heros",
+    "difficulty": 1,
+    "prompt": "Quel ennemi maquillé en clown est le grand rival de Batman ?",
+    "answer": "le Joker",
+    "aliases": [
+      "Joker"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 1,
+    "prompt": "Quelles sont les deux grandes maisons d'édition américaines de comics ?",
+    "answer": "Marvel et DC",
+    "aliases": [
+      "DC et Marvel"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 2,
+    "prompt": "Quel est le vrai nom de Batman ?",
+    "answer": "Bruce Wayne",
+    "aliases": [
+      "Wayne"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 2,
+    "prompt": "Quel est le vrai nom de Superman sur Terre ?",
+    "answer": "Clark Kent",
+    "aliases": [
+      "Kent"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 2,
+    "prompt": "Quel est le nom kryptonien de Superman ?",
+    "answer": "Kal-El",
+    "aliases": [
+      "Kal El"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 2,
+    "prompt": "Quel est le vrai nom de Spider-Man ?",
+    "answer": "Peter Parker",
+    "aliases": [
+      "Parker"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 2,
+    "prompt": "Quel est le vrai nom de Wonder Woman ?",
+    "answer": "Diana",
+    "aliases": [
+      "Diana Prince"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 2,
+    "prompt": "Quelle substance verte affaiblit Superman ?",
+    "answer": "la kryptonite",
+    "aliases": [
+      "kryptonite"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 2,
+    "prompt": "Quel majordome élève et assiste Bruce Wayne ?",
+    "answer": "Alfred",
+    "aliases": [
+      "Alfred Pennyworth"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 2,
+    "prompt": "Quel jeune acrobate en costume coloré assiste Batman ?",
+    "answer": "Robin",
+    "aliases": []
+  },
+  {
+    "theme": "heros",
+    "difficulty": 2,
+    "prompt": "Quelle cambrioleuse en combinaison féline entretient une relation ambiguë avec Batman ?",
+    "answer": "Catwoman",
+    "aliases": [
+      "Selina Kyle"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 2,
+    "prompt": "Quel ennemi de Superman est un homme d'affaires chauve et génial ?",
+    "answer": "Lex Luthor",
+    "aliases": [
+      "Luthor"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 2,
+    "prompt": "Quelle journaliste du Daily Planet est le grand amour de Clark Kent ?",
+    "answer": "Lois Lane",
+    "aliases": [
+      "Lois"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 2,
+    "prompt": "Quelle équipe réunit Iron Man, Captain America, Thor et Hulk ?",
+    "answer": "les Avengers",
+    "aliases": [
+      "Avengers",
+      "les Vengeurs"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 2,
+    "prompt": "Quelle équipe réunit Batman, Superman, Wonder Woman et Flash ?",
+    "answer": "la Justice League",
+    "aliases": [
+      "Justice League",
+      "la Ligue des justiciers"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle l'école qui accueille les jeunes mutants chez Marvel ?",
+    "answer": "l'institut Xavier",
+    "aliases": [
+      "institut Xavier",
+      "l'école du professeur Xavier"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 2,
+    "prompt": "Quel télépathe en fauteuil roulant dirige l'école des mutants ?",
+    "answer": "le professeur Xavier",
+    "aliases": [
+      "Charles Xavier",
+      "professeur X"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 2,
+    "prompt": "Quel mutant au casque pourpre contrôle le métal ?",
+    "answer": "Magnéto",
+    "aliases": [
+      "Magneto"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 2,
+    "prompt": "Quel héros marvel devient minuscule grâce à des particules découvertes par Hank Pym ?",
+    "answer": "Ant-Man",
+    "aliases": [
+      "Antman",
+      "l'Homme-Fourmi"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 2,
+    "prompt": "Quel héros marvel est le roi du Wakanda ?",
+    "answer": "Black Panther",
+    "aliases": [
+      "T'Challa",
+      "la Panthère noire"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 2,
+    "prompt": "Quel métal fictif et précieux se trouve au Wakanda ?",
+    "answer": "le vibranium",
+    "aliases": [
+      "vibranium"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 2,
+    "prompt": "Quel héros marvel est un ancien chirurgien devenu maître des arts mystiques ?",
+    "answer": "Doctor Strange",
+    "aliases": [
+      "Docteur Strange",
+      "Stephen Strange"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 2,
+    "prompt": "Quel mercenaire bavard au costume rouge brise le quatrième mur ?",
+    "answer": "Deadpool",
+    "aliases": []
+  },
+  {
+    "theme": "heros",
+    "difficulty": 2,
+    "prompt": "Quel groupe de Marvel comprend un raton laveur et un arbre qui parle ?",
+    "answer": "les Gardiens de la Galaxie",
+    "aliases": [
+      "Guardians of the Galaxy",
+      "Gardiens de la Galaxie"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle le raton laveur des Gardiens de la Galaxie ?",
+    "answer": "Rocket",
+    "aliases": []
+  },
+  {
+    "theme": "heros",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle l'arbre humanoïde des Gardiens de la Galaxie ?",
+    "answer": "Groot",
+    "aliases": []
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel dessinateur a co-créé Spider-Man avec Stan Lee ?",
+    "answer": "Steve Ditko",
+    "aliases": [
+      "Ditko"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel scénariste emblématique a co-créé la plupart des héros Marvel des années 1960 ?",
+    "answer": "Stan Lee",
+    "aliases": [
+      "Lee"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel dessinateur a co-créé les Quatre Fantastiques et les X-Men avec Stan Lee ?",
+    "answer": "Jack Kirby",
+    "aliases": [
+      "Kirby"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "En quelle année Superman est-il apparu pour la première fois ?",
+    "answer": "1938",
+    "aliases": []
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Dans quel magazine Superman est-il apparu pour la première fois ?",
+    "answer": "Action Comics",
+    "aliases": []
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Dans quel magazine Batman est-il apparu pour la première fois ?",
+    "answer": "Detective Comics",
+    "aliases": []
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Combien de gemmes de l'infini Thanos cherche-t-il à réunir ?",
+    "answer": "6",
+    "aliases": [
+      "six"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel titan violet claque des doigts pour effacer la moitié de la vie dans l'univers ?",
+    "answer": "Thanos",
+    "aliases": []
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel film Marvel de 2019 est devenu un temps le plus gros succès du box-office mondial ?",
+    "answer": "Avengers: Endgame",
+    "aliases": [
+      "Endgame",
+      "Avengers Endgame"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel acteur a incarné Tony Stark dans les films Marvel ?",
+    "answer": "Robert Downey Jr.",
+    "aliases": [
+      "Robert Downey Junior",
+      "Downey"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel acteur australien a incarné Thor dans les films Marvel ?",
+    "answer": "Chris Hemsworth",
+    "aliases": [
+      "Hemsworth"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel acteur a incarné Captain America dans les films Marvel ?",
+    "answer": "Chris Evans",
+    "aliases": [
+      "Evans"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel acteur a incarné le Joker dans The Dark Knight ?",
+    "answer": "Heath Ledger",
+    "aliases": [
+      "Ledger"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel acteur a remporté l'Oscar en 2020 pour son interprétation du clown criminel ?",
+    "answer": "Joaquin Phoenix",
+    "aliases": [
+      "Phoenix"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel réalisateur a signé la trilogie The Dark Knight ?",
+    "answer": "Christopher Nolan",
+    "aliases": [
+      "Nolan"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Comment s'appelle le sigle qui désigne l'ensemble des films Marvel liés entre eux ?",
+    "answer": "le MCU",
+    "aliases": [
+      "MCU",
+      "Marvel Cinematic Universe"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel héros marvel est un archer de l'équipe, sans pouvoir particulier ?",
+    "answer": "Hawkeye",
+    "aliases": [
+      "Œil de Faucon",
+      "Clint Barton"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quelle espionne russe rejoint les Avengers sans avoir de pouvoir ?",
+    "answer": "Black Widow",
+    "aliases": [
+      "Natasha Romanoff",
+      "la Veuve noire"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel personnage dirige le S.H.I.E.L.D. dans les films Marvel ?",
+    "answer": "Nick Fury",
+    "aliases": [
+      "Fury"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel acteur incarne ce directeur du S.H.I.E.L.D. ?",
+    "answer": "Samuel L. Jackson",
+    "aliases": [
+      "Samuel Jackson",
+      "Jackson"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Comment s'appelle le frère adoptif et rival de Thor ?",
+    "answer": "Loki",
+    "aliases": []
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Comment s'appelle la hache que Thor se fait forger dans Infinity War ?",
+    "answer": "Stormbreaker",
+    "aliases": [
+      "Brise-Tempête"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel héros de DC est un roi capable de commander aux créatures marines ?",
+    "answer": "Aquaman",
+    "aliases": []
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel héros de DC porte un anneau alimenté par la volonté ?",
+    "answer": "Green Lantern",
+    "aliases": [
+      "Lanterne verte"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel héros de DC est un homme mi-machine, membre de la Ligue ?",
+    "answer": "Cyborg",
+    "aliases": []
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quelle ennemie de Batman, ancienne psychiatre, tombe amoureuse de son patient ?",
+    "answer": "Harley Quinn",
+    "aliases": [
+      "Harleen Quinzel"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel ennemi de Batman pose des devinettes et porte un costume à points d'interrogation ?",
+    "answer": "le Sphinx",
+    "aliases": [
+      "Riddler",
+      "l'Homme-Mystère"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel ennemi de Batman, ancien procureur défiguré, s'en remet à une pièce de monnaie ?",
+    "answer": "Double-Face",
+    "aliases": [
+      "Two-Face",
+      "Harvey Dent"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel ennemi de Batman porte un masque et brise le dos du justicier dans les comics ?",
+    "answer": "Bane",
+    "aliases": []
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel ennemi de Spider-Man est un scientifique doté de quatre bras mécaniques ?",
+    "answer": "le Docteur Octopus",
+    "aliases": [
+      "Doctor Octopus",
+      "Doc Ock",
+      "Otto Octavius"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel ennemi de Spider-Man est un homme d'affaires sur une planche volante ?",
+    "answer": "le Bouffon vert",
+    "aliases": [
+      "Green Goblin",
+      "Norman Osborn"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel symbiote noir se colle à Spider-Man avant de devenir un ennemi à part entière ?",
+    "answer": "Venom",
+    "aliases": []
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quelle phrase l'oncle Ben transmet-il à Peter Parker ?",
+    "answer": "un grand pouvoir implique de grandes responsabilités",
+    "aliases": [
+      "de grands pouvoirs impliquent de grandes responsabilités",
+      "grand pouvoir grandes responsabilités"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Qui élève Peter Parker après la mort de son oncle ?",
+    "answer": "tante May",
+    "aliases": [
+      "May",
+      "May Parker"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel quatuor marvel a acquis ses pouvoirs lors d'un vol spatial ?",
+    "answer": "les Quatre Fantastiques",
+    "aliases": [
+      "Fantastic Four",
+      "les 4 Fantastiques"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel membre des Quatre Fantastiques est fait de roche orange ?",
+    "answer": "la Chose",
+    "aliases": [
+      "The Thing",
+      "Ben Grimm"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel héros aveugle de Marvel défend Hell's Kitchen la nuit ?",
+    "answer": "Daredevil",
+    "aliases": []
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel héros marvel maîtrise le kung-fu et porte un poing qui brille ?",
+    "answer": "Iron Fist",
+    "aliases": []
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quelle héroïne, ancienne pilote de chasse, est devenue l'une des plus puissantes de son univers ?",
+    "answer": "Captain Marvel",
+    "aliases": [
+      "Carol Danvers"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel héros marvel rétrécit et grandit à volonté grâce à un régiment de particules ?",
+    "answer": "Ant-Man",
+    "aliases": [
+      "l'Homme-Fourmi"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quelle mutante des X-Men contrôle la météo ?",
+    "answer": "Tornade",
+    "aliases": [
+      "Storm",
+      "Ororo Munroe"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel mutant des X-Men tire des rayons rouges par les yeux ?",
+    "answer": "Cyclope",
+    "aliases": [
+      "Cyclops",
+      "Scott Summers"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quelle mutante des X-Men absorbe les pouvoirs de ceux qu'elle touche ?",
+    "answer": "Malicia",
+    "aliases": [
+      "Rogue"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel mutant bleu des X-Men se téléporte dans un nuage de fumée ?",
+    "answer": "Diablo",
+    "aliases": [
+      "Nightcrawler",
+      "Kurt Wagner"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel roman graphique d'Alan Moore déconstruit le genre avec le Comédien et Rorschach ?",
+    "answer": "Watchmen",
+    "aliases": [
+      "Les Gardiens"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel roman graphique de Frank Miller montre un Batman vieillissant qui reprend du service ?",
+    "answer": "The Dark Knight Returns",
+    "aliases": [
+      "Dark Knight Returns"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel héros belge de bande dessinée, reporter, n'a rien d'un super-héros mais résout des complots ?",
+    "answer": "Tintin",
+    "aliases": []
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel justicier français en marcel et charentaises a été créé par Gotlib et Alexis ?",
+    "answer": "Superdupont",
+    "aliases": []
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quel studio japonais a produit la série animée sur les héros de l'académie de Yuei ?",
+    "answer": "Bones",
+    "aliases": [
+      "studio Bones"
+    ]
+  },
+  {
+    "theme": "heros",
+    "difficulty": 3,
+    "prompt": "Quelle plateforme diffuse les séries Marvel comme WandaVision et Loki ?",
+    "answer": "Disney+",
+    "aliases": [
+      "Disney Plus"
+    ]
+  }
+]

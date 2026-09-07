@@ -1,0 +1,797 @@
+[
+  {
+    "theme": "anime",
+    "difficulty": 1,
+    "prompt": "Quel ninja blond rêve de devenir Hokage de son village ?",
+    "answer": "Naruto",
+    "aliases": [
+      "Naruto Uzumaki"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 1,
+    "prompt": "Quel pirate au chapeau de paille veut devenir le roi des pirates ?",
+    "answer": "Luffy",
+    "aliases": [
+      "Monkey D. Luffy"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 1,
+    "prompt": "Dans quel manga Luffy et son équipage cherchent-ils un trésor légendaire ?",
+    "answer": "One Piece",
+    "aliases": []
+  },
+  {
+    "theme": "anime",
+    "difficulty": 1,
+    "prompt": "Quel Saiyan aux cheveux qui deviennent dorés protège la Terre ?",
+    "answer": "Son Goku",
+    "aliases": [
+      "Goku",
+      "Sangoku"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 1,
+    "prompt": "Quel manga suit les aventures de Son Goku et la quête de sept boules magiques ?",
+    "answer": "Dragon Ball",
+    "aliases": []
+  },
+  {
+    "theme": "anime",
+    "difficulty": 1,
+    "prompt": "Combien de boules faut-il réunir pour invoquer le dragon dans Dragon Ball ?",
+    "answer": "7",
+    "aliases": [
+      "sept"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 1,
+    "prompt": "Quel dresseur part de Bourg Palette avec un Pikachu ?",
+    "answer": "Sacha",
+    "aliases": [
+      "Ash",
+      "Ash Ketchum"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 1,
+    "prompt": "De quel type est Pikachu ?",
+    "answer": "électrique",
+    "aliases": [
+      "électrik",
+      "type électrique"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 1,
+    "prompt": "Quel manga suit des humains réfugiés derrière des murailles face à des géants mangeurs d'hommes ?",
+    "answer": "L'Attaque des Titans",
+    "aliases": [
+      "Attack on Titan",
+      "Shingeki no Kyojin"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 1,
+    "prompt": "Quel manga suit un lycéen qui tue en écrivant des noms dans un carnet ?",
+    "answer": "Death Note",
+    "aliases": []
+  },
+  {
+    "theme": "anime",
+    "difficulty": 1,
+    "prompt": "Quel manga suit un jeune vendeur de charbon dont la famille est massacrée et la sœur transformée ?",
+    "answer": "Demon Slayer",
+    "aliases": [
+      "Kimetsu no Yaiba"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 1,
+    "prompt": "Quel manga suit un élève sans pouvoir dans un monde où presque tout le monde en a un ?",
+    "answer": "My Hero Academia",
+    "aliases": [
+      "MHA"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 1,
+    "prompt": "Quel studio japonais a produit Mon voisin Totoro et Le Voyage de Chihiro ?",
+    "answer": "Ghibli",
+    "aliases": [
+      "le studio Ghibli"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 1,
+    "prompt": "Quelle grosse créature grise et poilue attend le bus sous la pluie chez Ghibli ?",
+    "answer": "Totoro",
+    "aliases": []
+  },
+  {
+    "theme": "anime",
+    "difficulty": 1,
+    "prompt": "Comment appelle-t-on les bandes dessinées japonaises ?",
+    "answer": "les mangas",
+    "aliases": [
+      "manga",
+      "mangas"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 1,
+    "prompt": "Quel mot de cinq lettres désigne l'animation japonaise ?",
+    "answer": "anime",
+    "aliases": [
+      "animé",
+      "les animés",
+      "les animes"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 2,
+    "prompt": "Quel démon renard à neuf queues est scellé dans Naruto ?",
+    "answer": "Kurama",
+    "aliases": [
+      "Kyubi",
+      "le Kyûbi"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 2,
+    "prompt": "Quel rival de Naruto appartient au clan Uchiwa ?",
+    "answer": "Sasuke",
+    "aliases": [
+      "Sasuke Uchiwa",
+      "Sasuke Uchiha"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 2,
+    "prompt": "Quel professeur au visage à moitié masqué encadre l'équipe 7 dans Naruto ?",
+    "answer": "Kakashi",
+    "aliases": [
+      "Kakashi Hatake"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle le village où grandit Naruto ?",
+    "answer": "Konoha",
+    "aliases": [
+      "le village caché de la feuille"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 2,
+    "prompt": "Quel sabreur aux trois épées fait partie de l'équipage du chapeau de paille ?",
+    "answer": "Zoro",
+    "aliases": [
+      "Roronoa Zoro"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 2,
+    "prompt": "Quel cuisinier blond et dragueur cuisine à bord du navire de Luffy ?",
+    "answer": "Sanji",
+    "aliases": []
+  },
+  {
+    "theme": "anime",
+    "difficulty": 2,
+    "prompt": "Quel fruit du démon rend le corps de Luffy élastique ?",
+    "answer": "Gomu Gomu no Mi",
+    "aliases": [
+      "le fruit du caoutchouc",
+      "Gomu Gomu",
+      "le Gomu Gomu no Mi"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 2,
+    "prompt": "Quel dieu de la mort remet le carnet mortel à Light Yagami ?",
+    "answer": "Ryuk",
+    "aliases": []
+  },
+  {
+    "theme": "anime",
+    "difficulty": 2,
+    "prompt": "Quel détective mystérieux traque Kira dans Death Note ?",
+    "answer": "L",
+    "aliases": [
+      "Ryuzaki"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 2,
+    "prompt": "Comment le tueur au carnet est-il surnommé par le public dans Death Note ?",
+    "answer": "Kira",
+    "aliases": []
+  },
+  {
+    "theme": "anime",
+    "difficulty": 2,
+    "prompt": "Quel héros de L'Attaque des Titans peut se transformer en géant ?",
+    "answer": "Eren",
+    "aliases": [
+      "Eren Jäger",
+      "Eren Yeager"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 2,
+    "prompt": "Quelle soldate surdouée protège Eren dans L'Attaque des Titans ?",
+    "answer": "Mikasa",
+    "aliases": [
+      "Mikasa Ackerman"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 2,
+    "prompt": "Quel capitaine réputé le plus fort de l'humanité commande une escouade dans L'Attaque des Titans ?",
+    "answer": "Livaï",
+    "aliases": [
+      "Levi",
+      "Livai",
+      "le caporal Livaï"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle la sœur de Tanjiro, transformée en démon dans Demon Slayer ?",
+    "answer": "Nezuko",
+    "aliases": []
+  },
+  {
+    "theme": "anime",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle le héros de Demon Slayer, aux boucles d'oreilles à motif ?",
+    "answer": "Tanjiro",
+    "aliases": [
+      "Tanjiro Kamado"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 2,
+    "prompt": "Quel héros de My Hero Academia hérite du pouvoir d'All Might ?",
+    "answer": "Izuku Midoriya",
+    "aliases": [
+      "Midoriya",
+      "Deku"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 2,
+    "prompt": "Quel surnom moqueur devient le nom de héros de Midoriya ?",
+    "answer": "Deku",
+    "aliases": []
+  },
+  {
+    "theme": "anime",
+    "difficulty": 2,
+    "prompt": "Quel alchimiste cherche la pierre philosophale pour rendre son corps à son frère ?",
+    "answer": "Edward Elric",
+    "aliases": [
+      "Edward",
+      "Ed Elric"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 2,
+    "prompt": "Dans quel manga les frères Elric paient le prix d'une transmutation interdite ?",
+    "answer": "Fullmetal Alchemist",
+    "aliases": [
+      "FMA"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 2,
+    "prompt": "Quel manga suit un jeune homme criblé de dettes qui fusionne avec un démon-tronçonneuse ?",
+    "answer": "Chainsaw Man",
+    "aliases": []
+  },
+  {
+    "theme": "anime",
+    "difficulty": 2,
+    "prompt": "Quel manga suit un lycéen qui avale un doigt maudit et héberge un roi des fléaux ?",
+    "answer": "Jujutsu Kaisen",
+    "aliases": []
+  },
+  {
+    "theme": "anime",
+    "difficulty": 2,
+    "prompt": "Quel héros de Jujutsu Kaisen héberge Ryomen Sukuna ?",
+    "answer": "Yuji Itadori",
+    "aliases": [
+      "Itadori",
+      "Yuji"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 2,
+    "prompt": "Quel professeur aux yeux bandés est le plus puissant de Jujutsu Kaisen ?",
+    "answer": "Gojo",
+    "aliases": [
+      "Satoru Gojo",
+      "Gojo Satoru"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 2,
+    "prompt": "Quel héros chauve bat tous ses adversaires d'un seul coup de poing ?",
+    "answer": "Saitama",
+    "aliases": []
+  },
+  {
+    "theme": "anime",
+    "difficulty": 2,
+    "prompt": "Dans quel manga un héros s'ennuie parce qu'il gagne tous ses combats immédiatement ?",
+    "answer": "One Punch Man",
+    "aliases": []
+  },
+  {
+    "theme": "anime",
+    "difficulty": 2,
+    "prompt": "Quel manga suit des chasseurs et un garçon qui cherche son père, Ging ?",
+    "answer": "Hunter x Hunter",
+    "aliases": [
+      "HxH"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 2,
+    "prompt": "Quel jeune chasseur cherche son père dans Hunter x Hunter ?",
+    "answer": "Gon",
+    "aliases": [
+      "Gon Freecss"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel mangaka a créé One Piece ?",
+    "answer": "Eiichirō Oda",
+    "aliases": [
+      "Oda",
+      "Eiichiro Oda"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel mangaka a créé Dragon Ball ?",
+    "answer": "Akira Toriyama",
+    "aliases": [
+      "Toriyama"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel mangaka a créé Naruto ?",
+    "answer": "Masashi Kishimoto",
+    "aliases": [
+      "Kishimoto"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel mangaka a créé L'Attaque des Titans ?",
+    "answer": "Hajime Isayama",
+    "aliases": [
+      "Isayama"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel réalisateur a fondé le studio Ghibli avec Isao Takahata ?",
+    "answer": "Hayao Miyazaki",
+    "aliases": [
+      "Miyazaki"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel film de Miyazaki a remporté l'Oscar du meilleur film d'animation en 2003 ?",
+    "answer": "Le Voyage de Chihiro",
+    "aliases": [
+      "Spirited Away"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel film de Miyazaki suit une apprentie de treize ans qui monte un service de livraison à balai ?",
+    "answer": "Kiki la petite sorcière",
+    "aliases": [
+      "Kiki"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel film de Ghibli oppose une jeune fille élevée par des loups aux forges des hommes ?",
+    "answer": "Princesse Mononoké",
+    "aliases": [
+      "Mononoke",
+      "Princesse Mononoke"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel film d'Isao Takahata raconte deux enfants pendant les bombardements de 1945 ?",
+    "answer": "Le Tombeau des lucioles",
+    "aliases": []
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel film d'animation japonais de 2016 raconte deux adolescents qui échangent de corps ?",
+    "answer": "Your Name",
+    "aliases": [
+      "Kimi no na wa"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel réalisateur japonais a signé Your Name et Les Enfants du temps ?",
+    "answer": "Makoto Shinkai",
+    "aliases": [
+      "Shinkai"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel film d'animation de 1988 se déroule dans un Néo-Tokyo cyberpunk ?",
+    "answer": "Akira",
+    "aliases": []
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quelle série met en scène des adolescents pilotant des mechas contre des créatures appelées Anges ?",
+    "answer": "Neon Genesis Evangelion",
+    "aliases": [
+      "Evangelion",
+      "NGE"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel pilote réticent est le héros de Neon Genesis Evangelion ?",
+    "answer": "Shinji",
+    "aliases": [
+      "Shinji Ikari"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel anime suit un chasseur de primes nommé Spike et son équipage dans un futur jazz et western ?",
+    "answer": "Cowboy Bebop",
+    "aliases": []
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel manga de Kentaro Miura suit un guerrier à l'épée gigantesque et au bras mécanique ?",
+    "answer": "Berserk",
+    "aliases": []
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel manga suit les combats de basket du lycée Shohoku ?",
+    "answer": "Slam Dunk",
+    "aliases": []
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel manga de volley suit le lycée Karasuno et un passeur surdoué ?",
+    "answer": "Haikyu",
+    "aliases": [
+      "Haikyuu",
+      "Haikyū"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel manga de football suit un attaquant japonais depuis l'école primaire ?",
+    "answer": "Captain Tsubasa",
+    "aliases": [
+      "Olive et Tom"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel manga de boxe suit un jeune homme entraîné dans un bidonville de Tokyo ?",
+    "answer": "Ashita no Joe",
+    "aliases": [
+      "Rocky Joe"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel manga suit un lycéen qui affronte des joueurs dans un jeu de go ancestral ?",
+    "answer": "Hikaru no Go",
+    "aliases": []
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel manga suit un jeune garçon qui veut devenir le meilleur dresseur de créatures de poche ?",
+    "answer": "Pokémon",
+    "aliases": [
+      "Pokemon"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel manga suit des chevaliers protégeant la déesse Athéna avec des armures d'or et de bronze ?",
+    "answer": "Saint Seiya",
+    "aliases": [
+      "Les Chevaliers du Zodiaque"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel manga suit un cyborg policier et un pirate informatique dans un futur en réseau ?",
+    "answer": "Ghost in the Shell",
+    "aliases": []
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel manga suit un lycéen rajeuni par un poison qui continue d'enquêter en secret ?",
+    "answer": "Détective Conan",
+    "aliases": [
+      "Detective Conan",
+      "Case Closed"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel manga enferme trois cents attaquants dans un centre pour désigner le meilleur buteur du Japon ?",
+    "answer": "Blue Lock",
+    "aliases": []
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel manga réunit sous un même toit un espion, une tueuse et une enfant télépathe qui se cachent tout ?",
+    "answer": "Spy x Family",
+    "aliases": [
+      "Spy Family"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Comment s'appelle la fillette télépathe de Spy x Family ?",
+    "answer": "Anya",
+    "aliases": []
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel magazine japonais publie chaque semaine One Piece et bien d'autres succès ?",
+    "answer": "le Weekly Shōnen Jump",
+    "aliases": [
+      "Shonen Jump",
+      "Weekly Shonen Jump",
+      "Jump"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on les mangas destinés à un jeune public masculin ?",
+    "answer": "shōnen",
+    "aliases": [
+      "shonen",
+      "le shonen"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on les mangas destinés à un jeune public féminin ?",
+    "answer": "shōjo",
+    "aliases": [
+      "shojo",
+      "le shojo"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on les mangas visant un lectorat adulte masculin ?",
+    "answer": "seinen",
+    "aliases": [
+      "le seinen"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Dans quel sens un manga se lit-il traditionnellement ?",
+    "answer": "de droite à gauche",
+    "aliases": [
+      "à l'envers",
+      "droite à gauche"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on un tome relié qui regroupe plusieurs chapitres ?",
+    "answer": "un tankōbon",
+    "aliases": [
+      "tankobon",
+      "un tome"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel est le vrai nom de Kira dans Death Note ?",
+    "answer": "Light Yagami",
+    "aliases": [
+      "Light",
+      "Yagami"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel manga de Naoki Urasawa suit un chirurgien qui sauve un enfant devenu tueur ?",
+    "answer": "Monster",
+    "aliases": []
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel anime suit un lycéen qui remonte le temps pour éviter un drame, sur fond de bandes de motards ?",
+    "answer": "Tokyo Revengers",
+    "aliases": []
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel manga suit des enfants d'un orphelinat qui découvrent la vérité sur leur avenir ?",
+    "answer": "The Promised Neverland",
+    "aliases": [
+      "Promised Neverland",
+      "Yakusoku no Neverland"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quelle transformation aux cheveux dorés Son Goku atteint-il pour la première fois face à Freezer ?",
+    "answer": "Super Saiyan",
+    "aliases": [
+      "Super Guerrier",
+      "le Super Saiyan"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel tyran de l'espace affronte Son Goku sur la planète Namek ?",
+    "answer": "Freezer",
+    "aliases": [
+      "Frieza"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel prince des Saiyans est le rival éternel de Son Goku ?",
+    "answer": "Vegeta",
+    "aliases": [
+      "Végéta"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Comment s'appelle l'attaque signature de Son Goku, chargée à deux mains ?",
+    "answer": "le Kaméhaméha",
+    "aliases": [
+      "Kamehameha",
+      "Kaméhaméha"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Sur quelle planète Son Goku est-il né ?",
+    "answer": "Vegeta",
+    "aliases": [
+      "la planète Vegeta",
+      "Végéta"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel manga suit un orphelin sans la moindre magie dans un monde où tout le monde en a ?",
+    "answer": "Black Clover",
+    "aliases": []
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel manga suit des élèves qui apprennent à tuer leur professeur, un poulpe jaune ?",
+    "answer": "Assassination Classroom",
+    "aliases": [
+      "Ansatsu Kyoshitsu"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel manga suit un jeune homme piégé dans un jeu en ligne dont il ne peut se déconnecter ?",
+    "answer": "Sword Art Online",
+    "aliases": [
+      "SAO"
+    ]
+  },
+  {
+    "theme": "anime",
+    "difficulty": 3,
+    "prompt": "Quel manga suit un ancien assassin de l'ère Meiji qui a juré de ne plus tuer, au sabre inversé ?",
+    "answer": "Kenshin le vagabond",
+    "aliases": [
+      "Rurouni Kenshin",
+      "Kenshin"
+    ]
+  }
+]

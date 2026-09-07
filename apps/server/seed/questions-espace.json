@@ -1,0 +1,805 @@
+[
+  {
+    "theme": "espace",
+    "difficulty": 1,
+    "prompt": "Quelle planète est la plus proche du Soleil ?",
+    "answer": "Mercure",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 1,
+    "prompt": "Quelle est la plus grosse planète du système solaire ?",
+    "answer": "Jupiter",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 1,
+    "prompt": "Quelle planète est célèbre pour ses anneaux ?",
+    "answer": "Saturne",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 1,
+    "prompt": "Combien de planètes le système solaire compte-t-il depuis 2006 ?",
+    "answer": "8",
+    "aliases": [
+      "huit"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 1,
+    "prompt": "Quel astre tourne autour de la Terre ?",
+    "answer": "la Lune",
+    "aliases": [
+      "Lune"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 1,
+    "prompt": "Quelle étoile est au centre de notre système ?",
+    "answer": "le Soleil",
+    "aliases": [
+      "Soleil"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 1,
+    "prompt": "Qui a été le premier homme à marcher sur la Lune ?",
+    "answer": "Neil Armstrong",
+    "aliases": [
+      "Armstrong"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 1,
+    "prompt": "Quel programme spatial américain a permis les premiers pas sur la Lune ?",
+    "answer": "Apollo",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 1,
+    "prompt": "Comment appelle-t-on une étoile qui explose en fin de vie ?",
+    "answer": "une supernova",
+    "aliases": [
+      "supernova"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 1,
+    "prompt": "Comment appelle-t-on un objet si dense que même la lumière n'en ressort pas ?",
+    "answer": "un trou noir",
+    "aliases": [
+      "trou noir"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 1,
+    "prompt": "Dans quelle galaxie se trouve la Terre ?",
+    "answer": "la Voie lactée",
+    "aliases": [
+      "Voie lactée"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 1,
+    "prompt": "Comment appelle-t-on un astre errant qui traîne une longue queue lumineuse ?",
+    "answer": "une comète",
+    "aliases": [
+      "comète"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 1,
+    "prompt": "Quelle agence spatiale américaine a envoyé les missions Apollo ?",
+    "answer": "la NASA",
+    "aliases": [
+      "NASA"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 1,
+    "prompt": "Comment appelle-t-on la station habitée en orbite autour de la Terre depuis 1998 ?",
+    "answer": "la Station spatiale internationale",
+    "aliases": [
+      "ISS",
+      "la Station spatiale",
+      "l'ISS"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 1,
+    "prompt": "Quelle planète est la plus proche de la Terre en taille ?",
+    "answer": "Vénus",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 1,
+    "prompt": "Combien de temps la Terre met-elle à faire un tour sur elle-même ?",
+    "answer": "24 heures",
+    "aliases": [
+      "un jour",
+      "vingt-quatre heures"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 1,
+    "prompt": "Comment appelle-t-on l'engin qui décolle pour envoyer une charge dans l'espace ?",
+    "answer": "une fusée",
+    "aliases": [
+      "fusée",
+      "un lanceur"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Quelle planète est la plus éloignée du Soleil ?",
+    "answer": "Neptune",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Quelle planète tourne pratiquement couchée sur le côté ?",
+    "answer": "Uranus",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Quel astre a été rétrogradé au rang de planète naine en 2006 ?",
+    "answer": "Pluton",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle la plus grande lune de Saturne ?",
+    "answer": "Titan",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle le plus grand satellite naturel du système solaire, en orbite autour de Jupiter ?",
+    "answer": "Ganymède",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle l'immense tempête ovale qui tourbillonne sur Jupiter depuis des siècles ?",
+    "answer": "la Grande Tache rouge",
+    "aliases": [
+      "Grande Tache rouge"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Qui a été le premier être humain envoyé dans l'espace, en 1961 ?",
+    "answer": "Youri Gagarine",
+    "aliases": [
+      "Gagarine",
+      "Yuri Gagarin"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Quel pays a envoyé le premier satellite artificiel en orbite ?",
+    "answer": "l'URSS",
+    "aliases": [
+      "URSS",
+      "Union soviétique",
+      "la Russie"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Comment s'appelait ce premier satellite artificiel, lancé en 1957 ?",
+    "answer": "Spoutnik",
+    "aliases": [
+      "Sputnik",
+      "Spoutnik 1"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Quelle mission américaine a posé les premiers humains sur notre satellite naturel ?",
+    "answer": "Apollo 11",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Quelle mission américaine a connu une explosion en route et a dû rentrer sans se poser ?",
+    "answer": "Apollo 13",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Quel astronaute a accompagné Neil Armstrong à la surface, en 1969 ?",
+    "answer": "Buzz Aldrin",
+    "aliases": [
+      "Aldrin",
+      "Edwin Aldrin"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Quelle agence spatiale regroupe les pays européens ?",
+    "answer": "l'ESA",
+    "aliases": [
+      "ESA",
+      "Agence spatiale européenne"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Depuis quel territoire français d'Amérique du Sud l'Europe lance-t-elle ses fusées ?",
+    "answer": "la Guyane",
+    "aliases": [
+      "Guyane",
+      "Kourou",
+      "la Guyane française"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Quelle famille de lanceurs européens décolle depuis Kourou ?",
+    "answer": "Ariane",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Quelle société privée d'Elon Musk a rendu les fusées réutilisables ?",
+    "answer": "SpaceX",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle la capsule habitée de SpaceX qui dessert la station orbitale ?",
+    "answer": "Crew Dragon",
+    "aliases": [
+      "Dragon"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Quel télescope spatial lancé en 1990 a fourni des images restées célèbres ?",
+    "answer": "Hubble",
+    "aliases": [
+      "le télescope Hubble"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Quel télescope spatial a pris la relève de Hubble en 2021, observant dans l'infrarouge ?",
+    "answer": "James Webb",
+    "aliases": [
+      "le James Webb",
+      "JWST"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Quel astronaute français a commandé la station orbitale en 2021 ?",
+    "answer": "Thomas Pesquet",
+    "aliases": [
+      "Pesquet"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle la ceinture de roches située entre Mars et Jupiter ?",
+    "answer": "la ceinture d'astéroïdes",
+    "aliases": [
+      "ceinture d'astéroïdes",
+      "les astéroïdes"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Combien de temps la lumière du Soleil met-elle à nous parvenir ?",
+    "answer": "8 minutes",
+    "aliases": [
+      "huit minutes",
+      "environ 8 minutes"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Quelle unité les astronomes utilisent-ils pour mesurer les distances entre les étoiles ?",
+    "answer": "l'année-lumière",
+    "aliases": [
+      "année-lumière",
+      "une année lumière"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle la théorie qui décrit l'expansion de l'univers depuis un état très dense ?",
+    "answer": "le Big Bang",
+    "aliases": [
+      "Big Bang"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Quelle constellation contient l'étoile Polaire ?",
+    "answer": "la Petite Ourse",
+    "aliases": [
+      "Petite Ourse"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Quelle constellation est reconnaissable à sa ceinture de trois étoiles alignées ?",
+    "answer": "Orion",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quelle est l'étoile la plus proche du Soleil ?",
+    "answer": "Proxima Centauri",
+    "aliases": [
+      "Proxima du Centaure"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quelle galaxie voisine finira par entrer en collision avec la nôtre ?",
+    "answer": "Andromède",
+    "aliases": [
+      "la galaxie d'Andromède"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quel volcan de Mars est le plus haut relief connu du système solaire ?",
+    "answer": "Olympus Mons",
+    "aliases": [
+      "le mont Olympe"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Combien de lunes Mars possède-t-elle ?",
+    "answer": "2",
+    "aliases": [
+      "deux"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Comment s'appellent les deux satellites de Mars ?",
+    "answer": "Phobos et Déimos",
+    "aliases": [
+      "Phobos et Deimos"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quelle lune de Jupiter est le corps le plus volcanique du système solaire ?",
+    "answer": "Io",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quelle lune de Jupiter cache probablement un océan sous sa croûte glacée ?",
+    "answer": "Europe",
+    "aliases": [
+      "Europa"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quelle sonde a survolé Pluton en 2015 ?",
+    "answer": "New Horizons",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quelles sondes lancées en 1977 ont quitté le système solaire ?",
+    "answer": "les Voyager",
+    "aliases": [
+      "Voyager",
+      "Voyager 1 et 2"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quelle sonde européenne s'est posée sur une comète en 2014 ?",
+    "answer": "Philae",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quelle sonde transportait l'atterrisseur Philae jusqu'à sa comète ?",
+    "answer": "Rosetta",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quel robot de la NASA explore le cratère Jezero depuis 2021 ?",
+    "answer": "Perseverance",
+    "aliases": [
+      "Persévérance"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quel petit hélicoptère a volé sur Mars pour la première fois en 2021 ?",
+    "answer": "Ingenuity",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quel robot de la NASA parcourt le cratère Gale depuis 2012 ?",
+    "answer": "Curiosity",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quel programme de la NASA vise à ramener des humains sur notre satellite naturel ?",
+    "answer": "Artemis",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quelle est la première femme envoyée dans l'espace, en 1963 ?",
+    "answer": "Valentina Terechkova",
+    "aliases": [
+      "Terechkova",
+      "Valentina Tereshkova"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on la limite d'un trou noir au-delà de laquelle rien ne revient ?",
+    "answer": "l'horizon des événements",
+    "aliases": [
+      "horizon des événements",
+      "l'horizon"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on le résidu ultra-dense laissé par certaines étoiles mortes, qui tourne très vite ?",
+    "answer": "une étoile à neutrons",
+    "aliases": [
+      "étoile à neutrons",
+      "un pulsar"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on une étoile à neutrons dont on reçoit un signal régulier, comme un phare ?",
+    "answer": "un pulsar",
+    "aliases": [
+      "pulsar"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quel physicien a décrit le rayonnement qui porte son nom, émis par les trous noirs ?",
+    "answer": "Stephen Hawking",
+    "aliases": [
+      "Hawking"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Qui a formulé la théorie de la relativité générale ?",
+    "answer": "Albert Einstein",
+    "aliases": [
+      "Einstein"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Qui a démontré que les planètes tournent autour du Soleil et non de la Terre ?",
+    "answer": "Copernic",
+    "aliases": [
+      "Nicolas Copernic"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quel savant italien a observé les quatre plus grosses lunes de Jupiter avec sa lunette ?",
+    "answer": "Galilée",
+    "aliases": [
+      "Galileo Galilei"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on collectivement les quatre plus grosses lunes de Jupiter ?",
+    "answer": "les satellites galiléens",
+    "aliases": [
+      "les lunes galiléennes",
+      "satellites galiléens"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on une planète en orbite autour d'une autre étoile que le Soleil ?",
+    "answer": "une exoplanète",
+    "aliases": [
+      "exoplanète"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quel nuage sphérique de corps glacés entourerait le système solaire très loin du Soleil ?",
+    "answer": "le nuage de Oort",
+    "aliases": [
+      "nuage de Oort",
+      "Oort"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Comment s'appelle la région de corps glacés située au-delà de Neptune ?",
+    "answer": "la ceinture de Kuiper",
+    "aliases": [
+      "ceinture de Kuiper",
+      "Kuiper"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on le rayonnement fossile qui baigne tout l'univers ?",
+    "answer": "le fond diffus cosmologique",
+    "aliases": [
+      "fond diffus cosmologique",
+      "le rayonnement fossile"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on la matière invisible qui explique la rotation des galaxies ?",
+    "answer": "la matière noire",
+    "aliases": [
+      "matière noire"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on la force hypothétique qui accélère l'expansion de l'univers ?",
+    "answer": "l'énergie sombre",
+    "aliases": [
+      "énergie sombre",
+      "énergie noire"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Comment s'appelle le trou noir supermassif au centre de notre galaxie ?",
+    "answer": "Sagittarius A*",
+    "aliases": [
+      "Sagittarius A",
+      "Sgr A*"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "En quelle année la première image d'un trou noir a-t-elle été publiée ?",
+    "answer": "2019",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quel gaz compose majoritairement le Soleil ?",
+    "answer": "l'hydrogène",
+    "aliases": [
+      "hydrogène"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quelle réaction produit l'énergie du Soleil ?",
+    "answer": "la fusion nucléaire",
+    "aliases": [
+      "fusion nucléaire",
+      "la fusion"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Combien de temps met la lumière de notre satellite naturel pour nous parvenir ?",
+    "answer": "1,3 seconde",
+    "aliases": [
+      "une seconde environ",
+      "1 seconde",
+      "1,3 s"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quelle mission américaine a fait atterrir des humains six fois sur notre satellite ?",
+    "answer": "Apollo",
+    "aliases": [
+      "le programme Apollo"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quelle navette spatiale américaine a explosé au décollage en 1986 ?",
+    "answer": "Challenger",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quelle navette spatiale s'est désintégrée au retour dans l'atmosphère en 2003 ?",
+    "answer": "Columbia",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quelle station orbitale soviétique puis russe a été habitée de 1986 à 2001 ?",
+    "answer": "Mir",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quel pays est devenu en 2003 le troisième à envoyer seul un humain en orbite ?",
+    "answer": "la Chine",
+    "aliases": [
+      "Chine"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on l'ombre portée qui cache le Soleil quand la Lune passe devant ?",
+    "answer": "une éclipse solaire",
+    "aliases": [
+      "éclipse solaire",
+      "une éclipse de Soleil"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on le phénomène lumineux provoqué par le vent solaire près des pôles ?",
+    "answer": "une aurore polaire",
+    "aliases": [
+      "aurore boréale",
+      "aurore polaire",
+      "les aurores"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on un caillou de l'espace qui brûle en traversant notre atmosphère ?",
+    "answer": "un météore",
+    "aliases": [
+      "météore",
+      "une étoile filante"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on un caillou venu de l'espace qui atteint le sol sans se consumer ?",
+    "answer": "une météorite",
+    "aliases": [
+      "météorite"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quel astronome français a donné son nom à un catalogue d'objets du ciel profond ?",
+    "answer": "Charles Messier",
+    "aliases": [
+      "Messier"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quelle célèbre nébuleuse porte le numéro M42 dans ce catalogue ?",
+    "answer": "la nébuleuse d'Orion",
+    "aliases": [
+      "nébuleuse d'Orion"
+    ]
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quelle planète possède le jour le plus long, plus long que son année ?",
+    "answer": "Vénus",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quelle planète tourne sur elle-même dans le sens inverse des autres ?",
+    "answer": "Vénus",
+    "aliases": []
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Quelle est la planète la plus chaude du système solaire ?",
+    "answer": "Vénus",
+    "aliases": []
+  }
+]

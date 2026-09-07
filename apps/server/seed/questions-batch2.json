@@ -1,171 +1,1501 @@
 [
-  {"theme":"histoire","difficulty":3,"prompt":"Quel traité, signé en 1648, a mis fin à la guerre de Trente Ans ?","answer":"le traité de Westphalie","aliases":["traité de westphalie","paix de westphalie"]},
-  {"theme":"histoire","difficulty":3,"prompt":"Quelle famille royale française a été renversée par la Révolution de 1789 ?","answer":"les Bourbons","aliases":["bourbon","dynastie des bourbons"]},
-  {"theme":"histoire","difficulty":1,"prompt":"Quelle organisation internationale a été créée en 1945 pour maintenir la paix mondiale ?","answer":"les Nations unies","aliases":["ONU","organisation des nations unies"]},
-  {"theme":"histoire","difficulty":2,"prompt":"Quel pays a été le berceau de la révolution industrielle à la fin du XVIIIe siècle ?","answer":"l'Angleterre","aliases":["angleterre","le royaume-uni","royaume-uni"]},
-  {"theme":"histoire","difficulty":3,"prompt":"Quel explorateur norvégien a été le premier à atteindre le pôle Sud, en 1911 ?","answer":"Roald Amundsen","aliases":["amundsen"]},
-  {"theme":"histoire","difficulty":1,"prompt":"Quel événement du 11 septembre 2001 a visé les tours jumelles de New York ?","answer":"les attentats du 11 septembre","aliases":["attentats du world trade center","11 septembre"]},
-  {"theme":"histoire","difficulty":2,"prompt":"Quel roi anglais a rompu avec l'Église catholique pour créer l'Église anglicane ?","answer":"Henri VIII","aliases":["henri 8","henry viii"]},
-  {"theme":"histoire","difficulty":2,"prompt":"Quelle civilisation précolombienne a construit le site du Machu Picchu ?","answer":"les Incas","aliases":["incas","civilisation inca"]},
-  {"theme":"histoire","difficulty":3,"prompt":"Quel document fondateur des droits, signé en Angleterre en 1215, limite le pouvoir royal ?","answer":"la Magna Carta","aliases":["magna carta","la grande charte"]},
-  {"theme":"histoire","difficulty":2,"prompt":"Quelle guerre a opposé la France et l'Angleterre de 1337 à 1453 ?","answer":"la guerre de Cent Ans","aliases":["guerre de cent ans"]},
-  {"theme":"histoire","difficulty":1,"prompt":"Quelle jeune femme a mené l'armée française contre les Anglais durant la guerre de Cent Ans ?","answer":"Jeanne d'Arc","aliases":["jeanne d arc","jeanne darc"]},
-  {"theme":"histoire","difficulty":2,"prompt":"Quel empire dirigé par Gengis Khan fut le plus grand empire terrestre continu de l'histoire ?","answer":"l'Empire mongol","aliases":["empire mongol"]},
-  {"theme":"histoire","difficulty":2,"prompt":"Quelle crise économique mondiale a débuté avec le krach boursier de 1929 ?","answer":"la Grande Dépression","aliases":["grande dépression","krach de 1929"]},
-  {"theme":"histoire","difficulty":1,"prompt":"Quel mouvement social et étudiant a marqué la France en mai 1968 ?","answer":"Mai 68","aliases":["mai 1968"]},
-  {"theme":"histoire","difficulty":2,"prompt":"Quel explorateur italien a rapporté ses voyages en Asie dans 'Le Livre des merveilles' ?","answer":"Marco Polo","aliases":["marco polo"]},
-
-  {"theme":"geo","difficulty":1,"prompt":"Quelle est la capitale de la Grèce ?","answer":"Athènes","aliases":["athenes"]},
-  {"theme":"geo","difficulty":3,"prompt":"Quel est le plus grand pays d'Afrique par la superficie ?","answer":"l'Algérie","aliases":["algérie","algerie"]},
-  {"theme":"geo","difficulty":1,"prompt":"Quelle est la capitale de la Chine ?","answer":"Pékin","aliases":["pekin","beijing"]},
-  {"theme":"geo","difficulty":2,"prompt":"Quelle est la capitale de la Suisse ?","answer":"Berne","aliases":["berne"]},
-  {"theme":"geo","difficulty":1,"prompt":"Quel est le fleuve le plus long d'Amérique du Sud ?","answer":"l'Amazone","aliases":["amazone"]},
-  {"theme":"geo","difficulty":1,"prompt":"Quelle est la capitale des Pays-Bas ?","answer":"Amsterdam","aliases":["amsterdam"]},
-  {"theme":"geo","difficulty":3,"prompt":"Quel pays possède, avec ses territoires d'outre-mer, le plus grand nombre de fuseaux horaires au monde ?","answer":"la France","aliases":["france"]},
-  {"theme":"geo","difficulty":1,"prompt":"Dans quelle chaîne de montagnes se trouve le mont Everest ?","answer":"l'Himalaya","aliases":["himalaya"]},
-  {"theme":"geo","difficulty":1,"prompt":"Quelle est la capitale de la Suède ?","answer":"Stockholm","aliases":["stockholm"]},
-  {"theme":"geo","difficulty":1,"prompt":"Quel pays a pour capitale Vienne ?","answer":"l'Autriche","aliases":["autriche"]},
-  {"theme":"geo","difficulty":2,"prompt":"Quelle est la plus grande île du monde (hors continent australien) ?","answer":"le Groenland","aliases":["groenland"]},
-  {"theme":"geo","difficulty":2,"prompt":"Quel canal relie la mer Méditerranée à la mer Rouge ?","answer":"le canal de Suez","aliases":["canal de suez","suez"]},
-  {"theme":"geo","difficulty":1,"prompt":"Quelle est la capitale du Mexique ?","answer":"Mexico","aliases":["mexico city","ciudad de mexico"]},
-  {"theme":"geo","difficulty":2,"prompt":"Quel est le plus haut sommet des Alpes, culminant à environ 4810 mètres ?","answer":"le Mont Blanc","aliases":["mont blanc"]},
-  {"theme":"geo","difficulty":2,"prompt":"Quel détroit sépare l'Espagne du Maroc, entre l'Atlantique et la Méditerranée ?","answer":"le détroit de Gibraltar","aliases":["détroit de gibraltar","gibraltar"]},
-
-  {"theme":"sciences","difficulty":1,"prompt":"Quel est le symbole chimique du fer ?","answer":"Fe","aliases":[]},
-  {"theme":"sciences","difficulty":2,"prompt":"Quelle est l'unité de mesure de la température dans le Système international ?","answer":"le kelvin","aliases":["kelvin"]},
-  {"theme":"sciences","difficulty":1,"prompt":"Quel organe filtre le sang pour produire l'urine ?","answer":"le rein","aliases":["rein","reins"]},
-  {"theme":"sciences","difficulty":1,"prompt":"Quelle est la plus grande planète du système solaire ?","answer":"Jupiter","aliases":[]},
-  {"theme":"sciences","difficulty":1,"prompt":"Quelle scientifique a découvert la radioactivité avec son mari Pierre ?","answer":"Marie Curie","aliases":["curie"]},
-  {"theme":"sciences","difficulty":1,"prompt":"Quel gaz l'être humain respire-t-il principalement pour vivre ?","answer":"l'oxygène","aliases":["oxygène","oxygene"]},
-  {"theme":"sciences","difficulty":3,"prompt":"Quelle est la vitesse du son dans l'air, arrondie en mètres par seconde ?","answer":"340","aliases":["340 m/s","343"]},
-  {"theme":"sciences","difficulty":2,"prompt":"Quel type de cellule sanguine transporte l'oxygène dans le corps ?","answer":"les globules rouges","aliases":["globules rouges"]},
-  {"theme":"sciences","difficulty":2,"prompt":"Quel physicien britannique est célèbre pour ses travaux sur les trous noirs et le livre 'Une brève histoire du temps' ?","answer":"Stephen Hawking","aliases":["hawking"]},
-  {"theme":"sciences","difficulty":2,"prompt":"Combien de dents de lait un enfant possède-t-il en général ?","answer":"20","aliases":["vingt"]},
-  {"theme":"sciences","difficulty":2,"prompt":"Quel est le seul métal liquide à température ambiante ?","answer":"le mercure","aliases":["mercure"]},
-  {"theme":"sciences","difficulty":1,"prompt":"Quelle est la principale source d'énergie de la Terre ?","answer":"le Soleil","aliases":["soleil"]},
-  {"theme":"sciences","difficulty":2,"prompt":"Quel astre est principalement responsable des marées océaniques sur Terre ?","answer":"la Lune","aliases":["lune","attraction de la lune"]},
-  {"theme":"sciences","difficulty":2,"prompt":"Quelle couche atmosphérique protège la Terre des rayons ultraviolets ?","answer":"la couche d'ozone","aliases":["couche d ozone","ozone"]},
-  {"theme":"sciences","difficulty":2,"prompt":"Quelle vitamine la peau produit-elle principalement grâce au soleil ?","answer":"la vitamine D","aliases":["vitamine d"]},
-
-  {"theme":"cinema","difficulty":2,"prompt":"Quel réalisateur a créé la trilogie Retour vers le futur ?","answer":"Robert Zemeckis","aliases":["zemeckis"]},
-  {"theme":"cinema","difficulty":1,"prompt":"Quel acteur incarne James Bond dans les films sortis entre 2006 et 2021 ?","answer":"Daniel Craig","aliases":["craig"]},
-  {"theme":"cinema","difficulty":1,"prompt":"Quelle saga de films met en scène l'archéologue aventurier au chapeau et au fouet ?","answer":"Indiana Jones","aliases":["indiana jones"]},
-  {"theme":"cinema","difficulty":2,"prompt":"Quel réalisateur américain est connu pour Le Parrain et Apocalypse Now ?","answer":"Francis Ford Coppola","aliases":["coppola"]},
-  {"theme":"cinema","difficulty":2,"prompt":"Quel film de 1994 met en scène deux détenus incarnés par Tim Robbins et Morgan Freeman ?","answer":"Les Évadés","aliases":["the shawshank redemption","shawshank"]},
-  {"theme":"cinema","difficulty":1,"prompt":"Quel acteur incarne Jack Dawson dans Titanic ?","answer":"Leonardo DiCaprio","aliases":["dicaprio","leonardo dicaprio"]},
-  {"theme":"cinema","difficulty":1,"prompt":"Quel film met en scène un savant fou et sa DeLorean voyageant dans le temps ?","answer":"Retour vers le futur","aliases":["back to the future"]},
-  {"theme":"cinema","difficulty":1,"prompt":"Quelle actrice incarne Katniss Everdeen dans Hunger Games ?","answer":"Jennifer Lawrence","aliases":["jennifer lawrence"]},
-  {"theme":"cinema","difficulty":3,"prompt":"Quel réalisateur britannique a mis en scène le premier film de la saga Alien en 1979 ?","answer":"Ridley Scott","aliases":["ridley scott"]},
-  {"theme":"cinema","difficulty":1,"prompt":"Quel film met en scène un enfant livré à lui-même face à des cambrioleurs à Noël ?","answer":"Maman, j'ai raté l'avion","aliases":["home alone"]},
-  {"theme":"cinema","difficulty":2,"prompt":"Quel acteur incarne le Joker face à Christian Bale dans The Dark Knight (2008) ?","answer":"Heath Ledger","aliases":["heath ledger"]},
-  {"theme":"cinema","difficulty":2,"prompt":"Quel film musical de 2016 met en vedette Ryan Gosling et Emma Stone à Los Angeles ?","answer":"La La Land","aliases":["la la land"]},
-  {"theme":"cinema","difficulty":3,"prompt":"Quel réalisateur mexicain a remporté deux Oscars du meilleur réalisateur consécutifs pour Birdman puis The Revenant ?","answer":"Alejandro González Iñárritu","aliases":["inarritu","alejandro gonzalez inarritu"]},
-  {"theme":"cinema","difficulty":1,"prompt":"Quel film d'animation Pixar raconte l'histoire d'un rat devenu chef cuisinier à Paris ?","answer":"Ratatouille","aliases":["ratatouille"]},
-  {"theme":"cinema","difficulty":1,"prompt":"Quel super-héros Marvel manie un marteau magique nommé Mjolnir ?","answer":"Thor","aliases":["thor"]},
-
-  {"theme":"musique","difficulty":2,"prompt":"Quel groupe de rock britannique a interprété 'Another Brick in the Wall' ?","answer":"Pink Floyd","aliases":["pink floyd"]},
-  {"theme":"musique","difficulty":1,"prompt":"Quel groupe britannique des années 60, mené par Mick Jagger, rivalisait avec les Beatles ?","answer":"les Rolling Stones","aliases":["rolling stones"]},
-  {"theme":"musique","difficulty":1,"prompt":"Quel chanteur britannique interprète 'Shape of You' ?","answer":"Ed Sheeran","aliases":["ed sheeran"]},
-  {"theme":"musique","difficulty":1,"prompt":"Quelle chanteuse américaine est surnommée 'Queen Bey' ?","answer":"Beyoncé","aliases":["beyonce"]},
-  {"theme":"musique","difficulty":2,"prompt":"Quel compositeur russe a écrit le ballet 'Casse-Noisette' ?","answer":"Tchaïkovski","aliases":["tchaikovski","piotr ilitch tchaikovski"]},
-  {"theme":"musique","difficulty":3,"prompt":"Quel rappeur français est connu pour l'album 'Ouest Side' et 'Or noir' ?","answer":"Booba","aliases":["booba"]},
-  {"theme":"musique","difficulty":2,"prompt":"Quel groupe de rock américain a interprété 'Hotel California' ?","answer":"Eagles","aliases":["les eagles","the eagles"]},
-  {"theme":"musique","difficulty":3,"prompt":"Quelle chanteuse islandaise est connue pour son style expérimental et le tube 'It's Oh So Quiet' ?","answer":"Björk","aliases":["bjork"]},
-  {"theme":"musique","difficulty":2,"prompt":"Quel DJ néerlandais, connu pour 'Levels', est décédé en 2018 ?","answer":"Avicii","aliases":["avicii"]},
-  {"theme":"musique","difficulty":2,"prompt":"Dans quel pays se déroule chaque année le festival de musique électronique Tomorrowland ?","answer":"la Belgique","aliases":["belgique"]},
-  {"theme":"musique","difficulty":2,"prompt":"Quel chanteur est le leader du groupe Coldplay ?","answer":"Chris Martin","aliases":["chris martin"]},
-  {"theme":"musique","difficulty":1,"prompt":"Quel genre musical est né dans le Bronx à New York dans les années 1970 ?","answer":"le hip-hop","aliases":["hip hop","hip-hop"]},
-  {"theme":"musique","difficulty":2,"prompt":"Quel est l'instrument à cordes frottées le plus grave d'un orchestre classique ?","answer":"la contrebasse","aliases":["contrebasse"]},
-  {"theme":"musique","difficulty":3,"prompt":"Quel compositeur allemand est l'auteur de l'opéra-fleuve 'L'Anneau du Nibelung' et de 'La Chevauchée des Walkyries' ?","answer":"Richard Wagner","aliases":["wagner"]},
-  {"theme":"musique","difficulty":2,"prompt":"Quel groupe de reggae jamaïcain était mené par Bob Marley ?","answer":"The Wailers","aliases":["wailers"]},
-
-  {"theme":"gaming","difficulty":2,"prompt":"Quel studio japonais a développé la série de jeux Metal Gear Solid ?","answer":"Konami","aliases":["konami"]},
-  {"theme":"gaming","difficulty":2,"prompt":"Quel jeu vidéo culte met en scène une chasseuse de primes appelée Samus Aran ?","answer":"Metroid","aliases":["metroid"]},
-  {"theme":"gaming","difficulty":3,"prompt":"Quel jeu vidéo d'horreur se déroule dans une cité sous-marine dystopique appelée Rapture ?","answer":"BioShock","aliases":["bioshock"]},
-  {"theme":"gaming","difficulty":2,"prompt":"Quelle entreprise développe et édite le jeu League of Legends ?","answer":"Riot Games","aliases":["riot games","riot"]},
-  {"theme":"gaming","difficulty":2,"prompt":"Quelle série de jeux de combat oppose des ninjas comme Scorpion et Sub-Zero ?","answer":"Mortal Kombat","aliases":["mortal kombat"]},
-  {"theme":"gaming","difficulty":1,"prompt":"Quel jeu vidéo bac à sable permet de construire des mondes avec des avatars appelés Robloxiens ?","answer":"Roblox","aliases":["roblox"]},
-  {"theme":"gaming","difficulty":2,"prompt":"Quelle entreprise a créé la console portable Game Boy en 1989 ?","answer":"Nintendo","aliases":["nintendo"]},
-  {"theme":"gaming","difficulty":2,"prompt":"Sur quelle carte emblématique se joue la majorité des parties classées de League of Legends ?","answer":"Summoner's Rift","aliases":["la faille de l invocateur","faille de l'invocateur"]},
-  {"theme":"gaming","difficulty":2,"prompt":"Quel jeu de rôle et d'action met en scène le sorceleur Geralt de Riv ?","answer":"The Witcher","aliases":["witcher"]},
-  {"theme":"gaming","difficulty":3,"prompt":"Quel jeu indépendant de simulation de ferme, sorti en 2016 et développé par une seule personne, s'appelle Stardew Valley ou fait référence à une licence japonaise plus ancienne du même genre ?","answer":"Stardew Valley","aliases":["harvest moon"]},
-  {"theme":"gaming","difficulty":1,"prompt":"Quel jeu vidéo culte des années 80 met en scène un personnage jaune qui mange des pac-gommes en évitant des fantômes ?","answer":"Pac-Man","aliases":["pacman","pac man"]},
-  {"theme":"gaming","difficulty":3,"prompt":"Quel jeu vidéo de rôle japonais met en scène un groupe de héros affrontant le antagoniste Sephiroth ?","answer":"Final Fantasy VII","aliases":["final fantasy 7","ff7"]},
-  {"theme":"gaming","difficulty":1,"prompt":"Quelle console de Sony est sortie en 2020, succédant à la PS4 ?","answer":"la PlayStation 5","aliases":["ps5","playstation 5"]},
-  {"theme":"gaming","difficulty":2,"prompt":"Quel jeu multijoueur en ligne, sorti avant Fortnite, oppose des joueurs sur une île qui rétrécit progressivement ?","answer":"PUBG","aliases":["playerunknown's battlegrounds","player unknown's battlegrounds"]},
-  {"theme":"gaming","difficulty":1,"prompt":"Quel personnage emblématique de Nintendo est un dinosaure vert compagnon de Mario ?","answer":"Yoshi","aliases":["yoshi"]},
-
-  {"theme":"sport","difficulty":2,"prompt":"Combien de points faut-il en général pour gagner un set de volley-ball (avec deux points d'écart) ?","answer":"25 points","aliases":["25"]},
-  {"theme":"sport","difficulty":1,"prompt":"Combien de joueurs compose une équipe de handball sur le terrain ?","answer":"7","aliases":["sept"]},
-  {"theme":"sport","difficulty":1,"prompt":"Dans quel sport la France a-t-elle remporté la Coupe du monde en 1998, à domicile ?","answer":"le football","aliases":["football"]},
-  {"theme":"sport","difficulty":2,"prompt":"Quelle est la distance officielle d'un marathon ?","answer":"42,195 km","aliases":["42 km","42195 m","42,2 km"]},
-  {"theme":"sport","difficulty":1,"prompt":"Quel sport de combat se pratique sur un ring avec des gants et des rounds ?","answer":"la boxe","aliases":["boxe"]},
-  {"theme":"sport","difficulty":2,"prompt":"Quel pilote allemand a remporté 7 titres de champion du monde de Formule 1 ?","answer":"Michael Schumacher","aliases":["schumacher","lewis hamilton"]},
-  {"theme":"sport","difficulty":1,"prompt":"Quel sport olympique se pratique sur une table avec de petites raquettes et une balle légère ?","answer":"le tennis de table","aliases":["ping-pong","ping pong"]},
-  {"theme":"sport","difficulty":2,"prompt":"Quel pays a organisé les premiers Jeux olympiques modernes, en 1896 ?","answer":"la Grèce","aliases":["grèce","grece"]},
-  {"theme":"sport","difficulty":2,"prompt":"Quel sport nautique consiste à glisser sur l'eau, debout sur une planche, tracté par un bateau ?","answer":"le ski nautique","aliases":["ski nautique"]},
-  {"theme":"sport","difficulty":1,"prompt":"Combien de trous compte un parcours de golf standard ?","answer":"18","aliases":["dix-huit"]},
-  {"theme":"sport","difficulty":3,"prompt":"Quel pays domine historiquement le cricket international, avec l'Angleterre et l'Australie ?","answer":"l'Inde","aliases":["inde"]},
-  {"theme":"sport","difficulty":2,"prompt":"Quel événement cycliste italien est l'équivalent du Tour de France ?","answer":"le Giro","aliases":["giro","tour d'italie"]},
-  {"theme":"sport","difficulty":1,"prompt":"Quel pays a accueilli la Coupe du monde de football 2022 ?","answer":"le Qatar","aliases":["qatar"]},
-  {"theme":"sport","difficulty":2,"prompt":"Quel sport de combat est surnommé 'le noble art' ?","answer":"la boxe","aliases":["boxe"]},
-  {"theme":"sport","difficulty":1,"prompt":"Dans quel sport évolue le basketteur qui marque des paniers à 3 points derrière une ligne ?","answer":"le basketball","aliases":["basket","basket-ball"]},
-
-  {"theme":"insolite","difficulty":2,"prompt":"Quel oiseau de proie est l'animal le plus rapide au monde en piqué, dépassant 300 km/h ?","answer":"le faucon pèlerin","aliases":["faucon pèlerin","faucon pelerin"]},
-  {"theme":"insolite","difficulty":2,"prompt":"Environ quel pourcentage du corps humain adulte est composé d'eau ?","answer":"60%","aliases":["60","environ 60%"]},
-  {"theme":"insolite","difficulty":3,"prompt":"Quel poisson tropical est capable de changer de sexe au cours de sa vie ?","answer":"le poisson-clown","aliases":["poisson clown"]},
-  {"theme":"insolite","difficulty":1,"prompt":"Quel insecte est capable de soulever plusieurs fois son propre poids ?","answer":"la fourmi","aliases":["fourmi"]},
-  {"theme":"insolite","difficulty":3,"prompt":"Quel fruit jaune est botaniquement classé comme une baie, contrairement à la fraise ?","answer":"la banane","aliases":["banane"]},
-  {"theme":"insolite","difficulty":3,"prompt":"Quelle capitale nationale est la plus septentrionale (la plus au nord) du monde ?","answer":"Reykjavik","aliases":["reykjavik"]},
-  {"theme":"insolite","difficulty":1,"prompt":"Quel reptile est capable de faire repousser sa queue si elle est coupée ?","answer":"le lézard","aliases":["lézard","lezard"]},
-  {"theme":"insolite","difficulty":2,"prompt":"Quel est le seul mammifère capable de voler activement (et non simplement planer) ?","answer":"la chauve-souris","aliases":["chauve-souris","chauve souris"]},
-  {"theme":"insolite","difficulty":1,"prompt":"Quelle est la monnaie utilisée dans la zone euro ?","answer":"l'euro","aliases":["euro"]},
-  {"theme":"insolite","difficulty":2,"prompt":"Quel phénomène lumineux naturel colore le ciel polaire de vert ou de rose la nuit ?","answer":"l'aurore boréale","aliases":["aurore boréale","aurore boreale"]},
-  {"theme":"insolite","difficulty":1,"prompt":"Quel est le plus grand oiseau vivant, incapable de voler ?","answer":"l'autruche","aliases":["autruche"]},
-  {"theme":"insolite","difficulty":3,"prompt":"Quelle planète du système solaire tourne 'sur le côté', avec un axe de rotation très incliné ?","answer":"Uranus","aliases":["uranus"]},
-  {"theme":"insolite","difficulty":3,"prompt":"Quel métal, utilisé dans les filaments d'ampoules, a le point de fusion le plus élevé de tous les métaux ?","answer":"le tungstène","aliases":["tungstène","tungstene"]},
-  {"theme":"insolite","difficulty":1,"prompt":"En combien d'heures la Terre effectue-t-elle un tour complet sur elle-même ?","answer":"24 heures","aliases":["24h","24"]},
-  {"theme":"insolite","difficulty":2,"prompt":"Quel crustacé marche généralement de travers, sur le côté ?","answer":"le crabe","aliases":["crabe"]},
-
-  {"theme":"litterature","difficulty":1,"prompt":"Quel écrivain français est l'auteur des 'Misérables' ?","answer":"Victor Hugo","aliases":["victor hugo"]},
-  {"theme":"litterature","difficulty":1,"prompt":"Quelle autrice britannique a créé le magicien Harry Potter ?","answer":"J.K. Rowling","aliases":["jk rowling","j.k. rowling","rowling"]},
-  {"theme":"litterature","difficulty":2,"prompt":"Quel écrivain russe a écrit 'Guerre et Paix' ?","answer":"Léon Tolstoï","aliases":["tolstoi","tolstoï","leon tolstoi"]},
-  {"theme":"litterature","difficulty":2,"prompt":"Quel poète français est l'auteur du recueil 'Les Fleurs du mal' ?","answer":"Charles Baudelaire","aliases":["baudelaire"]},
-  {"theme":"litterature","difficulty":1,"prompt":"Quel dramaturge anglais a écrit 'Roméo et Juliette' ?","answer":"William Shakespeare","aliases":["shakespeare"]},
-  {"theme":"litterature","difficulty":2,"prompt":"Quel écrivain français a créé le personnage du gentleman-cambrioleur Arsène Lupin ?","answer":"Maurice Leblanc","aliases":["leblanc","maurice leblanc"]},
-  {"theme":"litterature","difficulty":2,"prompt":"Quel auteur américain a écrit 'Le Vieil Homme et la Mer' ?","answer":"Ernest Hemingway","aliases":["hemingway"]},
-  {"theme":"litterature","difficulty":1,"prompt":"Quel écrivain français est l'auteur de 'Le Petit Prince' ?","answer":"Antoine de Saint-Exupéry","aliases":["saint-exupéry","saint exupery"]},
-  {"theme":"litterature","difficulty":1,"prompt":"Quelle saga littéraire de J.R.R. Tolkien met en scène la Terre du Milieu ?","answer":"Le Seigneur des Anneaux","aliases":["seigneur des anneaux"]},
-  {"theme":"litterature","difficulty":3,"prompt":"Quel écrivain colombien a écrit 'Cent ans de solitude' ?","answer":"Gabriel García Márquez","aliases":["garcia marquez","gabriel garcia marquez"]},
-  {"theme":"litterature","difficulty":1,"prompt":"Quel détective anglais, expert en déduction, a été créé par Arthur Conan Doyle ?","answer":"Sherlock Holmes","aliases":["sherlock holmes","sherlock"]},
-  {"theme":"litterature","difficulty":2,"prompt":"Quelle autrice britannique a créé le détective belge Hercule Poirot ?","answer":"Agatha Christie","aliases":["agatha christie"]},
-  {"theme":"litterature","difficulty":2,"prompt":"Quel écrivain français du XIXe siècle est l'auteur de 'Le Comte de Monte-Cristo' ?","answer":"Alexandre Dumas","aliases":["dumas","alexandre dumas"]},
-  {"theme":"litterature","difficulty":2,"prompt":"Quel roman dystopique de George Orwell met en scène la figure de 'Big Brother' ?","answer":"1984","aliases":["mille neuf cent quatre-vingt-quatre"]},
-  {"theme":"litterature","difficulty":3,"prompt":"Quel écrivain français est l'auteur de 'À la recherche du temps perdu' ?","answer":"Marcel Proust","aliases":["proust","marcel proust"]},
-  {"theme":"litterature","difficulty":3,"prompt":"En quelle langue Dante a-t-il écrit 'La Divine Comédie' ?","answer":"l'italien","aliases":["italien"]},
-  {"theme":"litterature","difficulty":2,"prompt":"Quel auteur américain a écrit la saga 'Le Trône de fer', adaptée en série Game of Thrones ?","answer":"George R.R. Martin","aliases":["george rr martin","grrm"]},
-  {"theme":"litterature","difficulty":2,"prompt":"Quel philosophe français est l'auteur de la phrase 'Je pense donc je suis' ?","answer":"René Descartes","aliases":["descartes"]},
-  {"theme":"litterature","difficulty":3,"prompt":"Quel dramaturge français a créé le personnage de Cyrano de Bergerac au théâtre ?","answer":"Edmond Rostand","aliases":["rostand","edmond rostand"]},
-  {"theme":"litterature","difficulty":2,"prompt":"Quelle autrice britannique a écrit 'Orgueil et Préjugés' ?","answer":"Jane Austen","aliases":["jane austen"]},
-
-  {"theme":"technologie","difficulty":1,"prompt":"Quelle entreprise a créé le smartphone iPhone ?","answer":"Apple","aliases":["apple"]},
-  {"theme":"technologie","difficulty":1,"prompt":"Qui a fondé l'entreprise Microsoft ?","answer":"Bill Gates","aliases":["bill gates"]},
-  {"theme":"technologie","difficulty":2,"prompt":"Que signifie le sigle 'WWW' utilisé dans les adresses web ?","answer":"World Wide Web","aliases":["world wide web"]},
-  {"theme":"technologie","difficulty":1,"prompt":"Quel réseau social a été fondé par Mark Zuckerberg en 2004 ?","answer":"Facebook","aliases":["facebook"]},
-  {"theme":"technologie","difficulty":1,"prompt":"Quelle entreprise a développé le système d'exploitation mobile Android ?","answer":"Google","aliases":["google"]},
-  {"theme":"technologie","difficulty":1,"prompt":"Que signifie l'acronyme 'IA' en informatique ?","answer":"intelligence artificielle","aliases":["ia"]},
-  {"theme":"technologie","difficulty":2,"prompt":"Quel langage de programmation, créé en 1991, doit son nom à un serpent (ou à une troupe comique britannique) ?","answer":"Python","aliases":["python"]},
-  {"theme":"technologie","difficulty":2,"prompt":"Quelle entreprise fabrique les processeurs Ryzen, concurrents d'Intel ?","answer":"AMD","aliases":["amd"]},
-  {"theme":"technologie","difficulty":1,"prompt":"Quel est le nom du navigateur web développé par Google ?","answer":"Chrome","aliases":["google chrome"]},
-  {"theme":"technologie","difficulty":2,"prompt":"Quelle entreprise a lancé l'Atari 2600, l'une des premières consoles de jeu grand public ?","answer":"Atari","aliases":["atari"]},
-  {"theme":"technologie","difficulty":2,"prompt":"Que signifie l'acronyme 'USB' ?","answer":"Universal Serial Bus","aliases":["universal serial bus"]},
-  {"theme":"technologie","difficulty":1,"prompt":"Quel entrepreneur a fondé SpaceX et dirige aussi Tesla ?","answer":"Elon Musk","aliases":["elon musk"]},
-  {"theme":"technologie","difficulty":1,"prompt":"Quel service de streaming vidéo, où l'on peut publier ses propres vidéos, appartient à Google ?","answer":"YouTube","aliases":["youtube"]},
-  {"theme":"technologie","difficulty":2,"prompt":"Quel type de mémoire informatique perd toutes ses données quand l'ordinateur s'éteint ?","answer":"la RAM","aliases":["ram","mémoire vive"]},
-  {"theme":"technologie","difficulty":2,"prompt":"Qui a racheté le réseau social Twitter en 2022 et l'a rebaptisé X ?","answer":"Elon Musk","aliases":["elon musk"]},
-  {"theme":"technologie","difficulty":2,"prompt":"Quel format d'image très utilisé sur le web correspond à l'extension de fichier '.jpg' ?","answer":"JPEG","aliases":["jpeg","jpg"]},
-  {"theme":"technologie","difficulty":3,"prompt":"Quel protocole sécurisé, signalé par un cadenas dans le navigateur, protège les échanges avec un site web ?","answer":"HTTPS","aliases":["https"]},
-  {"theme":"technologie","difficulty":2,"prompt":"Quelle entreprise chinoise a développé l'application TikTok ?","answer":"ByteDance","aliases":["bytedance"]},
-  {"theme":"technologie","difficulty":3,"prompt":"Quel inventeur britannique est crédité de la création du World Wide Web en 1989 ?","answer":"Tim Berners-Lee","aliases":["tim berners-lee","berners-lee"]},
-  {"theme":"technologie","difficulty":1,"prompt":"Quel type de programme conversationnel utilise l'intelligence artificielle pour répondre en langage naturel ?","answer":"un chatbot","aliases":["chatbot","agent conversationnel"]}
+  {
+    "theme": "histoire",
+    "difficulty": 3,
+    "prompt": "Quel accord signé en 1648 a mis fin à la guerre de Trente Ans ?",
+    "answer": "le traité de Westphalie",
+    "aliases": [
+      "traité de westphalie",
+      "paix de westphalie"
+    ]
+  },
+  {
+    "theme": "histoire",
+    "difficulty": 3,
+    "prompt": "Quelle famille royale française a été renversée par la Révolution de 1789 ?",
+    "answer": "les Bourbons",
+    "aliases": [
+      "bourbon",
+      "dynastie des bourbons"
+    ]
+  },
+  {
+    "theme": "histoire",
+    "difficulty": 1,
+    "prompt": "Quelle organisation internationale a été créée en 1945 pour maintenir la paix mondiale ?",
+    "answer": "les Nations unies",
+    "aliases": [
+      "ONU",
+      "organisation des nations unies"
+    ]
+  },
+  {
+    "theme": "histoire",
+    "difficulty": 2,
+    "prompt": "Quel pays a été le berceau de la révolution industrielle à la fin du XVIIIe siècle ?",
+    "answer": "l'Angleterre",
+    "aliases": [
+      "angleterre",
+      "le royaume-uni",
+      "royaume-uni"
+    ]
+  },
+  {
+    "theme": "histoire",
+    "difficulty": 3,
+    "prompt": "Quel explorateur norvégien a été le premier à atteindre le pôle Sud, en 1911 ?",
+    "answer": "Roald Amundsen",
+    "aliases": [
+      "amundsen"
+    ]
+  },
+  {
+    "theme": "histoire",
+    "difficulty": 1,
+    "prompt": "Comment appelle-t-on l'événement de 2001 qui a visé les tours jumelles de New York ?",
+    "answer": "les attentats du 11 septembre",
+    "aliases": [
+      "attentats du world trade center",
+      "11 septembre"
+    ]
+  },
+  {
+    "theme": "histoire",
+    "difficulty": 2,
+    "prompt": "Quel roi anglais a rompu avec l'Église catholique pour créer l'Église anglicane ?",
+    "answer": "Henri VIII",
+    "aliases": [
+      "henri 8",
+      "henry viii"
+    ]
+  },
+  {
+    "theme": "histoire",
+    "difficulty": 2,
+    "prompt": "Quelle civilisation précolombienne a construit le site du Machu Picchu ?",
+    "answer": "les Incas",
+    "aliases": [
+      "incas",
+      "civilisation inca"
+    ]
+  },
+  {
+    "theme": "histoire",
+    "difficulty": 3,
+    "prompt": "Quel document fondateur des droits, signé en Angleterre en 1215, limite le pouvoir royal ?",
+    "answer": "la Magna Carta",
+    "aliases": [
+      "magna carta",
+      "la grande charte"
+    ]
+  },
+  {
+    "theme": "histoire",
+    "difficulty": 2,
+    "prompt": "Quel conflit a opposé la France et l'Angleterre de 1337 à 1453 ?",
+    "answer": "la guerre de Cent Ans",
+    "aliases": [
+      "guerre de cent ans"
+    ]
+  },
+  {
+    "theme": "histoire",
+    "difficulty": 1,
+    "prompt": "Quelle jeune femme a mené l'armée française contre les Anglais durant la guerre de Cent Ans ?",
+    "answer": "Jeanne d'Arc",
+    "aliases": [
+      "jeanne d arc",
+      "jeanne darc"
+    ]
+  },
+  {
+    "theme": "histoire",
+    "difficulty": 2,
+    "prompt": "Quel vaste territoire dirigé par Gengis Khan fut le plus grand d'un seul tenant de l'histoire ?",
+    "answer": "l'Empire mongol",
+    "aliases": [
+      "empire mongol"
+    ]
+  },
+  {
+    "theme": "histoire",
+    "difficulty": 2,
+    "prompt": "Quelle crise économique mondiale a débuté avec le krach boursier de 1929 ?",
+    "answer": "la Grande Dépression",
+    "aliases": [
+      "grande dépression",
+      "krach de 1929"
+    ]
+  },
+  {
+    "theme": "histoire",
+    "difficulty": 1,
+    "prompt": "Quel mouvement social et étudiant a marqué la France en mai 1968 ?",
+    "answer": "Mai 68",
+    "aliases": [
+      "mai 1968"
+    ]
+  },
+  {
+    "theme": "histoire",
+    "difficulty": 2,
+    "prompt": "Quel explorateur italien a rapporté ses voyages en Asie dans 'Le Livre des merveilles' ?",
+    "answer": "Marco Polo",
+    "aliases": [
+      "marco polo"
+    ]
+  },
+  {
+    "theme": "geo",
+    "difficulty": 1,
+    "prompt": "Quelle est la capitale de la Grèce ?",
+    "answer": "Athènes",
+    "aliases": [
+      "athenes"
+    ]
+  },
+  {
+    "theme": "geo",
+    "difficulty": 3,
+    "prompt": "Quel est le plus grand pays d'Afrique par la superficie ?",
+    "answer": "l'Algérie",
+    "aliases": [
+      "algérie",
+      "algerie"
+    ]
+  },
+  {
+    "theme": "geo",
+    "difficulty": 1,
+    "prompt": "Quelle est la capitale de la Chine ?",
+    "answer": "Pékin",
+    "aliases": [
+      "pekin",
+      "beijing"
+    ]
+  },
+  {
+    "theme": "geo",
+    "difficulty": 2,
+    "prompt": "Quelle est la capitale de la Suisse ?",
+    "answer": "Berne",
+    "aliases": [
+      "berne"
+    ]
+  },
+  {
+    "theme": "geo",
+    "difficulty": 1,
+    "prompt": "Quel est le fleuve le plus long d'Amérique du Sud ?",
+    "answer": "l'Amazone",
+    "aliases": [
+      "amazone"
+    ]
+  },
+  {
+    "theme": "geo",
+    "difficulty": 1,
+    "prompt": "Quelle est la capitale des Pays-Bas ?",
+    "answer": "Amsterdam",
+    "aliases": [
+      "amsterdam"
+    ]
+  },
+  {
+    "theme": "geo",
+    "difficulty": 3,
+    "prompt": "Quel pays possède, avec ses territoires d'outre-mer, le plus grand nombre de fuseaux horaires au monde ?",
+    "answer": "la France",
+    "aliases": [
+      "france"
+    ]
+  },
+  {
+    "theme": "geo",
+    "difficulty": 1,
+    "prompt": "Dans quelle chaîne de montagnes se trouve le mont Everest ?",
+    "answer": "l'Himalaya",
+    "aliases": [
+      "himalaya"
+    ]
+  },
+  {
+    "theme": "geo",
+    "difficulty": 1,
+    "prompt": "Quelle est la capitale de la Suède ?",
+    "answer": "Stockholm",
+    "aliases": [
+      "stockholm"
+    ]
+  },
+  {
+    "theme": "geo",
+    "difficulty": 1,
+    "prompt": "Quel pays a pour capitale Vienne ?",
+    "answer": "l'Autriche",
+    "aliases": [
+      "autriche"
+    ]
+  },
+  {
+    "theme": "geo",
+    "difficulty": 2,
+    "prompt": "Quelle est la plus grande île du monde (hors continent australien) ?",
+    "answer": "le Groenland",
+    "aliases": [
+      "groenland"
+    ]
+  },
+  {
+    "theme": "geo",
+    "difficulty": 2,
+    "prompt": "Quel passage artificiel relie la Méditerranée à la mer Rouge ?",
+    "answer": "le canal de Suez",
+    "aliases": [
+      "canal de suez",
+      "suez"
+    ]
+  },
+  {
+    "theme": "geo",
+    "difficulty": 1,
+    "prompt": "Quelle est la capitale du Mexique ?",
+    "answer": "Mexico",
+    "aliases": [
+      "mexico city",
+      "ciudad de mexico"
+    ]
+  },
+  {
+    "theme": "geo",
+    "difficulty": 2,
+    "prompt": "Quel est le plus haut sommet des Alpes, culminant à environ 4810 mètres ?",
+    "answer": "le Mont Blanc",
+    "aliases": [
+      "mont blanc"
+    ]
+  },
+  {
+    "theme": "geo",
+    "difficulty": 2,
+    "prompt": "Quel détroit sépare l'Espagne du Maroc, entre l'Atlantique et la Méditerranée ?",
+    "answer": "le détroit de Gibraltar",
+    "aliases": [
+      "détroit de gibraltar",
+      "gibraltar"
+    ]
+  },
+  {
+    "theme": "sciences",
+    "difficulty": 1,
+    "prompt": "Quel est le symbole chimique du fer ?",
+    "answer": "Fe",
+    "aliases": []
+  },
+  {
+    "theme": "sciences",
+    "difficulty": 2,
+    "prompt": "Quelle est l'unité de mesure de la température dans le Système international ?",
+    "answer": "le kelvin",
+    "aliases": [
+      "kelvin"
+    ]
+  },
+  {
+    "theme": "sciences",
+    "difficulty": 1,
+    "prompt": "Quel organe filtre le sang pour produire l'urine ?",
+    "answer": "le rein",
+    "aliases": [
+      "rein",
+      "reins"
+    ]
+  },
+  {
+    "theme": "sciences",
+    "difficulty": 1,
+    "prompt": "Quelle est la plus grande planète du système solaire ?",
+    "answer": "Jupiter",
+    "aliases": []
+  },
+  {
+    "theme": "sciences",
+    "difficulty": 1,
+    "prompt": "Quelle scientifique a découvert la radioactivité avec son mari Pierre ?",
+    "answer": "Marie Curie",
+    "aliases": [
+      "curie"
+    ]
+  },
+  {
+    "theme": "sciences",
+    "difficulty": 1,
+    "prompt": "Quel gaz l'être humain respire-t-il principalement pour vivre ?",
+    "answer": "l'oxygène",
+    "aliases": [
+      "oxygène",
+      "oxygene"
+    ]
+  },
+  {
+    "theme": "sciences",
+    "difficulty": 3,
+    "prompt": "Quelle est la vitesse du son dans l'air, arrondie en mètres par seconde ?",
+    "answer": "340",
+    "aliases": [
+      "340 m/s",
+      "343"
+    ]
+  },
+  {
+    "theme": "sciences",
+    "difficulty": 2,
+    "prompt": "Quel type de cellule sanguine transporte l'oxygène dans le corps ?",
+    "answer": "les globules rouges",
+    "aliases": [
+      "globules rouges"
+    ]
+  },
+  {
+    "theme": "sciences",
+    "difficulty": 2,
+    "prompt": "Quel physicien britannique est célèbre pour ses travaux sur les trous noirs et le livre 'Une brève histoire du temps' ?",
+    "answer": "Stephen Hawking",
+    "aliases": [
+      "hawking"
+    ]
+  },
+  {
+    "theme": "sciences",
+    "difficulty": 2,
+    "prompt": "Combien de dents de lait un enfant possède-t-il en général ?",
+    "answer": "20",
+    "aliases": [
+      "vingt"
+    ]
+  },
+  {
+    "theme": "sciences",
+    "difficulty": 2,
+    "prompt": "Quel est le seul métal liquide à température ambiante ?",
+    "answer": "le mercure",
+    "aliases": [
+      "mercure"
+    ]
+  },
+  {
+    "theme": "sciences",
+    "difficulty": 1,
+    "prompt": "Quelle est la principale source d'énergie de la Terre ?",
+    "answer": "le Soleil",
+    "aliases": [
+      "soleil"
+    ]
+  },
+  {
+    "theme": "sciences",
+    "difficulty": 2,
+    "prompt": "Quel astre est principalement responsable des marées océaniques sur Terre ?",
+    "answer": "la Lune",
+    "aliases": [
+      "lune",
+      "attraction de la lune"
+    ]
+  },
+  {
+    "theme": "sciences",
+    "difficulty": 2,
+    "prompt": "Quelle partie de l'atmosphère nous protège des rayons ultraviolets ?",
+    "answer": "la couche d'ozone",
+    "aliases": [
+      "couche d ozone",
+      "ozone"
+    ]
+  },
+  {
+    "theme": "sciences",
+    "difficulty": 2,
+    "prompt": "Que la peau produit-elle principalement grâce au soleil ?",
+    "answer": "la vitamine D",
+    "aliases": [
+      "vitamine d"
+    ]
+  },
+  {
+    "theme": "cinema",
+    "difficulty": 2,
+    "prompt": "Quel réalisateur a créé la trilogie Retour vers le futur ?",
+    "answer": "Robert Zemeckis",
+    "aliases": [
+      "zemeckis"
+    ]
+  },
+  {
+    "theme": "cinema",
+    "difficulty": 1,
+    "prompt": "Quel acteur incarne James Bond dans les films sortis entre 2006 et 2021 ?",
+    "answer": "Daniel Craig",
+    "aliases": [
+      "craig"
+    ]
+  },
+  {
+    "theme": "cinema",
+    "difficulty": 1,
+    "prompt": "Quelle saga de films met en scène l'archéologue aventurier au chapeau et au fouet ?",
+    "answer": "Indiana Jones",
+    "aliases": [
+      "indiana jones"
+    ]
+  },
+  {
+    "theme": "cinema",
+    "difficulty": 2,
+    "prompt": "Quel réalisateur américain est connu pour Le Parrain et Apocalypse Now ?",
+    "answer": "Francis Ford Coppola",
+    "aliases": [
+      "coppola"
+    ]
+  },
+  {
+    "theme": "cinema",
+    "difficulty": 2,
+    "prompt": "Quel film de 1994 met en scène deux détenus incarnés par Tim Robbins et Morgan Freeman ?",
+    "answer": "Les Évadés",
+    "aliases": [
+      "the shawshank redemption",
+      "shawshank"
+    ]
+  },
+  {
+    "theme": "cinema",
+    "difficulty": 1,
+    "prompt": "Quel acteur incarne Jack Dawson dans Titanic ?",
+    "answer": "Leonardo DiCaprio",
+    "aliases": [
+      "dicaprio",
+      "leonardo dicaprio"
+    ]
+  },
+  {
+    "theme": "cinema",
+    "difficulty": 1,
+    "prompt": "Quel film met en scène un savant fou et sa DeLorean voyageant dans le temps ?",
+    "answer": "Retour vers le futur",
+    "aliases": [
+      "back to the future"
+    ]
+  },
+  {
+    "theme": "cinema",
+    "difficulty": 1,
+    "prompt": "Quelle actrice incarne Katniss Everdeen dans Hunger Games ?",
+    "answer": "Jennifer Lawrence",
+    "aliases": [
+      "jennifer lawrence"
+    ]
+  },
+  {
+    "theme": "cinema",
+    "difficulty": 3,
+    "prompt": "Quel réalisateur britannique a mis en scène le premier film de la saga Alien en 1979 ?",
+    "answer": "Ridley Scott",
+    "aliases": [
+      "ridley scott"
+    ]
+  },
+  {
+    "theme": "cinema",
+    "difficulty": 1,
+    "prompt": "Quel film met en scène un enfant livré à lui-même face à des cambrioleurs à Noël ?",
+    "answer": "Maman, j'ai raté l'avion",
+    "aliases": [
+      "home alone"
+    ]
+  },
+  {
+    "theme": "cinema",
+    "difficulty": 2,
+    "prompt": "Quel acteur incarne le Joker face à Christian Bale dans The Dark Knight (2008) ?",
+    "answer": "Heath Ledger",
+    "aliases": [
+      "heath ledger"
+    ]
+  },
+  {
+    "theme": "cinema",
+    "difficulty": 2,
+    "prompt": "Quel film musical de 2016 met en vedette Ryan Gosling et Emma Stone à Los Angeles ?",
+    "answer": "La La Land",
+    "aliases": [
+      "la la land"
+    ]
+  },
+  {
+    "theme": "cinema",
+    "difficulty": 3,
+    "prompt": "Quel réalisateur mexicain a remporté deux Oscars du meilleur réalisateur consécutifs pour Birdman puis The Revenant ?",
+    "answer": "Alejandro González Iñárritu",
+    "aliases": [
+      "inarritu",
+      "alejandro gonzalez inarritu"
+    ]
+  },
+  {
+    "theme": "cinema",
+    "difficulty": 1,
+    "prompt": "Quel film d'animation Pixar raconte l'histoire d'un rat devenu chef cuisinier à Paris ?",
+    "answer": "Ratatouille",
+    "aliases": [
+      "ratatouille"
+    ]
+  },
+  {
+    "theme": "cinema",
+    "difficulty": 1,
+    "prompt": "Quel super-héros Marvel manie un marteau magique nommé Mjolnir ?",
+    "answer": "Thor",
+    "aliases": [
+      "thor"
+    ]
+  },
+  {
+    "theme": "musique",
+    "difficulty": 2,
+    "prompt": "Quel groupe de rock britannique a interprété 'Another Brick in the Wall' ?",
+    "answer": "Pink Floyd",
+    "aliases": [
+      "pink floyd"
+    ]
+  },
+  {
+    "theme": "musique",
+    "difficulty": 1,
+    "prompt": "Quel groupe britannique des années 60, mené par Mick Jagger, rivalisait avec les Beatles ?",
+    "answer": "les Rolling Stones",
+    "aliases": [
+      "rolling stones"
+    ]
+  },
+  {
+    "theme": "musique",
+    "difficulty": 1,
+    "prompt": "Quel chanteur britannique interprète 'Shape of You' ?",
+    "answer": "Ed Sheeran",
+    "aliases": [
+      "ed sheeran"
+    ]
+  },
+  {
+    "theme": "musique",
+    "difficulty": 1,
+    "prompt": "Quelle chanteuse américaine est surnommée 'Queen Bey' ?",
+    "answer": "Beyoncé",
+    "aliases": [
+      "beyonce"
+    ]
+  },
+  {
+    "theme": "musique",
+    "difficulty": 2,
+    "prompt": "Quel compositeur russe a écrit le ballet 'Casse-Noisette' ?",
+    "answer": "Tchaïkovski",
+    "aliases": [
+      "tchaikovski",
+      "piotr ilitch tchaikovski"
+    ]
+  },
+  {
+    "theme": "musique",
+    "difficulty": 3,
+    "prompt": "Quel rappeur français est connu pour l'album 'Ouest Side' et 'Or noir' ?",
+    "answer": "Booba",
+    "aliases": [
+      "booba"
+    ]
+  },
+  {
+    "theme": "musique",
+    "difficulty": 2,
+    "prompt": "Quel groupe de rock américain a interprété 'Hotel California' ?",
+    "answer": "Eagles",
+    "aliases": [
+      "les eagles",
+      "the eagles"
+    ]
+  },
+  {
+    "theme": "musique",
+    "difficulty": 3,
+    "prompt": "Quelle chanteuse islandaise est connue pour son style expérimental et le tube 'It's Oh So Quiet' ?",
+    "answer": "Björk",
+    "aliases": [
+      "bjork"
+    ]
+  },
+  {
+    "theme": "musique",
+    "difficulty": 2,
+    "prompt": "Quel DJ néerlandais, connu pour 'Levels', est décédé en 2018 ?",
+    "answer": "Avicii",
+    "aliases": [
+      "avicii"
+    ]
+  },
+  {
+    "theme": "musique",
+    "difficulty": 2,
+    "prompt": "Dans quel pays se déroule chaque année le festival de musique électronique Tomorrowland ?",
+    "answer": "la Belgique",
+    "aliases": [
+      "belgique"
+    ]
+  },
+  {
+    "theme": "musique",
+    "difficulty": 2,
+    "prompt": "Quel chanteur est le leader du groupe Coldplay ?",
+    "answer": "Chris Martin",
+    "aliases": [
+      "chris martin"
+    ]
+  },
+  {
+    "theme": "musique",
+    "difficulty": 1,
+    "prompt": "Quel genre musical est né dans le Bronx à New York dans les années 1970 ?",
+    "answer": "le hip-hop",
+    "aliases": [
+      "hip hop",
+      "hip-hop"
+    ]
+  },
+  {
+    "theme": "musique",
+    "difficulty": 2,
+    "prompt": "Quel est l'instrument à cordes frottées le plus grave d'un orchestre classique ?",
+    "answer": "la contrebasse",
+    "aliases": [
+      "contrebasse"
+    ]
+  },
+  {
+    "theme": "musique",
+    "difficulty": 3,
+    "prompt": "Quel compositeur allemand est l'auteur de l'opéra-fleuve 'L'Anneau du Nibelung' et de 'La Chevauchée des Walkyries' ?",
+    "answer": "Richard Wagner",
+    "aliases": [
+      "wagner"
+    ]
+  },
+  {
+    "theme": "musique",
+    "difficulty": 2,
+    "prompt": "Quel groupe de reggae jamaïcain était mené par Bob Marley ?",
+    "answer": "The Wailers",
+    "aliases": [
+      "wailers"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel studio japonais a développé la série de jeux Metal Gear Solid ?",
+    "answer": "Konami",
+    "aliases": [
+      "konami"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel jeu vidéo culte met en scène une chasseuse de primes appelée Samus Aran ?",
+    "answer": "Metroid",
+    "aliases": [
+      "metroid"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel jeu vidéo d'horreur se déroule dans une cité sous-marine dystopique appelée Rapture ?",
+    "answer": "BioShock",
+    "aliases": [
+      "bioshock"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quelle entreprise développe et édite le jeu League of Legends ?",
+    "answer": "Riot Games",
+    "aliases": [
+      "riot games",
+      "riot"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quelle série de jeux de combat oppose des ninjas comme Scorpion et Sub-Zero ?",
+    "answer": "Mortal Kombat",
+    "aliases": [
+      "mortal kombat"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quel jeu vidéo bac à sable permet de construire ses propres mondes et d'y jouer avec d'autres ?",
+    "answer": "Roblox",
+    "aliases": [
+      "roblox"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quelle entreprise a créé la console portable Game Boy en 1989 ?",
+    "answer": "Nintendo",
+    "aliases": [
+      "nintendo"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Sur quelle carte emblématique se joue la majorité des parties classées de League of Legends ?",
+    "answer": "Summoner's Rift",
+    "aliases": [
+      "la faille de l invocateur",
+      "faille de l'invocateur"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel jeu de rôle et d'action met en scène le sorceleur Geralt de Riv ?",
+    "answer": "The Witcher",
+    "aliases": [
+      "witcher"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel jeu indépendant de simulation de ferme, sorti en 2016, a été développé par une seule personne ?",
+    "answer": "Stardew Valley",
+    "aliases": [
+      "harvest moon"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quel jeu vidéo culte des années 80 met en scène un personnage jaune qui mange des pac-gommes en évitant des fantômes ?",
+    "answer": "Pac-Man",
+    "aliases": [
+      "pacman",
+      "pac man"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel jeu vidéo de rôle japonais met en scène un groupe de héros affrontant le antagoniste Sephiroth ?",
+    "answer": "Final Fantasy VII",
+    "aliases": [
+      "final fantasy 7",
+      "ff7"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quelle console de Sony est sortie en 2020, succédant à la PS4 ?",
+    "answer": "la PlayStation 5",
+    "aliases": [
+      "ps5",
+      "playstation 5"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel jeu multijoueur en ligne, sorti avant Fortnite, oppose des joueurs sur une île qui rétrécit progressivement ?",
+    "answer": "PUBG",
+    "aliases": [
+      "playerunknown's battlegrounds",
+      "player unknown's battlegrounds"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quel personnage emblématique de Nintendo est un dinosaure vert compagnon de Mario ?",
+    "answer": "Yoshi",
+    "aliases": [
+      "yoshi"
+    ]
+  },
+  {
+    "theme": "sport",
+    "difficulty": 2,
+    "prompt": "Combien faut-il marquer en général pour gagner un set de volley-ball, avec deux d'écart ?",
+    "answer": "25 points",
+    "aliases": [
+      "25"
+    ]
+  },
+  {
+    "theme": "sport",
+    "difficulty": 1,
+    "prompt": "Combien de joueurs compose une équipe de handball sur le terrain ?",
+    "answer": "7",
+    "aliases": [
+      "sept"
+    ]
+  },
+  {
+    "theme": "sport",
+    "difficulty": 1,
+    "prompt": "Dans quel sport la France a-t-elle remporté la Coupe du monde en 1998, à domicile ?",
+    "answer": "le football",
+    "aliases": [
+      "football"
+    ]
+  },
+  {
+    "theme": "sport",
+    "difficulty": 2,
+    "prompt": "Quelle est la distance officielle d'un marathon ?",
+    "answer": "42,195 km",
+    "aliases": [
+      "42 km",
+      "42195 m",
+      "42,2 km"
+    ]
+  },
+  {
+    "theme": "sport",
+    "difficulty": 1,
+    "prompt": "Quel sport de combat se pratique sur un ring avec des gants et des rounds ?",
+    "answer": "la boxe",
+    "aliases": [
+      "boxe"
+    ]
+  },
+  {
+    "theme": "sport",
+    "difficulty": 2,
+    "prompt": "Quel pilote allemand a remporté 7 titres de champion du monde de Formule 1 ?",
+    "answer": "Michael Schumacher",
+    "aliases": [
+      "schumacher",
+      "lewis hamilton"
+    ]
+  },
+  {
+    "theme": "sport",
+    "difficulty": 1,
+    "prompt": "Quel sport olympique se pratique sur une plaque avec de petites raquettes et une balle légère ?",
+    "answer": "le tennis de table",
+    "aliases": [
+      "ping-pong",
+      "ping pong"
+    ]
+  },
+  {
+    "theme": "sport",
+    "difficulty": 2,
+    "prompt": "Quel pays a organisé les premiers Jeux olympiques modernes, en 1896 ?",
+    "answer": "la Grèce",
+    "aliases": [
+      "grèce",
+      "grece"
+    ]
+  },
+  {
+    "theme": "sport",
+    "difficulty": 2,
+    "prompt": "Quel sport se pratique debout sur une planche, tracté par un bateau ?",
+    "answer": "le ski nautique",
+    "aliases": [
+      "ski nautique"
+    ]
+  },
+  {
+    "theme": "sport",
+    "difficulty": 1,
+    "prompt": "Combien de trous compte un parcours de golf standard ?",
+    "answer": "18",
+    "aliases": [
+      "dix-huit"
+    ]
+  },
+  {
+    "theme": "sport",
+    "difficulty": 3,
+    "prompt": "Quel pays domine historiquement le cricket international, avec l'Angleterre et l'Australie ?",
+    "answer": "l'Inde",
+    "aliases": [
+      "inde"
+    ]
+  },
+  {
+    "theme": "sport",
+    "difficulty": 2,
+    "prompt": "Quel événement cycliste italien est l'équivalent du Tour de France ?",
+    "answer": "le Giro",
+    "aliases": [
+      "giro",
+      "tour d'italie"
+    ]
+  },
+  {
+    "theme": "sport",
+    "difficulty": 1,
+    "prompt": "Quel pays a accueilli la Coupe du monde de football 2022 ?",
+    "answer": "le Qatar",
+    "aliases": [
+      "qatar"
+    ]
+  },
+  {
+    "theme": "sport",
+    "difficulty": 2,
+    "prompt": "Quel sport de combat est surnommé 'le noble art' ?",
+    "answer": "la boxe",
+    "aliases": [
+      "boxe"
+    ]
+  },
+  {
+    "theme": "sport",
+    "difficulty": 1,
+    "prompt": "Dans quel sport marque-t-on des paniers à 3 points derrière une ligne ?",
+    "answer": "le basketball",
+    "aliases": [
+      "basket",
+      "basket-ball"
+    ]
+  },
+  {
+    "theme": "insolite",
+    "difficulty": 2,
+    "prompt": "Quel oiseau de proie est l'animal le plus rapide au monde en piqué, dépassant 300 km/h ?",
+    "answer": "le faucon pèlerin",
+    "aliases": [
+      "faucon pèlerin",
+      "faucon pelerin"
+    ]
+  },
+  {
+    "theme": "insolite",
+    "difficulty": 2,
+    "prompt": "Environ quel pourcentage du corps humain adulte est composé d'eau ?",
+    "answer": "60%",
+    "aliases": [
+      "60",
+      "environ 60%"
+    ]
+  },
+  {
+    "theme": "insolite",
+    "difficulty": 3,
+    "prompt": "Quelle espèce tropicale des récifs est capable de changer de sexe au cours de sa vie ?",
+    "answer": "le poisson-clown",
+    "aliases": [
+      "poisson clown"
+    ]
+  },
+  {
+    "theme": "insolite",
+    "difficulty": 1,
+    "prompt": "Quel insecte est capable de soulever plusieurs fois son propre poids ?",
+    "answer": "la fourmi",
+    "aliases": [
+      "fourmi"
+    ]
+  },
+  {
+    "theme": "insolite",
+    "difficulty": 3,
+    "prompt": "Quel fruit jaune est botaniquement classé comme une baie, contrairement à la fraise ?",
+    "answer": "la banane",
+    "aliases": [
+      "banane"
+    ]
+  },
+  {
+    "theme": "insolite",
+    "difficulty": 3,
+    "prompt": "Quelle capitale nationale est la plus septentrionale (la plus au nord) du monde ?",
+    "answer": "Reykjavik",
+    "aliases": [
+      "reykjavik"
+    ]
+  },
+  {
+    "theme": "insolite",
+    "difficulty": 1,
+    "prompt": "Quel reptile est capable de faire repousser sa queue si elle est coupée ?",
+    "answer": "le lézard",
+    "aliases": [
+      "lézard",
+      "lezard"
+    ]
+  },
+  {
+    "theme": "insolite",
+    "difficulty": 2,
+    "prompt": "Quel est le seul mammifère capable de voler activement (et non simplement planer) ?",
+    "answer": "la chauve-souris",
+    "aliases": [
+      "chauve-souris",
+      "chauve souris"
+    ]
+  },
+  {
+    "theme": "insolite",
+    "difficulty": 1,
+    "prompt": "Quelle est la monnaie commune à vingt pays de l'Union européenne ?",
+    "answer": "l'euro",
+    "aliases": [
+      "euro"
+    ]
+  },
+  {
+    "theme": "insolite",
+    "difficulty": 2,
+    "prompt": "Quel phénomène lumineux naturel colore le ciel polaire de vert ou de rose la nuit ?",
+    "answer": "l'aurore boréale",
+    "aliases": [
+      "aurore boréale",
+      "aurore boreale"
+    ]
+  },
+  {
+    "theme": "insolite",
+    "difficulty": 1,
+    "prompt": "Quel est le plus grand oiseau vivant, incapable de voler ?",
+    "answer": "l'autruche",
+    "aliases": [
+      "autruche"
+    ]
+  },
+  {
+    "theme": "insolite",
+    "difficulty": 3,
+    "prompt": "Quelle planète du système solaire tourne 'sur le côté', avec un axe de rotation très incliné ?",
+    "answer": "Uranus",
+    "aliases": [
+      "uranus"
+    ]
+  },
+  {
+    "theme": "insolite",
+    "difficulty": 3,
+    "prompt": "Quel métal, utilisé dans les filaments d'ampoules, a le point de fusion le plus élevé de tous les métaux ?",
+    "answer": "le tungstène",
+    "aliases": [
+      "tungstène",
+      "tungstene"
+    ]
+  },
+  {
+    "theme": "insolite",
+    "difficulty": 1,
+    "prompt": "En combien de temps la Terre effectue-t-elle un tour complet sur elle-même ?",
+    "answer": "24 heures",
+    "aliases": [
+      "24h",
+      "24"
+    ]
+  },
+  {
+    "theme": "insolite",
+    "difficulty": 2,
+    "prompt": "Quel crustacé marche généralement de travers, sur le côté ?",
+    "answer": "le crabe",
+    "aliases": [
+      "crabe"
+    ]
+  },
+  {
+    "theme": "litterature",
+    "difficulty": 1,
+    "prompt": "Quel écrivain français est l'auteur des 'Misérables' ?",
+    "answer": "Victor Hugo",
+    "aliases": [
+      "victor hugo"
+    ]
+  },
+  {
+    "theme": "litterature",
+    "difficulty": 1,
+    "prompt": "Quelle autrice britannique a créé le magicien Harry Potter ?",
+    "answer": "J.K. Rowling",
+    "aliases": [
+      "jk rowling",
+      "j.k. rowling",
+      "rowling"
+    ]
+  },
+  {
+    "theme": "litterature",
+    "difficulty": 2,
+    "prompt": "Quel écrivain russe a écrit 'Guerre et Paix' ?",
+    "answer": "Léon Tolstoï",
+    "aliases": [
+      "tolstoi",
+      "tolstoï",
+      "leon tolstoi"
+    ]
+  },
+  {
+    "theme": "litterature",
+    "difficulty": 2,
+    "prompt": "Quel poète français est l'auteur du recueil 'Les Fleurs du mal' ?",
+    "answer": "Charles Baudelaire",
+    "aliases": [
+      "baudelaire"
+    ]
+  },
+  {
+    "theme": "litterature",
+    "difficulty": 1,
+    "prompt": "Quel dramaturge anglais a écrit 'Roméo et Juliette' ?",
+    "answer": "William Shakespeare",
+    "aliases": [
+      "shakespeare"
+    ]
+  },
+  {
+    "theme": "litterature",
+    "difficulty": 2,
+    "prompt": "Quel écrivain français a créé le personnage du gentleman-cambrioleur Arsène Lupin ?",
+    "answer": "Maurice Leblanc",
+    "aliases": [
+      "leblanc",
+      "maurice leblanc"
+    ]
+  },
+  {
+    "theme": "litterature",
+    "difficulty": 2,
+    "prompt": "Quel auteur américain a écrit 'Le Vieil Homme et la Mer' ?",
+    "answer": "Ernest Hemingway",
+    "aliases": [
+      "hemingway"
+    ]
+  },
+  {
+    "theme": "litterature",
+    "difficulty": 1,
+    "prompt": "Quel écrivain français est l'auteur de 'Le Petit Prince' ?",
+    "answer": "Antoine de Saint-Exupéry",
+    "aliases": [
+      "saint-exupéry",
+      "saint exupery"
+    ]
+  },
+  {
+    "theme": "litterature",
+    "difficulty": 1,
+    "prompt": "Quelle saga littéraire de J.R.R. Tolkien met en scène la Terre du Milieu ?",
+    "answer": "Le Seigneur des Anneaux",
+    "aliases": [
+      "seigneur des anneaux"
+    ]
+  },
+  {
+    "theme": "litterature",
+    "difficulty": 3,
+    "prompt": "Quel écrivain colombien a écrit 'Cent ans de solitude' ?",
+    "answer": "Gabriel García Márquez",
+    "aliases": [
+      "garcia marquez",
+      "gabriel garcia marquez"
+    ]
+  },
+  {
+    "theme": "litterature",
+    "difficulty": 1,
+    "prompt": "Quel détective anglais, expert en déduction, a été créé par Arthur Conan Doyle ?",
+    "answer": "Sherlock Holmes",
+    "aliases": [
+      "sherlock holmes",
+      "sherlock"
+    ]
+  },
+  {
+    "theme": "litterature",
+    "difficulty": 2,
+    "prompt": "Quelle autrice britannique a créé le détective belge Hercule Poirot ?",
+    "answer": "Agatha Christie",
+    "aliases": [
+      "agatha christie"
+    ]
+  },
+  {
+    "theme": "litterature",
+    "difficulty": 2,
+    "prompt": "Quel écrivain français du XIXe siècle est l'auteur de 'Le Comte de Monte-Cristo' ?",
+    "answer": "Alexandre Dumas",
+    "aliases": [
+      "dumas",
+      "alexandre dumas"
+    ]
+  },
+  {
+    "theme": "litterature",
+    "difficulty": 2,
+    "prompt": "Quel roman dystopique de George Orwell met en scène la figure de 'Big Brother' ?",
+    "answer": "1984",
+    "aliases": [
+      "mille neuf cent quatre-vingt-quatre"
+    ]
+  },
+  {
+    "theme": "litterature",
+    "difficulty": 3,
+    "prompt": "Quel écrivain français est l'auteur de 'À la recherche du temps perdu' ?",
+    "answer": "Marcel Proust",
+    "aliases": [
+      "proust",
+      "marcel proust"
+    ]
+  },
+  {
+    "theme": "litterature",
+    "difficulty": 3,
+    "prompt": "En quelle langue Dante a-t-il écrit 'La Divine Comédie' ?",
+    "answer": "l'italien",
+    "aliases": [
+      "italien"
+    ]
+  },
+  {
+    "theme": "litterature",
+    "difficulty": 2,
+    "prompt": "Quel auteur américain a écrit la saga 'Le Trône de fer', adaptée en série Game of Thrones ?",
+    "answer": "George R.R. Martin",
+    "aliases": [
+      "george rr martin",
+      "grrm"
+    ]
+  },
+  {
+    "theme": "litterature",
+    "difficulty": 2,
+    "prompt": "Quel philosophe français est l'auteur de la phrase 'Je pense donc je suis' ?",
+    "answer": "René Descartes",
+    "aliases": [
+      "descartes"
+    ]
+  },
+  {
+    "theme": "litterature",
+    "difficulty": 3,
+    "prompt": "Quel dramaturge français a créé le personnage de Cyrano de Bergerac au théâtre ?",
+    "answer": "Edmond Rostand",
+    "aliases": [
+      "rostand",
+      "edmond rostand"
+    ]
+  },
+  {
+    "theme": "litterature",
+    "difficulty": 2,
+    "prompt": "Quelle autrice britannique a écrit 'Orgueil et Préjugés' ?",
+    "answer": "Jane Austen",
+    "aliases": [
+      "jane austen"
+    ]
+  },
+  {
+    "theme": "technologie",
+    "difficulty": 1,
+    "prompt": "Quelle entreprise a créé le smartphone iPhone ?",
+    "answer": "Apple",
+    "aliases": [
+      "apple"
+    ]
+  },
+  {
+    "theme": "technologie",
+    "difficulty": 1,
+    "prompt": "Qui a fondé l'entreprise Microsoft ?",
+    "answer": "Bill Gates",
+    "aliases": [
+      "bill gates"
+    ]
+  },
+  {
+    "theme": "technologie",
+    "difficulty": 2,
+    "prompt": "Que signifie le sigle 'WWW' utilisé dans les adresses web ?",
+    "answer": "World Wide Web",
+    "aliases": [
+      "world wide web"
+    ]
+  },
+  {
+    "theme": "technologie",
+    "difficulty": 1,
+    "prompt": "Quel réseau social a été fondé par Mark Zuckerberg en 2004 ?",
+    "answer": "Facebook",
+    "aliases": [
+      "facebook"
+    ]
+  },
+  {
+    "theme": "technologie",
+    "difficulty": 1,
+    "prompt": "Quelle entreprise a développé le système d'exploitation mobile Android ?",
+    "answer": "Google",
+    "aliases": [
+      "google"
+    ]
+  },
+  {
+    "theme": "technologie",
+    "difficulty": 1,
+    "prompt": "Que signifie l'acronyme 'IA' en informatique ?",
+    "answer": "intelligence artificielle",
+    "aliases": [
+      "ia"
+    ]
+  },
+  {
+    "theme": "technologie",
+    "difficulty": 2,
+    "prompt": "Quel langage de programmation, créé en 1991, doit son nom à un serpent (ou à une troupe comique britannique) ?",
+    "answer": "Python",
+    "aliases": [
+      "python"
+    ]
+  },
+  {
+    "theme": "technologie",
+    "difficulty": 2,
+    "prompt": "Quelle entreprise fabrique les processeurs Ryzen, concurrents d'Intel ?",
+    "answer": "AMD",
+    "aliases": [
+      "amd"
+    ]
+  },
+  {
+    "theme": "technologie",
+    "difficulty": 1,
+    "prompt": "Quel est le nom du navigateur web développé par Google ?",
+    "answer": "Chrome",
+    "aliases": [
+      "google chrome"
+    ]
+  },
+  {
+    "theme": "technologie",
+    "difficulty": 2,
+    "prompt": "Quelle entreprise a lancé la 2600, l'une des premières consoles de jeu grand public ?",
+    "answer": "Atari",
+    "aliases": [
+      "atari"
+    ]
+  },
+  {
+    "theme": "technologie",
+    "difficulty": 2,
+    "prompt": "Que signifie l'acronyme 'USB' ?",
+    "answer": "Universal Serial Bus",
+    "aliases": [
+      "universal serial bus"
+    ]
+  },
+  {
+    "theme": "technologie",
+    "difficulty": 1,
+    "prompt": "Quel entrepreneur a fondé SpaceX et dirige aussi Tesla ?",
+    "answer": "Elon Musk",
+    "aliases": [
+      "elon musk"
+    ]
+  },
+  {
+    "theme": "technologie",
+    "difficulty": 1,
+    "prompt": "Quel service de streaming vidéo, où l'on peut publier ses propres vidéos, appartient à Google ?",
+    "answer": "YouTube",
+    "aliases": [
+      "youtube"
+    ]
+  },
+  {
+    "theme": "technologie",
+    "difficulty": 2,
+    "prompt": "Quel type de mémoire informatique perd toutes ses données quand l'ordinateur s'éteint ?",
+    "answer": "la RAM",
+    "aliases": [
+      "ram",
+      "mémoire vive"
+    ]
+  },
+  {
+    "theme": "technologie",
+    "difficulty": 2,
+    "prompt": "Qui a racheté le réseau social Twitter en 2022 et l'a rebaptisé X ?",
+    "answer": "Elon Musk",
+    "aliases": [
+      "elon musk"
+    ]
+  },
+  {
+    "theme": "technologie",
+    "difficulty": 2,
+    "prompt": "Quel format d'image très utilisé sur le web correspond à l'extension de fichier '.jpg' ?",
+    "answer": "JPEG",
+    "aliases": [
+      "jpeg",
+      "jpg"
+    ]
+  },
+  {
+    "theme": "technologie",
+    "difficulty": 3,
+    "prompt": "Quel protocole sécurisé, signalé par un cadenas dans le navigateur, protège les échanges avec un site web ?",
+    "answer": "HTTPS",
+    "aliases": [
+      "https"
+    ]
+  },
+  {
+    "theme": "technologie",
+    "difficulty": 2,
+    "prompt": "Quelle entreprise chinoise a développé l'application TikTok ?",
+    "answer": "ByteDance",
+    "aliases": [
+      "bytedance"
+    ]
+  },
+  {
+    "theme": "technologie",
+    "difficulty": 3,
+    "prompt": "Quel inventeur britannique est crédité de la création du World Wide Web en 1989 ?",
+    "answer": "Tim Berners-Lee",
+    "aliases": [
+      "tim berners-lee",
+      "berners-lee"
+    ]
+  },
+  {
+    "theme": "technologie",
+    "difficulty": 1,
+    "prompt": "Quel type de programme conversationnel utilise l'intelligence artificielle pour répondre en langage naturel ?",
+    "answer": "un chatbot",
+    "aliases": [
+      "chatbot",
+      "agent conversationnel"
+    ]
+  }
 ]

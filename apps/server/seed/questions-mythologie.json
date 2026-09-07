@@ -1,0 +1,846 @@
+[
+  {
+    "theme": "mythologie",
+    "difficulty": 1,
+    "prompt": "Qui règne sur l'Olympe et lance la foudre ?",
+    "answer": "Zeus",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 1,
+    "prompt": "Quel dieu grec règne sur les mers avec un trident ?",
+    "answer": "Poséidon",
+    "aliases": [
+      "Poseidon"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 1,
+    "prompt": "Quel dieu grec règne sur le monde des morts ?",
+    "answer": "Hadès",
+    "aliases": [
+      "Hades"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 1,
+    "prompt": "Quelle déesse grecque est celle de l'amour et de la beauté ?",
+    "answer": "Aphrodite",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 1,
+    "prompt": "Quel dieu grec de la guerre est le fils de Zeus et Héra ?",
+    "answer": "Arès",
+    "aliases": [
+      "Ares"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 1,
+    "prompt": "Quelle déesse grecque de la sagesse est née de la tête de Zeus ?",
+    "answer": "Athéna",
+    "aliases": [
+      "Athena"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 1,
+    "prompt": "Quel héros grec devait accomplir douze travaux ?",
+    "answer": "Héraclès",
+    "aliases": [
+      "Hercule",
+      "Heracles"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 1,
+    "prompt": "Quelle créature grecque a un corps d'homme et une tête de taureau ?",
+    "answer": "le Minotaure",
+    "aliases": [
+      "Minotaure"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 1,
+    "prompt": "Quelle créature grecque change en pierre ceux qui la regardent ?",
+    "answer": "Méduse",
+    "aliases": [
+      "Meduse",
+      "la Gorgone"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 1,
+    "prompt": "Quel cheval ailé est né du sang de Méduse ?",
+    "answer": "Pégase",
+    "aliases": [
+      "Pegase"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 1,
+    "prompt": "Quel dieu nordique manie le marteau Mjöllnir ?",
+    "answer": "Thor",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 1,
+    "prompt": "Quel dieu nordique borgne règne sur Asgard ?",
+    "answer": "Odin",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 1,
+    "prompt": "Quel dieu nordique est le trompeur, père de plusieurs monstres ?",
+    "answer": "Loki",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 1,
+    "prompt": "Comment s'appelle le marteau de Thor ?",
+    "answer": "Mjöllnir",
+    "aliases": [
+      "Mjolnir"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 1,
+    "prompt": "Comment appelle-t-on le royaume des dieux dans la mythologie nordique ?",
+    "answer": "Asgard",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 1,
+    "prompt": "Quelle divinité égyptienne à tête de faucon est associée au ciel ?",
+    "answer": "Horus",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 1,
+    "prompt": "Quel dieu égyptien du soleil est la divinité principale de l'ancienne Égypte ?",
+    "answer": "Rê",
+    "aliases": [
+      "Ra",
+      "Re"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 1,
+    "prompt": "Quel dieu égyptien à tête de chacal accompagne les morts ?",
+    "answer": "Anubis",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Quel dieu grec est le messager, chaussé de sandales ailées ?",
+    "answer": "Hermès",
+    "aliases": [
+      "Hermes"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Quel dieu grec forgeron est boiteux et travaille dans un volcan ?",
+    "answer": "Héphaïstos",
+    "aliases": [
+      "Hephaistos",
+      "Hephaïstos"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Quelle déesse grecque est la sœur jumelle d'Apollon, protectrice de la chasse ?",
+    "answer": "Artémis",
+    "aliases": [
+      "Artemis"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Quel dieu grec est celui de la lumière, de la musique et des oracles ?",
+    "answer": "Apollon",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Quel dieu grec du vin et de la fête a donné son nom au théâtre ?",
+    "answer": "Dionysos",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Quelle déesse grecque est l'épouse de Zeus, protectrice du mariage ?",
+    "answer": "Héra",
+    "aliases": [
+      "Hera"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Quelle déesse grecque des moissons cherche sa fille enlevée aux Enfers ?",
+    "answer": "Déméter",
+    "aliases": [
+      "Demeter"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Quelle fille de Déméter passe une partie de l'année sous terre ?",
+    "answer": "Perséphone",
+    "aliases": [
+      "Persephone"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Quel héros grec a tué le Minotaure grâce au fil d'Ariane ?",
+    "answer": "Thésée",
+    "aliases": [
+      "Thesee"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Quel héros grec a tranché la tête de Méduse ?",
+    "answer": "Persée",
+    "aliases": [
+      "Persee"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Quel roi de Crète a fait construire le Labyrinthe ?",
+    "answer": "Minos",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Quel architecte a conçu le Labyrinthe et des ailes de cire pour s'enfuir ?",
+    "answer": "Dédale",
+    "aliases": [
+      "Dedale"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Quel fils de Dédale est mort en volant trop près du soleil ?",
+    "answer": "Icare",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Quel héros grec a mis dix ans à rentrer chez lui après la guerre de Troie ?",
+    "answer": "Ulysse",
+    "aliases": [
+      "Odysseus"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Quelle épouse d'Ulysse défaisait chaque nuit son ouvrage pour repousser ses prétendants ?",
+    "answer": "Pénélope",
+    "aliases": [
+      "Penelope"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Quel guerrier grec n'était vulnérable qu'au talon ?",
+    "answer": "Achille",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Quel prince troyen a tué Achille d'une flèche ?",
+    "answer": "Pâris",
+    "aliases": [
+      "Paris"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Quelle femme, enlevée par Pâris, a déclenché la guerre de Troie ?",
+    "answer": "Hélène",
+    "aliases": [
+      "Helene",
+      "Hélène de Troie"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Par quelle ruse les Grecs sont-ils entrés dans la cité assiégée ?",
+    "answer": "le cheval de Troie",
+    "aliases": [
+      "cheval de Troie",
+      "un cheval de bois"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Quel chien à trois têtes garde l'entrée des Enfers grecs ?",
+    "answer": "Cerbère",
+    "aliases": [
+      "Cerbere"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Quel serpent à plusieurs têtes repousse deux têtes pour chacune tranchée ?",
+    "answer": "l'Hydre de Lerne",
+    "aliases": [
+      "Hydre de Lerne",
+      "l'hydre"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Quel batelier fait traverser le Styx aux morts contre une obole ?",
+    "answer": "Charon",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Quel loup gigantesque doit dévorer Odin lors du Ragnarök ?",
+    "answer": "Fenrir",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Comment appelle-t-on la fin du monde dans la mythologie nordique ?",
+    "answer": "le Ragnarök",
+    "aliases": [
+      "Ragnarök",
+      "Ragnarok"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle le grand frêne qui relie les mondes chez les Nordiques ?",
+    "answer": "Yggdrasil",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Où les guerriers nordiques morts au combat sont-ils accueillis ?",
+    "answer": "au Valhalla",
+    "aliases": [
+      "Valhalla",
+      "le Valhalla"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Comment appelle-t-on les vierges guerrières qui emmènent les morts au Valhalla ?",
+    "answer": "les Valkyries",
+    "aliases": [
+      "Valkyries",
+      "walkyries"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Quel dieu égyptien de l'au-delà a été découpé par son frère puis reconstitué ?",
+    "answer": "Osiris",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Quelle déesse égyptienne, épouse d'Osiris, l'a ramené à la vie ?",
+    "answer": "Isis",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Quel dieu égyptien du chaos a assassiné son frère Osiris ?",
+    "answer": "Seth",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quel Titan a été condamné à porter la voûte céleste sur ses épaules ?",
+    "answer": "Atlas",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quel Titan a volé le feu aux dieux pour le donner aux hommes ?",
+    "answer": "Prométhée",
+    "aliases": [
+      "Promethee"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quel supplice Prométhée a-t-il subi, enchaîné à un rocher ?",
+    "answer": "un aigle lui dévorait le foie",
+    "aliases": [
+      "un aigle lui mangeait le foie",
+      "un aigle"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quel père de Zeus dévorait ses enfants à leur naissance ?",
+    "answer": "Cronos",
+    "aliases": [
+      "Kronos",
+      "Chronos"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on la génération divine qui a précédé les Olympiens ?",
+    "answer": "les Titans",
+    "aliases": [
+      "Titans"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Combien de divinités siègent traditionnellement sur l'Olympe ?",
+    "answer": "12",
+    "aliases": [
+      "douze"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quelle première femme a ouvert une boîte libérant tous les maux ?",
+    "answer": "Pandore",
+    "aliases": [
+      "Pandora"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Que restait-il au fond de la boîte de Pandore ?",
+    "answer": "l'espérance",
+    "aliases": [
+      "l'espoir",
+      "espérance",
+      "espoir"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quel musicien est descendu aux Enfers chercher sa femme Eurydice ?",
+    "answer": "Orphée",
+    "aliases": [
+      "Orphee"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Pourquoi Orphée a-t-il perdu Eurydice définitivement ?",
+    "answer": "il s'est retourné",
+    "aliases": [
+      "il a regardé en arrière",
+      "il s'est retourné trop tôt"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quel roi est condamné à rouler éternellement un rocher vers un sommet ?",
+    "answer": "Sisyphe",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quel roi affamé voit fruits et eau reculer dès qu'il tend la main ?",
+    "answer": "Tantale",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quel roi voyait tout ce qu'il touchait se transformer en or ?",
+    "answer": "Midas",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quel héros a résolu l'énigme du Sphinx devant Thèbes ?",
+    "answer": "Œdipe",
+    "aliases": [
+      "Oedipe"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quel navire Jason a-t-il mené à la conquête de la Toison d'or ?",
+    "answer": "l'Argo",
+    "aliases": [
+      "Argo"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on les compagnons de Jason à bord de son navire ?",
+    "answer": "les Argonautes",
+    "aliases": [
+      "Argonautes"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quelle magicienne a aidé Jason avant de se venger de lui ?",
+    "answer": "Médée",
+    "aliases": [
+      "Medee"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on les femmes-oiseaux dont le chant attire les marins vers les récifs ?",
+    "answer": "les Sirènes",
+    "aliases": [
+      "Sirènes",
+      "sirenes"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quel géant à un seul œil Ulysse a-t-il aveuglé ?",
+    "answer": "Polyphème",
+    "aliases": [
+      "Polypheme",
+      "un cyclope"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on les géants à un seul œil de la mythologie grecque ?",
+    "answer": "les Cyclopes",
+    "aliases": [
+      "Cyclopes"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Comment s'appellent les trois déesses qui filent et coupent le fil de la vie ?",
+    "answer": "les Moires",
+    "aliases": [
+      "Moires",
+      "les Parques"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quel fleuve les âmes traversent-elles pour entrer aux Enfers grecs ?",
+    "answer": "le Styx",
+    "aliases": [
+      "Styx"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quel fleuve des Enfers fait oublier la vie passée à qui en boit ?",
+    "answer": "le Léthé",
+    "aliases": [
+      "Léthé",
+      "Lethe"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quel dieu nordique lumineux est tué par une flèche de gui ?",
+    "answer": "Baldr",
+    "aliases": [
+      "Balder",
+      "Baldur"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quel serpent nordique entoure le monde en se mordant la queue ?",
+    "answer": "Jörmungand",
+    "aliases": [
+      "Jormungand",
+      "le serpent de Midgard"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on le monde des humains dans la cosmologie nordique ?",
+    "answer": "Midgard",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Combien de mondes l'arbre Yggdrasil relie-t-il ?",
+    "answer": "9",
+    "aliases": [
+      "neuf"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Comment s'appelle le pont arc-en-ciel qui mène chez les dieux nordiques ?",
+    "answer": "le Bifröst",
+    "aliases": [
+      "Bifröst",
+      "Bifrost"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quel gardien nordique veille sur ce pont et voit à des lieues ?",
+    "answer": "Heimdall",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Comment s'appellent les deux corbeaux d'Odin ?",
+    "answer": "Hugin et Munin",
+    "aliases": [
+      "Hugin et Munnin",
+      "Huginn et Muninn"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Combien de jambes le cheval d'Odin, Sleipnir, possède-t-il ?",
+    "answer": "8",
+    "aliases": [
+      "huit"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quelle déesse nordique de l'amour se déplace dans un char tiré par des chats ?",
+    "answer": "Freyja",
+    "aliases": [
+      "Freya"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quel oiseau égyptien renaît de ses cendres ?",
+    "answer": "le phénix",
+    "aliases": [
+      "phénix",
+      "phoenix"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Contre quoi le cœur des morts était-il pesé dans l'Égypte antique ?",
+    "answer": "la plume de Maât",
+    "aliases": [
+      "Maât",
+      "Maat",
+      "la plume de vérité"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quelle déesse égyptienne à tête de lionne incarne la fureur guerrière ?",
+    "answer": "Sekhmet",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quel dieu égyptien à tête d'ibis a inventé l'écriture ?",
+    "answer": "Thot",
+    "aliases": [
+      "Thoth"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quel dieu romain correspond à Zeus chez les Grecs ?",
+    "answer": "Jupiter",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quel dieu romain correspond à Arès chez les Grecs ?",
+    "answer": "Mars",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quelle déesse romaine correspond à Aphrodite chez les Grecs ?",
+    "answer": "Vénus",
+    "aliases": [
+      "Venus"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quel dieu romain correspond à Poséidon chez les Grecs ?",
+    "answer": "Neptune",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quels jumeaux, élevés par une louve, ont fondé Rome selon la légende ?",
+    "answer": "Romulus et Rémus",
+    "aliases": [
+      "Romulus et Remus"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quel dieu japonais du vent est souvent représenté avec un sac sur le dos ?",
+    "answer": "Fūjin",
+    "aliases": [
+      "Fujin"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quelle déesse japonaise du soleil est l'ancêtre revendiquée des empereurs ?",
+    "answer": "Amaterasu",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on les esprits et divinités du shintoïsme japonais ?",
+    "answer": "les kami",
+    "aliases": [
+      "kami",
+      "les kamis"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quel serpent à plumes est une divinité majeure des civilisations mésoaméricaines ?",
+    "answer": "Quetzalcóatl",
+    "aliases": [
+      "Quetzalcoatl"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quel géant nordique est le père de Fenrir, Jörmungand et Hel ?",
+    "answer": "Loki",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quelle fille de Loki règne sur le royaume des morts nordiques ?",
+    "answer": "Hel",
+    "aliases": []
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quelle créature grecque a un buste de femme et un corps de lion ailé, poseuse d'énigmes ?",
+    "answer": "le Sphinx",
+    "aliases": [
+      "Sphinx"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quelle créature grecque mêle un corps de cheval et un buste d'homme ?",
+    "answer": "le centaure",
+    "aliases": [
+      "centaure",
+      "les centaures"
+    ]
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 3,
+    "prompt": "Quel centaure savant a été le précepteur d'Achille ?",
+    "answer": "Chiron",
+    "aliases": []
+  }
+]

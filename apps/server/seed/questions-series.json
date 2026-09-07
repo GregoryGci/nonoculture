@@ -1,0 +1,725 @@
+[
+  {
+    "theme": "series",
+    "difficulty": 1,
+    "prompt": "Dans quelle série six amis new-yorkais se retrouvent-ils au Central Perk ?",
+    "answer": "Friends",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 1,
+    "prompt": "Quelle série suit la famille jaune de Springfield depuis 1989 ?",
+    "answer": "Les Simpson",
+    "aliases": [
+      "The Simpsons",
+      "Simpson"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 1,
+    "prompt": "Dans quelle série un professeur de chimie se met à fabriquer de la méthamphétamine ?",
+    "answer": "Breaking Bad",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 1,
+    "prompt": "Quelle série met en scène des maisons qui se disputent le Trône de Fer ?",
+    "answer": "Game of Thrones",
+    "aliases": [
+      "Le Trône de fer"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 1,
+    "prompt": "Dans quelle série des enfants d'Hawkins affrontent des monstres venus d'un autre monde ?",
+    "answer": "Stranger Things",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 1,
+    "prompt": "Quelle série espagnole suit des braqueurs en combinaison rouge et masque de Dalí ?",
+    "answer": "La Casa de Papel",
+    "aliases": [
+      "Casa de Papel"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 1,
+    "prompt": "Quelle série coréenne met des surendettés dans des jeux d'enfants mortels ?",
+    "answer": "Squid Game",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 1,
+    "prompt": "Quelle série d'animation met en scène Peter, Lois, Stewie et un chien qui parle ?",
+    "answer": "Family Guy",
+    "aliases": [
+      "Les Griffin"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 1,
+    "prompt": "Quelle série animée met en scène quatre enfants d'une petite ville du Colorado ?",
+    "answer": "South Park",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 1,
+    "prompt": "Quelle série suit les employés d'un bureau filmés comme un documentaire ?",
+    "answer": "The Office",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 1,
+    "prompt": "Quelle série suit des survivants d'un crash sur une île mystérieuse ?",
+    "answer": "Lost",
+    "aliases": [
+      "Les Disparus"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 1,
+    "prompt": "Quelle série met en scène des zombies et un shérif nommé Rick Grimes ?",
+    "answer": "The Walking Dead",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 1,
+    "prompt": "Quelle série française suit des agents clandestins de la DGSE et leurs identités d'emprunt ?",
+    "answer": "Le Bureau des légendes",
+    "aliases": [
+      "Bureau des légendes"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 1,
+    "prompt": "Quelle série britannique suit un détective consultant et son ami médecin à Londres ?",
+    "answer": "Sherlock",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 2,
+    "prompt": "Quel est le vrai nom du personnage surnommé Heisenberg dans Breaking Bad ?",
+    "answer": "Walter White",
+    "aliases": [
+      "Walter"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 2,
+    "prompt": "Quel personnage est l'ancien élève et complice de Walter White ?",
+    "answer": "Jesse Pinkman",
+    "aliases": [
+      "Jesse"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 2,
+    "prompt": "Quelle série dérivée de Breaking Bad raconte le passé de son avocat véreux ?",
+    "answer": "Better Call Saul",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 2,
+    "prompt": "Quel personnage est le nain de la maison Lannister dans Game of Thrones ?",
+    "answer": "Tyrion",
+    "aliases": [
+      "Tyrion Lannister"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 2,
+    "prompt": "Quelle héroïne de Game of Thrones est surnommée la Mère des dragons ?",
+    "answer": "Daenerys",
+    "aliases": [
+      "Daenerys Targaryen",
+      "Khaleesi"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 2,
+    "prompt": "Quelle série préquelle de Game of Thrones raconte la guerre civile Targaryen ?",
+    "answer": "House of the Dragon",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 2,
+    "prompt": "De quelle saga de George R. R. Martin Game of Thrones est-elle tirée ?",
+    "answer": "Le Trône de fer",
+    "aliases": [
+      "A Song of Ice and Fire",
+      "Le Trône de Fer"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle le café où se retrouve la bande de Friends ?",
+    "answer": "Central Perk",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 2,
+    "prompt": "Quels deux personnages de Friends forment le couple « on again, off again » de la série ?",
+    "answer": "Ross et Rachel",
+    "aliases": [
+      "Rachel et Ross"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 2,
+    "prompt": "Quelle série met en scène quatre amies new-yorkaises dont une chroniqueuse nommée Carrie ?",
+    "answer": "Sex and the City",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 2,
+    "prompt": "Quelle série suit une agence publicitaire de Madison Avenue dans les années 1960 ?",
+    "answer": "Mad Men",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 2,
+    "prompt": "Quelle série suit une famille de gangsters de Birmingham après la Première Guerre mondiale ?",
+    "answer": "Peaky Blinders",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 2,
+    "prompt": "Quelle série suit une famille mafieuse du New Jersey et son chef en thérapie ?",
+    "answer": "Les Soprano",
+    "aliases": [
+      "The Sopranos"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 2,
+    "prompt": "Quelle série britannique suit la famille royale du Royaume-Uni depuis les années 1940 ?",
+    "answer": "The Crown",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 2,
+    "prompt": "Quelle série suit une lycéenne californienne élue pour affronter les forces du mal ?",
+    "answer": "Buffy contre les vampires",
+    "aliases": [
+      "Buffy"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 2,
+    "prompt": "Quelle série d'anticipation propose un épisode indépendant et glaçant à chaque fois ?",
+    "answer": "Black Mirror",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 2,
+    "prompt": "Quelle série suit un parc d'attractions peuplé d'androïdes ?",
+    "answer": "Westworld",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 2,
+    "prompt": "Quelle série suit des détenues d'une prison pour femmes ?",
+    "answer": "Orange Is the New Black",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 2,
+    "prompt": "Quelle série médicale suit des internes d'un hôpital de Seattle ?",
+    "answer": "Grey's Anatomy",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 2,
+    "prompt": "Quelle série met en scène un médecin misanthrope et boiteux qui résout des cas impossibles ?",
+    "answer": "Dr House",
+    "aliases": [
+      "House",
+      "House MD"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 2,
+    "prompt": "Quelle série suit un agent du FBI et sa collègue enquêtant sur le paranormal ?",
+    "answer": "X-Files",
+    "aliases": [
+      "The X-Files",
+      "Aux frontières du réel"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 2,
+    "prompt": "Quelle série française parodique met en scène le roi Arthur et sa cour ?",
+    "answer": "Kaamelott",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 2,
+    "prompt": "Qui a créé et interprète le roi Arthur dans Kaamelott ?",
+    "answer": "Alexandre Astier",
+    "aliases": [
+      "Astier"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 2,
+    "prompt": "Quelle série française met en scène Omar Sy en gentleman cambrioleur moderne ?",
+    "answer": "Lupin",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quelle série a remporté le plus d'Emmy Awards de l'histoire ?",
+    "answer": "Game of Thrones",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quel personnage prononce la réplique « I am the one who knocks » ?",
+    "answer": "Walter White",
+    "aliases": [
+      "Walter",
+      "Heisenberg"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quel acteur incarne Walter White ?",
+    "answer": "Bryan Cranston",
+    "aliases": [
+      "Cranston"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quel acteur incarne Jesse Pinkman ?",
+    "answer": "Aaron Paul",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Dans quelle ville du Nouveau-Mexique se déroule Breaking Bad ?",
+    "answer": "Albuquerque",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quel acteur britannique incarne Tyrion Lannister ?",
+    "answer": "Peter Dinklage",
+    "aliases": [
+      "Dinklage"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on la barrière de glace qui protège le nord dans Game of Thrones ?",
+    "answer": "le Mur",
+    "aliases": [
+      "Mur"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quel ordre de frères jurés veille sur cette barrière de glace ?",
+    "answer": "la Garde de Nuit",
+    "aliases": [
+      "Garde de Nuit",
+      "les corbeaux"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quelle devise la maison Stark répète-t-elle tout au long de la série ?",
+    "answer": "L'hiver vient",
+    "aliases": [
+      "Winter is coming",
+      "l'hiver arrive"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Comment s'appelle la ville capitale des Sept Couronnes ?",
+    "answer": "Port-Réal",
+    "aliases": [
+      "King's Landing"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on la dimension parallèle et pourrie de Stranger Things ?",
+    "answer": "le Monde à l'envers",
+    "aliases": [
+      "Upside Down",
+      "l'Upside Down"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quelle jeune fille aux pouvoirs télékinétiques est l'héroïne de Stranger Things ?",
+    "answer": "Eleven",
+    "aliases": [
+      "Onze",
+      "Elfie"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quel duo de jumeaux a créé Stranger Things ?",
+    "answer": "les frères Duffer",
+    "aliases": [
+      "Duffer",
+      "les Duffer"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quel personnage dirige le braquage dans La Casa de Papel ?",
+    "answer": "le Professeur",
+    "aliases": [
+      "Professeur",
+      "El Profesor"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quelle chanson italienne est devenue l'hymne de La Casa de Papel ?",
+    "answer": "Bella Ciao",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "D'où viennent les pseudonymes que les braqueurs de La Casa de Papel se donnent ?",
+    "answer": "des noms de villes",
+    "aliases": [
+      "des villes",
+      "noms de villes"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quel numéro portait le joueur principal de Squid Game ?",
+    "answer": "456",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quel jeu d'enfants ouvre la compétition dans Squid Game ?",
+    "answer": "un, deux, trois, soleil",
+    "aliases": [
+      "1 2 3 soleil",
+      "le jeu du feu rouge"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Combien de saisons la série Friends compte-t-elle ?",
+    "answer": "10",
+    "aliases": [
+      "dix"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quel animal Ross gardait-il comme animal de compagnie au début de Friends ?",
+    "answer": "un singe",
+    "aliases": [
+      "Marcel",
+      "un capucin"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quel personnage de Friends chante « Smelly Cat » ?",
+    "answer": "Phoebe",
+    "aliases": [
+      "Phoebe Buffay"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quel métier exerce Joey dans Friends ?",
+    "answer": "acteur",
+    "aliases": [
+      "comédien",
+      "il est acteur"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quelle chaîne américaine a diffusé Les Soprano, The Wire et Game of Thrones ?",
+    "answer": "HBO",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quelle série de HBO suit la police et les dealers de Baltimore ?",
+    "answer": "The Wire",
+    "aliases": [
+      "Sur écoute"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quelle série d'anthologie policière a réuni Matthew McConaughey et Woody Harrelson ?",
+    "answer": "True Detective",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quelle série suit un expert de la police scientifique qui traque et tue d'autres meurtriers ?",
+    "answer": "Dexter",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quelle série retrace la traque des cartels de la drogue colombiens par la DEA ?",
+    "answer": "Narcos",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quel trafiquant colombien est au cœur des premières saisons de Narcos ?",
+    "answer": "Pablo Escobar",
+    "aliases": [
+      "Escobar"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quelle série de science-fiction suit l'équipage du vaisseau Serenity ?",
+    "answer": "Firefly",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quelle série britannique suit un voyageur du temps dans une cabine téléphonique bleue ?",
+    "answer": "Doctor Who",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Comment s'appelle la machine à voyager dans le temps de Doctor Who ?",
+    "answer": "le TARDIS",
+    "aliases": [
+      "TARDIS"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quelle série met en scène des super-héros corrompus affrontés par des justiciers ordinaires ?",
+    "answer": "The Boys",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quelle série suit un chasseur de primes casqué et un enfant de l'espèce de Yoda ?",
+    "answer": "The Mandalorian",
+    "aliases": [
+      "Mandalorian"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quelle série polonaise adaptée de romans suit un chasseur de monstres aux cheveux blancs ?",
+    "answer": "The Witcher",
+    "aliases": [
+      "Le Sorceleur"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quel acteur a incarné Geralt dans les premières saisons de The Witcher ?",
+    "answer": "Henry Cavill",
+    "aliases": [
+      "Cavill"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quelle série suit quatre amis geeks et leur voisine serveuse à Pasadena ?",
+    "answer": "The Big Bang Theory",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quel personnage de The Big Bang Theory frappe trois fois en appelant le prénom de sa voisine ?",
+    "answer": "Sheldon",
+    "aliases": [
+      "Sheldon Cooper"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quelle série suit un groupe d'amis qui racontent une rencontre à leurs enfants ?",
+    "answer": "How I Met Your Mother",
+    "aliases": [
+      "HIMYM"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quelle série animée suit un savant alcoolique et son petit-fils à travers les dimensions ?",
+    "answer": "Rick et Morty",
+    "aliases": [
+      "Rick and Morty"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quelle série animée met en scène un cheval humanoïde déprimé à Hollywood ?",
+    "answer": "BoJack Horseman",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quelle série animée suit un livreur cryogénisé réveillé mille ans plus tard ?",
+    "answer": "Futurama",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quelle série met en scène une jeune joueuse d'échecs prodige des années 1960 ?",
+    "answer": "Le Jeu de la dame",
+    "aliases": [
+      "The Queen's Gambit"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quelle plateforme a produit House of Cards, sa première série originale ?",
+    "answer": "Netflix",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quel personnage de House of Cards s'adresse directement à la caméra ?",
+    "answer": "Frank Underwood",
+    "aliases": [
+      "Underwood"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quelle série suit un ingénieur qui se fait incarcérer volontairement pour évader son frère ?",
+    "answer": "Prison Break",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quel personnage de Prison Break se fait tatouer les plans d'une prison ?",
+    "answer": "Michael Scofield",
+    "aliases": [
+      "Scofield",
+      "Michael"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quelle série suit une analyste bipolaire de la CIA convaincue qu'un héros de guerre est retourné ?",
+    "answer": "Homeland",
+    "aliases": []
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quelle série se déroule en temps réel, chaque saison couvrant vingt-quatre heures ?",
+    "answer": "24 heures chrono",
+    "aliases": [
+      "24",
+      "24 Heures chrono"
+    ]
+  },
+  {
+    "theme": "series",
+    "difficulty": 3,
+    "prompt": "Quel agent fédéral est le héros de cette série en temps réel ?",
+    "answer": "Jack Bauer",
+    "aliases": [
+      "Bauer"
+    ]
+  }
+]
