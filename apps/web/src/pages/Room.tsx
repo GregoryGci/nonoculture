@@ -160,11 +160,17 @@ export function Room() {
 
           {state.phase === "CHAIN_REVEAL" && (
             <ChainStep title="Ce qui s’est passé">
-              <ChainRevealSlideshow chains={state.chainReveal ?? []} />
-              {isHost && (
+              <ChainRevealSlideshow
+                chains={state.chainReveal ?? []}
+                canGrade={isHost}
+                onGrade={(originPlayerId, valid) => send({ type: "SUBMIT_CHAIN_GRADE", originPlayerId, valid })}
+              />
+              {isHost ? (
                 <button onClick={() => send({ type: "HOST_NEXT" })} className="btn btn-primary mt-2 h-14 w-full">
                   Continuer
                 </button>
+              ) : (
+                <p className="waiting text-center text-[13px] font-medium">L'hôte tranche — vous suivez en direct.</p>
               )}
             </ChainStep>
           )}

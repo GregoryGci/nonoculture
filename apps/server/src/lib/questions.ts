@@ -1,3 +1,4 @@
+import { OPT_IN_THEMES } from "@nonoculture/shared";
 import type { GameSettings } from "@nonoculture/shared";
 import type { DeckItem, InternalQuestion } from "../room/types.js";
 
@@ -71,7 +72,14 @@ async function fetchQuestions(
   if (limit <= 0) return [];
   const themes = settings.themes;
   const clauses = ["verified = 1"];
-  if (themes.length > 0) clauses.push(`theme IN (${themes.map(() => "?").join(",")})`);
+  if (themes.length > 0) {
+    clauses.push(`theme IN (${themes.map(() => "?").join(",")})`);
+  } else {
+    // "All themes" means all the general ones. A run nobody filtered should not suddenly ask
+    // about Dofus class mechanics; those come out only when someone picks them.
+    clauses.push(`theme NOT IN (${OPT_IN_THEMES.map(() => "?").join(",")})`);
+  }
+  const themeBindings = themes.length > 0 ? themes : [...OPT_IN_THEMES];
   const excluded = [...exclude];
   if (excluded.length > 0) clauses.push(`id NOT IN (${excluded.map(() => "?").join(",")})`);
   if (kind === "numeric") {
@@ -94,7 +102,7 @@ async function fetchQuestions(
   // Over-drawn on purpose: diversify() needs spare rows in each family to spread across.
   const stmt = db
     .prepare(`SELECT * FROM questions WHERE ${clauses.join(" AND ")} ORDER BY RANDOM() LIMIT ?`)
-    .bind(...themes, ...excluded, Math.min(limit * 6, 600));
+    .bind(...themeBindings, ...excluded, Math.min(limit * 6, 600));
   const { results } = await stmt.all<QuestionRow>();
   return diversify((results ?? []).map(toInternal), limit);
 }

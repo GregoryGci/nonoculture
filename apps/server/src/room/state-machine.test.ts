@@ -5,7 +5,6 @@ import {
   CHAIN_DRAW_DURATION_MS,
   CHAIN_POINTS,
   CHAIN_PROMPT_DURATION_MS,
-  CHAIN_REVEAL_PER_ITEM_MS,
   DISCONNECT_GRACE_MS,
   ROOM_IDLE_TIMEOUT_MS,
 } from "./types.js";
@@ -681,7 +680,68 @@ describe("chain round (téléphone dessiné)", () => {
     expect(state.players.host?.score).toBe(CHAIN_POINTS);
     expect(state.players.p2?.score).toBe(CHAIN_POINTS);
     expect(state.players.p3?.score).toBe(CHAIN_POINTS);
-    expect(state.phaseDeadlineTs).toBe(T0 + 132 + 3 * CHAIN_REVEAL_PER_ITEM_MS);
+    // No countdown on the reveal any more: the host rules on each chain and moves on when
+    // the room is done arguing about whether that blob was a cat.
+    expect(state.phaseDeadlineTs).toBeNull();
+  });
+
+  it("lets the host overturn the text matcher, and take the points back", () => {
+    let state = setupChainStarted();
+    for (const [id, text] of [
+      ["host", "chat"],
+      ["p2", "banane"],
+      ["p3", "voiture"],
+    ] as const) {
+      state = transition(state, { kind: "SUBMIT_CHAIN_PROMPT", playerId: id, text, now: T0 + 110 }).state;
+    }
+    for (const [id, dataUrl] of [
+      ["p2", "d-host"],
+      ["p3", "d-p2"],
+      ["host", "d-p3"],
+    ] as const) {
+      state = transition(state, { kind: "SUBMIT_CHAIN_DRAWING", playerId: id, dataUrl, now: T0 + 120 }).state;
+    }
+    // "matou" is the same idea as "chat" to anyone in the room, and not a string match.
+    state = transition(state, { kind: "SUBMIT_CHAIN_GUESS", playerId: "p3", text: "matou", now: T0 + 130 }).state;
+    state = transition(state, { kind: "SUBMIT_CHAIN_GUESS", playerId: "host", text: "nawak", now: T0 + 131 }).state;
+    state = transition(state, { kind: "SUBMIT_CHAIN_GUESS", playerId: "p2", text: "nawak", now: T0 + 132 }).state;
+    expect(state.phase).toBe("CHAIN_REVEAL");
+    expect(state.players.host?.score).toBe(0);
+
+    state = transition(state, {
+      kind: "SUBMIT_CHAIN_GRADE",
+      playerId: "host",
+      originPlayerId: "host",
+      valid: true,
+      now: T0 + 140,
+    }).state;
+    for (const id of ["host", "p2", "p3"] as const) expect(state.players[id]?.score).toBe(CHAIN_POINTS);
+
+    // Changing their mind takes the points back rather than stacking a second award.
+    state = transition(state, {
+      kind: "SUBMIT_CHAIN_GRADE",
+      playerId: "host",
+      originPlayerId: "host",
+      valid: false,
+      now: T0 + 141,
+    }).state;
+    for (const id of ["host", "p2", "p3"] as const) expect(state.players[id]?.score).toBe(0);
+  });
+
+  it("refuses a ruling from anyone but the host", () => {
+    let state = setupChainStarted();
+    state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state;
+    state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state;
+    state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state;
+    expect(state.phase).toBe("CHAIN_REVEAL");
+    const after = transition(state, {
+      kind: "SUBMIT_CHAIN_GRADE",
+      playerId: "p2",
+      originPlayerId: "host",
+      valid: true,
+      now: T0 + 999,
+    }).state;
+    expect(after.players.host?.score).toBe(0);
   });
 
   it("lets the host skip the CHAIN_REVEAL wait and clears the chain state, going straight to the next deck slot", () => {

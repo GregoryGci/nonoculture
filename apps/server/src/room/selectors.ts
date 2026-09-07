@@ -212,13 +212,15 @@ function computeChainReveal(
   resolveDrawing: DrawingResolver,
 ): ChainResult[] | null {
   if (state.phase !== "CHAIN_REVEAL" || !state.chain) return null;
-  const { order, prompts, guesses } = state.chain;
+  const { order, prompts, guesses, validated } = state.chain;
   return order.map((originId, idx) => {
     const drawerId = order[(idx + 1) % order.length]!;
     const guesserId = order[(idx + 2) % order.length]!;
     const prompt = prompts[originId] ?? "";
     const guess = guesses[originId] ?? "";
-    const matched = isChainMatch(guess, prompt);
+    // The host's ruling, falling back to the matcher's for a round that never reached the
+    // reveal. Showing the matcher's verdict next to the host's would be showing two truths.
+    const matched = validated[originId] ?? isChainMatch(guess, prompt);
     return {
       originPlayerId: originId,
       originNickname: nicknameOf(originId),

@@ -93,6 +93,13 @@ export const SubmitChainDrawingMsg = z.object({
     .regex(/^data:image\/(webp|jpeg|png);base64,/),
 });
 
+/** Host-only: accepts or rejects one chain during the reveal. */
+export const SubmitChainGradeMsg = z.object({
+  type: z.literal("SUBMIT_CHAIN_GRADE"),
+  originPlayerId: uuid,
+  valid: z.boolean(),
+});
+
 export const SubmitChainGuessMsg = z.object({
   type: z.literal("SUBMIT_CHAIN_GUESS"),
   text: z.string().min(1).max(80),
@@ -149,6 +156,7 @@ export const ClientMessage = z.discriminatedUnion("type", [
   SubmitChainPromptMsg,
   SubmitChainDrawingMsg,
   SubmitChainGuessMsg,
+  SubmitChainGradeMsg,
   SubmitBluffMsg,
   SubmitBluffVoteMsg,
   SubmitDuelPredictionMsg,

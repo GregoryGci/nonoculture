@@ -7,6 +7,7 @@ import {
   MAX_CHAIN_ROUNDS,
   MAX_SPECIAL_ROUNDS,
   THEME_LABELS,
+  isOptInTheme,
   type GameSettings,
 } from "@nonoculture/shared";
 import { fetchPlayableThemes } from "../lib/api";
@@ -197,8 +198,11 @@ export function HostSettings({
     r.label.toLowerCase(),
   );
 
+  // "Tous" leaves out the game-specific themes, so the count has to say so rather than
+  // claiming a total the server will not honour.
+  const general = themes.filter((t) => !isOptInTheme(t.id));
   const selectedLabel =
-    settings.themes.length === 0 ? `Tous (${themes.length})` : `${settings.themes.length} sur ${themes.length}`;
+    settings.themes.length === 0 ? `Tous (${general.length})` : `${settings.themes.length} sur ${themes.length}`;
 
   return (
     <div className="panel flex w-full flex-col gap-8 p-6">
@@ -299,13 +303,15 @@ export function HostSettings({
           </button>
           {themes.map(({ id, label }) => {
             const active = settings.themes.includes(id);
+            const optIn = isOptInTheme(id);
             return (
               <button
                 key={id}
                 type="button"
                 onClick={() => toggleTheme(id)}
                 aria-pressed={active}
-                className={`chip${active ? " chip-on" : ""}`}
+                title={optIn ? "Hors « Tous » : à choisir exprès" : undefined}
+                className={`chip${active ? " chip-on" : ""}${optIn && !active ? " chip-optin" : ""}`}
               >
                 {label}
               </button>

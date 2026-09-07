@@ -434,3 +434,10 @@ input[type="range"]::-moz-range-thumb {
     zoom: 0.8;
   }
 }
+
+/* Game-specific themes: available, but not part of "tous les thèmes". Dashed rather than
+   dimmed — they are opt-in, not disabled, and a faded chip reads as unavailable. */
+.chip-optin {
+  border-style: dashed;
+  color: var(--color-text-faint);
+}

@@ -58,6 +58,18 @@ export interface ChainRoundState {
    */
   drawings: Record<string, boolean>;
   guesses: Record<string, string>; // originPlayerId -> guess text
+  /**
+   * originPlayerId -> whether the chain counts, as decided by the host.
+   *
+   * Seeded from `isChainMatch` so the usual case needs no clicks, then overridable during
+   * CHAIN_REVEAL. Text matching cannot judge a drawing: "un chat qui fait du vélo" guessed as
+   * "chat à bicyclette" is obviously right and obviously not a string match, and the room
+   * knows it instantly while the algorithm never will.
+   */
+  validated: Record<string, boolean>;
+  /** playerId -> points this chain round has already paid them, so a re-ruling can take
+   *  them back instead of stacking a second award on top. */
+  awarded: Record<string, number>;
 }
 
 /**
@@ -153,6 +165,7 @@ export type GameEvent =
   | { kind: "SUBMIT_CHAIN_PROMPT"; playerId: string; text: string; now: number }
   | { kind: "SUBMIT_CHAIN_DRAWING"; playerId: string; dataUrl: string; now: number }
   | { kind: "SUBMIT_CHAIN_GUESS"; playerId: string; text: string; now: number }
+  | { kind: "SUBMIT_CHAIN_GRADE"; playerId: string; originPlayerId: string; valid: boolean; now: number }
   | { kind: "SUBMIT_BLUFF"; playerId: string; text: string; now: number }
   | { kind: "SUBMIT_BLUFF_VOTE"; playerId: string; optionId: string; now: number }
   | { kind: "SUBMIT_DUEL_PREDICTION"; playerId: string; targetId: string; now: number }

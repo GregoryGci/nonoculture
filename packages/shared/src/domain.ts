@@ -104,7 +104,19 @@ export const THEME_LABELS: Record<string, string> = {
   series: "Séries TV",
   anime: "Anime & Manga",
   heros: "Super-héros",
+  blasons: "Blasons",
 };
+
+/**
+ * Themes kept out of "tous les thèmes" unless someone asks for them by name.
+ *
+ * They are not lesser questions — they are questions about one game, and a table where half
+ * the room has never played it stops being a quiz. Picking them explicitly is a deliberate
+ * act; sweeping them in with everything else is not.
+ */
+export const OPT_IN_THEMES = ["lol", "dofus"] as const;
+
+export const isOptInTheme = (theme: string): boolean => (OPT_IN_THEMES as readonly string[]).includes(theme);
 
 export function themeLabel(id: string): string {
   return THEME_LABELS[id] ?? id;
@@ -164,6 +176,7 @@ export interface ChainResult {
   drawingDataUrl: string;
   guesserNickname: string;
   guess: string;
+  /** The host's ruling. Pre-filled from the text matcher, but the host has the last word. */
   matched: boolean;
   points: number;
 }

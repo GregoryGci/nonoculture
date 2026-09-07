@@ -24,8 +24,16 @@ function fakeDb(rows: Record<string, unknown>[]): D1Database {
           const limit = Number(bound[bound.length - 1]);
           const excluded = new Set(bound.slice(0, -1).filter((v) => typeof v === "number"));
           const wants = (kind: string) => sql.includes(kind);
+          const themeArgs = bound.filter((v) => typeof v === "string");
+          const themeIn = sql.includes("theme IN (");
+          const themeNotIn = sql.includes("theme NOT IN (");
           const results = rows
             .filter((r) => !excluded.has(r.id as number))
+            .filter((r) => {
+              if (themeIn) return themeArgs.includes(r.theme as string);
+              if (themeNotIn) return !themeArgs.includes(r.theme as string);
+              return true;
+            })
             .filter((r) => {
               if (wants("answer_kind = 'number'")) return r.answer_kind === "number";
               if (wants("answer_kind = 'list'")) return r.answer_kind === "list";
@@ -106,5 +114,53 @@ describe("buildDeck", () => {
     );
     const families = deck.flatMap((i) => (i.kind === "trivia" ? [i.question.family] : []));
     expect(new Set(families).size).toBe(4);
+  });
+});
+
+describe("theme selection", () => {
+  const mixed = [
+    ...bank.slice(0, 20),
+    ...Array.from({ length: 20 }, (_, i) => ({ ...bank[i]!, id: 100 + i, theme: i % 2 === 0 ? "lol" : "dofus" })),
+  ];
+
+  it("leaves the game-specific themes out of an unfiltered run", async () => {
+    // "Tous les thèmes" should not quietly start asking about Dofus class mechanics.
+    const deck = await buildDeck(
+      fakeDb(mixed),
+      {
+        ...DEFAULT_SETTINGS,
+        questionCount: 15,
+        themes: [],
+        chainRounds: 0,
+        bluffRounds: 0,
+        duelRounds: 0,
+        reflexRounds: 0,
+        numericRounds: 0,
+      },
+      { mediaAvailable: false },
+    );
+    const themes = deck.flatMap((i) => (i.kind === "trivia" ? [i.question.theme] : []));
+    expect(themes.length).toBeGreaterThan(0);
+    expect(themes).not.toContain("lol");
+    expect(themes).not.toContain("dofus");
+  });
+
+  it("still serves them when they are asked for by name", async () => {
+    const deck = await buildDeck(
+      fakeDb(mixed),
+      {
+        ...DEFAULT_SETTINGS,
+        questionCount: 6,
+        themes: ["lol"],
+        chainRounds: 0,
+        bluffRounds: 0,
+        duelRounds: 0,
+        reflexRounds: 0,
+        numericRounds: 0,
+      },
+      { mediaAvailable: false },
+    );
+    const themes = deck.flatMap((i) => (i.kind === "trivia" ? [i.question.theme] : []));
+    expect(themes.every((t) => t === "lol")).toBe(true);
   });
 });

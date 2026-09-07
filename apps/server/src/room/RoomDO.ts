@@ -337,6 +337,12 @@ export class RoomDO extends DurableObject<Env> {
       case "SUBMIT_CHAIN_GUESS":
         await this.dispatch({ kind: "SUBMIT_CHAIN_GUESS", playerId, text: sanitizeText(parsed.text, 80), now }, ws);
         break;
+      case "SUBMIT_CHAIN_GRADE":
+        await this.dispatch(
+          { kind: "SUBMIT_CHAIN_GRADE", playerId, originPlayerId: parsed.originPlayerId, valid: parsed.valid, now },
+          ws,
+        );
+        break;
       case "SUBMIT_BLUFF":
         await this.dispatch({ kind: "SUBMIT_BLUFF", playerId, text: sanitizeText(parsed.text, 80), now }, ws);
         break;

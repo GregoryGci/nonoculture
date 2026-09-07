@@ -28,7 +28,6 @@ import {
   BLUFF_REVEAL_DURATION_MS,
   BLUFF_VOTE_DURATION_MS,
   BLUFF_WRITE_DURATION_MS,
-  CHAIN_REVEAL_PER_ITEM_MS,
   CODE_RELEASE_DELAY_MS,
   DUEL_ANSWER_DURATION_MS,
   DUEL_PREDICT_DURATION_MS,
@@ -149,36 +148,54 @@ function advancePastChainDraw(state: GameState, now: number): GameState {
   return { ...state, chain, phase: "CHAIN_GUESS", phaseDeadlineTs: now + CHAIN_GUESS_DURATION_MS };
 }
 
-function resolveChain(state: GameState, now: number): GameState {
-  const { order, prompts, guesses } = state.chain!;
-  const scores = Object.fromEntries(Object.values(state.players).map((p) => [p.playerId, p.score]));
-  order.forEach((originId, idx) => {
-    const prompt = prompts[originId] ?? "";
-    const guess = guesses[originId] ?? "";
-    if (!isChainMatch(guess, prompt)) return;
-    const drawerId = order[(idx + 1) % order.length]!;
-    const guesserId = order[(idx + 2) % order.length]!;
-    for (const id of [originId, drawerId, guesserId]) {
-      scores[id] = (scores[id] ?? 0) + CHAIN_POINTS;
-    }
-  });
+/** The three players a chain pays: whoever wrote it, drew it and guessed it. */
+function chainTrio(order: string[], originId: string): string[] {
+  const idx = order.indexOf(originId);
+  if (idx === -1) return [];
+  return [originId, order[(idx + 1) % order.length]!, order[(idx + 2) % order.length]!];
+}
+
+/** Applies `validated` from scratch, so re-ruling a chain replaces its points instead of
+ *  stacking them — same rule as re-grading an answer during the host review. */
+function applyChainScores(state: GameState, validated: Record<string, boolean>): GameState {
+  const { order } = state.chain!;
+  const earned: Record<string, number> = {};
+  for (const originId of order) {
+    if (!validated[originId]) continue;
+    for (const id of chainTrio(order, originId)) earned[id] = (earned[id] ?? 0) + CHAIN_POINTS;
+  }
   const players = Object.fromEntries(
-    Object.entries(state.players).map(([id, p]) => [id, { ...p, score: scores[id] ?? p.score }]),
+    Object.entries(state.players).map(([id, p]) => [
+      id,
+      { ...p, score: p.score - (state.chain!.awarded[id] ?? 0) + (earned[id] ?? 0) },
+    ]),
   );
+  return { ...state, players, chain: { ...state.chain!, validated, awarded: earned } };
+}
+
+function resolveChain(state: GameState): GameState {
+  const { order, prompts, guesses } = state.chain!;
+  // The text matcher fills the ballot; the host corrects it. A drawing guessed as "chat à
+  // bicyclette" for "un chat qui fait du vélo" is right, and no string comparison will say so.
+  const validated: Record<string, boolean> = {};
+  for (const originId of order) {
+    validated[originId] = isChainMatch(guesses[originId] ?? "", prompts[originId] ?? "");
+  }
+  const scored = applyChainScores({ ...state, chain: { ...state.chain!, awarded: {} } }, validated);
   return {
-    ...state,
-    players,
+    ...scored,
     phase: "CHAIN_REVEAL",
-    phaseDeadlineTs: now + order.length * CHAIN_REVEAL_PER_ITEM_MS,
+    // No timer: the host rules on each chain and moves on when the room has stopped arguing.
+    phaseDeadlineTs: null,
   };
 }
 
-function advancePastChainGuess(state: GameState, now: number): GameState {
+function advancePastChainGuess(state: GameState): GameState {
   const chain: ChainRoundState = {
     ...state.chain!,
     guesses: fillMissing(state.chain!.order, state.chain!.guesses, ""),
   };
-  return resolveChain({ ...state, chain }, now);
+  return resolveChain({ ...state, chain });
 }
 
 // ---------- Bluff round ----------
@@ -322,7 +339,7 @@ function startDeckSlot(state: GameState, index: number, now: number): GameState 
   return {
     ...base,
     phase: "CHAIN_PROMPT",
-    chain: { order, prompts: {}, drawings: {}, guesses: {} },
+    chain: { order, prompts: {}, drawings: {}, guesses: {}, validated: {}, awarded: {} },
     phaseDeadlineTs: now + CHAIN_PROMPT_DURATION_MS,
   };
 }
@@ -519,7 +536,7 @@ function advanceIfStepComplete(state: GameState, now: number): GameState {
     return allChainStepDone(state, state.chain.drawings, 1) ? advancePastChainDraw(state, now) : state;
   }
   if (state.phase === "CHAIN_GUESS") {
-    return allChainStepDone(state, state.chain.guesses, 2) ? advancePastChainGuess(state, now) : state;
+    return allChainStepDone(state, state.chain.guesses, 2) ? advancePastChainGuess(state) : state;
   }
   return state;
 }
@@ -785,8 +802,17 @@ export function transition(state: GameState, event: GameEvent): TransitionResult
       next = { ...state, chain };
       effects.push({ kind: "SEND_ANSWER_RECEIVED", playerId: event.playerId });
       if (allChainStepDone(next, chain.guesses, 2)) {
-        next = advancePastChainGuess(next, event.now);
+        next = advancePastChainGuess(next);
       }
+      break;
+    }
+
+    case "SUBMIT_CHAIN_GRADE": {
+      if (state.phase !== "CHAIN_REVEAL" || !state.chain) break;
+      if (event.playerId !== state.hostPlayerId) break;
+      if (!state.chain.order.includes(event.originPlayerId)) break;
+      if (state.chain.validated[event.originPlayerId] === event.valid) break;
+      next = applyChainScores(state, { ...state.chain.validated, [event.originPlayerId]: event.valid });
       break;
     }
 
@@ -957,7 +983,7 @@ function handleAlarm(state: GameState, now: number, effects: Effect[]): GameStat
     } else if (next.phase === "CHAIN_DRAW") {
       next = advancePastChainDraw(next, now);
     } else if (next.phase === "CHAIN_GUESS") {
-      next = advancePastChainGuess(next, now);
+      next = advancePastChainGuess(next);
     } else if (next.phase === "CHAIN_REVEAL") {
       next = advanceDeck(next, now);
     } else if (next.phase === "BLUFF_WRITE") {
