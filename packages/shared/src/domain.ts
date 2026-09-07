@@ -85,6 +85,7 @@ export const THEME_LABELS: Record<string, string> = {
   lol: "League of Legends",
   dofus: "Dofus",
   drapeaux: "Drapeaux",
+  art: "Art",
 };
 
 export function themeLabel(id: string): string {

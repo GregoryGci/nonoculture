@@ -35,5 +35,6 @@ migrations_dir = "migrations"
 # binding = "MEDIA"
 # bucket_name = "quiproquo-media"
 
-[vars]
-ADMIN_SECRET = "dev-secret-change-me"
+# No [vars] block: the /admin back-office is not built yet, and a placeholder secret
+# committed here would ship to production as a real, public one. When that route lands,
+# give it a value with `wrangler secret put ADMIN_SECRET` — never a var.

@@ -15,7 +15,6 @@ interface Env {
   MEDIA?: R2Bucket;
   /** Static assets, which also carry question media (apps/web/public/media). */
   ASSETS?: { fetch: typeof fetch };
-  ADMIN_SECRET: string;
 }
 
 /** Every accepted socket gets a socketId up front so it can be rate-limited individually

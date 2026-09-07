@@ -9,7 +9,6 @@ export { RoomDO };
 interface Env {
   DB: D1Database;
   MEDIA?: R2Bucket;
-  ADMIN_SECRET: string;
   ROOM: DurableObjectNamespace<RoomDO>;
   ASSETS?: { fetch: typeof fetch };
 }
