@@ -38,6 +38,7 @@ function fakeDb(rows: Record<string, unknown>[]): D1Database {
               if (wants("answer_kind = 'number'")) return r.answer_kind === "number";
               if (wants("answer_kind = 'list'")) return r.answer_kind === "list";
               if (wants("type = 'audio'")) return r.type === "audio";
+              if (wants("type = 'image'")) return r.type === "image" && r.media_key !== null;
               return r.type !== "audio" && (r.answer_kind === "text" || r.answer_kind === "math");
             })
             .slice(0, limit);
@@ -162,5 +163,55 @@ describe("theme selection", () => {
     );
     const themes = deck.flatMap((i) => (i.kind === "trivia" ? [i.question.theme] : []));
     expect(themes.every((t) => t === "lol")).toBe(true);
+  });
+});
+
+describe("media quotas", () => {
+  const withImages = [
+    ...bank.slice(0, 30),
+    ...Array.from({ length: 10 }, (_, i) => ({
+      ...bank[i]!,
+      id: 300 + i,
+      type: "image",
+      family: "drapeaux",
+      media_key: `flag-${i}.webp`,
+    })),
+  ];
+
+  it("guarantees image questions instead of leaving them to chance", async () => {
+    // At 5% of the pool they turned up in three games out of four and never at all once a
+    // theme filter was on, which reads as "this game has no picture questions".
+    const deck = await buildDeck(
+      fakeDb(withImages),
+      {
+        ...DEFAULT_SETTINGS,
+        questionCount: 15,
+        chainRounds: 0,
+        bluffRounds: 0,
+        duelRounds: 0,
+        reflexRounds: 0,
+        numericRounds: 0,
+      },
+      { mediaAvailable: true },
+    );
+    const images = deck.filter((i) => i.kind === "trivia" && i.question.type === "image");
+    expect(images.length).toBeGreaterThanOrEqual(3);
+  });
+
+  it("degrades to none when the chosen themes hold no image at all", async () => {
+    const deck = await buildDeck(
+      fakeDb(bank),
+      {
+        ...DEFAULT_SETTINGS,
+        questionCount: 12,
+        chainRounds: 0,
+        bluffRounds: 0,
+        duelRounds: 0,
+        reflexRounds: 0,
+        numericRounds: 0,
+      },
+      { mediaAvailable: true },
+    );
+    expect(deck).toHaveLength(12);
   });
 });

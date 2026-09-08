@@ -23,6 +23,17 @@ interface QuestionRow {
  */
 const AUDIO_QUESTIONS_PER_15 = 4;
 
+/**
+ * Image share of the deck, per 15 slots — same reasoning as the audio quota above.
+ *
+ * Images were left to chance and it showed: they are 5% of the pool, so a game contained one
+ * about three quarters of the time and none the rest, which reads as "there are no picture
+ * questions". Worse, they live in themes of their own (drapeaux, art, blasons), so any run
+ * with a theme filter had exactly zero. A quota degrades to nothing on its own when the
+ * chosen themes hold no images, which is the correct behaviour rather than a special case.
+ */
+const IMAGE_QUESTIONS_PER_15 = 3;
+
 const ANSWER_KINDS = ["number", "list", "math"] as const;
 
 /**
@@ -62,7 +73,7 @@ async function fetchQuestions(
   db: D1Database,
   settings: GameSettings,
   limit: number,
-  kind: "audio" | "rest" | "numeric" | "list",
+  kind: "audio" | "image" | "rest" | "numeric" | "list",
   mediaAvailable: boolean,
   /** Ids already placed in this deck. Two buckets can draw from the same pool — bluff rounds
    *  and ordinary questions both come from "rest" — and two independent ORDER BY RANDOM()
@@ -91,6 +102,9 @@ async function fetchQuestions(
   } else if (kind === "audio") {
     // The quota bucket, drawn separately so a game reliably contains some.
     clauses.push("type = 'audio' AND media_key IS NOT NULL");
+  } else if (kind === "image") {
+    // Its own quota bucket for the same reason as audio.
+    clauses.push("type = 'image' AND media_key IS NOT NULL AND answer_kind = 'text'");
   } else {
     // Everything else, images and maths included. Splitting on "media_key IS NULL" instead
     // made image questions unreachable: they carry a media key but are not audio, so they
@@ -219,12 +233,14 @@ export async function buildDeck(
   const specialSlots = chainCount + reflexCount + bluffQuestions.length + duelQuestions.length;
   const questionSlots = Math.max(0, total - specialSlots);
   const audioQuota = mediaAvailable ? Math.round((total * AUDIO_QUESTIONS_PER_15) / 15) : 0;
+  const imageQuota = mediaAvailable ? Math.round((total * IMAGE_QUESTIONS_PER_15) / 15) : 0;
 
   const numeric = await take(Math.min(settings.numericRounds, questionSlots), "numeric");
   const audio = await take(Math.min(audioQuota, Math.max(0, questionSlots - numeric.length)), "audio");
   // Whatever the quotas could not supply is taken up here, so the deck keeps its length.
-  const rest = await take(questionSlots - audio.length - numeric.length, "rest");
-  const questions = shuffle([...audio, ...numeric, ...rest]);
+  const image = await take(Math.min(imageQuota, Math.max(0, questionSlots - numeric.length - audio.length)), "image");
+  const rest = await take(questionSlots - audio.length - numeric.length - image.length, "rest");
+  const questions = shuffle([...audio, ...image, ...numeric, ...rest]);
 
   // The bank may hold fewer questions than asked for (narrow theme filter, unseeded DB).
   // Only ever lay out as many question slots as we actually drew — filling the gap with
