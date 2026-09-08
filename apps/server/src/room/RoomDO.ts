@@ -1,5 +1,5 @@
 import { DurableObject } from "cloudflare:workers";
-import { parseClientMessage } from "@nonoculture/shared";
+import { mediaUrl, parseClientMessage } from "@nonoculture/shared";
 import type { GameSettings, ServerMessageType } from "@nonoculture/shared";
 import { buildDeck } from "../lib/questions.js";
 import { sanitizeNickname, sanitizeText } from "../lib/sanitize.js";
@@ -64,9 +64,8 @@ function send(ws: WebSocket, type: ServerMessageType, payload: unknown): void {
   }
 }
 
-function resolveMediaUrl(mediaKey: string): string {
-  return `/media/${mediaKey}`;
-}
+/** The one place a media URL is built. See `mediaUrl` for why it is not the key itself. */
+const resolveMediaUrl = mediaUrl;
 
 export class RoomDO extends DurableObject<Env> {
   private gameState: GameState | null = null;

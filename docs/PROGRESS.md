@@ -74,6 +74,12 @@ Générateurs (tous relançables, tous sur des sources CC0) :
 - Les images passent par une vérification de licence **fichier par fichier** via l'API
   Commons, jamais au niveau du site : la licence d'un fichier ne se déduit pas de celle
   de la plateforme qui l'héberge.
+- **Les URL de médias sont des tokens** (`packages/shared/src/media-token.ts`) : la clé nomme
+  la réponse, donc elle ne sort jamais du serveur. Ce que ça arrête : lire la réponse dans
+  l'onglet réseau, et deviner un nom de fichier pour le vérifier contre le token (il est salé).
+  Ce que ça n'arrête pas : un joueur qui note les paires token/réponse aux reveals et se
+  construit sa table sur plusieurs parties — il faudrait un token par manche, donc router
+  chaque image par le Durable Object, et l'image cesserait d'être un asset statique gratuit.
 
 ## Modes de jeu
 

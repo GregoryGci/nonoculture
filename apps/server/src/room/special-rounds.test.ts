@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { mediaUrl } from "@nonoculture/shared";
 import { buildStateSync } from "./selectors.js";
 import { computeNextAlarmTs, createRoom, transition } from "./state-machine.js";
 import type { DeckItem, GameState, InternalQuestion } from "./types.js";
@@ -459,15 +460,19 @@ describe("blurred picture round", () => {
     let state = room(["a", "b", "c"], deck);
     state = transition(state, { kind: "SUBMIT_BLUR_ANSWER", playerId: "a", text: "Annie", now: T0 + 2_000 }).state;
 
-    const forB = buildStateSync(state, "b", (key) => `/media/${key}`);
+    // The real resolver, not a stub: the key names the champion, so the assertion below is
+    // only worth anything if the URL is built the way production builds it.
+    const forB = buildStateSync(state, "b", mediaUrl);
     expect(forB.blur?.step).toBe("guess");
     expect(forB.blur?.answered).toBe(1);
     expect(forB.blur?.yourAnswer).toBeNull();
     expect(forB.blur?.correctAnswer).toBeNull();
     expect(forB.blur?.results).toBeNull();
     expect(JSON.stringify(forB)).not.toContain("Annie");
-    // The picture is the question, so it does travel — but only as a URL.
-    expect(forB.blur?.imageUrl).toBe("/media/lol-portrait-annie.webp");
+    // The picture is the question, so it does travel — but as a token that does not spell
+    // out the file it points at.
+    expect(forB.blur?.imageUrl).toBe(mediaUrl("lol-portrait-annie.webp"));
+    expect(forB.blur?.imageUrl).not.toContain("annie");
   });
 
   it("hands the room the ranked results once it is over", () => {
@@ -475,7 +480,7 @@ describe("blurred picture round", () => {
     state = transition(state, { kind: "SUBMIT_BLUR_ANSWER", playerId: "a", text: "Annie", now: T0 + 2_000 }).state;
     state = transition(state, { kind: "SUBMIT_BLUR_ANSWER", playerId: "b", text: "Lux", now: T0 + 4_000 }).state;
 
-    const view = buildStateSync(state, "b", (key) => `/media/${key}`).blur;
+    const view = buildStateSync(state, "b", mediaUrl).blur;
     expect(view?.step).toBe("reveal");
     expect(view?.correctAnswer).toBe("Annie");
     expect(view?.results?.map((r) => [r.nickname, r.correct, r.points])).toEqual([

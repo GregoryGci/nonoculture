@@ -32,6 +32,13 @@ premier** en reprenant ce projet, c'est la source de vérité sur ce qui est fai
 - `ctx.setWebSocketAutoResponse()` pour le ping/pong (gratuit, ne réveille pas le DO).
 - Aucune réponse d'un joueur ne doit être diffusée aux autres avant `HOST_REVIEW`
   (sinon triche via l'inspecteur réseau). `ANSWER_RECEIVED` est un accusé sans contenu.
+- **Les médias sont servis sous un token, jamais sous leur clé** (`mediaUrl` /
+  `tokenFromParam`, `packages/shared/src/media-token.ts`). `/media/lol-portrait-vex.webp`
+  annonçait la réponse à qui ouvrait l'onglet réseau. Le Worker retraduit le token via une
+  table clé→token construite depuis D1 et gardée en mémoire de l'isolate. Deux conséquences à
+  ne pas défaire : `run_worker_first = true` dans `wrangler.toml` (sinon le serveur d'assets
+  répond avant le Worker et le nom en clair reste joignable), et le proxy `/media` du dev
+  server Vite (sinon Vite sert `public/media` en direct et le dev n'exerce pas ce chemin).
 - Le DO persiste son état dans son storage SQLite après **chaque** transition de phase.
 - TypeScript strict partout, pas de `any`. Types du protocole WS et schémas Zod dans
   `packages/shared`, importés par le client et le serveur — jamais dupliqués.

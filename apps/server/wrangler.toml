@@ -11,6 +11,11 @@ compatibility_flags = ["nodejs_compat"]
 directory = "../web/dist"
 binding = "ASSETS"
 not_found_handling = "single-page-application"
+# Every request goes through the Worker, assets included. Without this the asset server
+# answers first, and /media/lol-portrait-vex.webp — the file name that spells out the answer —
+# would still be reachable by guessing it, which is exactly what the media tokens exist to
+# stop. The extra invocation per static request is free at this scale; the hole was not.
+run_worker_first = true
 
 # --- Durable Object: 1 instance per room, adressed by idFromName(roomCode).
 [[durable_objects.bindings]]
