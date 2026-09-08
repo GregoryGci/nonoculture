@@ -23,14 +23,17 @@ deploy` réel. Historique détaillé : `git log --oneline`.
 | ----------- | ----- | ---: |
 | text        | text  | 4253 |
 | number      | text  |  625 |
-| list        | text  |  705 |
 | math        | text  |  420 |
 | text        | image |  268 |
-| text        | audio |   15 |
-| **total**   |       | 6286 |
+| blur        | image |  223 |
+| list        | text  |  135 |
+| text        | audio |   21 |
+| **total**   |       | 5945 |
 
-À quoi s’ajoutent **223 questions `answer_kind = "blur"`** (173 portraits LoL, 50 drapeaux),
-chargées en local mais **pas encore sur le D1 distant** : le déploiement est en attente.
+Les 223 `blur` sont les 173 portraits LoL et les 50 drapeaux flous. Le compte `list` est
+tombé de 705 à 135 quand les listes générées ont été remplacées par des sujets qu’une table
+connaît vraiment — un duel sur « citez des films de Nolan » vaut mieux que vingt duels sur des
+listes que personne ne peut réciter.
 
 Réparties sur **23 thèmes** et **40 familles** (`family`), la plus grosse à 488 questions. La colonne
 `family` existe pour une raison précise : sans elle, choisir le thème « sport » sortait
