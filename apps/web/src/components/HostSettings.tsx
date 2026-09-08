@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {
   BLUFF_MIN_PLAYERS,
+  BLUR_MIN_PLAYERS,
   CHAIN_MIN_PLAYERS,
   DUEL_MIN_PLAYERS,
   REFLEX_MIN_PLAYERS,
@@ -52,6 +53,13 @@ const SPECIAL_ROUNDS = [
     blurb: "L'écran passe au vert, le premier à taper gagne.",
     max: MAX_SPECIAL_ROUNDS,
     minPlayers: REFLEX_MIN_PLAYERS,
+  },
+  {
+    key: "blurRounds",
+    label: "Image floue",
+    blurb: "Une image se précise en dix secondes, le plus rapide marque le plus.",
+    max: MAX_SPECIAL_ROUNDS,
+    minPlayers: BLUR_MIN_PLAYERS,
   },
   {
     key: "numericRounds",

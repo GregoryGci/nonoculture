@@ -18,6 +18,7 @@ import { ChainRevealSlideshow } from "../components/ChainRevealSlideshow";
 import { BluffRound } from "../components/BluffRound";
 import { DuelRound } from "../components/DuelRound";
 import { ReflexRound } from "../components/ReflexRound";
+import { BlurRound } from "../components/BlurRound";
 import { themeLabel, type QuestionPublic } from "@nonoculture/shared";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -208,13 +209,27 @@ export function Room() {
             </SpecialStep>
           )}
 
+          {state.blur && (
+            <SpecialStep label="Image floue" title={state.blur.step === "reveal" ? "Résultats" : state.blur.prompt}>
+              <BlurRound
+                blur={state.blur}
+                deadlineTs={state.phaseDeadlineTs}
+                clockOffset={clockOffset}
+                onAnswer={(text) => send({ type: "SUBMIT_BLUR_ANSWER", text })}
+              />
+            </SpecialStep>
+          )}
+
           {state.reflex && (
             <SpecialStep label="Réflexe" title={state.reflex.step === "reveal" ? "Résultats" : "Prêt ?"}>
               <ReflexRound reflex={state.reflex} onTap={() => send({ type: "SUBMIT_REFLEX_TAP" })} />
             </SpecialStep>
           )}
 
-          {(state.phase === "BLUFF_REVEAL" || state.phase === "DUEL_REVEAL" || state.phase === "REFLEX_REVEAL") &&
+          {(state.phase === "BLUFF_REVEAL" ||
+            state.phase === "DUEL_REVEAL" ||
+            state.phase === "REFLEX_REVEAL" ||
+            state.phase === "BLUR_REVEAL") &&
             isHost && (
               <button onClick={() => send({ type: "HOST_NEXT" })} className="btn btn-primary h-14 w-full">
                 Continuer

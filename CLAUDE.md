@@ -55,6 +55,8 @@ juger — c'est de l'arithmétique ou du comptage, pas du jugement :
   **exclues d'`answerLog`**, donc l'hôte ne les voit pas en review.
 - `answer_kind = "list"` : la question porte tout son ensemble de réponses acceptées dans
   `answer` + `aliases`, et la manche duel compte les touches.
+- `answer_kind = "blur"` : la manche image floue, payée à l’ordre d’arrivée. Même raison que
+  ci-dessus — la question porte ses orthographes acceptées, donc il n’y a rien à arbitrer.
 
 Dès que tous les joueurs connectés ont répondu (ou que le timer expire), on enchaîne
 directement sur le slot suivant du deck — **aucun `REVEAL` ni `SCOREBOARD` entre les
@@ -92,7 +94,8 @@ demandait d’inventer une fausse réponse à cette même question. Couvert par
 `apps/server/src/lib/questions.test.ts`.
 
 Chaque manche spéciale est sautée si la room compte moins de 3 joueurs connectés au moment
-où son slot arrive (`CHAIN_MIN_PLAYERS`, `BLUFF_MIN_PLAYERS`, `DUEL_MIN_PLAYERS`).
+où son slot arrive (`CHAIN_MIN_PLAYERS`, `BLUFF_MIN_PLAYERS`, `DUEL_MIN_PLAYERS`) — deux
+suffisent pour les manches de vitesse (`REFLEX_MIN_PLAYERS`, `BLUR_MIN_PLAYERS`).
 
 ```
 BLUFF_WRITE (45s) → BLUFF_VOTE (30s) → BLUFF_REVEAL (12s)
@@ -109,6 +112,19 @@ DUEL_PREDICT (15s) → DUEL_ANSWER (45s) → DUEL_REVEAL (12s)
   le nombre de fois où il est tapé. `DUEL_POINTS_WINNER` au vainqueur,
   `DUEL_POINTS_PREDICTED` à chaque spectateur qui a vu juste ; un duelliste ne peut pas
   parier sur lui-même.
+
+La manche image floue tient en deux phases :
+
+```
+BLUR_GUESS (15s) → BLUR_REVEAL (10s)
+```
+
+L’image arrive floutée à `BLUR_MAX_PX` et se précise linéairement en `BLUR_SHARPEN_MS` (10 s,
+soit avant la fin du tour). **Le rayon du flou n’est jamais envoyé** : c’est une fonction pure du
+temps restant, que le client a déjà via `phaseDeadlineTs` et la constante partagée — le diffuser
+serait un `STATE_SYNC` par frame pour de l’arithmétique. Une seule réponse par joueur, sinon il
+suffirait de tirer des noms au hasard en attendant que l’image devienne lisible. Les bonnes
+réponses touchent `BLUR_POINTS_BY_RANK` dans l’ordre d’arrivée, puis `BLUR_POINTS_OTHER`.
 
 Les manches dessinées gardent leur scoring automatique :
 

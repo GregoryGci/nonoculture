@@ -29,6 +29,9 @@ deploy` réel. Historique détaillé : `git log --oneline`.
 | text        | audio |   15 |
 | **total**   |       | 6286 |
 
+À quoi s’ajoutent **223 questions `answer_kind = "blur"`** (173 portraits LoL, 50 drapeaux),
+chargées en local mais **pas encore sur le D1 distant** : le déploiement est en attente.
+
 Réparties sur **23 thèmes** et **40 familles** (`family`), la plus grosse à 488 questions. La colonne
 `family` existe pour une raison précise : sans elle, choisir le thème « sport » sortait
 quinze fois « quel sport pratique X ? » d'affilée. Le tirage fait maintenant un round-robin
@@ -59,6 +62,15 @@ Générateurs (tous relançables, tous sur des sources CC0) :
   armoiries, monuments, animaux) a donné 97 % de domaine public pour les tableaux contre
   85 % pour les autres : l'art ancien est hors droits par construction.
 - `apps/server/scripts/generate-flags.mjs` — 90 drapeaux.
+- `apps/server/scripts/generate-lol-portraits.mjs` — 173 portraits de champions depuis le
+  **Data Dragon** de Riot, cadrés sur le carré haut de l’art de chargement (la tête et les
+  épaules), en `answer_kind = "blur"`. Art propriété de Riot, utilisé ici comme contenu de
+  fan sur un jeu privé — c’est la même situation que les questions LoL déjà en banque, et
+  Data Dragon est le CDN public de Riot lui-même, pas un tiers qui redistribue son bien.
+- `apps/server/scripts/generate-flag-blur.mjs` — 50 drapeaux flous, dérivés **sans aucun
+  téléchargement** des WebP que `generate-flags.mjs` a déjà produits. Énoncés volontairement
+  différents de ceux des questions nettes : l’index unique est sur `(prompt, answer)` et un
+  énoncé identique aurait fait avaler les 50 lignes par `INSERT OR IGNORE`, sans erreur.
 - Les images passent par une vérification de licence **fichier par fichier** via l'API
   Commons, jamais au niveau du site : la licence d'un fichier ne se déduit pas de celle
   de la plateforme qui l'héberge.
@@ -75,6 +87,8 @@ l'hôte dans le lobby (`GameSettings`, `HostSettings.tsx`) :
 | `bluffRounds`   |      1 | manches bluff                                                |
 | `duelRounds`    |      1 | duels 1v1                                                    |
 | `reflexRounds`  |      1 | manches réflexe (le premier à taper au vert)                 |
+| `blurRounds`    |      1 | manches image floue (elle se précise, le plus rapide marque) |
+| `numericRounds` |      2 | questions « le plus proche gagne »                           |
 
 **« Tous les thèmes » exclut `lol` et `dofus`** (`OPT_IN_THEMES` dans `packages/shared`) : ce
 sont des questions sur un jeu précis, et une table dont la moitié n'y a jamais joué cesse d'être
@@ -85,7 +99,6 @@ droits, sans recours. Sonde sur cinq familles Commons, 50 candidats chacune : bl
 domaine public, instruments 29 %, plats 12 %, monuments 0 %. Les photos modernes sont presque
 toutes en CC BY-SA, donc « devine ce monument / ce plat » n'est pas constructible librement.
 Les trois familles image en banque sont donc drapeaux, tableaux et blasons.
-| `numericRounds` |      2 | questions « le plus proche gagne »                           |
 
 Chaque manche spéciale consomme un slot ; jamais en première ni dernière position. Les
 manches à 3 joueurs minimum (`CHAIN_MIN_PLAYERS`, `BLUFF_MIN_PLAYERS`, `DUEL_MIN_PLAYERS`)
@@ -107,6 +120,16 @@ sont sautées si la room est trop petite au moment où le slot arrive.
   `null` pendant l’attente — un compte à rebours diffusé serait une réponse diffusée. Les
   temps sont mesurés à l’arrivée sur le serveur, trajet réseau compris (~40 ms mesurés) :
   face aux ~250 ms de temps de réaction humain, ce n’est pas ce qui décide la manche.
+- **Image floue** (`BLUR_GUESS` 15s → `BLUR_REVEAL` 10s, `answer_kind = "blur"`) — une image
+  arrive floutée à 34 px et se précise linéairement en 10 s. On répond une seule fois, et les
+  bonnes réponses sont payées **dans l'ordre d'arrivée** : 5, 3, 2, puis 1 pour toutes les
+  suivantes. Auto-scoré comme le duel — un nom de champion ou de pays se vérifie, il n'y a rien
+  à soumettre à l'hôte. **Le rayon du flou n'est pas envoyé** : c'est une fonction du temps
+  restant, que le client a déjà via `phaseDeadlineTs` et `BLUR_SHARPEN_MS` — le diffuser serait
+  un `STATE_SYNC` par frame pour de l'arithmétique. Deux sources en banque : 173 portraits de
+  champions LoL (Data Dragon, thème `lol`, opt-in) et 50 drapeaux flous (`drapeaux`, thème
+  général) — sans cette seconde source la manche n'existerait que pour les tables qui cochent
+  « League of Legends ».
 - **Maths** (thème `maths`, `answer_kind = "math"`) — arithmétique mentale courte, réponse
   exacte, **le plus rapide à répondre juste marque 3, les autres bonnes réponses 1**.
   420 questions générées hors ligne sur 14 familles (addition, puissances, racines,

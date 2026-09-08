@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { buildStateSync } from "./selectors.js";
 import { computeNextAlarmTs, createRoom, transition } from "./state-machine.js";
 import type { DeckItem, GameState, InternalQuestion } from "./types.js";
 
@@ -386,5 +387,100 @@ describe("review navigation", () => {
     // Otherwise every player scrolls their own way and nobody is following anybody.
     const state = transition(inReview(), { kind: "HOST_REVIEW_GOTO", playerId: "b", index: 3, now: T0 + 300 }).state;
     expect(state.reviewIndex).toBe(0);
+  });
+});
+
+describe("blurred picture round", () => {
+  const portrait = question({
+    id: 42,
+    theme: "lol",
+    answerKind: "blur",
+    type: "image",
+    mediaKey: "lol-portrait-annie.webp",
+    prompt: "Qui est ce champion ?",
+    answer: "Annie",
+    aliases: ["Annie Hastur"],
+  });
+  const deck: DeckItem[] = [{ kind: "blur", question: portrait }];
+
+  it("pays by finishing order, not by being right at the same time as everyone else", () => {
+    let state = room(["a", "b", "c"], deck);
+    expect(state.phase).toBe("BLUR_GUESS");
+
+    state = transition(state, { kind: "SUBMIT_BLUR_ANSWER", playerId: "b", text: "Annie", now: T0 + 3_000 }).state;
+    state = transition(state, { kind: "SUBMIT_BLUR_ANSWER", playerId: "a", text: "annie", now: T0 + 5_000 }).state;
+    state = transition(state, { kind: "SUBMIT_BLUR_ANSWER", playerId: "c", text: "Lux", now: T0 + 4_000 }).state;
+
+    expect(state.phase).toBe("BLUR_REVEAL");
+    // b answered first, a second, c never answered right at all.
+    expect(state.players.b?.score).toBe(5);
+    expect(state.players.a?.score).toBe(3);
+    expect(state.players.c?.score).toBe(0);
+  });
+
+  it("gives everyone past the podium a point, so a late right answer still beats a wrong one", () => {
+    let state = room(["a", "b", "c", "d"], deck);
+    const order = ["a", "b", "c", "d"];
+    order.forEach((id, i) => {
+      state = transition(state, {
+        kind: "SUBMIT_BLUR_ANSWER",
+        playerId: id,
+        // The fourth one spells it the way the aliases allow, which still counts.
+        text: id === "d" ? "annie hastur" : "Annie",
+        now: T0 + 1_000 * (i + 1),
+      }).state;
+    });
+    expect(state.players.d?.score).toBe(1);
+  });
+
+  it("takes the first answer only — a second guess cannot ride the picture getting sharper", () => {
+    let state = room(["a", "b"], deck);
+    state = transition(state, { kind: "SUBMIT_BLUR_ANSWER", playerId: "a", text: "Lux", now: T0 + 2_000 }).state;
+    state = transition(state, { kind: "SUBMIT_BLUR_ANSWER", playerId: "a", text: "Annie", now: T0 + 9_000 }).state;
+    expect(state.blur?.answers.a?.raw).toBe("Lux");
+  });
+
+  it("closes on the timer, scoring whoever did answer", () => {
+    let state = room(["a", "b"], deck);
+    state = transition(state, { kind: "SUBMIT_BLUR_ANSWER", playerId: "a", text: "Annie", now: T0 + 2_000 }).state;
+    expect(state.phase).toBe("BLUR_GUESS");
+    state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state;
+    expect(state.phase).toBe("BLUR_REVEAL");
+    expect(state.players.a?.score).toBe(5);
+  });
+
+  it("is skipped below the minimum, rather than played alone", () => {
+    const state = room(["a"], [...deck, { kind: "trivia", question: question() }]);
+    expect(state.phase).toBe("QUESTION");
+    expect(state.blur).toBeNull();
+  });
+
+  it("never leaves an answer on the wire before the reveal", () => {
+    let state = room(["a", "b", "c"], deck);
+    state = transition(state, { kind: "SUBMIT_BLUR_ANSWER", playerId: "a", text: "Annie", now: T0 + 2_000 }).state;
+
+    const forB = buildStateSync(state, "b", (key) => `/media/${key}`);
+    expect(forB.blur?.step).toBe("guess");
+    expect(forB.blur?.answered).toBe(1);
+    expect(forB.blur?.yourAnswer).toBeNull();
+    expect(forB.blur?.correctAnswer).toBeNull();
+    expect(forB.blur?.results).toBeNull();
+    expect(JSON.stringify(forB)).not.toContain("Annie");
+    // The picture is the question, so it does travel — but only as a URL.
+    expect(forB.blur?.imageUrl).toBe("/media/lol-portrait-annie.webp");
+  });
+
+  it("hands the room the ranked results once it is over", () => {
+    let state = room(["a", "b"], deck);
+    state = transition(state, { kind: "SUBMIT_BLUR_ANSWER", playerId: "a", text: "Annie", now: T0 + 2_000 }).state;
+    state = transition(state, { kind: "SUBMIT_BLUR_ANSWER", playerId: "b", text: "Lux", now: T0 + 4_000 }).state;
+
+    const view = buildStateSync(state, "b", (key) => `/media/${key}`).blur;
+    expect(view?.step).toBe("reveal");
+    expect(view?.correctAnswer).toBe("Annie");
+    expect(view?.results?.map((r) => [r.nickname, r.correct, r.points])).toEqual([
+      ["", true, 5],
+      ["", false, 0],
+    ]);
   });
 });

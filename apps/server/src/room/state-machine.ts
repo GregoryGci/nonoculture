@@ -2,6 +2,10 @@ import {
   BLUFF_MIN_PLAYERS,
   BLUFF_POINTS_FOOLED,
   BLUFF_POINTS_FOUND,
+  BLUR_GUESS_MS,
+  BLUR_MIN_PLAYERS,
+  BLUR_POINTS_BY_RANK,
+  BLUR_POINTS_OTHER,
   CHAIN_MIN_PLAYERS,
   DEFAULT_SETTINGS,
   DUEL_MIN_PLAYERS,
@@ -28,6 +32,7 @@ import {
   BLUFF_REVEAL_DURATION_MS,
   BLUFF_VOTE_DURATION_MS,
   BLUFF_WRITE_DURATION_MS,
+  BLUR_REVEAL_DURATION_MS,
   CODE_RELEASE_DELAY_MS,
   DUEL_ANSWER_DURATION_MS,
   DUEL_PREDICT_DURATION_MS,
@@ -74,6 +79,10 @@ function clampSettings(partial: Partial<GameSettings>, base: GameSettings): Game
       partial.duelRounds !== undefined
         ? Math.min(MAX_SPECIAL_ROUNDS, Math.max(0, partial.duelRounds))
         : base.duelRounds,
+    blurRounds:
+      partial.blurRounds !== undefined
+        ? Math.min(MAX_SPECIAL_ROUNDS, Math.max(0, partial.blurRounds))
+        : base.blurRounds,
     reflexRounds:
       partial.reflexRounds !== undefined
         ? Math.min(MAX_SPECIAL_ROUNDS, Math.max(0, partial.reflexRounds))
@@ -319,6 +328,17 @@ function startDeckSlot(state: GameState, index: number, now: number): GameState 
     };
   }
 
+  if (item.kind === "blur") {
+    // Guessing a picture works alone, but "who got it first" needs someone to be first against.
+    if (participants.length < BLUR_MIN_PLAYERS) return startDeckSlot(state, index + 1, now);
+    return {
+      ...base,
+      phase: "BLUR_GUESS",
+      blur: { answers: {}, points: {} },
+      phaseDeadlineTs: now + BLUR_GUESS_MS,
+    };
+  }
+
   if (item.kind === "reflex") {
     // A race needs someone to race against.
     if (participants.length < REFLEX_MIN_PLAYERS) return startDeckSlot(state, index + 1, now);
@@ -345,7 +365,41 @@ function startDeckSlot(state: GameState, index: number, now: number): GameState 
 }
 
 /** Every special-round slate wiped, so a slot never inherits the previous one's state. */
-const CLEARED = { chain: null, bluff: null, duel: null, reflex: null } as const;
+const CLEARED = { chain: null, bluff: null, duel: null, reflex: null, blur: null } as const;
+
+/**
+ * Closes a blurred-picture round: correct answers pay by finishing order.
+ *
+ * Scored on the spot rather than sent to the host review, for the same reason arithmetic is:
+ * a champion's portrait either got named or it didn't, and the question carries every accepted
+ * spelling itself. Ties are impossible — arrival order at the server is a total order.
+ */
+function resolveBlur(state: GameState, now: number): GameState {
+  const blur = state.blur;
+  const question = currentQuestion(state);
+  if (!blur || !question) return state;
+
+  const accepted = new Set(acceptedAnswers(question));
+  const ranked = Object.entries(blur.answers)
+    .filter(([, a]) => accepted.has(normalizeAnswer(a.raw)))
+    .sort((a, b) => a[1].at - b[1].at);
+
+  const points: Record<string, number> = {};
+  ranked.forEach(([playerId], rank) => {
+    points[playerId] = BLUR_POINTS_BY_RANK[rank] ?? BLUR_POINTS_OTHER;
+  });
+
+  const players = Object.fromEntries(
+    Object.entries(state.players).map(([id, p]) => [id, { ...p, score: p.score + (points[id] ?? 0) }]),
+  );
+  return {
+    ...state,
+    players,
+    blur: { ...blur, points },
+    phase: "BLUR_REVEAL",
+    phaseDeadlineTs: now + BLUR_REVEAL_DURATION_MS,
+  };
+}
 
 /**
  * Closes a reflex round: fastest tap takes the round, second place gets a consolation point.
@@ -550,6 +604,9 @@ function advanceIfSpecialComplete(state: GameState, now: number): GameState {
   if (state.phase === "BLUFF_VOTE" && state.bluff) {
     return allConnectedHaveKeys(state, state.bluff.votes) ? resolveBluff(state, now) : state;
   }
+  if (state.phase === "BLUR_GUESS" && state.blur) {
+    return allConnectedHaveKeys(state, state.blur.answers) ? resolveBlur(state, now) : state;
+  }
   if (state.phase === "DUEL_PREDICT" && state.duel) {
     return allSpectatorsPredicted(state)
       ? { ...state, phase: "DUEL_ANSWER", phaseDeadlineTs: now + DUEL_ANSWER_DURATION_MS }
@@ -575,6 +632,7 @@ export function createRoom(roomCode: string, now: number): GameState {
     bluff: null,
     duel: null,
     reflex: null,
+    blur: null,
     phaseDeadlineTs: null,
     createdAt: now,
     lastActivityAt: now,
@@ -714,6 +772,19 @@ export function transition(state: GameState, event: GameEvent): TransitionResult
       if (allConnectedAnswered(next)) {
         next = logAnswersAndAdvance(next, event.now);
       }
+      break;
+    }
+
+    case "SUBMIT_BLUR_ANSWER": {
+      if (state.phase !== "BLUR_GUESS" || !state.blur) break;
+      const player = state.players[event.playerId];
+      if (!player || !player.connected) break;
+      // One shot each. The round measures how early you were sure of yourself, and a second
+      // guess would let a player fire names off blind while the picture sharpens for them.
+      if (state.blur.answers[event.playerId] !== undefined) break;
+      const answers = { ...state.blur.answers, [event.playerId]: { raw: event.text, at: event.now } };
+      next = { ...state, blur: { ...state.blur, answers } };
+      if (allConnectedHaveKeys(next, answers)) next = resolveBlur(next, event.now);
       break;
     }
 
@@ -1001,6 +1072,10 @@ function handleAlarm(state: GameState, now: number, effects: Effect[]): GameStat
     } else if (next.phase === "REFLEX_GO") {
       next = resolveReflex(next, now);
     } else if (next.phase === "REFLEX_REVEAL") {
+      next = advanceDeck(next, now);
+    } else if (next.phase === "BLUR_GUESS") {
+      next = resolveBlur(next, now);
+    } else if (next.phase === "BLUR_REVEAL") {
       next = advanceDeck(next, now);
     }
   }

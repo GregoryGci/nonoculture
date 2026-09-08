@@ -6,6 +6,7 @@ import type {
   DuelView,
   PlayerPublic,
   QuestionPublic,
+  BlurView,
   ReflexView,
   ReviewQuestion,
   RoomStateSync,
@@ -177,6 +178,49 @@ function computeDuel(state: GameState, forPlayerId: string, nicknameOf: (id: str
   };
 }
 
+/**
+ * The blurred picture as one player sees it.
+ *
+ * No answer leaves the server before the reveal, same rule as every other round — and the blur
+ * radius is not sent either, because it is a pure function of how much of the round is left,
+ * which the client already has from `phaseDeadlineTs`. Only the count of players who have
+ * locked in goes out: that is pressure, not information.
+ */
+function computeBlur(
+  state: GameState,
+  forPlayerId: string,
+  nicknameOf: (id: string) => string,
+  resolveMediaUrl: (mediaKey: string) => string,
+): BlurView | null {
+  const blur = state.blur;
+  const question = questionAt(state, state.deckIndex);
+  if (!blur || !question) return null;
+  const step = state.phase === "BLUR_GUESS" ? "guess" : state.phase === "BLUR_REVEAL" ? "reveal" : null;
+  if (!step) return null;
+
+  const revealing = step === "reveal";
+  const accepted = new Set([question.answer, ...question.aliases].map(normalizeAnswer).filter((a) => a.length > 0));
+  return {
+    step,
+    prompt: question.prompt,
+    imageUrl: question.mediaKey ? resolveMediaUrl(question.mediaKey) : "",
+    yourAnswer: blur.answers[forPlayerId]?.raw ?? null,
+    correctAnswer: revealing ? question.answer : null,
+    results: revealing
+      ? Object.entries(blur.answers)
+          .sort((a, b) => a[1].at - b[1].at)
+          .map(([playerId, a]) => ({
+            nickname: nicknameOf(playerId),
+            answer: a.raw,
+            correct: accepted.has(normalizeAnswer(a.raw)),
+            points: blur.points[playerId] ?? 0,
+          }))
+      : null,
+    answered: Object.keys(blur.answers).length,
+    total: Object.values(state.players).filter((p) => p.connected).length,
+  };
+}
+
 /** Looks up a chain drawing's data URL — the bytes live outside GameState (see ChainRoundState). */
 export type DrawingResolver = (originPlayerId: string) => string;
 
@@ -335,6 +379,7 @@ export function buildStateSync(
     bluff: computeBluff(state, forPlayerId, nicknameOf),
     duel: computeDuel(state, forPlayerId, nicknameOf),
     reflex: computeReflex(state, forPlayerId, nicknameOf),
+    blur: computeBlur(state, forPlayerId, nicknameOf, resolveMediaUrl),
     reviewQuestions: computeReviewQuestions(state, forPlayerId, nicknameOf),
     reviewIndex: state.reviewIndex,
     serverNowTs: Date.now(),

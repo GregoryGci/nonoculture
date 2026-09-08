@@ -68,6 +68,7 @@ export const HostSettingsMsg = z.object({
   bluffRounds: z.number().int().min(0).max(6).optional(),
   duelRounds: z.number().int().min(0).max(6).optional(),
   reflexRounds: z.number().int().min(0).max(6).optional(),
+  blurRounds: z.number().int().min(0).max(6).optional(),
   numericRounds: z.number().int().min(0).max(6).optional(),
   themes: z.array(z.string()).optional(),
 });
@@ -141,6 +142,14 @@ export const SubmitReflexTapMsg = z.object({
   type: z.literal("SUBMIT_REFLEX_TAP"),
 });
 
+// --- Blurred picture round ---
+
+/** One guess at the picture. Timed on arrival, like everything else that races. */
+export const SubmitBlurAnswerMsg = z.object({
+  type: z.literal("SUBMIT_BLUR_ANSWER"),
+  text: z.string().min(1).max(60),
+});
+
 export const ClientMessage = z.discriminatedUnion("type", [
   HelloMsg,
   ObserveMsg,
@@ -162,6 +171,7 @@ export const ClientMessage = z.discriminatedUnion("type", [
   SubmitDuelPredictionMsg,
   SubmitDuelAnswerMsg,
   SubmitReflexTapMsg,
+  SubmitBlurAnswerMsg,
 ]);
 
 export type ClientMessage = z.infer<typeof ClientMessage>;

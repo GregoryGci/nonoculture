@@ -43,6 +43,7 @@ const SETTING_KEYS = [
   "bluffRounds",
   "duelRounds",
   "reflexRounds",
+  "blurRounds",
   "numericRounds",
   "themes",
 ] as const satisfies readonly (keyof GameSettings)[];
@@ -354,6 +355,11 @@ export class RoomDO extends DurableObject<Env> {
         break;
       case "SUBMIT_DUEL_ANSWER":
         await this.dispatch({ kind: "SUBMIT_DUEL_ANSWER", playerId, text: sanitizeText(parsed.text, 60), now }, ws);
+        break;
+      case "SUBMIT_BLUR_ANSWER":
+        // Timed on arrival like the reflex tap, and for the same reason: the round pays for
+        // being early, so the clock has to be one the client cannot touch.
+        await this.dispatch({ kind: "SUBMIT_BLUR_ANSWER", playerId, text: sanitizeText(parsed.text, 60), now }, ws);
         break;
       case "SUBMIT_REFLEX_TAP":
         // `now` is taken here, on arrival, and never from the client: a self-reported

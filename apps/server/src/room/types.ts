@@ -7,7 +7,7 @@ export interface InternalQuestion {
   /** Generator template it came from; null for hand-written questions. */
   family: string | null;
   /** How the answer is judged: by the host, by proximity, or by counting list hits. */
-  answerKind: "text" | "number" | "list" | "math";
+  answerKind: "text" | "number" | "list" | "math" | "blur";
   difficulty: 1 | 2 | 3;
   type: QuestionType;
   prompt: string;
@@ -23,7 +23,8 @@ export type DeckItem =
   | { kind: "chain" }
   | { kind: "bluff"; question: InternalQuestion }
   | { kind: "duel"; question: InternalQuestion }
-  | { kind: "reflex" };
+  | { kind: "reflex" }
+  | { kind: "blur"; question: InternalQuestion };
 
 export interface InternalPlayer {
   playerId: string;
@@ -123,6 +124,20 @@ export interface ReflexRoundState {
   points: Record<string, number>;
 }
 
+/**
+ * A blurred-picture round in progress.
+ *
+ * Answers are kept in arrival order with their timestamps, because the whole scoring is
+ * "who got there first" — a set of who-answered would lose exactly the information the
+ * round exists to measure.
+ */
+export interface BlurRoundState {
+  /** playerId -> what they typed and when it reached the server. */
+  answers: Record<string, { raw: string; at: number }>;
+  /** playerId -> points, filled in at the reveal. */
+  points: Record<string, number>;
+}
+
 export interface GameState {
   roomCode: string;
   phase: Phase;
@@ -148,6 +163,7 @@ export interface GameState {
   bluff: BluffRoundState | null; // set only while playing a bluff slot
   duel: DuelRoundState | null; // set only while playing a duel slot
   reflex: ReflexRoundState | null; // set only while playing a reflex slot
+  blur: BlurRoundState | null; // set only while playing a blurred-picture slot
   phaseDeadlineTs: number | null;
   createdAt: number;
   lastActivityAt: number;
@@ -171,6 +187,7 @@ export type GameEvent =
   | { kind: "SUBMIT_DUEL_PREDICTION"; playerId: string; targetId: string; now: number }
   | { kind: "SUBMIT_DUEL_ANSWER"; playerId: string; text: string; now: number }
   | { kind: "SUBMIT_REFLEX_TAP"; playerId: string; now: number }
+  | { kind: "SUBMIT_BLUR_ANSWER"; playerId: string; text: string; now: number }
   | { kind: "HOST_NEXT"; playerId: string; now: number }
   | { kind: "HOST_KICK"; playerId: string; targetId: string; now: number }
   | { kind: "ALARM_FIRED"; now: number }
@@ -212,3 +229,5 @@ export const REFLEX_WAIT_MAX_MS = 7_000;
 /** Long enough that a distracted player still registers a time, short enough to stay tense. */
 export const REFLEX_GO_DURATION_MS = 6_000;
 export const REFLEX_REVEAL_DURATION_MS = 10_000;
+
+export const BLUR_REVEAL_DURATION_MS = 10_000;

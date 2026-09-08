@@ -34,7 +34,7 @@ const AUDIO_QUESTIONS_PER_15 = 4;
  */
 const IMAGE_QUESTIONS_PER_15 = 3;
 
-const ANSWER_KINDS = ["number", "list", "math"] as const;
+const ANSWER_KINDS = ["number", "list", "math", "blur"] as const;
 
 /**
  * Reads the column, falling back to host-graded text for anything unrecognised.
@@ -73,7 +73,7 @@ async function fetchQuestions(
   db: D1Database,
   settings: GameSettings,
   limit: number,
-  kind: "audio" | "image" | "rest" | "numeric" | "list",
+  kind: "audio" | "image" | "rest" | "numeric" | "list" | "blur",
   mediaAvailable: boolean,
   /** Ids already placed in this deck. Two buckets can draw from the same pool — bluff rounds
    *  and ordinary questions both come from "rest" — and two independent ORDER BY RANDOM()
@@ -102,6 +102,10 @@ async function fetchQuestions(
   } else if (kind === "audio") {
     // The quota bucket, drawn separately so a game reliably contains some.
     clauses.push("type = 'audio' AND media_key IS NOT NULL");
+  } else if (kind === "blur") {
+    // Its own answer_kind, so a portrait meant to sharpen never turns up as a plain question
+    // — shown all at once it would just be an easier version of itself.
+    clauses.push("answer_kind = 'blur' AND media_key IS NOT NULL");
   } else if (kind === "image") {
     // Its own quota bucket for the same reason as audio.
     clauses.push("type = 'image' AND media_key IS NOT NULL AND answer_kind = 'text'");
@@ -216,6 +220,11 @@ export async function buildDeck(
     settings.reflexRounds,
     Math.max(0, specialBudget - chainCount - bluffWanted - duelWanted),
   );
+  // Needs a picture of its own, and the bank may hold none for the chosen themes.
+  const blurWanted = Math.min(
+    settings.blurRounds,
+    Math.max(0, specialBudget - chainCount - bluffWanted - duelWanted - reflexCount),
+  );
 
   // Bluff and duel each need a question of their own, drawn first so the slot count can
   // shrink to what the bank can actually supply — a duel needs a list question, and there
@@ -229,8 +238,9 @@ export async function buildDeck(
 
   const bluffQuestions = await take(bluffWanted, "rest");
   const duelQuestions = await take(duelWanted, "list");
+  const blurQuestions = mediaAvailable ? await take(blurWanted, "blur") : [];
 
-  const specialSlots = chainCount + reflexCount + bluffQuestions.length + duelQuestions.length;
+  const specialSlots = chainCount + reflexCount + bluffQuestions.length + duelQuestions.length + blurQuestions.length;
   const questionSlots = Math.max(0, total - specialSlots);
   const audioQuota = mediaAvailable ? Math.round((total * AUDIO_QUESTIONS_PER_15) / 15) : 0;
   const imageQuota = mediaAvailable ? Math.round((total * IMAGE_QUESTIONS_PER_15) / 15) : 0;
@@ -254,6 +264,7 @@ export async function buildDeck(
     ...Array.from({ length: reflexCount }, (): DeckItem => ({ kind: "reflex" })),
     ...bluffQuestions.map((question): DeckItem => ({ kind: "bluff", question })),
     ...duelQuestions.map((question): DeckItem => ({ kind: "duel", question })),
+    ...blurQuestions.map((question): DeckItem => ({ kind: "blur", question })),
   ]);
   const positions = [...pickChainPositions(deck.length + specials.length, specials.length)].sort((a, b) => a - b);
   positions.forEach((position, i) => {

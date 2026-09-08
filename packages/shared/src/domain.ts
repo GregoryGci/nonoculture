@@ -14,6 +14,8 @@ export const PHASES = [
   "REFLEX_WAIT",
   "REFLEX_GO",
   "REFLEX_REVEAL",
+  "BLUR_GUESS",
+  "BLUR_REVEAL",
   "HOST_REVIEW",
   "FINISHED",
 ] as const;
@@ -51,6 +53,8 @@ export interface GameSettings {
   duelRounds: number;
   /** Reaction-time duels: the screen turns green, first tap wins. */
   reflexRounds: number;
+  /** A picture that starts blurred and sharpens; answer early for more points. */
+  blurRounds: number;
   /** Ordinary questions scored by proximity instead of by the host. */
   numericRounds: number;
   themes: string[]; // empty = all themes
@@ -65,6 +69,8 @@ export const BLUFF_MIN_PLAYERS = 3;
 export const DUEL_MIN_PLAYERS = 3;
 /** A reflex round is a race, so two is already a game. */
 export const REFLEX_MIN_PLAYERS = 2;
+/** Guessing a blurred picture works alone, but the podium needs someone to beat. */
+export const BLUR_MIN_PLAYERS = 2;
 
 /** Points awarded by the self-scoring rounds. */
 export const BLUFF_POINTS_FOUND = 2; // you spotted the real answer
@@ -78,6 +84,21 @@ export const REFLEX_POINTS_SECOND = 1;
 /** Maths questions reward being right, and reward being right first a lot more. */
 export const MATH_POINTS_CORRECT = 1;
 export const MATH_POINTS_FASTEST = 3;
+
+/**
+ * A blurred picture pays by finishing order, not by a stopwatch.
+ *
+ * Ranked rather than proportional to the blur left, because a threshold everyone can see —
+ * "I was third" — is worth more at a table than a score nobody can reconstruct.
+ */
+export const BLUR_POINTS_BY_RANK = [5, 3, 2] as const;
+export const BLUR_POINTS_OTHER = 1;
+
+/** How long the round runs, and how long the picture takes to come fully into focus. */
+export const BLUR_GUESS_MS = 15_000;
+export const BLUR_SHARPEN_MS = 10_000;
+/** Blur radius at the very start, in CSS pixels on the rendered image. */
+export const BLUR_MAX_PX = 34;
 
 /** Theme ids the bank uses, with their display label. Shared so the settings screen and the
  *  question screen name a theme the same way. */
@@ -129,6 +150,7 @@ export const DEFAULT_SETTINGS: GameSettings = {
   bluffRounds: 1,
   duelRounds: 1,
   reflexRounds: 1,
+  blurRounds: 1,
   numericRounds: 2,
   themes: [],
 };
@@ -152,8 +174,9 @@ export interface QuestionPublic {
   prompt: string;
   mediaUrl: string | null;
   /** "number": closest answer wins. "math": exact answer, fastest correct one wins.
-   *  Neither reaches the host review — there is nothing to judge in arithmetic. */
-  answerKind: "text" | "number" | "list" | "math";
+   *  "blur": a picture that sharpens, answered by finishing order. None of the three reach
+   *  the host review — there is nothing to judge in arithmetic or in a name that matches. */
+  answerKind: "text" | "number" | "list" | "math" | "blur";
 }
 
 /**
@@ -269,6 +292,29 @@ export interface ReflexView {
   results: { nickname: string; ms: number | null; falseStart: boolean; points: number }[] | null;
 }
 
+/**
+ * What a player sees during a blurred-picture round.
+ *
+ * The blur itself is not sent: it is a pure function of how much of the round is left, which
+ * the client already has through `phaseDeadlineTs` and the shared `BLUR_SHARPEN_MS`. Sending
+ * a radius per frame would be sixty state syncs a second for something arithmetic.
+ */
+export interface BlurView {
+  step: "guess" | "reveal";
+  /** The question itself. Carried here rather than hardcoded on the screen: the round runs
+   *  on champion portraits and on flags, and "Qui est-ce ?" is wrong for a flag. */
+  prompt: string;
+  imageUrl: string;
+  /** Your own submission, locked in once sent. */
+  yourAnswer: string | null;
+  /** Set at the reveal only. */
+  correctAnswer: string | null;
+  results: { nickname: string; answer: string; correct: boolean; points: number }[] | null;
+  /** How many players have locked in, so the room can see the pressure build. */
+  answered: number;
+  total: number;
+}
+
 export interface RoomStateSync {
   roomCode: string;
   phase: Phase;
@@ -297,6 +343,7 @@ export interface RoomStateSync {
   bluff: BluffView | null;
   duel: DuelView | null;
   reflex: ReflexView | null;
+  blur: BlurView | null;
   /** Every trivia question and answer of the game, sent to the whole room during HOST_REVIEW
    *  so everyone watches the host grade. Only the host's grades are accepted. */
   reviewQuestions: ReviewQuestion[] | null;
