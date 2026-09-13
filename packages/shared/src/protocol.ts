@@ -70,6 +70,7 @@ export const HostSettingsMsg = z.object({
   reflexRounds: z.number().int().min(0).max(6).optional(),
   blurRounds: z.number().int().min(0).max(6).optional(),
   numericRounds: z.number().int().min(0).max(6).optional(),
+  audioEnabled: z.boolean().optional(),
   themes: z.array(z.string()).optional(),
 });
 

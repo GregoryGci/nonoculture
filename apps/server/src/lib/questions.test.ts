@@ -214,4 +214,44 @@ describe("media quotas", () => {
     );
     expect(deck).toHaveLength(12);
   });
+
+  describe("the audio switch", () => {
+    const withSounds = [
+      ...bank.slice(0, 30),
+      ...Array.from({ length: 10 }, (_, i) => ({
+        ...bank[i]!,
+        id: 400 + i,
+        type: "audio",
+        family: "sons",
+        media_key: `son-${i}.mp3`,
+      })),
+    ];
+    const noSpecials = {
+      ...DEFAULT_SETTINGS,
+      questionCount: 15,
+      chainRounds: 0,
+      bluffRounds: 0,
+      duelRounds: 0,
+      reflexRounds: 0,
+      blurRounds: 0,
+      numericRounds: 0,
+    };
+    const sounds = (deck: Awaited<ReturnType<typeof buildDeck>>) =>
+      deck.filter((i) => i.kind === "trivia" && i.question.type === "audio").length;
+
+    it("draws sound questions when it is on", async () => {
+      const deck = await buildDeck(fakeDb(withSounds), noSpecials, { mediaAvailable: true });
+      expect(sounds(deck)).toBeGreaterThan(0);
+    });
+
+    it("draws none at all when it is off, and keeps the game at full length", async () => {
+      const deck = await buildDeck(
+        fakeDb(withSounds),
+        { ...noSpecials, audioEnabled: false },
+        { mediaAvailable: true },
+      );
+      expect(sounds(deck)).toBe(0);
+      expect(deck).toHaveLength(15);
+    });
+  });
 });

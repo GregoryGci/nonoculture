@@ -1,0 +1,1654 @@
+[
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quelle princesse Mario doit-il régulièrement sauver ?",
+    "answer": "Peach",
+    "aliases": [
+      "Princesse Peach"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Comment s'appelle le frère de Mario, habillé en vert ?",
+    "answer": "Luigi",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quel roi des Koopas enlève sans cesse la princesse du Royaume Champignon ?",
+    "answer": "Bowser",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quelle princesse donne son nom à la série où l'on incarne Link ?",
+    "answer": "Zelda",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quel sorcier est l'ennemi juré de Link dans la série Zelda ?",
+    "answer": "Ganondorf",
+    "aliases": [
+      "Ganon"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quel gorille lance des tonneaux sur Mario dans un jeu d'arcade de 1981 ?",
+    "answer": "Donkey Kong",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quelle boule rose de Nintendo aspire ses ennemis pour copier leurs pouvoirs ?",
+    "answer": "Kirby",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quel marsupial orange tourbillonnant fut une mascotte de la première PlayStation ?",
+    "answer": "Crash Bandicoot",
+    "aliases": [
+      "Crash"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quel petit dragon violet crache du feu sur la PlayStation de 1998 ?",
+    "answer": "Spyro",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quel jeu soviétique consiste à empiler des pièces qui tombent pour compléter des lignes ?",
+    "answer": "Tetris",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Dans quel jeu joue-t-on au football avec des voitures propulsées par des fusées ?",
+    "answer": "Rocket League",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Dans quel jeu de 2018 des imposteurs sabotent-ils un vaisseau en éliminant l'équipage ?",
+    "answer": "Among Us",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Comment s'appelle le monstre vert qui explose en silence près du joueur dans Minecraft ?",
+    "answer": "Creeper",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Comment s'appelle la dimension infernale de Minecraft ?",
+    "answer": "Nether",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quel boss faut-il vaincre dans la dimension de l'End de Minecraft ?",
+    "answer": "Ender Dragon",
+    "aliases": [
+      "Dragon de l'Ender",
+      "le dragon"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Comment s'appelle la monnaie virtuelle de Fortnite ?",
+    "answer": "V-Bucks",
+    "aliases": [
+      "V Bucks",
+      "Vbucks"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quel éditeur publie la série Call of Duty ?",
+    "answer": "Activision",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quel jeu de tir en équipe de Valve oppose terroristes et antiterroristes autour d'une bombe ?",
+    "answer": "Counter-Strike",
+    "aliases": [
+      "CS",
+      "CS2",
+      "Counter Strike"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Comment s'appelle la boutique de jeux PC en ligne de Valve ?",
+    "answer": "Steam",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quelle console de Nintendo de 2006 se jouait avec une télécommande détectant les mouvements ?",
+    "answer": "Wii",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quelle console portable sortie en 2004 avait deux écrans dont un tactile ?",
+    "answer": "Nintendo DS",
+    "aliases": [
+      "DS"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quelle console 16 bits de Sega a affronté la Super Nintendo ?",
+    "answer": "Mega Drive",
+    "aliases": [
+      "Genesis"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quelle série de simulation automobile est exclusive aux consoles PlayStation ?",
+    "answer": "Gran Turismo",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quelle série d'Ubisoft fait danser les joueurs devant leur écran ?",
+    "answer": "Just Dance",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quel jeu musical se jouait avec un instrument en plastique à cinq boutons de couleur ?",
+    "answer": "Guitar Hero",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Combien de fantômes poursuivent Pac-Man dans le jeu original ?",
+    "answer": "4",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Dans quelle série de Nintendo vit-on paisiblement sur une île peuplée d'animaux ?",
+    "answer": "Animal Crossing",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quel tanuki commerçant accueille les joueurs dans Animal Crossing ?",
+    "answer": "Tom Nook",
+    "aliases": [
+      "Nook"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Que signifie le sigle GTA ?",
+    "answer": "Grand Theft Auto",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quel studio développe la série Grand Theft Auto ?",
+    "answer": "Rockstar Games",
+    "aliases": [
+      "Rockstar"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Dans quel western de Rockstar incarne-t-on Arthur Morgan ?",
+    "answer": "Red Dead Redemption 2",
+    "aliases": [
+      "Red Dead Redemption"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quelle série de combat de Nintendo réunit Mario, Link et Pikachu dans une même arène ?",
+    "answer": "Super Smash Bros.",
+    "aliases": [
+      "Smash Bros",
+      "Smash"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quel jeu de plateau de Nintendo enchaîne les mini-jeux entre amis ?",
+    "answer": "Mario Party",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Dans quel jeu de Nintendo des calamars recouvrent-ils l'arène d'encre colorée ?",
+    "answer": "Splatoon",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Comment surnomme-t-on le soldat en armure verte héros de Halo ?",
+    "answer": "Master Chief",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Sur quelle console Halo est-il sorti à l'origine, en 2001 ?",
+    "answer": "Xbox",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Dans quelle série d'horreur de Capcom affronte-t-on des zombies à Raccoon City ?",
+    "answer": "Resident Evil",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quel renard à deux queues est le meilleur ami de Sonic ?",
+    "answer": "Tails",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Que ramasse Sonic en courant pour survivre aux coups ?",
+    "answer": "des anneaux",
+    "aliases": [
+      "anneaux",
+      "rings"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Dans quel jeu mobile catapulte-t-on des oiseaux sur des cochons ?",
+    "answer": "Angry Birds",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quel jeu mobile consiste à aligner des bonbons de même couleur ?",
+    "answer": "Candy Crush",
+    "aliases": [
+      "Candy Crush Saga"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Dans quel jeu mobile de Supercell bâtit-on un village pour attaquer celui des autres ?",
+    "answer": "Clash of Clans",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Dans quel jeu mobile fuit-on un contrôleur en courant sur des rails de métro ?",
+    "answer": "Subway Surfers",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quel jeu mobile de 2013, où un oiseau passe entre des tuyaux, a été retiré par son créateur ?",
+    "answer": "Flappy Bird",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quel jeu livré avec la Wii proposait tennis, bowling et boxe ?",
+    "answer": "Wii Sports",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quels personnages hurlants d'Ubisoft sont d'abord apparus comme ennemis de Rayman ?",
+    "answer": "Les Lapins Crétins",
+    "aliases": [
+      "Lapins Crétins",
+      "Raving Rabbids"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quel héros d'Ubisoft n'a ni bras ni jambes, seulement des mains et des pieds ?",
+    "answer": "Rayman",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Dans quel jeu le frère de Mario chasse-t-il des fantômes avec un aspirateur ?",
+    "answer": "Luigi's Mansion",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quel Zelda en monde ouvert a accompagné la sortie de la Switch en 2017 ?",
+    "answer": "Breath of the Wild",
+    "aliases": [
+      "Zelda Breath of the Wild",
+      "BOTW"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Dans Mario Kart, quel objet traque et frappe le joueur en tête de course ?",
+    "answer": "la carapace bleue",
+    "aliases": [
+      "carapace bleue"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quel est le jeu vidéo le plus vendu de l'histoire ?",
+    "answer": "Minecraft",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Combien de joueurs s'affrontent dans une partie classique du battle royale de Fortnite ?",
+    "answer": "100",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quelle plateforme de streaming de jeux vidéo appartient à Amazon ?",
+    "answer": "Twitch",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quel acteur prête sa voix à Mario dans la version originale du film de 2023 ?",
+    "answer": "Chris Pratt",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quel acteur incarne le docteur Robotnik dans les films Sonic ?",
+    "answer": "Jim Carrey",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quel acteur joue Joel dans la série The Last of Us de HBO ?",
+    "answer": "Pedro Pascal",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quel acteur incarne Steve dans Minecraft, le film de 2025 ?",
+    "answer": "Jack Black",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Quelle série d'animation de Netflix est tirée de League of Legends et suit Vi et Jinx ?",
+    "answer": "Arcane",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Dans Les Sims, quel losange vert flotte au-dessus de la tête du personnage contrôlé ?",
+    "answer": "plumbob",
+    "aliases": [
+      "le plumbob",
+      "losange"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Dans quel jeu une intelligence artificielle promet-elle un gâteau qui n'existe pas ?",
+    "answer": "Portal",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel jeu de FromSoftware de 2022 a vu son univers coécrit par George R. R. Martin ?",
+    "answer": "Elden Ring",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel studio japonais a créé Dark Souls, Bloodborne et Sekiro ?",
+    "answer": "FromSoftware",
+    "aliases": [
+      "From Software"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Dans quel jeu indépendant de 2015 peut-on finir sans tuer personne, aux côtés du squelette Sans ?",
+    "answer": "Undertale",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel jeu de 2017 envoie un petit chevalier insecte explorer le royaume déchu d'Hallownest ?",
+    "answer": "Hollow Knight",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Dans quel jeu de plateforme de 2018 Madeline gravit-elle une montagne ?",
+    "answer": "Celeste",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Dans quel roguelike de 2020 Zagreus tente-t-il de s'échapper des Enfers ?",
+    "answer": "Hades",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Dans quel jeu de 2022 incarne-t-on un chat errant dans une ville peuplée de robots ?",
+    "answer": "Stray",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel RPG français de 2025, du studio Sandfall Interactive, envoie un groupe affronter la Peintresse ?",
+    "answer": "Clair Obscur : Expedition 33",
+    "aliases": [
+      "Expedition 33",
+      "Clair Obscur"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Dans quel jeu d'Hideo Kojima de 2019 incarne-t-on un livreur traversant une Amérique dévastée ?",
+    "answer": "Death Stranding",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel créateur japonais a imaginé la série Metal Gear ?",
+    "answer": "Hideo Kojima",
+    "aliases": [
+      "Kojima"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel espion au bandeau, au nom de code de serpent, est le héros de la saga Metal Gear ?",
+    "answer": "Solid Snake",
+    "aliases": [
+      "Snake"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Dans quel objet Solid Snake se cache-t-il pour passer inaperçu ?",
+    "answer": "un carton",
+    "aliases": [
+      "carton",
+      "une boîte en carton"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel guerrier spartiate est le héros de God of War ?",
+    "answer": "Kratos",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle le fils de Kratos dans God of War de 2018 ?",
+    "answer": "Atreus",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel chasseur de trésors est le héros de la série Uncharted ?",
+    "answer": "Nathan Drake",
+    "aliases": [
+      "Drake"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel studio américain a créé Uncharted et The Last of Us ?",
+    "answer": "Naughty Dog",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle l'héroïne chasseuse de machines d'Horizon Zero Dawn ?",
+    "answer": "Aloy",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel studio polonais a développé Cyberpunk 2077 ?",
+    "answer": "CD Projekt Red",
+    "aliases": [
+      "CD Projekt"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Dans quelle ville se déroule Cyberpunk 2077 ?",
+    "answer": "Night City",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel personnage Keanu Reeves incarne-t-il dans Cyberpunk 2077 ?",
+    "answer": "Johnny Silverhand",
+    "aliases": [
+      "Silverhand"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Dans quelle province enneigée se déroule The Elder Scrolls V ?",
+    "answer": "Bordeciel",
+    "aliases": [
+      "Skyrim"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel studio a développé Skyrim et Fallout 3 ?",
+    "answer": "Bethesda",
+    "aliases": [
+      "Bethesda Game Studios"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Comment appelle-t-on les bunkers antiatomiques numérotés de la série Fallout ?",
+    "answer": "les Abris",
+    "aliases": [
+      "Abris",
+      "Vaults",
+      "Vault"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle l'intelligence artificielle sarcastique de Portal ?",
+    "answer": "GLaDOS",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quelle arme emblématique Gordon Freeman brandit-il dans Half-Life ?",
+    "answer": "le pied-de-biche",
+    "aliases": [
+      "pied-de-biche",
+      "pied de biche"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel studio a créé les jeux Overwatch et Diablo ?",
+    "answer": "Blizzard",
+    "aliases": [
+      "Blizzard Entertainment"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel éditeur japonais publie la série de combat Tekken ?",
+    "answer": "Bandai Namco",
+    "aliases": [
+      "Namco"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel éditeur japonais publie Street Fighter et Monster Hunter ?",
+    "answer": "Capcom",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel chasseur de démons aux cheveux blancs est le héros de Devil May Cry ?",
+    "answer": "Dante",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel jeu d'exploration en 2D de 2011 est souvent décrit comme un Minecraft à plat ?",
+    "answer": "Terraria",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quelle série de Maxis permet de construire et gérer sa propre ville ?",
+    "answer": "SimCity",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel créateur a donné son nom à la série de stratégie Civilization ?",
+    "answer": "Sid Meier",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle le premier héros assassin de la série Assassin's Creed ?",
+    "answer": "Altaïr",
+    "aliases": [
+      "Altair"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel assassin florentin est le héros d'Assassin's Creed II ?",
+    "answer": "Ezio Auditore",
+    "aliases": [
+      "Ezio"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Pendant quel événement historique se déroule Assassin's Creed Unity, à Paris ?",
+    "answer": "la Révolution française",
+    "aliases": [
+      "Révolution française",
+      "Révolution"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Dans quel pays et à quelle époque se déroule Assassin's Creed Odyssey ?",
+    "answer": "la Grèce antique",
+    "aliases": [
+      "Grèce antique",
+      "Grèce"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Dans quelle époque et quel pays se déroule Assassin's Creed Shadows, sorti en 2025 ?",
+    "answer": "le Japon féodal",
+    "aliases": [
+      "Japon féodal",
+      "Japon"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Dans quelle ville américaine se déroule le premier Watch Dogs ?",
+    "answer": "Chicago",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel méchant de Far Cry 3 a rendu célèbre un monologue sur la définition de la folie ?",
+    "answer": "Vaas",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel studio français a développé Heavy Rain et Detroit: Become Human ?",
+    "answer": "Quantic Dream",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel studio français a créé Life is Strange ?",
+    "answer": "Dontnod",
+    "aliases": [
+      "Don't Nod",
+      "DON'T NOD"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel studio lyonnais a créé la série Dishonored ?",
+    "answer": "Arkane",
+    "aliases": [
+      "Arkane Studios",
+      "Arkane Lyon"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle la reporter héroïne de Beyond Good & Evil ?",
+    "answer": "Jade",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel éditeur français est devenu Atari au début des années 2000 ?",
+    "answer": "Infogrames",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel jeu d'arcade de 1978 oppose un canon à des vagues d'extraterrestres ?",
+    "answer": "Space Invaders",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel jeu de 1985 sur NES a fait du plombier moustachu une star mondiale ?",
+    "answer": "Super Mario Bros.",
+    "aliases": [
+      "Super Mario Bros"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Sous quel nom Mario est-il apparu pour la première fois, dans Donkey Kong ?",
+    "answer": "Jumpman",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel métier Mario exerçait-il dans Donkey Kong, avant de devenir plombier ?",
+    "answer": "charpentier",
+    "aliases": [
+      "menuisier"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel créateur japonais a imaginé Mario et Zelda ?",
+    "answer": "Shigeru Miyamoto",
+    "aliases": [
+      "Miyamoto"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quelle fut la dernière console de salon de Sega, sortie en 1998 ?",
+    "answer": "Dreamcast",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quelle pierre précieuse faut-il miner dans Minecraft pour fabriquer la meilleure pioche avant la netherite ?",
+    "answer": "le diamant",
+    "aliases": [
+      "diamant",
+      "diamants"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle l'arme sacrée qui repousse le mal dans la série Zelda ?",
+    "answer": "l'Épée de légende",
+    "aliases": [
+      "Épée de légende",
+      "Master Sword"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quelle est la monnaie de la série Zelda ?",
+    "answer": "les rubis",
+    "aliases": [
+      "rubis"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle la fée qui guide Link dans Ocarina of Time ?",
+    "answer": "Navi",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel héros aux cheveux en pointe manie l'épée Buster dans Final Fantasy VII ?",
+    "answer": "Cloud",
+    "aliases": [
+      "Cloud Strife"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quelle héroïne de Final Fantasy VII est tuée par Sephiroth ?",
+    "answer": "Aerith",
+    "aliases": [
+      "Aeris"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel grand oiseau jaune sert de monture dans la série Final Fantasy ?",
+    "answer": "Chocobo",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quelle série mêle l'univers Disney et Final Fantasy autour du héros Sora ?",
+    "answer": "Kingdom Hearts",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel monstre bleu en forme de goutte souriante est la mascotte de Dragon Quest ?",
+    "answer": "Gluant",
+    "aliases": [
+      "Slime"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quelle entreprise chinoise a créé Genshin Impact ?",
+    "answer": "miHoYo",
+    "aliases": [
+      "HoYoverse",
+      "Mihoyo"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel studio a développé Apex Legends et Titanfall ?",
+    "answer": "Respawn Entertainment",
+    "aliases": [
+      "Respawn"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quelle équipe française d'esport a remporté le Major de Counter-Strike à Paris en 2023 ?",
+    "answer": "Team Vitality",
+    "aliases": [
+      "Vitality"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel streamer français a fondé la Karmine Corp ?",
+    "answer": "Kameto",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel streamer organise le ZEvent, marathon caritatif français ?",
+    "answer": "ZeratoR",
+    "aliases": [
+      "Zerator"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quelle suite de touches forme le célèbre code Konami ?",
+    "answer": "haut haut bas bas gauche droite gauche droite B A",
+    "aliases": [
+      "↑↑↓↓←→←→BA"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel surnom a-t-on donné à la panne matérielle signalée par trois voyants lumineux sur la Xbox 360 ?",
+    "answer": "le cercle rouge de la mort",
+    "aliases": [
+      "red ring of death",
+      "cercle rouge",
+      "RROD"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quelle console portable pour jeux PC Valve a-t-elle lancée en 2022 ?",
+    "answer": "Steam Deck",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Dans quel jeu de réalité virtuelle tranche-t-on des cubes au rythme de la musique avec deux sabres ?",
+    "answer": "Beat Saber",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel écrivain polonais a créé le personnage de Geralt de Riv ?",
+    "answer": "Andrzej Sapkowski",
+    "aliases": [
+      "Sapkowski"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel jeu de cartes peut-on jouer dans les tavernes de The Witcher 3 ?",
+    "answer": "Gwynt",
+    "aliases": [
+      "Gwent"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Comment surnomme-t-on Carl Johnson, héros de GTA San Andreas ?",
+    "answer": "CJ",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quelle ville réelle a inspiré Vice City dans la série GTA ?",
+    "answer": "Miami",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Comment appelle-t-on la langue imaginaire que parlent les personnages des Sims ?",
+    "answer": "le simlish",
+    "aliases": [
+      "simlish"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel studio a créé Doom en 1993 ?",
+    "answer": "id Software",
+    "aliases": [
+      "id"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle le fantôme rouge qui poursuit Pac-Man ?",
+    "answer": "Blinky",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel samouraï est le héros de Ghost of Tsushima ?",
+    "answer": "Jin Sakai",
+    "aliases": [
+      "Jin"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel studio belge a développé Baldur's Gate 3 ?",
+    "answer": "Larian",
+    "aliases": [
+      "Larian Studios"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel jeu a été élu jeu de l'année aux Game Awards 2023 ?",
+    "answer": "Baldur's Gate 3",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel jeu de plateforme de Sony a été élu jeu de l'année aux Game Awards 2024 ?",
+    "answer": "Astro Bot",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel jeu a été élu jeu de l'année aux Game Awards 2022 ?",
+    "answer": "Elden Ring",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel jeu entièrement coopératif de Hazelight suit un couple transformé en poupées ?",
+    "answer": "It Takes Two",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel rappeur a donné un concert géant dans Fortnite en avril 2020 ?",
+    "answer": "Travis Scott",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel agent du gouvernement est le héros de Resident Evil 4 ?",
+    "answer": "Leon S. Kennedy",
+    "aliases": [
+      "Leon Kennedy",
+      "Leon"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quelle immense aristocrate vampire traque le joueur dans Resident Evil Village ?",
+    "answer": "Lady Dimitrescu",
+    "aliases": [
+      "Dimitrescu"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel jeu asymétrique oppose un tueur à quatre survivants qui réparent des générateurs ?",
+    "answer": "Dead by Daylight",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Dans quelle série de jeux d'horreur survit-on à des animatroniques dans une pizzeria ?",
+    "answer": "Five Nights at Freddy's",
+    "aliases": [
+      "FNAF"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel jeu de 2024 est un roguelike construit autour des mains de poker ?",
+    "answer": "Balatro",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel jeu de 2024 a été surnommé « Pokémon avec des armes à feu » ?",
+    "answer": "Palworld",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Quel jeu coopératif de 2024 envoie des soldats répandre la « démocratie dirigée » contre des insectes géants ?",
+    "answer": "Helldivers 2",
+    "aliases": [
+      "Helldivers"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Combien de jours la lune met-elle à s'écraser sur le monde dans Zelda : Majora's Mask ?",
+    "answer": "3",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "En quelle année Grand Theft Auto V est-il sorti ?",
+    "answer": "2013",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "En quelle année la Nintendo Switch 2 est-elle sortie ?",
+    "answer": "2025",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "En quelle année Red Dead Redemption 2 est-il sorti ?",
+    "answer": "2018",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "En quelle année est sortie la version complète de Minecraft ?",
+    "answer": "2011",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "En quelle année Zelda : Ocarina of Time est-il sorti ?",
+    "answer": "1998",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "En quelle année Super Mario Bros. est-il sorti au Japon ?",
+    "answer": "1985",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel ingénieur soviétique a créé Tetris en 1984 ?",
+    "answer": "Alexeï Pajitnov",
+    "aliases": [
+      "Pajitnov",
+      "Alexey Pajitnov"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel game designer français a créé Rayman et Beyond Good & Evil ?",
+    "answer": "Michel Ancel",
+    "aliases": [
+      "Ancel"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel directeur de FromSoftware est à l'origine de Dark Souls ?",
+    "answer": "Hidetaka Miyazaki",
+    "aliases": [
+      "Miyazaki"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Qui a créé et composé Undertale presque seul ?",
+    "answer": "Toby Fox",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel studio a développé Hades, Bastion et Transistor ?",
+    "answer": "Supergiant Games",
+    "aliases": [
+      "Supergiant"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quelle équipe texane a développé la série Age of Empires pour Microsoft ?",
+    "answer": "Ensemble Studios",
+    "aliases": [
+      "Ensemble"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Qui a fondé le studio Quantic Dream ?",
+    "answer": "David Cage",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel jeu français de 1992, d'Infogrames, est considéré comme le premier survival horror en 3D ?",
+    "answer": "Alone in the Dark",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel programmeur a cofondé id Software et créé les moteurs de Doom et Quake ?",
+    "answer": "John Carmack",
+    "aliases": [
+      "Carmack"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Qui a créé Pac-Man chez Namco ?",
+    "answer": "Toru Iwatani",
+    "aliases": [
+      "Iwatani"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel studio japonais a créé Space Invaders ?",
+    "answer": "Taito",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Comment s'appelait le pistolet optique utilisé pour jouer à Duck Hunt sur NES ?",
+    "answer": "Zapper",
+    "aliases": [
+      "NES Zapper"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel studio a développé Among Us ?",
+    "answer": "Innersloth",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel est le vrai nom du joueur français de Counter-Strike surnommé ZywOo ?",
+    "answer": "Mathieu Herbaut",
+    "aliases": [
+      "Herbaut"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel marathon caritatif américain réunit des speedrunners deux fois par an ?",
+    "answer": "Games Done Quick",
+    "aliases": [
+      "GDQ",
+      "AGDQ",
+      "SGDQ"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel code de triche des Sims donne 50 000 simflouz d'un coup ?",
+    "answer": "motherlode",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel protagoniste de Silent Hill 2 reçoit une lettre de sa femme pourtant décédée ?",
+    "answer": "James Sunderland",
+    "aliases": [
+      "James"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel jeu d'exploration de 2019 enferme le joueur dans une boucle temporelle jusqu'à l'explosion du Soleil ?",
+    "answer": "Outer Wilds",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel jeu a été élu jeu de l'année aux Game Awards 2020 ?",
+    "answer": "The Last of Us Part II",
+    "aliases": [
+      "The Last of Us 2",
+      "TLOU2"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel jeu de Valve de 2020, jouable uniquement en réalité virtuelle, a ramené la saga de Gordon Freeman ?",
+    "answer": "Half-Life: Alyx",
+    "aliases": [
+      "Half-Life Alyx",
+      "Alyx"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel personnage manipule le héros de BioShock avec la formule « Would you kindly » ?",
+    "answer": "Atlas",
+    "aliases": [
+      "Frank Fontaine",
+      "Fontaine"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel sous-titre porte The Witcher 3 ?",
+    "answer": "Wild Hunt",
+    "aliases": [
+      "La Traque sauvage",
+      "Traque sauvage"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Pour combien Microsoft a-t-il racheté Mojang, l'éditeur de Minecraft, en 2014 ?",
+    "answer": "2,5 milliards de dollars",
+    "aliases": [
+      "2,5 milliards",
+      "2.5 milliards"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Dans quelle ville bretonne Ubisoft a-t-il été fondé en 1986 ?",
+    "answer": "Carentoir",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel moteur de jeu libre tire son nom d'une pièce de Samuel Beckett ?",
+    "answer": "Godot",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel moteur de jeu d'Epic Games fait tourner Fortnite ?",
+    "answer": "Unreal Engine",
+    "aliases": [
+      "Unreal"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel jeu de 1972 d'Atari simule une partie de tennis de table ?",
+    "answer": "Pong",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "En quelle année Pong est-il sorti ?",
+    "answer": "1972",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "En quelle année la première PlayStation est-elle sortie au Japon ?",
+    "answer": "1994",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Combien de minutes dure une boucle temporelle dans Outer Wilds ?",
+    "answer": "22",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quelle console de Nintendo de 1995, en rouge et noir, a été un échec commercial retentissant ?",
+    "answer": "Virtual Boy",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel accessoire de 1997 faisait vibrer la manette de la Nintendo 64 ?",
+    "answer": "Rumble Pak",
+    "aliases": [
+      "Rumble Pack"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quelle console de 1993 d'Atari prétendait être la première console 64 bits ?",
+    "answer": "Jaguar",
+    "aliases": [
+      "Atari Jaguar"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quelle révélation attendait les joueurs à la fin du premier Metroid, en 1986 ?",
+    "answer": "Samus est une femme",
+    "aliases": [
+      "Samus est une fille",
+      "c'est une femme"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel jeu de Valve de 2008 oppose quatre survivants à des hordes d'infectés ?",
+    "answer": "Left 4 Dead",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel épisode fut le premier de la grande saga de Square à sortir en Europe, en 1997 ?",
+    "answer": "Final Fantasy VII",
+    "aliases": [
+      "FF7",
+      "FFVII"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel propriétaire de l'entrepôt de Nintendo of America aurait donné son prénom au plombier moustachu ?",
+    "answer": "Mario Segale",
+    "aliases": [
+      "Segale"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel jeu de stratégie de Blizzard, sorti en 1994, a lancé l'univers d'Azeroth ?",
+    "answer": "Warcraft: Orcs & Humans",
+    "aliases": [
+      "Warcraft Orcs and Humans",
+      "Warcraft"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel studio français a créé la série Dofus et Wakfu ?",
+    "answer": "Ankama",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quelle attaque Ryu lance-t-il en criant « Hadōken » ?",
+    "answer": "une boule de feu",
+    "aliases": [
+      "boule de feu",
+      "Hadoken",
+      "boule d'énergie"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel personnage de Street Fighter est un militaire américain au célèbre « Sonic Boom » ?",
+    "answer": "Guile",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quelle lutteuse chinoise de Street Fighter II fut le premier personnage féminin jouable de la série ?",
+    "answer": "Chun-Li",
+    "aliases": [
+      "Chun Li"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel dictateur à cape rouge dirige l'organisation Shadaloo dans Street Fighter ?",
+    "answer": "M. Bison",
+    "aliases": [
+      "Bison",
+      "Dictator"
+    ]
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel jeu indépendant de 2008 de Jonathan Blow joue avec le retour dans le temps ?",
+    "answer": "Braid",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel jeu de 2016 de Playdead fait fuir un garçon dans un monde sombre et silencieux, après Limbo ?",
+    "answer": "Inside",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Quel jeu de 2011 de Supergiant est raconté en direct par un narrateur à la voix grave ?",
+    "answer": "Bastion",
+    "aliases": []
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 3,
+    "prompt": "Chez quel éditeur, futur créateur de Candy Crush, Markus Persson travaillait-il avant Minecraft ?",
+    "answer": "King",
+    "aliases": []
+  }
+]

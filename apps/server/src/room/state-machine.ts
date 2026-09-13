@@ -91,6 +91,7 @@ function clampSettings(partial: Partial<GameSettings>, base: GameSettings): Game
       partial.numericRounds !== undefined
         ? Math.min(MAX_SPECIAL_ROUNDS, Math.max(0, partial.numericRounds))
         : base.numericRounds,
+    audioEnabled: partial.audioEnabled ?? base.audioEnabled,
     themes: partial.themes ?? base.themes,
   };
 }

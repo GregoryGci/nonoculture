@@ -1,0 +1,1126 @@
+[
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Que fait-on à quelqu'un quand on ne vient pas au rendez-vous fixé ?",
+    "answer": "poser un lapin",
+    "aliases": [
+      "un lapin",
+      "lapin"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Quel insecte « a »-t-on quand on a le moral en berne ?",
+    "answer": "le cafard",
+    "aliases": [
+      "cafard"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "À quel animal donne-t-on sa langue quand on renonce à trouver la réponse ?",
+    "answer": "au chat",
+    "aliases": [
+      "chat"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Dans quels fruits tombe-t-on quand on s'évanouit ?",
+    "answer": "les pommes",
+    "aliases": [
+      "pommes"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Qu'a-t-on dans la main quand on est très paresseux ?",
+    "answer": "un poil",
+    "aliases": [
+      "poil"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Quel petit insecte met-on à l'oreille de quelqu'un pour éveiller ses soupçons ?",
+    "answer": "la puce",
+    "aliases": [
+      "puce"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Quand les poules auront des dents… qu'est-ce que cela veut dire ?",
+    "answer": "jamais",
+    "aliases": []
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Qu'a-t-on au plafond quand on est un peu dérangé ?",
+    "answer": "une araignée",
+    "aliases": [
+      "araignée"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Que raconte-t-on, dans l'assiette, quand on ment ?",
+    "answer": "des salades",
+    "aliases": [
+      "salades"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Dans quel astre est-on quand on est distrait et rêveur ?",
+    "answer": "dans la lune",
+    "aliases": [
+      "la lune",
+      "lune"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Où a-t-on le cœur quand on est très généreux ?",
+    "answer": "sur la main",
+    "aliases": [
+      "la main",
+      "main"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Combien de coups fait-on avec une seule pierre quand on règle un double problème d'un geste ?",
+    "answer": "deux",
+    "aliases": [
+      "2"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Qu'est-ce qui ne fait pas le moine, selon le proverbe ?",
+    "answer": "l'habit",
+    "aliases": [
+      "habit"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Qu'a-t-on sur la planche quand on a beaucoup de travail qui attend ?",
+    "answer": "du pain",
+    "aliases": [
+      "pain"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Sur quel numéro se met-on quand on s'habille très élégamment ?",
+    "answer": "31",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Combien de coups fait un enfant très turbulent, selon l'expression ?",
+    "answer": "400",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Combien de chandelles voit-on après un coup violent sur la tête ?",
+    "answer": "36",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "En combien se met-on quand on fait tout son possible pour quelqu'un ?",
+    "answer": "4",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Comme quel animal se sent-on quand on est parfaitement à l'aise, « dans l'eau » ?",
+    "answer": "un poisson",
+    "aliases": [
+      "poisson"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Que cherche-t-on dans une botte de foin quand la tâche est presque impossible ?",
+    "answer": "une aiguille",
+    "aliases": [
+      "aiguille"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Combien de lettres compte l'alphabet français ?",
+    "answer": "26",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Quel est le pluriel de « œil » ?",
+    "answer": "yeux",
+    "aliases": []
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Comment appelle-t-on un mot qui se lit de la même façon dans les deux sens, comme « radar » ?",
+    "answer": "un palindrome",
+    "aliases": [
+      "palindrome"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Comment appelle-t-on un mot de sens contraire à un autre ?",
+    "answer": "un antonyme",
+    "aliases": [
+      "antonyme",
+      "contraire"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Comment appelle-t-on un mot qui imite un bruit, comme « boum » ou « miaou » ?",
+    "answer": "une onomatopée",
+    "aliases": [
+      "onomatopée"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Quel signe place-t-on sous le c de « garçon » ?",
+    "answer": "la cédille",
+    "aliases": [
+      "cédille"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Comment s'appelle le petit du cheval ?",
+    "answer": "le poulain",
+    "aliases": [
+      "poulain"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Comment s'appelle le petit de la biquette ?",
+    "answer": "le chevreau",
+    "aliases": [
+      "chevreau",
+      "cabri"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Comment s'appelle le petit de la biche ?",
+    "answer": "le faon",
+    "aliases": [
+      "faon"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Comment s'appelle le petit du canard ?",
+    "answer": "le caneton",
+    "aliases": [
+      "caneton"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Quel est le cri de l'âne ?",
+    "answer": "il brait",
+    "aliases": [
+      "braire",
+      "brait"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Quel est le cri du lion ?",
+    "answer": "il rugit",
+    "aliases": [
+      "rugir",
+      "rugit"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Que fait le mouton quand il crie ?",
+    "answer": "il bêle",
+    "aliases": [
+      "bêler",
+      "bêle"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Quelle est la femelle du cheval ?",
+    "answer": "la jument",
+    "aliases": [
+      "jument"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Quelle est la femelle du loup ?",
+    "answer": "la louve",
+    "aliases": [
+      "louve"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Que veut dire « meuf » en verlan ?",
+    "answer": "femme",
+    "aliases": []
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Que veut dire « relou » en verlan ?",
+    "answer": "lourd",
+    "aliases": []
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Que veut dire « chelou » en verlan ?",
+    "answer": "louche",
+    "aliases": []
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Que veut dire « ouf » en verlan ?",
+    "answer": "fou",
+    "aliases": []
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Que signifie l'abréviation « MDR » ?",
+    "answer": "mort de rire",
+    "aliases": []
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Comment appelle-t-on le petit du sanglier ?",
+    "answer": "le marcassin",
+    "aliases": [
+      "marcassin"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Comment appelle-t-on le petit de l'oie ?",
+    "answer": "l'oison",
+    "aliases": [
+      "oison"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Comment appelle-t-on le petit du lapin ?",
+    "answer": "le lapereau",
+    "aliases": [
+      "lapereau"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Quelle est la femelle du sanglier ?",
+    "answer": "la laie",
+    "aliases": [
+      "laie"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Quelle est la femelle du lièvre ?",
+    "answer": "la hase",
+    "aliases": [
+      "hase"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Quelle est la femelle du cerf ?",
+    "answer": "la biche",
+    "aliases": [
+      "biche"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Que fait la grenouille quand elle crie ?",
+    "answer": "coasser",
+    "aliases": [
+      "elle coasse",
+      "coasse"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Que fait le corbeau quand il crie ?",
+    "answer": "il croasse",
+    "aliases": [
+      "croasser",
+      "croasse"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Que fait le cerf quand il crie à la saison des amours ?",
+    "answer": "il brame",
+    "aliases": [
+      "bramer",
+      "brame"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Que fait l'éléphant quand il crie ?",
+    "answer": "il barrit",
+    "aliases": [
+      "barrir",
+      "barrit"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Que fait la chouette quand elle crie ?",
+    "answer": "hululer",
+    "aliases": [
+      "elle hulule",
+      "hulule",
+      "ululer"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Combien de noms en -ou prennent un x au pluriel dans la célèbre liste « bijou, caillou, chou… » ?",
+    "answer": "7",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Quel est le plus long mot de la langue française couramment cité, en 25 lettres ?",
+    "answer": "anticonstitutionnellement",
+    "aliases": []
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Quelle est la lettre la plus fréquente de la langue française ?",
+    "answer": "E",
+    "aliases": []
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Sur quel seul mot de la langue française trouve-t-on un accent grave sur le u ?",
+    "answer": "où",
+    "aliases": []
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Quelle lettre disparue l'accent circonflexe remplace-t-il souvent, comme dans « forêt » ?",
+    "answer": "le s",
+    "aliases": [
+      "s"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle le signe fait de deux points sur le i de « maïs » ?",
+    "answer": "le tréma",
+    "aliases": [
+      "tréma"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Comment appelle-t-on les signes « » qui encadrent une citation ?",
+    "answer": "les guillemets",
+    "aliases": [
+      "guillemets"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Comment appelle-t-on la figure de style qui unit deux mots contraires, comme « obscure clarté » ?",
+    "answer": "un oxymore",
+    "aliases": [
+      "oxymore",
+      "oxymoron"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Quelle figure de style exagère, comme dans « je meurs de faim » ?",
+    "answer": "une hyperbole",
+    "aliases": [
+      "hyperbole"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Quelle figure de style désigne le contenant pour le contenu, comme « boire un verre » ?",
+    "answer": "une métonymie",
+    "aliases": [
+      "métonymie"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Comment appelle-t-on une phrase qui contient toutes les lettres de l'alphabet ?",
+    "answer": "un pangramme",
+    "aliases": [
+      "pangramme"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Quel cardinal a fondé l'Académie française en 1635 ?",
+    "answer": "Richelieu",
+    "aliases": [
+      "le cardinal de Richelieu"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Quel surnom porte-t-on quand on est membre de l'Académie française ?",
+    "answer": "Immortel",
+    "aliases": [
+      "les Immortels",
+      "Immortels"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Combien de fauteuils compte l'Académie française ?",
+    "answer": "40",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Quel dictionnaire a pour devise « Je sème à tout vent » ?",
+    "answer": "le Larousse",
+    "aliases": [
+      "Larousse"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Comment dit-on « soixante-dix » en Belgique et en Suisse ?",
+    "answer": "septante",
+    "aliases": []
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Comment dit-on « quatre-vingt-dix » en Belgique et en Suisse ?",
+    "answer": "nonante",
+    "aliases": []
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Comment dit-on « quatre-vingts » dans le canton de Vaud, en Suisse ?",
+    "answer": "huitante",
+    "aliases": []
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Que désigne une « blonde » pour un Québécois ?",
+    "answer": "une petite amie",
+    "aliases": [
+      "petite amie",
+      "copine",
+      "petite copine"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Que fait-on quand on « magasine » au Québec ?",
+    "answer": "du shopping",
+    "aliases": [
+      "faire les magasins",
+      "les courses",
+      "magasiner"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Que désigne un « char » au Québec ?",
+    "answer": "une voiture",
+    "aliases": [
+      "voiture",
+      "auto"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Quel nom le Sud-Ouest donne-t-il à la viennoiserie que les Parisiens appellent autrement ?",
+    "answer": "chocolatine",
+    "aliases": []
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "De quelle langue vient le mot « chocolat », via l'espagnol ?",
+    "answer": "le nahuatl",
+    "aliases": [
+      "nahuatl",
+      "aztèque",
+      "la langue des Aztèques"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "De quelle langue le mot « robot » est-il issu ?",
+    "answer": "le tchèque",
+    "aliases": [
+      "tchèque"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "De quelle langue viennent les mots « algèbre » et « alchimie » ?",
+    "answer": "l'arabe",
+    "aliases": [
+      "arabe"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Que veut dire « keuf » en verlan ?",
+    "answer": "flic",
+    "aliases": [
+      "policier"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Que veut dire « zarbi » en verlan ?",
+    "answer": "bizarre",
+    "aliases": []
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Que signifie l'abréviation « TMTC » ?",
+    "answer": "toi-même tu sais",
+    "aliases": [
+      "toi même tu sais"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Quel est le participe passé du verbe « résoudre » ?",
+    "answer": "résolu",
+    "aliases": []
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Comment conjugue-t-on « faire » à la deuxième personne du pluriel du présent ?",
+    "answer": "vous faites",
+    "aliases": [
+      "faites"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Comment conjugue-t-on « dire » à la deuxième personne du pluriel du présent ?",
+    "answer": "vous dites",
+    "aliases": [
+      "dites"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Comment conjugue-t-on « faire » au subjonctif présent, après « que je » ?",
+    "answer": "fasse",
+    "aliases": [
+      "que je fasse"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Comment écrit-on l'adverbe qui signifie « parfois » : en un mot ou en deux ?",
+    "answer": "quelquefois",
+    "aliases": [
+      "en un mot"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Quel est le genre du mot « pétale » ?",
+    "answer": "masculin",
+    "aliases": [
+      "un pétale"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Quel est le genre du mot « oasis » ?",
+    "answer": "féminin",
+    "aliases": [
+      "une oasis"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Quel est le genre du mot « astérisque » ?",
+    "answer": "masculin",
+    "aliases": [
+      "un astérisque"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Quel est le genre du mot « tentacule » ?",
+    "answer": "masculin",
+    "aliases": [
+      "un tentacule"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Quel est le genre du mot « éloge » ?",
+    "answer": "masculin",
+    "aliases": [
+      "un éloge"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Quel est le genre du mot « espèce » ?",
+    "answer": "féminin",
+    "aliases": [
+      "une espèce"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Quel est le genre du mot « apogée » ?",
+    "answer": "masculin",
+    "aliases": [
+      "un apogée"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Qu'a-t-on tiré du nez de quelqu'un quand on l'a fait parler ?",
+    "answer": "les vers",
+    "aliases": [
+      "vers"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Que casse-t-on, selon l'expression familière, quand on meurt ?",
+    "answer": "sa pipe",
+    "aliases": [
+      "pipe"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Que fait-on quand on « fait la grasse matinée » ?",
+    "answer": "on dort tard",
+    "aliases": [
+      "dormir tard",
+      "se lever tard"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Quel roman de Georges Perec est écrit entièrement sans la lettre e ?",
+    "answer": "La Disparition",
+    "aliases": []
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Quel animateur a rendu célèbres les championnats d'orthographe et sa dictée ?",
+    "answer": "Bernard Pivot",
+    "aliases": [
+      "Pivot"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "De quelle pièce médiévale vient l'expression « revenons à nos moutons » ?",
+    "answer": "La Farce de Maître Pathelin",
+    "aliases": [
+      "Maître Pathelin",
+      "la Farce de Maître Pathelin"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Quel texte de François Ier impose en 1539 le français dans les actes officiels ?",
+    "answer": "l'ordonnance de Villers-Cotterêts",
+    "aliases": [
+      "ordonnance de Villers-Cotterêts",
+      "Villers-Cotterêts"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Quel roi a signé l'ordonnance de Villers-Cotterêts en 1539 ?",
+    "answer": "François Ier",
+    "aliases": [
+      "François 1er",
+      "François Premier"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Comment écrit-on « nénuphar » selon les rectifications orthographiques de 1990 ?",
+    "answer": "nénufar",
+    "aliases": []
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Comment conjugue-t-on « naître » à la troisième personne du singulier du passé simple ?",
+    "answer": "naquit",
+    "aliases": [
+      "il naquit"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Comment conjugue-t-on « coudre » à la première personne du pluriel du présent ?",
+    "answer": "cousons",
+    "aliases": [
+      "nous cousons"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Comment conjugue-t-on « moudre » à la première personne du pluriel du présent ?",
+    "answer": "moulons",
+    "aliases": [
+      "nous moulons"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Comment conjugue-t-on « résoudre » à la première personne du pluriel du présent ?",
+    "answer": "résolvons",
+    "aliases": [
+      "nous résolvons"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Quelle formule l'Académie recommande-t-elle pour reconnaître une erreur : « autant pour moi » ou l'autre ?",
+    "answer": "au temps pour moi",
+    "aliases": []
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Quel mot est masculin au singulier et souvent féminin au pluriel en poésie, avec « délice » et « orgue » ?",
+    "answer": "amour",
+    "aliases": []
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Quel est le genre du mot « après-midi » ?",
+    "answer": "les deux",
+    "aliases": [
+      "masculin ou féminin",
+      "masculin et féminin"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Quel est le genre du mot « octave » ?",
+    "answer": "féminin",
+    "aliases": [
+      "une octave"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Quel est le genre du mot « armistice » ?",
+    "answer": "masculin",
+    "aliases": [
+      "un armistice"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Quel est le genre du mot « écritoire » ?",
+    "answer": "féminin",
+    "aliases": [
+      "une écritoire"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Quel est le pluriel de « aïeul » quand il désigne les ancêtres en général ?",
+    "answer": "aïeux",
+    "aliases": []
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Quel est le pluriel de « bail » ?",
+    "answer": "baux",
+    "aliases": []
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Que fait le paon quand il crie ?",
+    "answer": "il braille",
+    "aliases": [
+      "brailler",
+      "criailler",
+      "il criaille"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Que fait le chameau quand il crie ?",
+    "answer": "il blatère",
+    "aliases": [
+      "blatérer",
+      "blatère"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on le petit de l'aigle ?",
+    "answer": "l'aiglon",
+    "aliases": [
+      "aiglon"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on un texte qui s'interdit volontairement une lettre ?",
+    "answer": "un lipogramme",
+    "aliases": [
+      "lipogramme"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on un mot formé des initiales prononcées comme un mot, comme « OVNI » ?",
+    "answer": "un acronyme",
+    "aliases": [
+      "acronyme"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on la répétition d'une même consonne, comme « Pour qui sont ces serpents qui sifflent » ?",
+    "answer": "une allitération",
+    "aliases": [
+      "allitération"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on un mot nouvellement créé dans une langue ?",
+    "answer": "un néologisme",
+    "aliases": [
+      "néologisme"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Comment s'appelle la science de l'origine des mots ?",
+    "answer": "l'étymologie",
+    "aliases": [
+      "étymologie"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on un conseiller influent qui agit dans l'ombre d'un dirigeant ?",
+    "answer": "une éminence grise",
+    "aliases": [
+      "éminence grise"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Que signifie « tirer le diable par la queue » ?",
+    "answer": "avoir du mal à joindre les deux bouts",
+    "aliases": [
+      "être pauvre",
+      "manquer d'argent",
+      "vivre difficilement"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Que signifie « ménager la chèvre et le chou » ?",
+    "answer": "ne pas prendre parti",
+    "aliases": [
+      "ménager les deux camps",
+      "rester neutre",
+      "ne froisser personne"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Vers quelle ville Joffre éloignait-il ses généraux incapables en 1914, donnant naissance à un verbe ?",
+    "answer": "Limoges",
+    "aliases": []
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Quel objet du quotidien porte le nom du préfet de la Seine qui l'imposa aux Parisiens en 1884 ?",
+    "answer": "la poubelle",
+    "aliases": [
+      "poubelle"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "De quelle langue vient le mot « kiosque » ?",
+    "answer": "le turc",
+    "aliases": [
+      "turc",
+      "persan"
+    ]
+  },
+  {
+    "theme": "langue",
+    "difficulty": 3,
+    "prompt": "Quelle phrase célèbre, utilisée pour tester les claviers, contient toutes les lettres : « Portez ce vieux whisky… » ?",
+    "answer": "au juge blond qui fume",
+    "aliases": []
+  }
+]

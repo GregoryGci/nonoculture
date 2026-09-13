@@ -45,6 +45,7 @@ const SETTING_KEYS = [
   "reflexRounds",
   "blurRounds",
   "numericRounds",
+  "audioEnabled",
   "themes",
 ] as const satisfies readonly (keyof GameSettings)[];
 

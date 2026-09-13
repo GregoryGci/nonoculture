@@ -124,6 +124,51 @@ function SliderRow({
   );
 }
 
+/** An on/off setting, with the sentence that says what switching it off costs. */
+function ToggleRow({
+  label,
+  blurb,
+  checked,
+  onChange,
+}: {
+  label: string;
+  blurb: string;
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+}) {
+  return (
+    <div className="flex items-center justify-between gap-4">
+      <div className="flex min-w-0 flex-col gap-0.5">
+        <span className="text-[15px]">{label}</span>
+        <span className="text-[13px] leading-snug" style={{ color: "var(--color-text-faint)" }}>
+          {blurb}
+        </span>
+      </div>
+      <button
+        type="button"
+        role="switch"
+        aria-checked={checked}
+        aria-label={label}
+        onClick={() => onChange(!checked)}
+        className="relative h-7 w-12 shrink-0 rounded-full transition-colors duration-300"
+        style={{
+          background: checked ? "var(--color-accent)" : "var(--color-surface-2)",
+          border: `1px solid ${checked ? "var(--color-accent)" : "var(--color-border-strong)"}`,
+        }}
+      >
+        <span
+          className="absolute top-1/2 size-5 -translate-y-1/2 rounded-full transition-all duration-300"
+          style={{
+            left: checked ? "calc(100% - 1.375rem)" : "0.125rem",
+            background: checked ? "var(--color-accent-contrast)" : "var(--color-text-muted)",
+            transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+          }}
+        />
+      </button>
+    </div>
+  );
+}
+
 /** A 0–6 count is a stepper, not a slider: fewer pixels, no dragging, exact on a phone. */
 function Stepper({
   value,
@@ -242,6 +287,16 @@ export function HostSettings({
           min={15}
           max={30}
           onChange={(n) => onChange({ questionDurationSec: n })}
+        />
+        <ToggleRow
+          label="Questions audio"
+          blurb={
+            settings.audioEnabled
+              ? "Sons à reconnaître. À couper si quelqu'un joue sans le son."
+              : "Coupées : aucune question ne demandera d'écouter."
+          }
+          checked={settings.audioEnabled}
+          onChange={(audioEnabled) => onChange({ audioEnabled })}
         />
       </Section>
 

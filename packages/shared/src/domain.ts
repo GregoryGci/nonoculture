@@ -57,6 +57,9 @@ export interface GameSettings {
   blurRounds: number;
   /** Ordinary questions scored by proximity instead of by the host. */
   numericRounds: number;
+  /** Whether sound questions are drawn at all. Off for a table where not everyone has sound —
+   *  a laptop on mute, a phone in a bar — since a question you cannot hear is a free zero. */
+  audioEnabled: boolean;
   themes: string[]; // empty = all themes
 }
 
@@ -126,6 +129,11 @@ export const THEME_LABELS: Record<string, string> = {
   anime: "Anime & Manga",
   heros: "Super-héros",
   blasons: "Blasons",
+  pokemon: "Pokémon",
+  disney: "Disney & Pixar",
+  langue: "Langue française",
+  web: "Culture web",
+  france: "France & terroirs",
 };
 
 /**
@@ -135,7 +143,7 @@ export const THEME_LABELS: Record<string, string> = {
  * the room has never played it stops being a quiz. Picking them explicitly is a deliberate
  * act; sweeping them in with everything else is not.
  */
-export const OPT_IN_THEMES = ["lol", "dofus"] as const;
+export const OPT_IN_THEMES = ["lol", "dofus", "pokemon"] as const;
 
 export const isOptInTheme = (theme: string): boolean => (OPT_IN_THEMES as readonly string[]).includes(theme);
 
@@ -152,6 +160,7 @@ export const DEFAULT_SETTINGS: GameSettings = {
   reflexRounds: 1,
   blurRounds: 1,
   numericRounds: 2,
+  audioEnabled: true,
   themes: [],
 };
 

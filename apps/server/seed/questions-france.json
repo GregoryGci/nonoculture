@@ -1,0 +1,971 @@
+[
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Quelle région est surnommée « l'île de Beauté » ?",
+    "answer": "la Corse",
+    "aliases": [
+      "Corse"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Quelle ville est surnommée « la Ville rose » ?",
+    "answer": "Toulouse",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Quelle ville est surnommée « la cité phocéenne » ?",
+    "answer": "Marseille",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Quelle ville est surnommée « la capitale des Gaules » ?",
+    "answer": "Lyon",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Quelle est la ville la plus peuplée de France après Paris ?",
+    "answer": "Marseille",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Dans quelle région trouve-t-on le Mont-Saint-Michel ?",
+    "answer": "la Normandie",
+    "aliases": [
+      "Normandie"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Quel est le plus haut sommet de France ?",
+    "answer": "le mont Blanc",
+    "aliases": [
+      "mont Blanc",
+      "Mont-Blanc"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Quel est le plus long fleuve coulant entièrement en France ?",
+    "answer": "la Loire",
+    "aliases": [
+      "Loire"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Dans quelle ville se déroule le célèbre Festival international du film chaque mois de mai ?",
+    "answer": "Cannes",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Dans quelle ville a lieu la course automobile des 24 Heures ?",
+    "answer": "Le Mans",
+    "aliases": [
+      "au Mans"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "De quelle région vient la choucroute ?",
+    "answer": "l'Alsace",
+    "aliases": [
+      "Alsace"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "De quelle ville vient la bouillabaisse ?",
+    "answer": "Marseille",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "De quelle ville vient la célèbre moutarde forte ?",
+    "answer": "Dijon",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "De quelle région la quiche porte-t-elle le nom ?",
+    "answer": "la Lorraine",
+    "aliases": [
+      "Lorraine"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Quel fromage fond dans la tartiflette savoyarde ?",
+    "answer": "le reblochon",
+    "aliases": [
+      "reblochon"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "De quelle région française vient le camembert ?",
+    "answer": "la Normandie",
+    "aliases": [
+      "Normandie"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Quelle région est célèbre pour ses crêpes, ses galettes et son kouign-amann ?",
+    "answer": "la Bretagne",
+    "aliases": [
+      "Bretagne"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Quel ouvrage romain à trois étages franchit le Gardon ?",
+    "answer": "le pont du Gard",
+    "aliases": [
+      "pont du Gard"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Quelle cité médiévale de l'Aude est entourée d'une double enceinte de remparts ?",
+    "answer": "Carcassonne",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Dans quelle ville se trouve le Palais des Papes ?",
+    "answer": "Avignon",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Quelle est la plus haute dune d'Europe, en Gironde ?",
+    "answer": "Pilat",
+    "aliases": [
+      "dune du Pilat",
+      "la dune du Pilat"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Quel parc d'attractions historique se trouve en Vendée ?",
+    "answer": "le Puy du Fou",
+    "aliases": [
+      "Puy du Fou"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Près de quelle ville se trouve le parc du Futuroscope ?",
+    "answer": "Poitiers",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Quel château de la région parisienne abrite la galerie des Glaces ?",
+    "answer": "Versailles",
+    "aliases": [
+      "château de Versailles"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Dans quelle ville se tient la grande braderie chaque premier week-end de septembre ?",
+    "answer": "Lille",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Quelle ville célèbre la fête des Lumières chaque 8 décembre ?",
+    "answer": "Lyon",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Quelle ville de la Côte d'Azur organise un célèbre carnaval et une bataille de fleurs ?",
+    "answer": "Nice",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Combien de régions compte la France métropolitaine depuis 2016 ?",
+    "answer": "13",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Quel est le numéro du département de Paris ?",
+    "answer": "75",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Quel est le numéro du département des Bouches-du-Rhône ?",
+    "answer": "13",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Quelle ville accueille le siège du Parlement européen ?",
+    "answer": "Strasbourg",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Dans quel département d'outre-mer se trouve le Centre spatial de Kourou ?",
+    "answer": "la Guyane",
+    "aliases": [
+      "Guyane"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 1,
+    "prompt": "Quelle île de l'océan Indien abrite le volcan du Piton de la Fournaise ?",
+    "answer": "La Réunion",
+    "aliases": [
+      "Réunion"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Combien de départements compte la France, outre-mer compris ?",
+    "answer": "101",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quel est le numéro du département du Nord ?",
+    "answer": "59",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quel est le numéro du département de la Gironde ?",
+    "answer": "33",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quel est le numéro du département du Rhône ?",
+    "answer": "69",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quel département porte le numéro 01 ?",
+    "answer": "l'Ain",
+    "aliases": [
+      "Ain"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quels numéros portent les deux départements de Corse ?",
+    "answer": "2A et 2B",
+    "aliases": [
+      "2A 2B"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle est la préfecture de la région Bretagne ?",
+    "answer": "Rennes",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle est la préfecture de la région Occitanie ?",
+    "answer": "Toulouse",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle est la préfecture de la région Nouvelle-Aquitaine ?",
+    "answer": "Bordeaux",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle est la préfecture de la région Grand Est ?",
+    "answer": "Strasbourg",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle est la préfecture de la région Hauts-de-France ?",
+    "answer": "Lille",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle est la préfecture de la région Normandie ?",
+    "answer": "Rouen",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle est la préfecture de la région Bourgogne-Franche-Comté ?",
+    "answer": "Dijon",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle est la préfecture de la région Centre-Val de Loire ?",
+    "answer": "Orléans",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle est la préfecture de la région Pays de la Loire ?",
+    "answer": "Nantes",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle est la plus grande région de France métropolitaine ?",
+    "answer": "la Nouvelle-Aquitaine",
+    "aliases": [
+      "Nouvelle-Aquitaine"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quel est le plus grand département de France métropolitaine ?",
+    "answer": "la Gironde",
+    "aliases": [
+      "Gironde"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quel est le plus grand département de France, outre-mer compris ?",
+    "answer": "la Guyane",
+    "aliases": [
+      "Guyane"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quel est le plus petit département de France par la superficie ?",
+    "answer": "Paris",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle ville se proclame capitale mondiale du cassoulet ?",
+    "answer": "Castelnaudary",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "De quelle ville viennent les calissons, confiseries en forme de losange ?",
+    "answer": "Aix-en-Provence",
+    "aliases": [
+      "Aix"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "De quelle ville viennent les petits gâteaux cannelés au rhum et à la vanille ?",
+    "answer": "Bordeaux",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle ville de la Drôme est la capitale du nougat ?",
+    "answer": "Montélimar",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "De quelle ville du Nord viennent les bonbons à la menthe appelés « bêtises » ?",
+    "answer": "Cambrai",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "De quelle ville de la Meuse viennent les madeleines les plus célèbres ?",
+    "answer": "Commercy",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Avec quel lait est fabriqué le roquefort ?",
+    "answer": "brebis",
+    "aliases": [
+      "lait de brebis"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "De quel massif vient le comté ?",
+    "answer": "le Jura",
+    "aliases": [
+      "Jura"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quel piment rouge du Pays basque bénéficie d'une appellation d'origine protégée ?",
+    "answer": "Espelette",
+    "aliases": [
+      "piment d'Espelette"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle ville bretonne est célèbre pour ses marais salants et sa fleur de sel ?",
+    "answer": "Guérande",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle ville de Haute-Loire est réputée pour ses lentilles vertes ?",
+    "answer": "Le Puy-en-Velay",
+    "aliases": [
+      "Le Puy",
+      "Puy-en-Velay"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle ville de la Marne abrite la célèbre avenue de Champagne ?",
+    "answer": "Épernay",
+    "aliases": [
+      "Epernay"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle eau-de-vie de pomme est une fierté normande ?",
+    "answer": "le calvados",
+    "aliases": [
+      "calvados"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quel plat auvergnat mêle purée de pommes de terre et tome fraîche filante ?",
+    "answer": "l'aligot",
+    "aliases": [
+      "aligot"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quel viaduc de l'Aveyron, à haubans, détient le record de hauteur de pile ?",
+    "answer": "Millau",
+    "aliases": [
+      "viaduc de Millau"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Dans quel département se trouve la grotte de Lascaux ?",
+    "answer": "la Dordogne",
+    "aliases": [
+      "Dordogne"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quel roi a fait construire le château de Chambord ?",
+    "answer": "François Ier",
+    "aliases": [
+      "François 1er"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Sur quel littoral normand se dressent les falaises d'Étretat ?",
+    "answer": "la côte d'Albâtre",
+    "aliases": [
+      "côte d'Albâtre"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle ville alsacienne a un quartier surnommé « la Petite Venise » ?",
+    "answer": "Colmar",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle ville de Haute-Savoie est surnommée « la Venise des Alpes » ?",
+    "answer": "Annecy",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle ville bretonne est surnommée « la cité corsaire » ?",
+    "answer": "Saint-Malo",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle ville des Alpes-Maritimes est la capitale mondiale du parfum ?",
+    "answer": "Grasse",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle ville de la Côte d'Azur organise la fête du Citron ?",
+    "answer": "Menton",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle ville du Morbihan accueille chaque été le Festival interceltique ?",
+    "answer": "Lorient",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Dans quelle ville de Bretagne a lieu le festival des Vieilles Charrues ?",
+    "answer": "Carhaix",
+    "aliases": [
+      "Carhaix-Plouguer"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle ville accueille chaque juillet un grand festival de théâtre dans la cour du Palais des Papes ?",
+    "answer": "Avignon",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle langue régionale parle-t-on traditionnellement à Bayonne et Saint-Jean-de-Luz ?",
+    "answer": "le basque",
+    "aliases": [
+      "basque",
+      "euskara"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quel est le plus grand lac naturel entièrement situé en France ?",
+    "answer": "le lac du Bourget",
+    "aliases": [
+      "lac du Bourget",
+      "Bourget"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quel lac alpin la France partage-t-elle avec la Suisse ?",
+    "answer": "le lac Léman",
+    "aliases": [
+      "Léman",
+      "lac de Genève"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle rivière rejoint le Rhône à Lyon ?",
+    "answer": "la Saône",
+    "aliases": [
+      "Saône"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quel fleuve arrose à la fois Toulouse et Bordeaux ?",
+    "answer": "la Garonne",
+    "aliases": [
+      "Garonne"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quel volcan de Martinique a détruit la ville de Saint-Pierre en 1902 ?",
+    "answer": "la montagne Pelée",
+    "aliases": [
+      "montagne Pelée",
+      "Pelée"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle île des Antilles françaises a la forme d'un papillon ?",
+    "answer": "la Guadeloupe",
+    "aliases": [
+      "Guadeloupe"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelles gorges spectaculaires du Var et des Alpes-de-Haute-Provence sont surnommées le « Grand Canyon » européen ?",
+    "answer": "Verdon",
+    "aliases": [
+      "gorges du Verdon"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quel parc d'Auvergne consacré aux volcans a été imaginé par Valéry Giscard d'Estaing ?",
+    "answer": "Vulcania",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle île du Var, près d'Hyères, est réputée pour ses plages et interdite aux voitures ?",
+    "answer": "Porquerolles",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 2,
+    "prompt": "Quelle île de Charente-Maritime est reliée au continent par un pont depuis 1988 ?",
+    "answer": "l'île de Ré",
+    "aliases": [
+      "Ré",
+      "île de Ré"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "Quelle est l'altitude du mont Blanc, en mètres, arrondie ?",
+    "answer": "4806",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "Combien de régions compte la France, outre-mer compris ?",
+    "answer": "18",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "En quelle année Mayotte est-elle devenue un département français ?",
+    "answer": "2011",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "En quelle année ont ouvert les Hospices de Beaune ?",
+    "answer": "1452",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "Quelle ville est surnommée « la ville aux cent clochers » ?",
+    "answer": "Rouen",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "Quelle est la troisième ville la plus peuplée de France ?",
+    "answer": "Lyon",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "Dans quelle commune de l'Aveyron affine-t-on le célèbre bleu de brebis dans des caves naturelles ?",
+    "answer": "Roquefort-sur-Soulzon",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "Quelle ville charentaise donne son nom à une eau-de-vie de vin mondialement exportée ?",
+    "answer": "Cognac",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "Quel cirque glaciaire des Hautes-Pyrénées est classé au patrimoine mondial ?",
+    "answer": "Gavarnie",
+    "aliases": [
+      "cirque de Gavarnie"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "Quelle ville de Côte-d'Or est célèbre pour ses Hospices et leur vente de vins aux enchères ?",
+    "answer": "Beaune",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "Sur quelle colline de Lyon se dresse la basilique qui domine la ville ?",
+    "answer": "Fourvière",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "Quel pont d'Avignon inachevé est célèbre grâce à une comptine ?",
+    "answer": "Saint-Bénézet",
+    "aliases": [
+      "pont Saint-Bénézet"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "Quelle langue régionale est appelée « brezhoneg » par ses locuteurs ?",
+    "answer": "le breton",
+    "aliases": [
+      "breton"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "Dans quelle région parle-t-on traditionnellement le catalan en France ?",
+    "answer": "le Roussillon",
+    "aliases": [
+      "Pyrénées-Orientales",
+      "Roussillon",
+      "Occitanie"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "Quel est le département le plus peuplé de France ?",
+    "answer": "le Nord",
+    "aliases": [
+      "Nord"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "Quel département est le moins peuplé de France métropolitaine ?",
+    "answer": "la Lozère",
+    "aliases": [
+      "Lozère"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "Quel département porte le numéro 974 ?",
+    "answer": "La Réunion",
+    "aliases": [
+      "Réunion"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "Quel département porte le numéro 976 ?",
+    "answer": "Mayotte",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "Quel est le point culminant du Massif central ?",
+    "answer": "le puy de Sancy",
+    "aliases": [
+      "Sancy",
+      "puy de Sancy"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "Quel est le point culminant des Vosges ?",
+    "answer": "le Grand Ballon",
+    "aliases": [
+      "Grand Ballon",
+      "ballon de Guebwiller"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "Quel archipel français se trouve au large de Terre-Neuve ?",
+    "answer": "Saint-Pierre-et-Miquelon",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "Dans quelle ville de Bourgogne se trouve la plus grande abbaye du Moyen Âge, fondée en 910 ?",
+    "answer": "Cluny",
+    "aliases": []
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "Quelle ville de Dordogne est une capitale de la truffe noire et du foie gras ?",
+    "answer": "Sarlat",
+    "aliases": [
+      "Sarlat-la-Canéda"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "Quelle AOP de volaille, aux pattes bleues, vient de l'Ain ?",
+    "answer": "Bresse",
+    "aliases": [
+      "volaille de Bresse",
+      "poulet de Bresse"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "Quel monument de Nîmes est un temple romain parmi les mieux conservés au monde ?",
+    "answer": "la Maison carrée",
+    "aliases": [
+      "Maison carrée"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "Quel phare de Gironde, en pleine mer, est surnommé « le roi des phares » ?",
+    "answer": "Cordouan",
+    "aliases": [
+      "phare de Cordouan"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "Quel sommet du Vaucluse, surnommé « le Géant de Provence », est une étape mythique du Tour ?",
+    "answer": "le mont Ventoux",
+    "aliases": [
+      "Ventoux"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "Quelle région viticole produit le sauternes ?",
+    "answer": "le Bordelais",
+    "aliases": [
+      "Bordeaux",
+      "Gironde"
+    ]
+  },
+  {
+    "theme": "france",
+    "difficulty": 3,
+    "prompt": "Quel fromage bleu d'Auvergne porte le nom d'une ville du Puy-de-Dôme ?",
+    "answer": "la fourme d'Ambert",
+    "aliases": [
+      "fourme d'Ambert"
+    ]
+  }
+]

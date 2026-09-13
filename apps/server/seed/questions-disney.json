@@ -1,0 +1,1206 @@
+[
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quelle souris aux grandes oreilles rondes est la mascotte de Disney ?",
+    "answer": "Mickey",
+    "aliases": [
+      "Mickey Mouse"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Comment s'appelle la compagne de Mickey ?",
+    "answer": "Minnie",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel canard colérique en costume de marin est l'ami de Mickey ?",
+    "answer": "Donald",
+    "aliases": [
+      "Donald Duck"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Comment s'appelle le chien de Mickey, qui ne parle pas ?",
+    "answer": "Pluto",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel grand chien maladroit, qui parle, est le meilleur ami de Mickey ?",
+    "answer": "Dingo",
+    "aliases": [
+      "Goofy"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Combien de nains accompagnent Blanche-Neige ?",
+    "answer": "7",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel nain de Blanche-Neige ne cesse d'éternuer ?",
+    "answer": "Atchoum",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel pantin de bois rêve de devenir un vrai petit garçon ?",
+    "answer": "Pinocchio",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel criquet sert de conscience à Pinocchio ?",
+    "answer": "Jiminy Cricket",
+    "aliases": [
+      "Jiminy"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel éléphanteau vole grâce à ses immenses oreilles ?",
+    "answer": "Dumbo",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel faon perd sa mère sous les balles d'un chasseur ?",
+    "answer": "Bambi",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel lapin tape du pied et devient l'ami de Bambi ?",
+    "answer": "Panpan",
+    "aliases": [
+      "Pan-Pan"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quelle princesse perd sa pantoufle de verre en quittant le bal ?",
+    "answer": "Cendrillon",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "À quelle heure le sortilège de la marraine de Cendrillon prend-il fin ?",
+    "answer": "minuit",
+    "aliases": [
+      "à minuit"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel garçon refuse de grandir et vit au Pays imaginaire ?",
+    "answer": "Peter Pan",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quelle petite fée accompagne Peter Pan ?",
+    "answer": "la Fée Clochette",
+    "aliases": [
+      "Fée Clochette",
+      "Clochette"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel pirate à la main de fer est l'ennemi de Peter Pan ?",
+    "answer": "Capitaine Crochet",
+    "aliases": [
+      "Crochet"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quelle méchante veut se faire un manteau avec la fourrure de chiots tachetés ?",
+    "answer": "Cruella d'Enfer",
+    "aliases": [
+      "Cruella"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Combien de dalmatiens compte le titre du film de 1961 ?",
+    "answer": "101",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel ours insouciant chante « Il en faut peu pour être heureux » ?",
+    "answer": "Baloo",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quelle panthère noire protège Mowgli dans Le Livre de la jungle ?",
+    "answer": "Bagheera",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel tigre menace Mowgli dans Le Livre de la jungle ?",
+    "answer": "Shere Khan",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quelle sirène rousse rêve de vivre parmi les humains ?",
+    "answer": "Ariel",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel crabe musicien veille sur Ariel ?",
+    "answer": "Sébastien",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quelle sorcière des mers vole la voix d'Ariel ?",
+    "answer": "Ursula",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel chandelier galant chante « C'est la fête » dans La Belle et la Bête ?",
+    "answer": "Lumière",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel singe voleur accompagne Aladdin ?",
+    "answer": "Abu",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel vizir maléfique convoite la lampe d'Aladdin ?",
+    "answer": "Jafar",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Comment s'appelle le perroquet bavard de Jafar ?",
+    "answer": "Iago",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel lionceau est destiné à régner sur la Terre des Lions ?",
+    "answer": "Simba",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel lion, oncle de Simba, fait tuer son propre frère ?",
+    "answer": "Scar",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Comment s'appelle le père de Simba ?",
+    "answer": "Mufasa",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel phacochère est le meilleur ami de Timon ?",
+    "answer": "Pumbaa",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quelle expression signifie « pas de soucis » dans Le Roi lion ?",
+    "answer": "Hakuna Matata",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel petit dragon rouge veille sur Mulan ?",
+    "answer": "Mushu",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel bonhomme de neige rêve de l'été dans La Reine des neiges ?",
+    "answer": "Olaf",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quelle reine aux pouvoirs de glace est la sœur d'Anna ?",
+    "answer": "Elsa",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quelle chanson Elsa chante-t-elle en bâtissant son palais de glace, en version française ?",
+    "answer": "Libérée, délivrée",
+    "aliases": [
+      "Libérée délivrée"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quelle princesse aux très longs cheveux blonds est enfermée dans une tour ?",
+    "answer": "Raiponce",
+    "aliases": [
+      "Rapunzel"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel demi-dieu tatoué accompagne Vaiana dans son voyage ?",
+    "answer": "Maui",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel cowboy est le jouet préféré d'Andy dans Toy Story ?",
+    "answer": "Woody",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel jouet astronaute s'écrie « Vers l'infini et au-delà ! » ?",
+    "answer": "Buzz l'Éclair",
+    "aliases": [
+      "Buzz",
+      "Buzz Lightyear"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel poisson-clown se perd loin de son père dans un film Pixar de 2003 ?",
+    "answer": "Nemo",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel poisson bleu à la mémoire défaillante aide à retrouver Nemo ?",
+    "answer": "Dory",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quelle voiture de course rouge porte le numéro 95 dans Cars ?",
+    "answer": "Flash McQueen",
+    "aliases": [
+      "Lightning McQueen",
+      "McQueen"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel rat rêve de devenir grand cuisinier à Paris ?",
+    "answer": "Rémy",
+    "aliases": [
+      "Remy"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel petit robot compacte des déchets seul sur une Terre abandonnée ?",
+    "answer": "WALL-E",
+    "aliases": [
+      "Wall-E",
+      "Walle"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Dans quel film de Pixar une maison s'envole-t-elle grâce à des milliers de ballons ?",
+    "answer": "Là-haut",
+    "aliases": [
+      "Up"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quelle émotion jaune et pétillante dirige la tête de Riley dans Vice-Versa ?",
+    "answer": "Joie",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel est le prénom du créateur de Mickey, fondateur de son studio ?",
+    "answer": "Walt",
+    "aliases": [
+      "Walt Disney"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quelle fée aux cornes noires maudit la princesse Aurore ?",
+    "answer": "Maléfique",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel extraterrestre bleu, expérience 626, est adopté par Lilo ?",
+    "answer": "Stitch",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Dans quelle ville française se déroule Ratatouille ?",
+    "answer": "Paris",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel gros monstre bleu à pois violets fait équipe avec Bob dans Monstres & Cie ?",
+    "answer": "Sulli",
+    "aliases": [
+      "Sully",
+      "Sullivan"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 1,
+    "prompt": "Quel robot gonflable et bienveillant soigne Hiro dans Les Nouveaux Héros ?",
+    "answer": "Baymax",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quel est le tout premier long métrage d'animation de Disney, sorti en 1937 ?",
+    "answer": "Blanche-Neige et les Sept Nains",
+    "aliases": [
+      "Blanche-Neige"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quel suricate bavard fait découvrir la vie sans soucis à Simba ?",
+    "answer": "Timon",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quel mandrill sage présente Simba à la savane à sa naissance ?",
+    "answer": "Rafiki",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quel tigre de compagnie veille sur la princesse Jasmine ?",
+    "answer": "Rajah",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quelle théière maternelle vit au château de la Bête ?",
+    "answer": "Madame Samovar",
+    "aliases": [
+      "Mme Samovar"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quel chasseur vaniteux veut épouser Belle ?",
+    "answer": "Gaston",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quel caméléon vert est le compagnon de Raiponce ?",
+    "answer": "Pascal",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quel renne accompagne Kristoff dans La Reine des neiges ?",
+    "answer": "Sven",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quel coq stupide embarque par erreur avec Vaiana ?",
+    "answer": "Heihei",
+    "aliases": [
+      "Hei Hei"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quel est le nom de famille de la famille colombienne magique d'Encanto ?",
+    "answer": "Madrigal",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "De quel oncle « ne parle-t-on pas » dans la chanson d'Encanto ?",
+    "answer": "Bruno",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quelle fête mexicaine est au cœur du film Coco ?",
+    "answer": "le Jour des morts",
+    "aliases": [
+      "Día de los Muertos",
+      "fête des morts",
+      "Jour des morts"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle le jeune guitariste héros de Coco ?",
+    "answer": "Miguel",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quel ours rose sentant la fraise est le méchant de Toy Story 3 ?",
+    "answer": "Lotso",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle le garçon propriétaire des jouets dans les premiers Toy Story ?",
+    "answer": "Andy",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle le père de Nemo ?",
+    "answer": "Marin",
+    "aliases": [
+      "Marlin"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quelle petite fille surnommée par les monstres entre dans leur monde dans Monstres & Cie ?",
+    "answer": "Bouh",
+    "aliases": [
+      "Boo"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quelle styliste miniature crée les costumes des Indestructibles ?",
+    "answer": "Edna Mode",
+    "aliases": [
+      "Edna"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quelle dépanneuse rouillée est le meilleur ami de Flash McQueen ?",
+    "answer": "Martin",
+    "aliases": [
+      "Mater"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle le robot blanc et moderne dont WALL-E tombe amoureux ?",
+    "answer": "EVE",
+    "aliases": [
+      "Ève"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle le vieil homme grincheux héros de Là-haut ?",
+    "answer": "Carl",
+    "aliases": [
+      "Carl Fredricksen"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quelle nouvelle émotion orange bouscule Riley dans Vice-Versa 2 ?",
+    "answer": "Anxiété",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Dans quel pays se déroule le film Pixar Luca ?",
+    "answer": "l'Italie",
+    "aliases": [
+      "Italie"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "En quel animal Mei se transforme-t-elle dans Alerte rouge ?",
+    "answer": "un panda roux",
+    "aliases": [
+      "panda roux",
+      "panda"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quelle lampe de bureau sautille dans le logo de Pixar ?",
+    "answer": "Luxo Jr.",
+    "aliases": [
+      "Luxo",
+      "Luxo Junior"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "En quelle année est sorti Toy Story, premier long métrage entièrement en images de synthèse ?",
+    "answer": "1995",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "En quelle année Disneyland Paris a-t-il ouvert ses portes ?",
+    "answer": "1992",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "En quelle année le premier parc Disneyland a-t-il ouvert en Californie ?",
+    "answer": "1955",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Combien de bonnes fées veillent sur Aurore dans La Belle au bois dormant ?",
+    "answer": "3",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quel monument trône au centre de Disneyland Paris ?",
+    "answer": "le château de la Belle au bois dormant",
+    "aliases": [
+      "Belle au bois dormant"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quel animal incarne Robin des Bois dans le film Disney de 1973 ?",
+    "answer": "un renard",
+    "aliases": [
+      "renard"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quel chat de gouttière séduit Duchesse dans Les Aristochats ?",
+    "answer": "Thomas O'Malley",
+    "aliases": [
+      "O'Malley"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "En quel animal l'empereur Kuzco est-il transformé ?",
+    "answer": "un lama",
+    "aliases": [
+      "lama"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quelle lapine devient la première policière de Zootopie ?",
+    "answer": "Judy Hopps",
+    "aliases": [
+      "Judy"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quel renard escroc fait équipe avec Judy dans Zootopie ?",
+    "answer": "Nick Wilde",
+    "aliases": [
+      "Nick"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quel paresseux d'une lenteur légendaire travaille au bureau des permis de Zootopie ?",
+    "answer": "Flash",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Dans quelle ville se déroule La Princesse et la Grenouille ?",
+    "answer": "La Nouvelle-Orléans",
+    "aliases": [
+      "Nouvelle-Orléans",
+      "New Orleans"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quel sonneur de cloches vit caché dans Notre-Dame de Paris chez Disney ?",
+    "answer": "Quasimodo",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quel juge inflexible élève Quasimodo ?",
+    "answer": "Frollo",
+    "aliases": [
+      "Claude Frollo"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quelle gitane danse sur le parvis de Notre-Dame dans le film de 1996 ?",
+    "answer": "Esmeralda",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quel mot interminable Mary Poppins chante-t-elle pour tout rendre joyeux ?",
+    "answer": "supercalifragilisticexpialidocious",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Dans quel film de 1940 Mickey incarne-t-il l'apprenti sorcier ?",
+    "answer": "Fantasia",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quel dessin animé de 1928 met en scène Mickey pilotant un bateau à vapeur ?",
+    "answer": "Steamboat Willie",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "En quel animal le jeune Kenai est-il transformé par les esprits, dans un Disney de 2003 ?",
+    "answer": "un ours",
+    "aliases": [
+      "ours"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quel chien, star d'une série télé, se croit doté de super-pouvoirs ?",
+    "answer": "Volt",
+    "aliases": [
+      "Bolt"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quel demi-dieu grec est élevé parmi les mortels dans le film Disney de 1997 ?",
+    "answer": "Hercule",
+    "aliases": [
+      "Hercules"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quel homme élevé par des gorilles est le héros d'un Disney de 1999 ?",
+    "answer": "Tarzan",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quelle princesse amérindienne rencontre le colon John Smith ?",
+    "answer": "Pocahontas",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quel est le nom de famille des Indestructibles ?",
+    "answer": "Parr",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle le petit scout qui s'invite dans l'aventure de Là-haut ?",
+    "answer": "Russell",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quelle émotion rouge, dans Vice-Versa, s'enflamme littéralement quand elle s'énerve ?",
+    "answer": "Colère",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 2,
+    "prompt": "Quel est le vrai prénom de la Belle au bois dormant ?",
+    "answer": "Aurore",
+    "aliases": [
+      "Aurora"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "En quelle année Disney a-t-il racheté Pixar ?",
+    "answer": "2006",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "En quelle année Disney a-t-il racheté Marvel ?",
+    "answer": "2009",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "En quelle année Disney a-t-il racheté Lucasfilm ?",
+    "answer": "2012",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "En quelle année la plateforme Disney+ a-t-elle été lancée aux États-Unis ?",
+    "answer": "2019",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Comment s'appelait le frère de Walt Disney, cofondateur du studio ?",
+    "answer": "Roy",
+    "aliases": [
+      "Roy Disney",
+      "Roy O. Disney"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Dans quelle ville de Seine-et-Marne se trouve Disneyland Paris ?",
+    "answer": "Chessy",
+    "aliases": [
+      "Marne-la-Vallée",
+      "Serris"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Dans quelle ville de Californie a ouvert le premier Disneyland ?",
+    "answer": "Anaheim",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Quel lapin, créé par Walt Disney avant Mickey, lui a été retiré par Universal ?",
+    "answer": "Oswald",
+    "aliases": [
+      "Oswald le lapin chanceux"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "En quelle année la première version de Mickey est-elle entrée dans le domaine public américain ?",
+    "answer": "2024",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Comment s'appelle le poisson rouge de Geppetto dans Pinocchio ?",
+    "answer": "Cléo",
+    "aliases": [
+      "Cleo"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Comment s'appelle le chat de Geppetto dans Pinocchio ?",
+    "answer": "Figaro",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Quel est le nom de la baleine géante qui avale Geppetto ?",
+    "answer": "Monstro",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Comment s'appelle l'émotion violette et craintive de Vice-Versa ?",
+    "answer": "Peur",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Quel personnage tente de réaliser son vœu dans Wish, le film des 100 ans de Disney ?",
+    "answer": "Asha",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Quel est le nom du roi tyrannique de Rosas dans Wish ?",
+    "answer": "Magnifico",
+    "aliases": [
+      "le roi Magnifico"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Dans quel film Pixar deux frères elfes tentent-ils de ramener leur père pour une journée ?",
+    "answer": "En avant",
+    "aliases": [
+      "Onward"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Dans quel film Pixar un professeur de musique se retrouve-t-il dans l'au-delà ?",
+    "answer": "Soul",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Dans quelle ville peuplée d'éléments se déroule le film Pixar Élémentaire ?",
+    "answer": "Element City",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Quel est le nom du dinosaure peureux de Toy Story ?",
+    "answer": "Rex",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Quel cochon tirelire fait des remarques cyniques dans Toy Story ?",
+    "answer": "Bayonne",
+    "aliases": [
+      "Hamm"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Quel est le nom du chien à ressort de Toy Story ?",
+    "answer": "Zigzag",
+    "aliases": [
+      "Slinky"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Quelle cowgirl rejoint les jouets d'Andy dans Toy Story 2 ?",
+    "answer": "Jessie",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Quel est le nom du cheval de Woody ?",
+    "answer": "Pile-Poil",
+    "aliases": [
+      "Pile Poil",
+      "Bullseye"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Quel requin végétarien anime un groupe de soutien dans Le Monde de Nemo ?",
+    "answer": "Bruce",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Comment s'appelle la tortue marine surfeuse du Monde de Nemo ?",
+    "answer": "Crush",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Quel critique gastronomique redoutable goûte la ratatouille de Rémy ?",
+    "answer": "Anton Ego",
+    "aliases": [
+      "Ego"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Quel frère maladroit de Rémy ne pense qu'à manger ?",
+    "answer": "Émile",
+    "aliases": [
+      "Emile"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Quel chien parle grâce à un collier traducteur dans Là-haut ?",
+    "answer": "Doug",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Quelle ville fictive traversée par la Route 66 abrite les héros de Cars ?",
+    "answer": "Radiator Springs",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Quelle lionne, amie d'enfance de Simba, devient sa compagne ?",
+    "answer": "Nala",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Comment s'appelle la mère de Simba ?",
+    "answer": "Sarabi",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Quelle est la ville où vit Aladdin ?",
+    "answer": "Agrabah",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Quelle souris dodue, amie de Cendrillon, ne pense qu'au fromage ?",
+    "answer": "Gus",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Quel chat maléfique appartient à la belle-mère de Cendrillon ?",
+    "answer": "Lucifer",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Comment s'appelle le poisson jaune et bleu ami d'Ariel ?",
+    "answer": "Polochon",
+    "aliases": [
+      "Flounder"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Comment s'appelle le goéland qui explique mal les objets humains à Ariel ?",
+    "answer": "Eurêka",
+    "aliases": [
+      "Eureka",
+      "Scuttle"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Quel père d'Ariel règne sur l'Atlantica ?",
+    "answer": "Triton",
+    "aliases": [
+      "le roi Triton"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Quelle petite tasse ébréchée est le fils de Madame Samovar ?",
+    "answer": "Zip",
+    "aliases": [
+      "Chip"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Quelle horloge nerveuse est le majordome du château de la Bête ?",
+    "answer": "Big Ben",
+    "aliases": [
+      "Cogsworth"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Quel film Disney de 1959, avec Aurore, a été un échec coûteux à sa sortie ?",
+    "answer": "La Belle au bois dormant",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Quel compositeur a écrit les chansons de La Petite Sirène, La Belle et la Bête et Aladdin ?",
+    "answer": "Alan Menken",
+    "aliases": [
+      "Menken"
+    ]
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Quel artiste a composé la musique du Roi lion avec Hans Zimmer ?",
+    "answer": "Elton John",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Quel acteur prête sa voix au Génie dans la version originale d'Aladdin de 1992 ?",
+    "answer": "Robin Williams",
+    "aliases": []
+  },
+  {
+    "theme": "disney",
+    "difficulty": 3,
+    "prompt": "Quel explorateur, idole d'enfance de Carl, se révèle être le méchant de Là-haut ?",
+    "answer": "Charles Muntz",
+    "aliases": [
+      "Muntz"
+    ]
+  }
+]

@@ -1,0 +1,1259 @@
+[
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Comment s'appelle le jeune dresseur héros de l'anime Pokémon depuis 1997 ?",
+    "answer": "Sacha",
+    "aliases": [
+      "Ash"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Quel Pokémon électrique jaune accompagne Sacha dans l'anime ?",
+    "answer": "Pikachu",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Dans quelle ville Sacha a-t-il grandi ?",
+    "answer": "Bourg Palette",
+    "aliases": [
+      "Pallet Town"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Quel professeur remet leur premier Pokémon aux dresseurs de Bourg Palette ?",
+    "answer": "Chen",
+    "aliases": [
+      "Professeur Chen",
+      "Professeur Oak",
+      "Oak"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Quel Pokémon qui parle fait équipe avec Jessie et James dans la Team Rocket ?",
+    "answer": "Miaouss",
+    "aliases": [
+      "Meowth"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Avec quel objet capture-t-on un Pokémon sauvage ?",
+    "answer": "Poké Ball",
+    "aliases": [
+      "Pokéball"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Comment s'appelle l'encyclopédie électronique qui recense les Pokémon rencontrés ?",
+    "answer": "Pokédex",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Dans quel bâtiment soigne-t-on gratuitement son équipe entre deux combats ?",
+    "answer": "Centre Pokémon",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Quel gros Pokémon endormi bloque la route et ne se réveille qu'au son d'une flûte ?",
+    "answer": "Ronflex",
+    "aliases": [
+      "Snorlax"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "En quel Pokémon Pikachu évolue-t-il ?",
+    "answer": "Raichu",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Quel Pokémon rose en forme de ballon endort son public en chantant ?",
+    "answer": "Rondoudou",
+    "aliases": [
+      "Jigglypuff"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Quel poisson réputé inutile évolue en redoutable Léviator ?",
+    "answer": "Magicarpe",
+    "aliases": [
+      "Magikarp"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Quelle est l'évolution finale de Salamèche ?",
+    "answer": "Dracaufeu",
+    "aliases": [
+      "Charizard"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Quelle est l'évolution finale de Carapuce ?",
+    "answer": "Tortank",
+    "aliases": [
+      "Blastoise"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Quel Pokémon peut évoluer en huit Pokémon différents, un par type ?",
+    "answer": "Évoli",
+    "aliases": [
+      "Eevee"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Quel Pokémon légendaire a été créé en laboratoire à partir de l'ADN de Mew ?",
+    "answer": "Mewtwo",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Sur quelle console portable sont sortis les tout premiers jeux Pokémon ?",
+    "answer": "Game Boy",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Quel studio japonais développe les jeux Pokémon principaux ?",
+    "answer": "Game Freak",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Quel Pokémon canard, qui a toujours mal à la tête, accompagne Ondine ?",
+    "answer": "Psykokwak",
+    "aliases": [
+      "Psyduck"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Quel Pokémon serpent de roche est le partenaire fétiche de Pierre ?",
+    "answer": "Onix",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Quelle infirmière aux cheveux roses tient chaque Centre Pokémon dans l'anime ?",
+    "answer": "Joëlle",
+    "aliases": [
+      "Infirmière Joëlle"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Quel Pokémon de feu de Sacha cesse de lui obéir en évoluant ?",
+    "answer": "Dracaufeu",
+    "aliases": [
+      "Charizard"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Quelle est la pré-évolution de Pikachu ?",
+    "answer": "Pichu",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Quel Pokémon ressemble à une Poké Ball et explose volontiers ?",
+    "answer": "Voltorbe",
+    "aliases": [
+      "Voltorb"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Quelle organisation criminelle Jessie et James servent-ils ?",
+    "answer": "Team Rocket",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Combien de Pokémon un dresseur peut-il emmener au maximum dans son équipe ?",
+    "answer": "6",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Combien d'attaques un Pokémon peut-il connaître en même temps ?",
+    "answer": "4",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Quel est le niveau maximum qu'un Pokémon peut atteindre ?",
+    "answer": "100",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Quel mot désigne un Pokémon aux couleurs rares, différentes de d'habitude ?",
+    "answer": "chromatique",
+    "aliases": [
+      "shiny"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 1,
+    "prompt": "Quelle entreprise a développé le jeu mobile Pokémon GO ?",
+    "answer": "Niantic",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Combien de Pokémon compte le Pokédex de la toute première génération ?",
+    "answer": "151",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quelle région découvre-t-on dans Pokémon Or et Argent ?",
+    "answer": "Johto",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quelle région découvre-t-on dans Pokémon Rubis et Saphir ?",
+    "answer": "Hoenn",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quelle région découvre-t-on dans Pokémon Diamant et Perle ?",
+    "answer": "Sinnoh",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quelle région découvre-t-on dans Pokémon Noir et Blanc ?",
+    "answer": "Unys",
+    "aliases": [
+      "Unova"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quelle région de Pokémon X et Y est inspirée de la France ?",
+    "answer": "Kalos",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quelle région de Pokémon Soleil et Lune est inspirée d'Hawaï ?",
+    "answer": "Alola",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quelle région de Pokémon Épée et Bouclier est inspirée du Royaume-Uni ?",
+    "answer": "Galar",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quelle région de Pokémon Écarlate et Violet est inspirée de la péninsule Ibérique ?",
+    "answer": "Paldea",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quelle grande ville de la région de Kalos est inspirée de Paris ?",
+    "answer": "Illumis",
+    "aliases": [
+      "Lumiose"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quels sont les trois oiseaux légendaires de Kanto ?",
+    "answer": "Artikodin, Électhor et Sulfura",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel Pokémon légendaire orne la boîte de Pokémon Argent ?",
+    "answer": "Lugia",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel Pokémon légendaire orne la boîte de Pokémon Rubis ?",
+    "answer": "Groudon",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel Pokémon légendaire orne la boîte de Pokémon Saphir ?",
+    "answer": "Kyogre",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel dragon légendaire orne la boîte de Pokémon Émeraude ?",
+    "answer": "Rayquaza",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel Pokémon légendaire orne la boîte de Pokémon Diamant ?",
+    "answer": "Dialga",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel Pokémon légendaire orne la boîte de Pokémon Perle ?",
+    "answer": "Palkia",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel Pokémon légendaire orne la boîte de Pokémon Noir ?",
+    "answer": "Zekrom",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel Pokémon légendaire orne la boîte de Pokémon Blanc ?",
+    "answer": "Reshiram",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel Pokémon légendaire orne la boîte de Pokémon Soleil ?",
+    "answer": "Solgaleo",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel Pokémon légendaire orne la boîte de Pokémon Lune ?",
+    "answer": "Lunala",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel Pokémon légendaire orne la boîte de Pokémon Épée ?",
+    "answer": "Zacian",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel objet fait évoluer Pikachu en Raichu ?",
+    "answer": "Pierre Foudre",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "En quel Pokémon Évoli évolue-t-il au contact d'une Pierre Eau ?",
+    "answer": "Aquali",
+    "aliases": [
+      "Vaporeon"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "En quel Pokémon Évoli évolue-t-il au contact d'une Pierre Feu ?",
+    "answer": "Pyroli",
+    "aliases": [
+      "Flareon"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "En quel Pokémon Évoli évolue-t-il au contact d'une Pierre Foudre ?",
+    "answer": "Voltali",
+    "aliases": [
+      "Jolteon"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quelle évolution d'Évoli est de type Fée ?",
+    "answer": "Nymphali",
+    "aliases": [
+      "Sylveon"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quelle évolution d'Évoli, de type Ténèbres, apparaît la nuit ?",
+    "answer": "Noctali",
+    "aliases": [
+      "Umbreon"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Qui dirige la Team Rocket et tient en secret l'arène de Jadielle ?",
+    "answer": "Giovanni",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quelle organisation criminelle affronte-t-on dans Pokémon Rubis ?",
+    "answer": "Team Magma",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quelle organisation criminelle affronte-t-on dans Pokémon Saphir ?",
+    "answer": "Team Aqua",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quelle organisation criminelle affronte-t-on dans Pokémon Diamant et Perle ?",
+    "answer": "Team Galaxie",
+    "aliases": [
+      "Team Galactic"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quelle organisation veut « libérer » les Pokémon dans Pokémon Noir et Blanc ?",
+    "answer": "Team Plasma",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quelle bande de voyous en casquette sème le désordre dans Pokémon Soleil et Lune ?",
+    "answer": "Team Skull",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quels sont les trois starters de la deuxième génération ?",
+    "answer": "Germignon, Héricendre et Kaiminus",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quels sont les trois starters de la troisième génération ?",
+    "answer": "Arcko, Poussifeu et Gobou",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quels sont les trois starters de la quatrième génération ?",
+    "answer": "Tortipouss, Ouisticram et Tiplouf",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel starter de type Eau de Pokémon X et Y deviendra Amphinobi ?",
+    "answer": "Grenousse",
+    "aliases": [
+      "Froakie"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel starter de type Feu de Pokémon Épée et Bouclier est un lapin footballeur ?",
+    "answer": "Flambino",
+    "aliases": [
+      "Scorbunny"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel starter de type Plante de Pokémon Écarlate et Violet est un petit chat ?",
+    "answer": "Poussacha",
+    "aliases": [
+      "Sprigatito"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel Pokémon de Sacha, relâché pour rejoindre ses congénères, a fait pleurer toute une génération ?",
+    "answer": "Papilusion",
+    "aliases": [
+      "Butterfree"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel Pokémon bleu de Jessie salue en criant son propre nom ?",
+    "answer": "Qulbutoké",
+    "aliases": [
+      "Wobbuffet"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel Pokémon plante de James a la fâcheuse habitude de lui gober la tête ?",
+    "answer": "Empiflor",
+    "aliases": [
+      "Victreebel"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quelle policière apparaît, identique, dans presque chaque ville de l'anime ?",
+    "answer": "Agent Jenny",
+    "aliases": [
+      "Jenny"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel Pokémon est la vedette de l'épisode banni après des crises d'épilepsie au Japon en 1997 ?",
+    "answer": "Porygon",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel acteur prête sa voix à Pikachu dans le film Détective Pikachu de 2019 ?",
+    "answer": "Ryan Reynolds",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Dans quelle région Sacha devient-il enfin champion de la Ligue, dans la série Soleil et Lune ?",
+    "answer": "Alola",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quels deux héros remplacent Sacha dans l'anime à partir de 2023 ?",
+    "answer": "Liko et Roy",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel Pokémon légendaire Sacha aperçoit-il dans le ciel dès le premier épisode ?",
+    "answer": "Ho-Oh",
+    "aliases": [
+      "Hooh"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quelle est la pré-évolution de Ronflex ?",
+    "answer": "Goinfrex",
+    "aliases": [
+      "Munchlax"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quelle est la pré-évolution de Rondoudou ?",
+    "answer": "Toudoudou",
+    "aliases": [
+      "Igglybuff"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel Pokémon porte sur la tête le crâne de sa mère disparue ?",
+    "answer": "Osselait",
+    "aliases": [
+      "Cubone"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel Pokémon peut se transformer en copie exacte de n'importe quel autre ?",
+    "answer": "Métamorph",
+    "aliases": [
+      "Ditto"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel Pokémon légendaire est présenté comme le créateur de l'univers Pokémon ?",
+    "answer": "Arceus",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel Pokémon fabuleux voyage dans le temps et protège les forêts ?",
+    "answer": "Celebi",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel Pokémon fabuleux se réveille tous les mille ans pour exaucer des vœux ?",
+    "answer": "Jirachi",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel Pokémon de type Ténèbres plonge ceux qui l'approchent dans d'horribles cauchemars ?",
+    "answer": "Darkrai",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel mécanisme temporaire de combat a été introduit par Pokémon X et Y ?",
+    "answer": "Méga-Évolution",
+    "aliases": [
+      "Méga Évolution",
+      "Mega Evolution"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel phénomène rend les Pokémon géants dans Pokémon Épée et Bouclier ?",
+    "answer": "Dynamax",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel mécanisme couronne les Pokémon d'un joyau dans Écarlate et Violet ?",
+    "answer": "Téracristallisation",
+    "aliases": [
+      "Tera",
+      "Téracristal"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quelle attaque permet de traverser l'eau sur le dos de son Pokémon ?",
+    "answer": "Surf",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel objet ranime un Pokémon K.O. en lui rendant la moitié de ses PV ?",
+    "answer": "Rappel",
+    "aliases": [
+      "Revive"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel objet violet capture à coup sûr n'importe quelle créature sauvage ?",
+    "answer": "Master Ball",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel jeu Nintendo 64 de 1999 consiste à photographier des créatures depuis un wagon sur rails ?",
+    "answer": "Pokémon Snap",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Dans quelle série dérivée incarne-t-on soi-même un Pokémon, dans des labyrinthes générés au hasard ?",
+    "answer": "Donjon Mystère",
+    "aliases": [
+      "Pokémon Donjon Mystère",
+      "Mystery Dungeon"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel jeu de 2022 se déroule dans la région de Hisui, l'ancienne Sinnoh ?",
+    "answer": "Légendes Pokémon : Arceus",
+    "aliases": [
+      "Légendes Arceus",
+      "Pokémon Legends Arceus"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle Ectoplasma en anglais ?",
+    "answer": "Gengar",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle Salamèche en anglais ?",
+    "answer": "Charmander",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle Carapuce en anglais ?",
+    "answer": "Squirtle",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel Pokémon de type Combat maîtrise l'aura et a eu son propre film en 2005 ?",
+    "answer": "Lucario",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel Pokémon à deux têtes évolue en un Pokémon à trois têtes ?",
+    "answer": "Doduo",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Quel objet faut-il utiliser pour réveiller le Ronflex qui bloque la route ?",
+    "answer": "Poké Flûte",
+    "aliases": [
+      "Pokéflûte",
+      "Poké Flute"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Dans quelle ville se dresse la Tour Pokémon hantée de Kanto ?",
+    "answer": "Lavanville",
+    "aliases": [
+      "Lavender Town"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Qui dirige l'arène de Céladopole, spécialisée dans le type Plante ?",
+    "answer": "Érika",
+    "aliases": [
+      "Erika"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Qui dirige l'arène de Carmin sur Mer, spécialisée dans le type Électrik ?",
+    "answer": "Major Bob",
+    "aliases": [
+      "Lt. Surge"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 2,
+    "prompt": "Qui dirige l'arène d'Azuria, spécialisée dans le type Eau ?",
+    "answer": "Ondine",
+    "aliases": [
+      "Misty"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Combien de types de Pokémon existe-t-il, sans compter le type Stellaire ?",
+    "answer": "18",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Combien de Pokémon compte le Pokédex national après Écarlate et Violet et leurs extensions ?",
+    "answer": "1025",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "En quelle année Pokémon Rouge et Vert sont-ils sortis au Japon ?",
+    "answer": "1996",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "En quelle année Pokémon Rouge et Bleu sont-ils sortis en France ?",
+    "answer": "1999",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Combien existe-t-il de natures différentes pour un Pokémon ?",
+    "answer": "25",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Combien de points d'effort (EV) un Pokémon peut-il cumuler au total ?",
+    "answer": "510",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Combien de points d'effort (EV) peut-on mettre au maximum dans une seule statistique ?",
+    "answer": "252",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Quelle est la valeur maximale d'une valeur individuelle (IV) ?",
+    "answer": "31",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Quel type a été ajouté par Pokémon X et Y ?",
+    "answer": "Fée",
+    "aliases": [
+      "Fairy"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Quels deux types ont été ajoutés par Pokémon Or et Argent ?",
+    "answer": "Acier et Ténèbres",
+    "aliases": [
+      "Ténèbres et Acier"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Contre quel type les attaques Électrik n'ont-elles aucun effet ?",
+    "answer": "Sol",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Quel type est totalement immunisé contre les attaques de type Normal ?",
+    "answer": "Spectre",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Quel type est totalement immunisé contre les attaques de type Dragon ?",
+    "answer": "Fée",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Quel type est totalement immunisé contre les attaques de type Psy ?",
+    "answer": "Ténèbres",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Quel type est totalement immunisé contre les attaques de type Poison ?",
+    "answer": "Acier",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Quel type est totalement immunisé contre les attaques de type Sol ?",
+    "answer": "Vol",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Depuis quelle génération chaque attaque est-elle physique ou spéciale individuellement, et non plus selon son type ?",
+    "answer": "la quatrième",
+    "aliases": [
+      "4",
+      "quatrième",
+      "4e",
+      "Diamant et Perle"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Dans quelle génération les talents des Pokémon sont-ils apparus ?",
+    "answer": "la troisième",
+    "aliases": [
+      "3",
+      "troisième",
+      "3e",
+      "Rubis et Saphir"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Quelle était la probabilité de rencontrer un Pokémon chromatique de la deuxième à la cinquième génération ?",
+    "answer": "1 sur 8192",
+    "aliases": [
+      "1/8192",
+      "8192"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Quel Pokémon insecte fantôme n'est touché que par les attaques super efficaces ?",
+    "answer": "Munja",
+    "aliases": [
+      "Shedinja"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "De quel Pokémon Munja apparaît-il, s'il reste une place dans l'équipe lors de son évolution ?",
+    "answer": "Ningale",
+    "aliases": [
+      "Nincada"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Quel Pokémon possède la statistique de PV de base la plus élevée, 255 ?",
+    "answer": "Leuphorie",
+    "aliases": [
+      "Blissey"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "En quel Pokémon Insécateur évolue-t-il lorsqu'on l'échange en tenant une Peau Métal ?",
+    "answer": "Cizayox",
+    "aliases": [
+      "Scizor"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "En quel Pokémon Onix évolue-t-il lorsqu'on l'échange en tenant une Peau Métal ?",
+    "answer": "Steelix",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Comment Kadabra évolue-t-il en Alakazam ?",
+    "answer": "par échange",
+    "aliases": [
+      "échange",
+      "en l'échangeant"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Quel Pokémon discret évolue en Milobellus quand sa Beauté est assez élevée ?",
+    "answer": "Barpau",
+    "aliases": [
+      "Feebas"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Quel Pokémon glitch célèbre apparaît sur la côte de Cramois'Île dans Rouge et Bleu ?",
+    "answer": "MissingNo.",
+    "aliases": [
+      "MissingNo",
+      "Missingno"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Selon une célèbre rumeur de 1999, sous quel véhicule de Carmin sur Mer Mew serait-il caché ?",
+    "answer": "un camion",
+    "aliases": [
+      "camion"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Sur quel sommet affronte-t-on Red, le héros de la première génération, à la fin de Pokémon Or ?",
+    "answer": "Mont Argent",
+    "aliases": [
+      "Mt. Silver"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Quels sont les trois Pokémon légendaires errants de Johto ?",
+    "answer": "Raikou, Entei et Suicune",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Quel système d'écriture faut-il déchiffrer pour réveiller les Regis dans Rubis et Saphir ?",
+    "answer": "le braille",
+    "aliases": [
+      "braille"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Quels sont les trois Pokémon des lacs de Sinnoh ?",
+    "answer": "Créhelf, Créfollet et Créfadet",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Quel Pokémon extraterrestre, né d'un virus venu de l'espace, change de forme ?",
+    "answer": "Deoxys",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Quelle passion d'enfance de Satoshi Tajiri a inspiré la création de Pokémon ?",
+    "answer": "la collection d'insectes",
+    "aliases": [
+      "insectes",
+      "les insectes"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Qui a créé Pokémon, avant de fonder le studio Game Freak ?",
+    "answer": "Satoshi Tajiri",
+    "aliases": [
+      "Tajiri"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Quelle version, sortie avec Rouge au Japon en 1996, n'est jamais arrivée en Europe ?",
+    "answer": "Vert",
+    "aliases": [
+      "Pokémon Vert"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Quel Pokémon de type Eau offre-t-on au joueur à l'intérieur de Sylphe SARL ?",
+    "answer": "Lokhlass",
+    "aliases": [
+      "Lapras"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Dans quelle ville de Kanto reçoit-on un Évoli en cadeau ?",
+    "answer": "Céladopole",
+    "aliases": [
+      "Celadon City"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Pour combien de Pokédollars un marchand vend-il un Magicarpe au Centre Pokémon de la route 4 ?",
+    "answer": "500",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Quel objet de Kanto permet de faire revivre Amonita ?",
+    "answer": "Fossile Nautile",
+    "aliases": [
+      "Nautile"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Quel Pokémon préhistorique ressuscite-t-on grâce au Vieil Ambre ?",
+    "answer": "Ptéra",
+    "aliases": [
+      "Aerodactyl"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Quel objet révèle les fantômes de la Tour Pokémon de Lavanville ?",
+    "answer": "Scope Sylphe",
+    "aliases": [
+      "Silph Scope"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Qui dirige l'arène de Safrania, spécialisée dans le type Psy ?",
+    "answer": "Morgane",
+    "aliases": [
+      "Sabrina"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Qui dirige l'arène de Cramois'Île, spécialisée dans le type Feu ?",
+    "answer": "Auguste",
+    "aliases": [
+      "Blaine"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Quel spécialiste des Dragons fait partie du Conseil 4 de Kanto ?",
+    "answer": "Peter",
+    "aliases": [
+      "Lance"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Quel objet fait évoluer Ortide en Rafflesia ?",
+    "answer": "Pierre Plante",
+    "aliases": []
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Quel Pokémon la Pierre Lune fait-elle évoluer en Mélodelfe ?",
+    "answer": "Mélofée",
+    "aliases": [
+      "Clefairy"
+    ]
+  },
+  {
+    "theme": "pokemon",
+    "difficulty": 3,
+    "prompt": "Quel jeu de combat en arène, façon Tekken, oppose des Pokémon ?",
+    "answer": "Pokkén Tournament",
+    "aliases": [
+      "Pokken Tournament",
+      "Pokkén"
+    ]
+  }
+]

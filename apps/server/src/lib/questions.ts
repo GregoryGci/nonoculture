@@ -242,7 +242,9 @@ export async function buildDeck(
 
   const specialSlots = chainCount + reflexCount + bluffQuestions.length + duelQuestions.length + blurQuestions.length;
   const questionSlots = Math.max(0, total - specialSlots);
-  const audioQuota = mediaAvailable ? Math.round((total * AUDIO_QUESTIONS_PER_15) / 15) : 0;
+  // The quota is the only road into the deck for a sound question — "rest" excludes them — so
+  // switching it off here is the whole of the "no audio" setting.
+  const audioQuota = mediaAvailable && settings.audioEnabled ? Math.round((total * AUDIO_QUESTIONS_PER_15) / 15) : 0;
   const imageQuota = mediaAvailable ? Math.round((total * IMAGE_QUESTIONS_PER_15) / 15) : 0;
 
   const numeric = await take(Math.min(settings.numericRounds, questionSlots), "numeric");

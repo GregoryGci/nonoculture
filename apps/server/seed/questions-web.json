@@ -1,0 +1,851 @@
+[
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Qui a fondé Facebook dans sa chambre d'étudiant à Harvard ?",
+    "answer": "Mark Zuckerberg",
+    "aliases": [
+      "Zuckerberg"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Quel nom porte le réseau social Twitter depuis 2023 ?",
+    "answer": "X",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Quel milliardaire a racheté Twitter en 2022 ?",
+    "answer": "Elon Musk",
+    "aliases": [
+      "Musk"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Quelle entreprise a racheté YouTube en 2006 ?",
+    "answer": "Google",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Quelle entreprise chinoise possède TikTok ?",
+    "answer": "ByteDance",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Quelle silhouette blanche sur fond jaune sert de logo à Snapchat ?",
+    "answer": "un fantôme",
+    "aliases": [
+      "fantôme"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Quelle encyclopédie en ligne gratuite et collaborative a été lancée en 2001 ?",
+    "answer": "Wikipédia",
+    "aliases": [
+      "Wikipedia"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Qu'est-ce que Jeff Bezos vendait à l'origine sur Amazon ?",
+    "answer": "des livres",
+    "aliases": [
+      "livres"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Quel service télématique français, avec son petit terminal, a précédé Internet dans les foyers ?",
+    "answer": "le Minitel",
+    "aliases": [
+      "Minitel"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Quelle chanson de Rick Astley piège les internautes dans le « rickroll » ?",
+    "answer": "Never Gonna Give You Up",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Quelle race de chien est devenue le mème « Doge » ?",
+    "answer": "Shiba Inu",
+    "aliases": [
+      "Shiba"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Quel chat à l'air éternellement renfrogné est devenu un mème mondial ?",
+    "answer": "Grumpy Cat",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Quel chanteur sud-coréen a été le premier à dépasser le milliard de vues sur YouTube, en 2012 ?",
+    "answer": "PSY",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Quelle comptine animée est la vidéo la plus vue de l'histoire de YouTube ?",
+    "answer": "Baby Shark",
+    "aliases": [
+      "Baby Shark Dance"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Pour quelle maladie le « Ice Bucket Challenge » récoltait-il des fonds en 2014 ?",
+    "answer": "Charcot",
+    "aliases": [
+      "la maladie de Charcot",
+      "SLA",
+      "sclérose latérale amyotrophique"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Dans quel pays les émojis ont-ils été inventés ?",
+    "answer": "le Japon",
+    "aliases": [
+      "Japon"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Que signifie l'acronyme anglais « LOL » ?",
+    "answer": "Laughing Out Loud",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Que signifie « IRL » ?",
+    "answer": "In Real Life",
+    "aliases": [
+      "dans la vraie vie"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Que signifie « AFK » dans un jeu en ligne ?",
+    "answer": "Away From Keyboard",
+    "aliases": [
+      "loin du clavier"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Que signifie « GG » à la fin d'une partie ?",
+    "answer": "Good Game",
+    "aliases": [
+      "bien joué"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Comment s'appelle en français le signe @ des adresses mail ?",
+    "answer": "arobase",
+    "aliases": [
+      "l'arobase",
+      "arobas"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Quel test vérifie qu'un internaute n'est pas un robot en lui faisant cliquer sur des feux rouges ?",
+    "answer": "CAPTCHA",
+    "aliases": [
+      "reCAPTCHA",
+      "Captcha"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Quelle entreprise a créé ChatGPT ?",
+    "answer": "OpenAI",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Quel youtubeur français organise la course de voitures GP Explorer ?",
+    "answer": "Squeezie",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Quel youtubeur américain est le plus abonné au monde ?",
+    "answer": "MrBeast",
+    "aliases": [
+      "Mr Beast",
+      "Jimmy Donaldson"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Quel dinosaure court dans le jeu caché de Google Chrome quand on n'a plus de connexion ?",
+    "answer": "un T-Rex",
+    "aliases": [
+      "T-Rex",
+      "tyrannosaure",
+      "dinosaure"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Quel code d'erreur s'affiche quand une page web est introuvable ?",
+    "answer": "404",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Quel raccourci clavier annule la dernière action sur Windows ?",
+    "answer": "Ctrl+Z",
+    "aliases": [
+      "Ctrl Z",
+      "Control Z"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Quel animateur de Koh-Lanta est devenu un mème pour son « Ah ! » ?",
+    "answer": "Denis Brogniart",
+    "aliases": [
+      "Brogniart"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Quel personnage de Kaamelott répond « C'est pas faux » quand il ne comprend pas ?",
+    "answer": "Perceval",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Quelle application de messagerie verte appartient à Meta ?",
+    "answer": "WhatsApp",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Quel réseau social professionnel appartient à Microsoft ?",
+    "answer": "LinkedIn",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Quelle application de discussion vocale, prisée des joueurs, a une manette-robot pour logo ?",
+    "answer": "Discord",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Quel youtubeur français a gravi l'Everest dans le documentaire Kaizen en 2024 ?",
+    "answer": "Inoxtag",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Quel duo de youtubeurs a lancé un concours d'anecdotes avec Emmanuel Macron en 2021 ?",
+    "answer": "McFly et Carlito",
+    "aliases": [
+      "McFly & Carlito",
+      "Mcfly et Carlito"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Quel informaticien britannique a inventé le World Wide Web ?",
+    "answer": "Tim Berners-Lee",
+    "aliases": [
+      "Berners-Lee"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Dans quel centre de recherche européen le Web est-il né ?",
+    "answer": "le CERN",
+    "aliases": [
+      "CERN"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "En quelle année Facebook a-t-il été lancé ?",
+    "answer": "2004",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "En quelle année YouTube a-t-il été fondé ?",
+    "answer": "2005",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "En quelle année le premier iPhone a-t-il été présenté ?",
+    "answer": "2007",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "En quelle année le Minitel a-t-il été définitivement débranché ?",
+    "answer": "2012",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle la maison mère de Facebook et Instagram depuis 2021 ?",
+    "answer": "Meta",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Quelle entreprise a racheté Instagram en 2012 ?",
+    "answer": "Facebook",
+    "aliases": [
+      "Meta"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle la version chinoise de TikTok ?",
+    "answer": "Douyin",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Comment s'appelait l'oiseau du logo de Twitter ?",
+    "answer": "Larry",
+    "aliases": [
+      "Larry the Bird"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Qui a cofondé Wikipédia avec Larry Sanger ?",
+    "answer": "Jimmy Wales",
+    "aliases": [
+      "Wales"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Quels étudiants de Stanford ont fondé Google ?",
+    "answer": "Larry Page et Sergey Brin",
+    "aliases": [
+      "Page et Brin",
+      "Sergey Brin et Larry Page"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Quelle plateforme de blogs de la radio Skyrock a marqué les ados français des années 2000 ?",
+    "answer": "Skyblog",
+    "aliases": [
+      "Skyrock Blog",
+      "les skyblogs"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Quelle fonctionnalité de MSN Messenger faisait trembler la fenêtre de conversation ?",
+    "answer": "le wizz",
+    "aliases": [
+      "wizz"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Quel chat pixelisé au corps de pâtisserie laisse un arc-en-ciel derrière lui ?",
+    "answer": "Nyan Cat",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Quelle danse virale de 2013 alternait une personne seule puis une foule déchaînée ?",
+    "answer": "Harlem Shake",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Quel animal, assis dans une pièce en flammes, affirme « This is fine » ?",
+    "answer": "un chien",
+    "aliases": [
+      "chien"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Quel mème montre un homme qui se retourne vers une passante sous le regard outré de sa compagne ?",
+    "answer": "Distracted Boyfriend",
+    "aliases": [
+      "le petit ami distrait",
+      "petit ami distrait"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Quel émoji est le plus utilisé au monde selon le consortium Unicode ?",
+    "answer": "le visage riant aux larmes",
+    "aliases": [
+      "😂",
+      "rire aux larmes",
+      "mort de rire"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Que signifie « PTDR » ?",
+    "answer": "pété de rire",
+    "aliases": [
+      "pétée de rire"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Que signifie « FOMO » ?",
+    "answer": "Fear Of Missing Out",
+    "aliases": [
+      "peur de rater quelque chose"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "De quelle troupe comique britannique vient le mot « spam », tiré d'un sketch sur une viande en conserve ?",
+    "answer": "Monty Python",
+    "aliases": [
+      "les Monty Python"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Sous quel pseudonyme se cache le créateur du Bitcoin ?",
+    "answer": "Satoshi Nakamoto",
+    "aliases": [
+      "Nakamoto"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "En quelle année le réseau Bitcoin a-t-il été lancé ?",
+    "answer": "2009",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Que signifie l'acronyme NFT ?",
+    "answer": "Non-Fungible Token",
+    "aliases": [
+      "jeton non fongible"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Que signifie « HTTP » ?",
+    "answer": "HyperText Transfer Protocol",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Quel réseau militaire américain est l'ancêtre d'Internet ?",
+    "answer": "ARPANET",
+    "aliases": [
+      "Arpanet"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Quelle est la véritable identité civile du youtubeur Squeezie ?",
+    "answer": "Lucas Hauchard",
+    "aliases": [
+      "Hauchard"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Quelle plateforme de vidéos de six secondes a fermé en 2017 ?",
+    "answer": "Vine",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Quelle image est devenue en 2019 la publication la plus aimée d'Instagram ?",
+    "answer": "un œuf",
+    "aliases": [
+      "œuf",
+      "oeuf",
+      "un oeuf"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Quel mème montre un homme en costume devant un graphique qui monte, avec une faute d'orthographe ?",
+    "answer": "Stonks",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Quelle plateforme de forums a pour mascotte un extraterrestre blanc nommé Snoo ?",
+    "answer": "Reddit",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Quelle expression anglaise désigne le fait de faire défiler sans fin des mauvaises nouvelles ?",
+    "answer": "doomscrolling",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Comment appelle-t-on une personne qui poste des messages provocateurs pour faire réagir ?",
+    "answer": "un troll",
+    "aliases": [
+      "troll"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Comment appelle-t-on une image ou une vidéo truquée par IA pour imiter une vraie personne ?",
+    "answer": "un deepfake",
+    "aliases": [
+      "deepfake",
+      "hypertrucage"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Quel mot désigne un contenu accrocheur conçu uniquement pour obtenir des clics ?",
+    "answer": "putaclic",
+    "aliases": [
+      "piège à clics",
+      "clickbait"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Comment s'appellent les vidéos courtes et verticales de YouTube ?",
+    "answer": "Shorts",
+    "aliases": [
+      "YouTube Shorts"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Comment s'appellent les vidéos courtes lancées par Instagram en 2020 pour concurrencer TikTok ?",
+    "answer": "Reels",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Quel réseau social au logo de papillon bleu a accueilli de nombreux déçus de X ?",
+    "answer": "Bluesky",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Quelle application de Meta lancée en 2023 imite le fonctionnement de Twitter ?",
+    "answer": "Threads",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Sous quel nom l'assistant d'IA de Google s'appelait-il avant de devenir Gemini ?",
+    "answer": "Bard",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Quel mot français officiel remplace « e-mail » ?",
+    "answer": "courriel",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Quel site français de petites annonces entre particuliers a un logo orange ?",
+    "answer": "Leboncoin",
+    "aliases": [
+      "le bon coin"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Quelle fonction payante permet de épingler son message en couleur pendant un direct YouTube ?",
+    "answer": "Super Chat",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 2,
+    "prompt": "Quel sénateur américain est devenu un mème, assis en moufles à l'investiture de Joe Biden ?",
+    "answer": "Bernie Sanders",
+    "aliases": [
+      "Sanders"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 1,
+    "prompt": "Comment appelle-t-on une personne qui diffuse ses parties en direct sur Twitch ?",
+    "answer": "un streamer",
+    "aliases": [
+      "streamer",
+      "streameur"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 3,
+    "prompt": "Quel est le titre de la toute première vidéo publiée sur YouTube, en 2005 ?",
+    "answer": "Me at the zoo",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 3,
+    "prompt": "Quel ingénieur a envoyé le premier e-mail en 1971 et choisi le signe @ ?",
+    "answer": "Ray Tomlinson",
+    "aliases": [
+      "Tomlinson"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 3,
+    "prompt": "Qui a proposé en 2007 d'utiliser le croisillon # sur Twitter ?",
+    "answer": "Chris Messina",
+    "aliases": [
+      "Messina"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 3,
+    "prompt": "Quel designer japonais a dessiné les 176 premiers émojis pour l'opérateur NTT Docomo ?",
+    "answer": "Shigetaka Kurita",
+    "aliases": [
+      "Kurita"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 3,
+    "prompt": "Comment s'appelait Google à ses débuts, en 1996 ?",
+    "answer": "BackRub",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 3,
+    "prompt": "Combien de bitcoins ont été payés pour deux pizzas le 22 mai 2010 ?",
+    "answer": "10000",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "web",
+    "difficulty": 3,
+    "prompt": "Quelle informaticienne a popularisé le mot « bug » après avoir trouvé un insecte dans un ordinateur ?",
+    "answer": "Grace Hopper",
+    "aliases": [
+      "Hopper"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 3,
+    "prompt": "Pour combien de milliards de dollars Facebook a-t-il racheté WhatsApp en 2014 ?",
+    "answer": "19",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "web",
+    "difficulty": 3,
+    "prompt": "Pour combien de milliard de dollars Facebook a-t-il racheté Instagram en 2012 ?",
+    "answer": "1",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "web",
+    "difficulty": 3,
+    "prompt": "Pour combien de milliards de dollars Elon Musk a-t-il racheté Twitter en 2022 ?",
+    "answer": "44",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "web",
+    "difficulty": 3,
+    "prompt": "En quelle année ChatGPT a-t-il été rendu public ?",
+    "answer": "2022",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "web",
+    "difficulty": 3,
+    "prompt": "Sur quel forum de jeuxvideo.com sont nés de nombreux mèmes français, dont les « Risitas » ?",
+    "answer": "Blabla 18-25 ans",
+    "aliases": [
+      "18-25",
+      "Blabla 18-25",
+      "le 18-25"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 3,
+    "prompt": "Quel humoriste espagnol, au rire incontrôlable, est devenu le mème « Risitas » ?",
+    "answer": "Juan Joya Borja",
+    "aliases": [
+      "Juan Joya",
+      "El Risitas"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 3,
+    "prompt": "Quel navigateur, lancé en 1994, a dominé le Web avant Internet Explorer ?",
+    "answer": "Netscape",
+    "aliases": [
+      "Netscape Navigator"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 3,
+    "prompt": "Quelle loi européenne de 2018 encadre la protection des données personnelles ?",
+    "answer": "le RGPD",
+    "aliases": [
+      "RGPD",
+      "GDPR"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 3,
+    "prompt": "Comment s'appelle le principe selon lequel toute discussion en ligne finit par une comparaison à Hitler ?",
+    "answer": "la loi de Godwin",
+    "aliases": [
+      "loi de Godwin",
+      "point Godwin",
+      "Godwin"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on le phénomène où une tentative de censure rend une information virale ?",
+    "answer": "l'effet Streisand",
+    "aliases": [
+      "effet Streisand",
+      "Streisand"
+    ]
+  },
+  {
+    "theme": "web",
+    "difficulty": 3,
+    "prompt": "Quelle est l'adresse du tout premier site web, mis en ligne en 1991 par Tim Berners-Lee ?",
+    "answer": "info.cern.ch",
+    "aliases": []
+  },
+  {
+    "theme": "web",
+    "difficulty": 3,
+    "prompt": "Quelle application de rencontres a popularisé le geste de glisser vers la droite ?",
+    "answer": "Tinder",
+    "aliases": []
+  }
+]
