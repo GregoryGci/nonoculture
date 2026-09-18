@@ -19,6 +19,7 @@ import { BluffRound } from "../components/BluffRound";
 import { DuelRound } from "../components/DuelRound";
 import { ReflexRound } from "../components/ReflexRound";
 import { BlurRound } from "../components/BlurRound";
+import { TrueFalseRound } from "../components/TrueFalseRound";
 import { themeLabel, type QuestionPublic } from "@nonoculture/shared";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -209,6 +210,18 @@ export function Room() {
             </SpecialStep>
           )}
 
+          {state.trueFalse && (
+            <SpecialStep
+              label="Vrai ou faux"
+              title={state.trueFalse.step === "reveal" ? "Résultats" : "Vrai ou faux ?"}
+            >
+              <TrueFalseRound
+                trueFalse={state.trueFalse}
+                onAnswer={(value) => send({ type: "SUBMIT_TRUE_FALSE", value })}
+              />
+            </SpecialStep>
+          )}
+
           {state.blur && (
             <SpecialStep label="Image floue" title={state.blur.step === "reveal" ? "Résultats" : state.blur.prompt}>
               <BlurRound
@@ -229,7 +242,8 @@ export function Room() {
           {(state.phase === "BLUFF_REVEAL" ||
             state.phase === "DUEL_REVEAL" ||
             state.phase === "REFLEX_REVEAL" ||
-            state.phase === "BLUR_REVEAL") &&
+            state.phase === "BLUR_REVEAL" ||
+            state.phase === "TRUEFALSE_REVEAL") &&
             isHost && (
               <button onClick={() => send({ type: "HOST_NEXT" })} className="btn btn-primary h-14 w-full">
                 Continuer
@@ -251,7 +265,7 @@ export function Room() {
 
           {state.phase === "FINISHED" && (
             <>
-              <Podium players={state.players} />
+              <Podium players={state.players} awards={state.awards} />
               <hr className="divider" />
               <Scoreboard players={state.players} />
               {isHost && (

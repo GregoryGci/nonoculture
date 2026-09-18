@@ -134,7 +134,7 @@ export function HostScreen() {
           {state.phase === "FINISHED" && (
             <div className="w-full max-w-2xl">
               <p className="eyebrow mb-10">Résultat final</p>
-              <Podium players={state.players} />
+              <Podium players={state.players} awards={state.awards} />
               <hr className="divider my-10" />
               <div className="text-left">
                 <Scoreboard players={state.players} />

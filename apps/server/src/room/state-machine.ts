@@ -6,6 +6,10 @@ import {
   BLUR_MIN_PLAYERS,
   BLUR_POINTS_BY_RANK,
   BLUR_POINTS_OTHER,
+  TRUEFALSE_ANSWER_MS,
+  TRUEFALSE_MIN_PLAYERS,
+  TRUEFALSE_POINTS_CORRECT,
+  TRUEFALSE_POINTS_FASTEST,
   CHAIN_MIN_PLAYERS,
   DEFAULT_SETTINGS,
   DUEL_MIN_PLAYERS,
@@ -33,12 +37,14 @@ import {
   BLUFF_VOTE_DURATION_MS,
   BLUFF_WRITE_DURATION_MS,
   BLUR_REVEAL_DURATION_MS,
+  TRUEFALSE_REVEAL_DURATION_MS,
   CODE_RELEASE_DELAY_MS,
   DUEL_ANSWER_DURATION_MS,
   DUEL_PREDICT_DURATION_MS,
   DUEL_REVEAL_DURATION_MS,
   DISCONNECT_GRACE_MS,
   REFLEX_GO_DURATION_MS,
+  REFLEX_HUMAN_FLOOR_MS,
   REFLEX_REVEAL_DURATION_MS,
   REFLEX_WAIT_MAX_MS,
   REFLEX_WAIT_MIN_MS,
@@ -79,6 +85,10 @@ function clampSettings(partial: Partial<GameSettings>, base: GameSettings): Game
       partial.duelRounds !== undefined
         ? Math.min(MAX_SPECIAL_ROUNDS, Math.max(0, partial.duelRounds))
         : base.duelRounds,
+    trueFalseRounds:
+      partial.trueFalseRounds !== undefined
+        ? Math.min(MAX_SPECIAL_ROUNDS, Math.max(0, partial.trueFalseRounds))
+        : base.trueFalseRounds,
     blurRounds:
       partial.blurRounds !== undefined
         ? Math.min(MAX_SPECIAL_ROUNDS, Math.max(0, partial.blurRounds))
@@ -329,6 +339,17 @@ function startDeckSlot(state: GameState, index: number, now: number): GameState 
     };
   }
 
+  if (item.kind === "truefalse") {
+    // A coin flip alone is not a round, and the speed bonus needs a race.
+    if (participants.length < TRUEFALSE_MIN_PLAYERS) return startDeckSlot(state, index + 1, now);
+    return {
+      ...base,
+      phase: "TRUEFALSE_ANSWER",
+      trueFalse: { answers: {}, points: {} },
+      phaseDeadlineTs: now + TRUEFALSE_ANSWER_MS,
+    };
+  }
+
   if (item.kind === "blur") {
     // Guessing a picture works alone, but "who got it first" needs someone to be first against.
     if (participants.length < BLUR_MIN_PLAYERS) return startDeckSlot(state, index + 1, now);
@@ -366,7 +387,40 @@ function startDeckSlot(state: GameState, index: number, now: number): GameState 
 }
 
 /** Every special-round slate wiped, so a slot never inherits the previous one's state. */
-const CLEARED = { chain: null, bluff: null, duel: null, reflex: null, blur: null } as const;
+const CLEARED = { chain: null, bluff: null, duel: null, reflex: null, blur: null, trueFalse: null } as const;
+
+/**
+ * Closes a true-or-false round: everyone right scores, the first one right scores a little more.
+ *
+ * Settled here rather than by the host for the same reason as arithmetic — the statement is
+ * true or it is not, and the question carries which.
+ */
+function resolveTrueFalse(state: GameState, now: number): GameState {
+  const round = state.trueFalse;
+  const question = currentQuestion(state);
+  if (!round || !question) return state;
+
+  const expected = normalizeAnswer(question.answer);
+  const correct = Object.entries(round.answers)
+    .filter(([, a]) => normalizeAnswer(a.value) === expected)
+    .sort((a, b) => a[1].at - b[1].at);
+
+  const points: Record<string, number> = {};
+  correct.forEach(([playerId], rank) => {
+    points[playerId] = TRUEFALSE_POINTS_CORRECT + (rank === 0 ? TRUEFALSE_POINTS_FASTEST : 0);
+  });
+
+  const players = Object.fromEntries(
+    Object.entries(state.players).map(([id, p]) => [id, { ...p, score: p.score + (points[id] ?? 0) }]),
+  );
+  return {
+    ...state,
+    players,
+    trueFalse: { ...round, points },
+    phase: "TRUEFALSE_REVEAL",
+    phaseDeadlineTs: now + TRUEFALSE_REVEAL_DURATION_MS,
+  };
+}
 
 /**
  * Closes a blurred-picture round: correct answers pay by finishing order.
@@ -464,10 +518,15 @@ function scoreMathQuestion(state: GameState, question: InternalQuestion): GameSt
     awarded[playerId] = rank === 0 ? MATH_POINTS_FASTEST : MATH_POINTS_CORRECT;
   });
 
+  const autoPoints = { ...state.autoPoints };
+  for (const answer of state.answers) {
+    autoPoints[`${state.deckIndex}:${answer.playerId}`] = awarded[answer.playerId] ?? 0;
+  }
+
   const players = Object.fromEntries(
     Object.entries(state.players).map(([id, p]) => [id, { ...p, score: p.score + (awarded[id] ?? 0) }]),
   );
-  return { ...state, players };
+  return { ...state, players, autoPoints };
 }
 
 /** The question attached to the slot currently in play, whatever kind it is. */
@@ -547,7 +606,7 @@ function scoreNumericQuestion(state: GameState, question: InternalQuestion): Gam
 /** True when the server settled this slot itself, so the review shows it without grading. */
 function isAutoScored(state: GameState, deckIndex: number): boolean {
   const item = state.deck[deckIndex];
-  return item?.kind === "trivia" && item.question.answerKind === "number";
+  return item?.kind === "trivia" && (item.question.answerKind === "number" || item.question.answerKind === "math");
 }
 
 function logAnswersAndAdvance(state: GameState, now: number): GameState {
@@ -558,7 +617,9 @@ function logAnswersAndAdvance(state: GameState, now: number): GameState {
     return advanceDeck(scoreNumericQuestion({ ...state, answerLog }, question), now);
   }
   if (question?.answerKind === "math") {
-    return advanceDeck(scoreMathQuestion(state, question), now);
+    // Archived for the same reason as "closest wins": 7 × 8 settles itself, but a logic
+    // sequence that never tells you the answer is a question asked and dropped.
+    return advanceDeck(scoreMathQuestion({ ...state, answerLog }, question), now);
   }
   return advanceDeck({ ...state, answerLog }, now);
 }
@@ -614,6 +675,9 @@ function advanceIfSpecialComplete(state: GameState, now: number): GameState {
   if (state.phase === "BLUFF_VOTE" && state.bluff) {
     return allConnectedHaveKeys(state, state.bluff.votes) ? resolveBluff(state, now) : state;
   }
+  if (state.phase === "TRUEFALSE_ANSWER" && state.trueFalse) {
+    return allConnectedHaveKeys(state, state.trueFalse.answers) ? resolveTrueFalse(state, now) : state;
+  }
   if (state.phase === "BLUR_GUESS" && state.blur) {
     return allConnectedHaveKeys(state, state.blur.answers) ? resolveBlur(state, now) : state;
   }
@@ -644,6 +708,7 @@ export function createRoom(roomCode: string, now: number): GameState {
     duel: null,
     reflex: null,
     blur: null,
+    trueFalse: null,
     phaseDeadlineTs: null,
     createdAt: now,
     lastActivityAt: now,
@@ -786,6 +851,18 @@ export function transition(state: GameState, event: GameEvent): TransitionResult
       break;
     }
 
+    case "SUBMIT_TRUE_FALSE": {
+      if (state.phase !== "TRUEFALSE_ANSWER" || !state.trueFalse) break;
+      const player = state.players[event.playerId];
+      if (!player || !player.connected) break;
+      // One pick each. With two options, a second try is just the other one.
+      if (state.trueFalse.answers[event.playerId] !== undefined) break;
+      const answers = { ...state.trueFalse.answers, [event.playerId]: { value: event.value, at: event.now } };
+      next = { ...state, trueFalse: { ...state.trueFalse, answers } };
+      if (allConnectedHaveKeys(next, answers)) next = resolveTrueFalse(next, event.now);
+      break;
+    }
+
     case "SUBMIT_BLUR_ANSWER": {
       if (state.phase !== "BLUR_GUESS" || !state.blur) break;
       const player = state.players[event.playerId];
@@ -808,14 +885,15 @@ export function transition(state: GameState, event: GameEvent): TransitionResult
       // cannot tap their way to a better one.
       if (reflex.times[event.playerId] !== undefined || reflex.falseStarts.includes(event.playerId)) break;
 
-      if (state.phase === "REFLEX_WAIT") {
-        next = { ...state, reflex: { ...reflex, falseStarts: [...reflex.falseStarts, event.playerId] } };
-        if (allConnectedTapped(next)) next = resolveReflex(next, event.now);
-        break;
-      }
-
+      // A tap on the red screen is not a false start any more, it is nothing at all: the
+      // button is inert until the green, so the only taps that got here were the ones that
+      // crossed the switch by accident — punishing those was punishing latency.
       if (state.phase !== "REFLEX_GO" || reflex.goTs === null) break;
-      const times = { ...reflex.times, [event.playerId]: Math.max(0, event.now - reflex.goTs) };
+      const elapsed = event.now - reflex.goTs;
+      // Faster than a human can be: a mash that happened to land, not a reaction. Dropped, so
+      // the player can tap again rather than winning with a time they did not produce.
+      if (elapsed < REFLEX_HUMAN_FLOOR_MS) break;
+      const times = { ...reflex.times, [event.playerId]: elapsed };
       next = { ...state, reflex: { ...reflex, times } };
       if (allConnectedTapped(next)) next = resolveReflex(next, event.now);
       break;
@@ -1090,6 +1168,10 @@ function handleAlarm(state: GameState, now: number, effects: Effect[]): GameStat
     } else if (next.phase === "BLUR_GUESS") {
       next = resolveBlur(next, now);
     } else if (next.phase === "BLUR_REVEAL") {
+      next = advanceDeck(next, now);
+    } else if (next.phase === "TRUEFALSE_ANSWER") {
+      next = resolveTrueFalse(next, now);
+    } else if (next.phase === "TRUEFALSE_REVEAL") {
       next = advanceDeck(next, now);
     }
   }

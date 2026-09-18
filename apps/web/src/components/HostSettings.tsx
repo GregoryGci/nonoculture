@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import {
   BLUFF_MIN_PLAYERS,
   BLUR_MIN_PLAYERS,
+  TRUEFALSE_MIN_PLAYERS,
   CHAIN_MIN_PLAYERS,
   DUEL_MIN_PLAYERS,
   REFLEX_MIN_PLAYERS,
@@ -60,6 +61,13 @@ const SPECIAL_ROUNDS = [
     blurb: "Une image se précise en dix secondes, le plus rapide marque le plus.",
     max: MAX_SPECIAL_ROUNDS,
     minPlayers: BLUR_MIN_PLAYERS,
+  },
+  {
+    key: "trueFalseRounds",
+    label: "Vrai ou faux",
+    blurb: "Une affirmation, dix secondes, deux boutons.",
+    max: MAX_SPECIAL_ROUNDS,
+    minPlayers: TRUEFALSE_MIN_PLAYERS,
   },
   {
     key: "numericRounds",

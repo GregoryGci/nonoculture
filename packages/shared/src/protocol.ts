@@ -69,6 +69,7 @@ export const HostSettingsMsg = z.object({
   duelRounds: z.number().int().min(0).max(6).optional(),
   reflexRounds: z.number().int().min(0).max(6).optional(),
   blurRounds: z.number().int().min(0).max(6).optional(),
+  trueFalseRounds: z.number().int().min(0).max(6).optional(),
   numericRounds: z.number().int().min(0).max(6).optional(),
   audioEnabled: z.boolean().optional(),
   themes: z.array(z.string()).optional(),
@@ -151,6 +152,14 @@ export const SubmitBlurAnswerMsg = z.object({
   text: z.string().min(1).max(60),
 });
 
+// --- True or false round ---
+
+/** One pick. Timed on arrival, like everything else that races. */
+export const SubmitTrueFalseMsg = z.object({
+  type: z.literal("SUBMIT_TRUE_FALSE"),
+  value: z.enum(["vrai", "faux"]),
+});
+
 export const ClientMessage = z.discriminatedUnion("type", [
   HelloMsg,
   ObserveMsg,
@@ -173,6 +182,7 @@ export const ClientMessage = z.discriminatedUnion("type", [
   SubmitDuelAnswerMsg,
   SubmitReflexTapMsg,
   SubmitBlurAnswerMsg,
+  SubmitTrueFalseMsg,
 ]);
 
 export type ClientMessage = z.infer<typeof ClientMessage>;

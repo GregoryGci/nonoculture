@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import type { PlayerPublic } from "@nonoculture/shared";
+import type { Award, PlayerPublic } from "@nonoculture/shared";
 import { Avatar } from "./Avatar";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -11,7 +11,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
  * ranking sits right underneath them anyway. The winner is stated once, large, and the two
  * runners-up sit quietly below in a single row. Hierarchy comes from size and space.
  */
-export function Podium({ players }: { players: PlayerPublic[] }) {
+export function Podium({ players, awards }: { players: PlayerPublic[]; awards?: Award[] | null }) {
   const ranked = [...players].sort((a, b) => b.score - a.score);
   const [winner, ...rest] = ranked;
   const runnersUp = rest.slice(0, 2);
@@ -31,6 +31,29 @@ export function Podium({ players }: { players: PlayerPublic[] }) {
           {winner.score} {winner.score <= 1 ? "point" : "points"}
         </p>
       </motion.div>
+
+      {awards && awards.length > 0 && (
+        <div className="mt-12 flex w-full flex-col gap-2">
+          <p className="eyebrow text-center">Les titres de la partie</p>
+          {awards.map((award, i) => (
+            <motion.div
+              key={award.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: EASE, delay: 0.7 + i * 0.08 }}
+              className="panel flex items-baseline justify-between gap-4 px-5 py-3.5"
+            >
+              <span className="flex min-w-0 flex-col">
+                <span className="text-[15px] font-medium">{award.label}</span>
+                <span className="text-[13px]" style={{ color: "var(--color-text-faint)" }}>
+                  {award.detail}
+                </span>
+              </span>
+              <span className="shrink-0 text-[15px]">{award.nickname}</span>
+            </motion.div>
+          ))}
+        </div>
+      )}
 
       {runnersUp.length > 0 && (
         <div className="mt-10 flex w-full items-start justify-center gap-10">

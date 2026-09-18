@@ -1,0 +1,818 @@
+[
+  {
+    "theme": "animaux",
+    "difficulty": 1,
+    "prompt": "Un poulpe possède trois cœurs.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "animaux",
+    "difficulty": 1,
+    "prompt": "Les éléphants sont incapables de sauter.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "animaux",
+    "difficulty": 1,
+    "prompt": "Une girafe a le même nombre de vertèbres cervicales qu'un humain.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "animaux",
+    "difficulty": 2,
+    "prompt": "Les crevettes-mantes peuvent frapper assez vite pour faire bouillir l'eau autour de leur pince.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "animaux",
+    "difficulty": 1,
+    "prompt": "Le colibri est capable de voler à reculons.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "animaux",
+    "difficulty": 2,
+    "prompt": "Le sang des poulpes est bleu.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "animaux",
+    "difficulty": 2,
+    "prompt": "Les koalas dorment environ vingt heures par jour.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "animaux",
+    "difficulty": 1,
+    "prompt": "Les chauves-souris sont aveugles.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "animaux",
+    "difficulty": 1,
+    "prompt": "Un poisson rouge n'a que trois secondes de mémoire.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "animaux",
+    "difficulty": 1,
+    "prompt": "Les autruches enfouissent leur tête dans le sable quand elles ont peur.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "animaux",
+    "difficulty": 2,
+    "prompt": "Les taureaux chargent parce qu'ils détestent la couleur rouge.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "animaux",
+    "difficulty": 2,
+    "prompt": "Les caméléons changent de couleur d'abord pour se camoufler.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "animaux",
+    "difficulty": 2,
+    "prompt": "Un scorpion se suicide quand il est encerclé par le feu.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "animaux",
+    "difficulty": 3,
+    "prompt": "Les écureuils oublient une grande partie des noix qu'ils enterrent, ce qui plante des arbres.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "animaux",
+    "difficulty": 3,
+    "prompt": "Le rorqual bleu est le plus gros animal ayant jamais vécu sur Terre.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "L'eau chaude peut geler plus vite que l'eau froide dans certaines conditions.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Le verre est un matériau qui n'a pas de structure cristalline.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Le diamant et le graphite sont faits du même élément chimique.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Un kilogramme de plomb et un kilogramme de plumes pèsent exactement la même chose.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Le verre des cathédrales coule lentement, ce qui explique les vitraux plus épais en bas.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "On n'utilise que dix pour cent de notre cerveau.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "L'or est le métal le plus dense qui existe.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Un éclair ne frappe jamais deux fois au même endroit.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Le miel peut se conserver des milliers d'années sans jamais pourrir.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Un atome est essentiellement constitué de vide.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Le son se déplace plus vite dans l'air que dans l'eau.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "espace",
+    "difficulty": 1,
+    "prompt": "Une journée sur Vénus dure plus longtemps qu'une année sur Vénus.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "espace",
+    "difficulty": 1,
+    "prompt": "Il n'y a pas de son dans l'espace.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Les empreintes laissées sur la Lune y resteront des millions d'années.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Le Soleil représente plus de 99 % de la masse du système solaire.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "espace",
+    "difficulty": 1,
+    "prompt": "La Grande Muraille de Chine est visible à l'œil nu depuis la Lune.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "espace",
+    "difficulty": 1,
+    "prompt": "Le Soleil est jaune vu depuis l'espace.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Sans combinaison, un astronaute exploserait instantanément dans le vide.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "espace",
+    "difficulty": 2,
+    "prompt": "Mercure est la planète la plus chaude du système solaire.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Saturne flotterait sur l'eau si l'on trouvait un océan assez grand.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "espace",
+    "difficulty": 3,
+    "prompt": "Il y a plus d'étoiles dans l'univers observable que de grains de sable sur Terre.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "geo",
+    "difficulty": 1,
+    "prompt": "L'Australie est plus large d'est en ouest que la Lune n'a de diamètre.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "geo",
+    "difficulty": 1,
+    "prompt": "La Russie s'étend sur onze fuseaux horaires.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "geo",
+    "difficulty": 2,
+    "prompt": "Le Canada compte plus de lacs que tout le reste du monde réuni.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "geo",
+    "difficulty": 2,
+    "prompt": "L'Alaska est à la fois l'État américain le plus à l'ouest et le plus à l'est.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "geo",
+    "difficulty": 1,
+    "prompt": "Sydney est la capitale de l'Australie.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "geo",
+    "difficulty": 1,
+    "prompt": "L'Afrique est un pays.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "geo",
+    "difficulty": 2,
+    "prompt": "Istanbul est la capitale de la Turquie.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "geo",
+    "difficulty": 2,
+    "prompt": "Le Sahara est le plus grand désert du monde.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "geo",
+    "difficulty": 3,
+    "prompt": "Le point le plus éloigné du centre de la Terre n'est pas l'Everest mais le Chimborazo.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "geo",
+    "difficulty": 3,
+    "prompt": "La mer Caspienne est le plus grand lac du monde.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "histoire",
+    "difficulty": 1,
+    "prompt": "Cléopâtre a vécu plus près de nos jours que de la construction de la grande pyramide de Gizeh.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "histoire",
+    "difficulty": 2,
+    "prompt": "L'université d'Oxford est plus ancienne que l'empire aztèque.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "histoire",
+    "difficulty": 2,
+    "prompt": "La guerre la plus courte de l'histoire a duré moins d'une heure.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "histoire",
+    "difficulty": 1,
+    "prompt": "Napoléon était de très petite taille pour son époque.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "histoire",
+    "difficulty": 1,
+    "prompt": "Les Vikings portaient des casques à cornes au combat.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "histoire",
+    "difficulty": 2,
+    "prompt": "Marie-Antoinette a réellement prononcé la phrase sur la brioche.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "histoire",
+    "difficulty": 2,
+    "prompt": "Au Moyen Âge, les savants croyaient tous que la Terre était plate.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "histoire",
+    "difficulty": 3,
+    "prompt": "Le mammouth laineux existait encore quand les pyramides d'Égypte étaient déjà bâties.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "histoire",
+    "difficulty": 3,
+    "prompt": "La tour Eiffel devait être démontée vingt ans après sa construction.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "histoire",
+    "difficulty": 3,
+    "prompt": "Le Grand Incendie de Londres a eu lieu pendant la Révolution française.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "insolite",
+    "difficulty": 1,
+    "prompt": "Les empreintes digitales d'un humain sont uniques, même entre jumeaux identiques.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "insolite",
+    "difficulty": 1,
+    "prompt": "Il est impossible de se lécher le coude pour la grande majorité des gens.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "insolite",
+    "difficulty": 2,
+    "prompt": "Le cœur d'un humain bat environ cent mille fois par jour.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "insolite",
+    "difficulty": 2,
+    "prompt": "Les os humains sont, à masse égale, plus résistants que le béton.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "insolite",
+    "difficulty": 1,
+    "prompt": "Se craquer les doigts donne de l'arthrose.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "insolite",
+    "difficulty": 1,
+    "prompt": "Les cheveux et les ongles continuent de pousser après la mort.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "insolite",
+    "difficulty": 2,
+    "prompt": "La langue possède des zones distinctes pour chaque goût.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "insolite",
+    "difficulty": 2,
+    "prompt": "On avale huit araignées par an en dormant.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "insolite",
+    "difficulty": 3,
+    "prompt": "L'estomac fabrique une nouvelle paroi régulièrement pour éviter de se digérer lui-même.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "insolite",
+    "difficulty": 3,
+    "prompt": "Un humain adulte a exactement le même nombre d'os qu'un nouveau-né.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "cuisine",
+    "difficulty": 1,
+    "prompt": "La tomate est botaniquement un fruit.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "cuisine",
+    "difficulty": 1,
+    "prompt": "Le wasabi servi dans la plupart des restaurants n'est pas du wasabi véritable.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "cuisine",
+    "difficulty": 2,
+    "prompt": "La banane est botaniquement une baie.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "cuisine",
+    "difficulty": 2,
+    "prompt": "Le chocolat blanc ne contient pas de cacao en poudre.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "cuisine",
+    "difficulty": 1,
+    "prompt": "Les cacahuètes sont des fruits à coque comme les noix.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "cuisine",
+    "difficulty": 2,
+    "prompt": "L'alcool s'évapore entièrement à la cuisson d'un plat.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "cuisine",
+    "difficulty": 2,
+    "prompt": "Les croissants ont été inventés en France.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "cuisine",
+    "difficulty": 3,
+    "prompt": "Le safran véritable est plus cher que l'or au gramme, certaines années.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "sport",
+    "difficulty": 1,
+    "prompt": "Un match de football compte deux périodes de quarante-cinq minutes.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "sport",
+    "difficulty": 2,
+    "prompt": "Le marathon fait plus de quarante-deux kilomètres.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "sport",
+    "difficulty": 2,
+    "prompt": "Le tir à la corde a déjà été une discipline olympique.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "sport",
+    "difficulty": 1,
+    "prompt": "Le Tour de France se court toujours entièrement en France.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "sport",
+    "difficulty": 2,
+    "prompt": "Une balle de golf compte toujours exactement trois cent trente-six alvéoles.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "sport",
+    "difficulty": 3,
+    "prompt": "Les Jeux olympiques ont déjà décerné des médailles pour des concours d'art.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "cinema",
+    "difficulty": 1,
+    "prompt": "Le rôle de Dark Vador a été joué par un acteur et doublé par une autre voix.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "cinema",
+    "difficulty": 2,
+    "prompt": "Titanic et Avatar ont le même réalisateur.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "cinema",
+    "difficulty": 1,
+    "prompt": "Dans Star Wars, la réplique exacte est « Luke, je suis ton père ».",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "cinema",
+    "difficulty": 2,
+    "prompt": "Walt Disney a été cryogénisé après sa mort.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "musique",
+    "difficulty": 2,
+    "prompt": "Les Beatles ne savaient pas lire la musique.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "musique",
+    "difficulty": 1,
+    "prompt": "Mozart a composé la mélodie de « Frère Jacques ».",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Mario est apparu dans un jeu avant d'avoir son propre titre.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Tetris a été créé en Union soviétique.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 1,
+    "prompt": "Le personnage de Sonic appartient à Nintendo.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "gaming",
+    "difficulty": 2,
+    "prompt": "Minecraft a été racheté par Sony.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "series",
+    "difficulty": 2,
+    "prompt": "Game of Thrones est tiré d'une série de romans inachevée.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "series",
+    "difficulty": 1,
+    "prompt": "Breaking Bad se déroule à Los Angeles.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "langue",
+    "difficulty": 2,
+    "prompt": "Le mot « azerty » vient de la disposition des touches du clavier français.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "langue",
+    "difficulty": 1,
+    "prompt": "Le français est la langue la plus parlée au monde.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "technologie",
+    "difficulty": 1,
+    "prompt": "Le premier ordinateur pesait plusieurs tonnes.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "technologie",
+    "difficulty": 2,
+    "prompt": "Le mot « bug » informatique vient d'un insecte trouvé dans une machine.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "technologie",
+    "difficulty": 1,
+    "prompt": "Bill Gates a inventé Internet.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "technologie",
+    "difficulty": 2,
+    "prompt": "Le wifi et le Bluetooth utilisent des ondes totalement différentes.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "art",
+    "difficulty": 2,
+    "prompt": "La Joconde a été volée au Louvre au début du vingtième siècle.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "art",
+    "difficulty": 2,
+    "prompt": "Van Gogh a vendu des centaines de tableaux de son vivant.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Dans la mythologie grecque, Zeus et Hadès sont frères.",
+    "answer": "vrai",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  },
+  {
+    "theme": "mythologie",
+    "difficulty": 2,
+    "prompt": "Thor est le père d'Odin dans la mythologie nordique.",
+    "answer": "faux",
+    "aliases": [],
+    "answer_kind": "truefalse"
+  }
+]

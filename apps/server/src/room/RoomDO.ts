@@ -44,6 +44,7 @@ const SETTING_KEYS = [
   "duelRounds",
   "reflexRounds",
   "blurRounds",
+  "trueFalseRounds",
   "numericRounds",
   "audioEnabled",
   "themes",
@@ -355,6 +356,9 @@ export class RoomDO extends DurableObject<Env> {
         break;
       case "SUBMIT_DUEL_ANSWER":
         await this.dispatch({ kind: "SUBMIT_DUEL_ANSWER", playerId, text: sanitizeText(parsed.text, 60), now }, ws);
+        break;
+      case "SUBMIT_TRUE_FALSE":
+        await this.dispatch({ kind: "SUBMIT_TRUE_FALSE", playerId, value: parsed.value, now }, ws);
         break;
       case "SUBMIT_BLUR_ANSWER":
         // Timed on arrival like the reflex tap, and for the same reason: the round pays for

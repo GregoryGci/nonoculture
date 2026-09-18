@@ -26,12 +26,7 @@ export function ReflexRound({ reflex, onTap }: { reflex: ReflexView; onTap: () =
             >
               <span className="text-[17px] font-medium">{r.nickname}</span>
               <span className="flex items-baseline gap-3">
-                <span
-                  className="tabular text-[17px]"
-                  style={{ color: r.falseStart ? "var(--color-danger)" : "var(--color-text)" }}
-                >
-                  {r.falseStart ? "faux départ" : r.ms === null ? "—" : `${r.ms} ms`}
-                </span>
+                <span className="tabular text-[17px]">{r.ms === null ? "—" : `${r.ms} ms`}</span>
                 {r.points > 0 && (
                   <span className="tabular text-[13px]" style={{ color: "var(--color-success)" }}>
                     +{r.points}
@@ -49,38 +44,36 @@ export function ReflexRound({ reflex, onTap }: { reflex: ReflexView; onTap: () =
   }
 
   const green = reflex.step === "go";
-  const burnt = reflex.falseStart;
   const done = reflex.youTapped;
+  // Inert until the green. Tapping early used to eliminate the player, which punished anyone
+  // whose click crossed the switch a few milliseconds too soon — latency, not impatience.
+  const armed = green && !done;
 
-  const label = burnt
-    ? "Trop tôt !"
-    : done
-      ? reflex.yourMs !== null
-        ? `${reflex.yourMs} ms`
-        : "Enregistré"
-      : green
-        ? "MAINTENANT"
-        : "Attends le vert…";
+  const label = done
+    ? reflex.yourMs !== null
+      ? `${reflex.yourMs} ms`
+      : "Enregistré"
+    : green
+      ? "MAINTENANT"
+      : "Attends le vert…";
 
   return (
     <div className="flex flex-col gap-5">
       <button
         type="button"
         onClick={onTap}
-        disabled={done}
+        disabled={!armed}
         aria-label={green ? "Tape maintenant" : "Ne tape pas encore"}
-        className="flex w-full items-center justify-center rounded-[var(--radius-card)] transition-colors duration-100"
+        // No colour transition at all: a hundred-millisecond fade is a hundred milliseconds
+        // where the screen is neither red nor green, and that ambiguity is the round.
+        className="flex w-full items-center justify-center rounded-[var(--radius-card)]"
         style={{
           minHeight: "clamp(220px, 42vh, 380px)",
-          background: burnt
-            ? "rgba(255,69,58,0.18)"
-            : green
-              ? "var(--color-success)"
-              : done
-                ? "var(--color-surface-2)"
-                : "var(--color-surface)",
-          border: `1px solid ${burnt ? "var(--color-danger)" : green ? "var(--color-success)" : "var(--color-border)"}`,
-          cursor: done ? "default" : "pointer",
+          background: green ? "var(--color-success)" : done ? "var(--color-surface-2)" : "var(--color-surface)",
+          border: `1px solid ${green ? "var(--color-success)" : "var(--color-border)"}`,
+          cursor: armed ? "pointer" : "default",
+          // The red screen must not even look clickable.
+          pointerEvents: armed ? "auto" : "none",
         }}
       >
         <span
@@ -92,11 +85,9 @@ export function ReflexRound({ reflex, onTap }: { reflex: ReflexView; onTap: () =
       </button>
 
       <p className="text-center text-[15px]" style={{ color: "var(--color-text-muted)" }}>
-        {burnt
-          ? "Tu as tapé avant le vert : pas de points cette manche."
-          : done
-            ? "En attente des autres…"
-            : "Le premier à taper quand l'écran passe au vert gagne. Partir trop tôt élimine."}
+        {done
+          ? "En attente des autres…"
+          : "Le premier à taper quand l'écran passe au vert gagne. Avant le vert, le bouton ne répond pas."}
       </p>
     </div>
   );

@@ -16,6 +16,8 @@ export const PHASES = [
   "REFLEX_REVEAL",
   "BLUR_GUESS",
   "BLUR_REVEAL",
+  "TRUEFALSE_ANSWER",
+  "TRUEFALSE_REVEAL",
   "HOST_REVIEW",
   "FINISHED",
 ] as const;
@@ -55,6 +57,8 @@ export interface GameSettings {
   reflexRounds: number;
   /** A picture that starts blurred and sharpens; answer early for more points. */
   blurRounds: number;
+  /** One statement, two buttons, a few seconds. */
+  trueFalseRounds: number;
   /** Ordinary questions scored by proximity instead of by the host. */
   numericRounds: number;
   /** Whether sound questions are drawn at all. Off for a table where not everyone has sound —
@@ -74,6 +78,8 @@ export const DUEL_MIN_PLAYERS = 3;
 export const REFLEX_MIN_PLAYERS = 2;
 /** Guessing a blurred picture works alone, but the podium needs someone to beat. */
 export const BLUR_MIN_PLAYERS = 2;
+/** True or false is a coin flip alone; the speed bonus needs someone to be faster than. */
+export const TRUEFALSE_MIN_PLAYERS = 2;
 
 /** Points awarded by the self-scoring rounds. */
 export const BLUFF_POINTS_FOUND = 2; // you spotted the real answer
@@ -96,6 +102,19 @@ export const MATH_POINTS_FASTEST = 3;
  */
 export const BLUR_POINTS_BY_RANK = [5, 3, 2] as const;
 export const BLUR_POINTS_OTHER = 1;
+
+/**
+ * True or false pays for being right, and a little more for being right first.
+ *
+ * Deliberately flat rather than ranked like the blurred picture: on a fifty-fifty, paying by
+ * finishing order would mostly reward whoever guessed fastest, which is not knowledge. The
+ * bonus is one point — enough to make hesitating cost something, too little to make a lucky
+ * jab worth more than thinking.
+ */
+export const TRUEFALSE_POINTS_CORRECT = 2;
+export const TRUEFALSE_POINTS_FASTEST = 1;
+/** Short on purpose: a statement you have to weigh for twenty seconds is a trivia question. */
+export const TRUEFALSE_ANSWER_MS = 10_000;
 
 /** How long the round runs, and how long the picture takes to come fully into focus. */
 export const BLUR_GUESS_MS = 15_000;
@@ -136,6 +155,7 @@ export const THEME_LABELS: Record<string, string> = {
   france: "France & terroirs",
   physchi: "Physique & Chimie",
   fromsoft: "FromSoftware",
+  psycho: "Psychotechnique",
 };
 
 /**
@@ -161,6 +181,7 @@ export const DEFAULT_SETTINGS: GameSettings = {
   duelRounds: 1,
   reflexRounds: 1,
   blurRounds: 1,
+  trueFalseRounds: 1,
   numericRounds: 2,
   audioEnabled: true,
   themes: [],
@@ -187,7 +208,7 @@ export interface QuestionPublic {
   /** "number": closest answer wins. "math": exact answer, fastest correct one wins.
    *  "blur": a picture that sharpens, answered by finishing order. None of the three reach
    *  the host review — there is nothing to judge in arithmetic or in a name that matches. */
-  answerKind: "text" | "number" | "list" | "math" | "blur";
+  answerKind: "text" | "number" | "list" | "math" | "blur" | "truefalse";
 }
 
 /**
@@ -336,6 +357,40 @@ export interface BlurView {
   total: number;
 }
 
+/**
+ * What a player sees during a true-or-false round.
+ *
+ * Nobody's pick travels before the reveal — the same rule as everywhere else, and it matters
+ * more here than anywhere: with two options, one leaked answer is the whole round.
+ */
+export interface TrueFalseView {
+  step: "answer" | "reveal";
+  statement: string;
+  /** Your own pick, locked in once sent. */
+  yourAnswer: "vrai" | "faux" | null;
+  /** Set at the reveal only. */
+  correctAnswer: "vrai" | "faux" | null;
+  results: { nickname: string; answer: "vrai" | "faux" | null; correct: boolean; points: number }[] | null;
+  answered: number;
+  total: number;
+}
+
+/**
+ * A title handed out on the podium, so the end of a game says something about it.
+ *
+ * Computed from what the room actually did, never from taste: every award below is a count
+ * or an average over answers the server already kept. A title nobody earned is not awarded —
+ * an empty list is a quiet podium, not a bug.
+ */
+export interface Award {
+  /** Stable id, so the client can style or reorder without matching on the label. */
+  id: string;
+  label: string;
+  nickname: string;
+  /** The figure behind the title — "4 fois", "18 caractères". */
+  detail: string;
+}
+
 export interface RoomStateSync {
   roomCode: string;
   phase: Phase;
@@ -365,6 +420,9 @@ export interface RoomStateSync {
   duel: DuelView | null;
   reflex: ReflexView | null;
   blur: BlurView | null;
+  trueFalse: TrueFalseView | null;
+  /** Filled in at FINISHED only. */
+  awards: Award[] | null;
   /** Every trivia question and answer of the game, sent to the whole room during HOST_REVIEW
    *  so everyone watches the host grade. Only the host's grades are accepted. */
   reviewQuestions: ReviewQuestion[] | null;

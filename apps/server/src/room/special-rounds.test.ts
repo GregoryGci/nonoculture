@@ -305,22 +305,29 @@ describe("reflex round", () => {
     expect(state.players.a?.score).toBe(0);
   });
 
-  it("burns a player who taps before the green, whatever they do next", () => {
+  it("ignores a tap on the red screen instead of eliminating the player", () => {
     let state = room(["a", "b", "c"], deck);
+    // The screen is inert until the green, so an early tap costs nothing — it used to burn
+    // the round for anyone whose click crossed the switch a few milliseconds too soon.
     state = transition(state, { kind: "SUBMIT_REFLEX_TAP", playerId: "a", now: T0 + 150 }).state;
-    expect(state.reflex?.falseStarts).toContain("a");
+    expect(state.reflex?.falseStarts).toEqual([]);
+    expect(state.reflex?.times.a).toBeUndefined();
 
     state = transition(state, { kind: "ALARM_FIRED", now: state.reflex!.goAtTs }).state;
     const goTs = state.reflex!.goTs!;
-    // Mashing the button is not a reaction test: the second tap must not register a time.
+    state = transition(state, { kind: "SUBMIT_REFLEX_TAP", playerId: "a", now: goTs + 250 }).state;
+    expect(state.reflex?.times.a).toBe(250);
+  });
+
+  it("drops a time no human produces, and lets that player tap again", () => {
+    let state = afterGo();
+    const goTs = state.reflex!.goTs!;
+    // 5 ms after the switch is a mash that landed, not a reaction.
     state = transition(state, { kind: "SUBMIT_REFLEX_TAP", playerId: "a", now: goTs + 5 }).state;
     expect(state.reflex?.times.a).toBeUndefined();
 
-    state = transition(state, { kind: "SUBMIT_REFLEX_TAP", playerId: "b", now: goTs + 400 }).state;
-    state = transition(state, { kind: "SUBMIT_REFLEX_TAP", playerId: "c", now: goTs + 500 }).state;
-    expect(state.phase).toBe("REFLEX_REVEAL");
-    expect(state.players.a?.score).toBe(0);
-    expect(state.players.b?.score).toBe(3);
+    state = transition(state, { kind: "SUBMIT_REFLEX_TAP", playerId: "a", now: goTs + 300 }).state;
+    expect(state.reflex?.times.a).toBe(300);
   });
 
   it("keeps the first time a player registers, not their best", () => {
@@ -373,13 +380,26 @@ describe("maths questions", () => {
     expect(state.players.a?.score).toBe(1);
   });
 
-  it("keeps arithmetic out of the host review — there is nothing to judge", () => {
+  it("settles arithmetic itself, then shows the answer without asking the host to grade it", () => {
     let state = room(["a", "b"], deck);
     state = answer(state, "a", "56", T0 + 300);
     state = answer(state, "b", "pas la moindre idée", T0 + 400);
     expect(state.phase).toBe("HOST_REVIEW");
-    expect(state.answerLog).toEqual({});
     expect(state.players.b?.score).toBe(0);
+
+    const card = buildStateSync(state, "a").reviewQuestions?.[0];
+    expect(card?.autoScored).toBe(true);
+    expect(card?.answers.map((x) => x.autoPoints)).toEqual([3, 0]);
+
+    // Grading it would pay a second time for a question the server already settled.
+    const after = transition(state, {
+      kind: "SUBMIT_HOST_GRADE",
+      playerId: state.hostPlayerId,
+      deckIndex: 0,
+      targetPlayerId: "b",
+      grade: 1,
+    }).state;
+    expect(after.players.b?.score).toBe(0);
   });
 });
 
@@ -513,5 +533,152 @@ describe("blurred picture round", () => {
       ["", true, 5],
       ["", false, 0],
     ]);
+  });
+});
+
+describe("true or false round", () => {
+  const statement = question({
+    id: 77,
+    answerKind: "truefalse",
+    prompt: "Un poulpe a trois cœurs.",
+    answer: "vrai",
+  });
+  const deck: DeckItem[] = [{ kind: "truefalse", question: statement }];
+
+  it("pays everyone who is right, and a point more to the first of them", () => {
+    let state = room(["a", "b", "c"], deck);
+    expect(state.phase).toBe("TRUEFALSE_ANSWER");
+
+    state = transition(state, { kind: "SUBMIT_TRUE_FALSE", playerId: "b", value: "vrai", now: T0 + 4_000 }).state;
+    state = transition(state, { kind: "SUBMIT_TRUE_FALSE", playerId: "a", value: "vrai", now: T0 + 2_000 }).state;
+    state = transition(state, { kind: "SUBMIT_TRUE_FALSE", playerId: "c", value: "faux", now: T0 + 3_000 }).state;
+
+    expect(state.phase).toBe("TRUEFALSE_REVEAL");
+    expect(state.players.a?.score).toBe(3); // right, and first of the right ones
+    expect(state.players.b?.score).toBe(2);
+    expect(state.players.c?.score).toBe(0);
+  });
+
+  it("takes the first pick only — with two options a second try is just the other one", () => {
+    let state = room(["a", "b"], deck);
+    state = transition(state, { kind: "SUBMIT_TRUE_FALSE", playerId: "a", value: "faux", now: T0 + 1_000 }).state;
+    state = transition(state, { kind: "SUBMIT_TRUE_FALSE", playerId: "a", value: "vrai", now: T0 + 2_000 }).state;
+    expect(state.trueFalse?.answers.a?.value).toBe("faux");
+  });
+
+  it("closes on the timer, scoring whoever did pick", () => {
+    let state = room(["a", "b"], deck);
+    state = transition(state, { kind: "SUBMIT_TRUE_FALSE", playerId: "a", value: "vrai", now: T0 + 1_000 }).state;
+    expect(state.phase).toBe("TRUEFALSE_ANSWER");
+    state = transition(state, { kind: "ALARM_FIRED", now: state.phaseDeadlineTs! }).state;
+    expect(state.phase).toBe("TRUEFALSE_REVEAL");
+    expect(state.players.a?.score).toBe(3);
+    expect(state.players.b?.score).toBe(0);
+  });
+
+  it("never leaves a pick on the wire before the reveal", () => {
+    let state = room(["a", "b", "c"], deck);
+    state = transition(state, { kind: "SUBMIT_TRUE_FALSE", playerId: "a", value: "vrai", now: T0 + 1_000 }).state;
+
+    const forB = buildStateSync(state, "b");
+    expect(forB.trueFalse?.step).toBe("answer");
+    expect(forB.trueFalse?.answered).toBe(1);
+    expect(forB.trueFalse?.yourAnswer).toBeNull();
+    expect(forB.trueFalse?.correctAnswer).toBeNull();
+    expect(forB.trueFalse?.results).toBeNull();
+  });
+
+  it("is skipped below the minimum rather than played alone", () => {
+    const state = room(["a"], [...deck, { kind: "trivia", question: question() }]);
+    expect(state.phase).toBe("QUESTION");
+    expect(state.trueFalse).toBeNull();
+  });
+});
+
+describe("podium awards", () => {
+  const deck: DeckItem[] = [
+    { kind: "trivia", question: question({ id: 1, prompt: "Capitale de l'Italie ?", answer: "Rome" }) },
+    { kind: "trivia", question: question({ id: 2, prompt: "Capitale du Japon ?", answer: "Tokyo" }) },
+  ];
+
+  /** Plays both questions with a fixed order, then ends the game. */
+  function playedGame(): GameState {
+    let state = room(["a", "b"], deck);
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "a",
+      questionId: 1,
+      raw: "Rome",
+      now: T0 + 100,
+    }).state;
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "b",
+      questionId: 1,
+      raw: "Milan",
+      now: T0 + 900,
+    }).state;
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "a",
+      questionId: 2,
+      raw: "Tokyo",
+      now: T0 + 1_100,
+    }).state;
+    state = transition(state, {
+      kind: "SUBMIT_ANSWER",
+      playerId: "b",
+      questionId: 2,
+      raw: "une très longue réponse qui ne veut rien dire",
+      now: T0 + 1_900,
+    }).state;
+    expect(state.phase).toBe("HOST_REVIEW");
+    return state;
+  }
+
+  it("hands out titles only once the game is over", () => {
+    const state = playedGame();
+    expect(buildStateSync(state, "a").awards).toBeNull();
+    const finished = transition(state, { kind: "HOST_NEXT", playerId: state.hostPlayerId, now: T0 + 3_000 }).state;
+    expect(finished.phase).toBe("FINISHED");
+    const awards = buildStateSync(finished, "a").awards ?? [];
+    expect(awards.length).toBeGreaterThan(0);
+  });
+
+  it("crowns the player who answered first the most often", () => {
+    const state = transition(playedGame(), {
+      kind: "HOST_NEXT",
+      playerId: playedGame().hostPlayerId,
+      now: T0 + 3_000,
+    }).state;
+    const awards = buildStateSync(state, "a").awards ?? [];
+    const fastest = awards.find((x) => x.id === "fastest");
+    expect(fastest?.detail).toBe("première réponse 2 fois");
+  });
+
+  it("gives no title on a measure two players tie on", () => {
+    let state = room(["a", "b"], deck);
+    for (const id of ["a", "b"] as const) {
+      state = transition(state, {
+        kind: "SUBMIT_ANSWER",
+        playerId: id,
+        questionId: 1,
+        raw: "Rome",
+        now: T0 + 100,
+      }).state;
+    }
+    for (const id of ["a", "b"] as const) {
+      state = transition(state, {
+        kind: "SUBMIT_ANSWER",
+        playerId: id,
+        questionId: 2,
+        raw: "Tokyo",
+        now: T0 + 200,
+      }).state;
+    }
+    state = transition(state, { kind: "HOST_NEXT", playerId: state.hostPlayerId, now: T0 + 3_000 }).state;
+    const awards = buildStateSync(state, "a").awards ?? [];
+    // Both answered everything, both were "first" once: nothing here separates them.
+    expect(awards.find((x) => x.id === "ghost")).toBeUndefined();
   });
 });

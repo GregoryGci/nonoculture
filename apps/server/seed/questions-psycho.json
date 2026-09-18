@@ -1,0 +1,750 @@
+[
+  {
+    "theme": "psycho",
+    "difficulty": 1,
+    "prompt": "Quel nombre complète la suite : 2, 4, 6, 8, … ?",
+    "answer": "10",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 1,
+    "prompt": "Quel nombre complète la suite : 5, 10, 15, 20, … ?",
+    "answer": "25",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 1,
+    "prompt": "Quel nombre complète la suite : 3, 6, 12, 24, … ?",
+    "answer": "48",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 1,
+    "prompt": "Quel nombre complète la suite : 1, 4, 9, 16, … ?",
+    "answer": "25",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 1,
+    "prompt": "Quel nombre complète la suite : 100, 90, 80, 70, … ?",
+    "answer": "60",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 1,
+    "prompt": "Quel nombre complète la suite : 1, 2, 4, 8, 16, … ?",
+    "answer": "32",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quel nombre complète la suite : 1, 1, 2, 3, 5, 8, … ?",
+    "answer": "13",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quel nombre complète la suite : 2, 3, 5, 7, 11, … ?",
+    "answer": "13",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quel nombre complète la suite : 1, 3, 6, 10, 15, … ?",
+    "answer": "21",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quel nombre complète la suite : 2, 6, 12, 20, 30, … ?",
+    "answer": "42",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quel nombre complète la suite : 1, 8, 27, 64, … ?",
+    "answer": "125",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quel nombre complète la suite : 81, 27, 9, 3, … ?",
+    "answer": "1",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quel nombre complète la suite : 4, 9, 16, 25, 36, … ?",
+    "answer": "49",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quel nombre complète la suite : 1, 2, 6, 24, 120, … ?",
+    "answer": "720",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quel nombre complète la suite : 7, 14, 28, 56, … ?",
+    "answer": "112",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quel nombre complète la suite : 3, 7, 15, 31, … ?",
+    "answer": "63",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "Quel nombre complète la suite : 2, 5, 11, 23, 47, … ?",
+    "answer": "95",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "Quel nombre complète la suite : 1, 4, 13, 40, … ?",
+    "answer": "121",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "Quel nombre complète la suite : 10, 11, 13, 16, 20, … ?",
+    "answer": "25",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "Quel nombre complète la suite : 1, 3, 7, 13, 21, … ?",
+    "answer": "31",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "Quel nombre complète la suite : 64, 32, 16, 8, 4, … ?",
+    "answer": "2",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "Quel nombre complète la suite : 1, 2, 4, 7, 11, 16, … ?",
+    "answer": "22",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "Quel nombre complète la suite : 5, 8, 14, 26, 50, … ?",
+    "answer": "98",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "Quel nombre complète la suite : 12, 21, 34, 51, … ?",
+    "answer": "72",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 1,
+    "prompt": "Une raquette et une balle coûtent 11 euros. La raquette coûte 10 euros de plus que la balle. Combien coûte la balle, en euros ?",
+    "answer": "1",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Cinq machines mettent cinq minutes à produire cinq pièces. Combien de minutes mettent cent machines pour produire cent pièces ?",
+    "answer": "5",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Des nénuphars doublent chaque jour et couvrent le lac en 48 jours. En combien de jours couvrent-ils la moitié du lac ?",
+    "answer": "47",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 1,
+    "prompt": "Si trois chats attrapent trois souris en trois minutes, combien de minutes faut-il à cent chats pour attraper cent souris ?",
+    "answer": "3",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 1,
+    "prompt": "Un escargot monte un mur de 10 mètres : 3 mètres le jour, 2 mètres la nuit. Combien de jours lui faut-il pour atteindre le sommet ?",
+    "answer": "8",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 1,
+    "prompt": "Combien de fois le chiffre 7 apparaît-il entre 1 et 100 ?",
+    "answer": "20",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 1,
+    "prompt": "Si vous doublez la deuxième place dans une course, à quelle place êtes-vous ?",
+    "answer": "2",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Un train part à 8 h et roule 3 heures à 80 km/h. Combien de kilomètres a-t-il parcourus ?",
+    "answer": "240",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 1,
+    "prompt": "Combien de minutes y a-t-il dans une journée et demie ?",
+    "answer": "2160",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Un objet coûte 80 euros après une remise de 20 %. Quel était son prix, en euros ?",
+    "answer": "100",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quel est le prix final, en euros, d'un article à 200 euros avec deux remises successives de 50 % puis 10 % ?",
+    "answer": "90",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 1,
+    "prompt": "Combien de secondes y a-t-il dans deux heures ?",
+    "answer": "7200",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quelle est la somme des nombres de 1 à 10 ?",
+    "answer": "55",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "Quelle est la somme des nombres de 1 à 100 ?",
+    "answer": "5050",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Combien de poignées de main échangent cinq personnes qui se saluent toutes une fois ?",
+    "answer": "10",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "Combien de diagonales possède un octogone ?",
+    "answer": "20",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Combien d'angles droits compte un rectangle ?",
+    "answer": "4",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "Combien de carrés, de toutes tailles, un damier de 3 cases sur 3 contient-il ?",
+    "answer": "14",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Trois personnes partagent 90 euros : la deuxième reçoit le double de la première, la troisième le triple. Combien reçoit la première, en euros ?",
+    "answer": "15",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Il est 15 h 40. Dans combien de minutes sera-t-il 16 h 25 ?",
+    "answer": "45",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "Combien de fois par jour les aiguilles d'une horloge se superposent-elles exactement ?",
+    "answer": "22",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Un tissu de 12 mètres est coupé en morceaux de 2 mètres. Combien de coups de ciseaux faut-il ?",
+    "answer": "5",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "Combien de zéros termine le résultat de 10 × 20 × 30 × 40 × 50 ?",
+    "answer": "6",
+    "aliases": [],
+    "answer_kind": "math"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 1,
+    "prompt": "Quelle lettre complète la série : A, C, E, G, … ?",
+    "answer": "I",
+    "aliases": []
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 1,
+    "prompt": "Quelle lettre complète la série : B, D, F, H, … ?",
+    "answer": "J",
+    "aliases": []
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quelle lettre complète la série : A, B, D, G, … ?",
+    "answer": "K",
+    "aliases": []
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quelle lettre complète la série : Z, X, V, T, … ?",
+    "answer": "R",
+    "aliases": []
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quelles lettres complètent la série : AB, CD, EF, … ?",
+    "answer": "GH",
+    "aliases": []
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "Quelle lettre complète la série : A, E, I, … ?",
+    "answer": "O",
+    "aliases": []
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quel mot complète : chat est à chaton ce que chien est à … ?",
+    "answer": "chiot",
+    "aliases": []
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quel mot complète : main est à gant ce que pied est à … ?",
+    "answer": "chaussure",
+    "aliases": [
+      "chaussette"
+    ]
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quel mot complète : oiseau est à nid ce qu'abeille est à … ?",
+    "answer": "ruche",
+    "aliases": []
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 1,
+    "prompt": "Quel mot complète : jour est à nuit ce que blanc est à … ?",
+    "answer": "noir",
+    "aliases": []
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quel mot complète : médecin est à malade ce que professeur est à … ?",
+    "answer": "élève",
+    "aliases": []
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quel mot complète : livre est à lire ce que film est à … ?",
+    "answer": "regarder",
+    "aliases": [
+      "voir"
+    ]
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quel mot complète : poisson est à nager ce qu'oiseau est à … ?",
+    "answer": "voler",
+    "aliases": []
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "Quel mot complète : poule est à œuf ce que vache est à … ?",
+    "answer": "lait",
+    "aliases": [
+      "veau"
+    ]
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quel mot complète : pied est à jambe ce que main est à … ?",
+    "answer": "bras",
+    "aliases": []
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quel mot complète : froid est à glace ce que chaud est à … ?",
+    "answer": "vapeur",
+    "aliases": [
+      "feu"
+    ]
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "Quel mot complète : horloge est à heure ce que thermomètre est à … ?",
+    "answer": "température",
+    "aliases": []
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "Quel mot complète : roman est à écrivain ce que tableau est à … ?",
+    "answer": "peintre",
+    "aliases": []
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 1,
+    "prompt": "Quel est l'intrus : chien, chat, cheval, table ?",
+    "answer": "table",
+    "aliases": [],
+    "family": "choix-multiple"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 1,
+    "prompt": "Quel est l'intrus : rouge, bleu, carré, vert ?",
+    "answer": "carré",
+    "aliases": [],
+    "family": "choix-multiple"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quel est l'intrus : lion, tigre, requin, panthère ?",
+    "answer": "requin",
+    "aliases": [],
+    "family": "choix-multiple"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quel est l'intrus : Paris, Madrid, Berlin, New York ?",
+    "answer": "New York",
+    "aliases": [],
+    "family": "choix-multiple"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quel est l'intrus : 3, 5, 9, 11 ?",
+    "answer": "9",
+    "aliases": [],
+    "family": "choix-multiple"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quel est l'intrus : 16, 25, 30, 36 ?",
+    "answer": "30",
+    "aliases": [],
+    "family": "choix-multiple"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quel est l'intrus : violon, guitare, trompette, harpe ?",
+    "answer": "trompette",
+    "aliases": [],
+    "family": "choix-multiple"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quel est l'intrus : mètre, litre, kilo, vitesse ?",
+    "answer": "vitesse",
+    "aliases": [],
+    "family": "choix-multiple"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "Quel est l'intrus : cercle, carré, cube, triangle ?",
+    "answer": "cube",
+    "aliases": [],
+    "family": "choix-multiple"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "Quel est l'intrus : lundi, mars, jeudi, samedi ?",
+    "answer": "mars",
+    "aliases": [],
+    "family": "choix-multiple"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quel est l'intrus : orange, banane, carotte, pomme ?",
+    "answer": "carotte",
+    "aliases": [],
+    "family": "choix-multiple"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Tous les A sont des B, et tous les B sont des C. Les A sont-ils forcément des C ?",
+    "answer": "oui",
+    "aliases": []
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Certains chats sont noirs. Tous les chats sont des animaux. Peut-on conclure que certains animaux sont noirs ?",
+    "answer": "oui",
+    "aliases": []
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "Tous les chiens aboient. Rex aboie. Peut-on en conclure que Rex est un chien ?",
+    "answer": "non",
+    "aliases": []
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Si « aucun oiseau n'est un mammifère », un pingouin peut-il être un mammifère ?",
+    "answer": "non",
+    "aliases": []
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "Paul est plus grand que Marie, Marie est plus grande que Luc. Qui est le plus petit ?",
+    "answer": "Luc",
+    "aliases": [],
+    "family": "choix-multiple"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "Anna est née avant Bob, Bob avant Chloé. Qui est l'aîné ?",
+    "answer": "Anna",
+    "aliases": [],
+    "family": "choix-multiple"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Dans une file, vous êtes juste derrière la personne qui est juste derrière la première. À quelle place êtes-vous ?",
+    "answer": "troisième",
+    "aliases": [
+      "3",
+      "3e",
+      "la troisième"
+    ]
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "La mère de la fille de ma mère est-elle ma mère ou ma sœur ?",
+    "answer": "ma mère",
+    "aliases": [
+      "mère"
+    ],
+    "family": "choix-multiple"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Si hier était demain, aujourd'hui serait vendredi. Quel jour sommes-nous vraiment ?",
+    "answer": "dimanche",
+    "aliases": []
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Vous marchez plein nord puis tournez deux fois à droite. Dans quelle direction allez-vous ?",
+    "answer": "vers le sud",
+    "aliases": [
+      "sud"
+    ]
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Vous regardez vers l'ouest. Le soleil se lève-t-il devant vous ou derrière vous ?",
+    "answer": "derrière",
+    "aliases": [],
+    "family": "choix-multiple"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "Un cube est peint puis coupé en 27 petits cubes. Combien n'ont aucune face peinte ?",
+    "answer": "1",
+    "aliases": []
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "Un miroir inverse-t-il la gauche et la droite, ou l'avant et l'arrière ?",
+    "answer": "l'avant et l'arrière",
+    "aliases": [
+      "avant et arrière"
+    ],
+    "family": "choix-multiple"
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Combien de faces possède un dé classique ?",
+    "answer": "6",
+    "aliases": []
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "Sur un dé classique, que vaut la somme de deux faces opposées ?",
+    "answer": "7",
+    "aliases": []
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Quelle forme obtient-on en pliant un carré de papier exactement en deux le long d'une diagonale ?",
+    "answer": "un triangle",
+    "aliases": [
+      "triangle"
+    ]
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "Combien d'arêtes possède un cube ?",
+    "answer": "12",
+    "aliases": []
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 3,
+    "prompt": "Combien de sommets possède une pyramide à base carrée ?",
+    "answer": "5",
+    "aliases": []
+  },
+  {
+    "theme": "psycho",
+    "difficulty": 2,
+    "prompt": "Si l'on retourne le chiffre 6 à l'envers, quel chiffre lit-on ?",
+    "answer": "9",
+    "aliases": []
+  }
+]

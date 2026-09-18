@@ -105,7 +105,7 @@ export function HostReviewPanel({
               className="rounded-[var(--radius-control)] px-3.5 py-2.5 text-[13px] leading-snug"
               style={{ background: "var(--color-surface-2)", color: "var(--color-text-muted)" }}
             >
-              Le plus proche gagne : les points ont déjà été comptés pendant la partie.
+              Question auto-corrigée : les points ont déjà été comptés pendant la partie.
             </p>
           )}
 

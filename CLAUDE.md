@@ -124,6 +124,26 @@ DUEL_PREDICT (15s) → DUEL_ANSWER (45s) → DUEL_REVEAL (12s)
   `DUEL_POINTS_PREDICTED` à chaque spectateur qui a vu juste ; un duelliste ne peut pas
   parier sur lui-même.
 
+La manche vrai ou faux tient aussi en deux phases :
+
+```
+TRUEFALSE_ANSWER (10s) → TRUEFALSE_REVEAL (8s)
+```
+
+Une affirmation, deux boutons, un seul choix par joueur (avec deux options, un second essai
+c'est l'autre réponse). `TRUEFALSE_POINTS_CORRECT` à chaque bonne réponse, plus
+`TRUEFALSE_POINTS_FASTEST` au premier — volontairement plat plutôt que classé comme l'image
+floue : sur un pile ou face, payer à l'ordre d'arrivée récompenserait surtout le hasard.
+Les affirmations portent `answer_kind = "truefalse"` et sont réparties dans les thèmes
+existants, pour suivre le filtre choisi par l'hôte.
+
+**La manche réflexe n'élimine plus personne.** Le bouton est inerte tant que l'écran n'est pas
+vert (`pointerEvents: none`, aucune transition de couleur) : un clic sur le rouge ne fait rien
+du tout. Punir un faux départ punissait surtout la latence, à quelques millisecondes du
+basculement. Le serveur écarte en revanche tout temps inférieur à `REFLEX_HUMAN_FLOOR_MS` —
+personne ne réagit en 20 ms, c'est un matraquage qui est passé — sans bloquer le joueur, qui
+peut retaper.
+
 La manche image floue tient en deux phases :
 
 ```

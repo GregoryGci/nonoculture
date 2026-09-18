@@ -97,6 +97,7 @@ l'hôte dans le lobby (`GameSettings`, `HostSettings.tsx`) :
 | `duelRounds`    |      1 | duels 1v1                                                    |
 | `reflexRounds`  |      1 | manches réflexe (le premier à taper au vert)                 |
 | `blurRounds`    |      1 | manches image floue (elle se précise, le plus rapide marque) |
+| `trueFalseRounds` |    1 | manches vrai ou faux (10 s, bonus au premier)                |
 | `numericRounds` |      2 | questions « le plus proche gagne »                           |
 
 **« Tous les thèmes » exclut `lol` et `dofus`** (`OPT_IN_THEMES` dans `packages/shared`) : ce

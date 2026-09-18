@@ -7,7 +7,7 @@ export interface InternalQuestion {
   /** Generator template it came from; null for hand-written questions. */
   family: string | null;
   /** How the answer is judged: by the host, by proximity, or by counting list hits. */
-  answerKind: "text" | "number" | "list" | "math" | "blur";
+  answerKind: "text" | "number" | "list" | "math" | "blur" | "truefalse";
   difficulty: 1 | 2 | 3;
   type: QuestionType;
   prompt: string;
@@ -24,7 +24,8 @@ export type DeckItem =
   | { kind: "bluff"; question: InternalQuestion }
   | { kind: "duel"; question: InternalQuestion }
   | { kind: "reflex" }
-  | { kind: "blur"; question: InternalQuestion };
+  | { kind: "blur"; question: InternalQuestion }
+  | { kind: "truefalse"; question: InternalQuestion };
 
 export interface InternalPlayer {
   playerId: string;
@@ -138,6 +139,17 @@ export interface BlurRoundState {
   points: Record<string, number>;
 }
 
+/**
+ * A true-or-false round in progress.
+ *
+ * Picks carry their arrival time because the round pays a bonus for the fastest correct one;
+ * a plain map of who chose what would lose exactly that.
+ */
+export interface TrueFalseRoundState {
+  answers: Record<string, { value: "vrai" | "faux"; at: number }>;
+  points: Record<string, number>;
+}
+
 export interface GameState {
   roomCode: string;
   phase: Phase;
@@ -172,6 +184,7 @@ export interface GameState {
   duel: DuelRoundState | null; // set only while playing a duel slot
   reflex: ReflexRoundState | null; // set only while playing a reflex slot
   blur: BlurRoundState | null; // set only while playing a blurred-picture slot
+  trueFalse: TrueFalseRoundState | null; // set only while playing a true-or-false slot
   phaseDeadlineTs: number | null;
   createdAt: number;
   lastActivityAt: number;
@@ -196,6 +209,7 @@ export type GameEvent =
   | { kind: "SUBMIT_DUEL_ANSWER"; playerId: string; text: string; now: number }
   | { kind: "SUBMIT_REFLEX_TAP"; playerId: string; now: number }
   | { kind: "SUBMIT_BLUR_ANSWER"; playerId: string; text: string; now: number }
+  | { kind: "SUBMIT_TRUE_FALSE"; playerId: string; value: "vrai" | "faux"; now: number }
   | { kind: "HOST_NEXT"; playerId: string; now: number }
   | { kind: "HOST_KICK"; playerId: string; targetId: string; now: number }
   | { kind: "ALARM_FIRED"; now: number }
@@ -237,5 +251,16 @@ export const REFLEX_WAIT_MAX_MS = 7_000;
 /** Long enough that a distracted player still registers a time, short enough to stay tense. */
 export const REFLEX_GO_DURATION_MS = 6_000;
 export const REFLEX_REVEAL_DURATION_MS = 10_000;
+/**
+ * Under this, nobody reacted — they were already moving.
+ *
+ * Human reaction to a colour change sits around 200 ms and essentially never goes below 100.
+ * The red screen ignores taps outright now, so the only way to produce a 20 ms time is to
+ * mash through the switch; that tap is dropped rather than scored, and the player can still
+ * tap again for a real time.
+ */
+export const REFLEX_HUMAN_FLOOR_MS = 100;
 
 export const BLUR_REVEAL_DURATION_MS = 10_000;
+
+export const TRUEFALSE_REVEAL_DURATION_MS = 8_000;

@@ -7,7 +7,9 @@ import type {
   PlayerPublic,
   QuestionPublic,
   BlurView,
+  Award,
   ReflexView,
+  TrueFalseView,
   ReviewQuestion,
   RoomStateSync,
 } from "@nonoculture/shared";
@@ -179,6 +181,44 @@ function computeDuel(state: GameState, forPlayerId: string, nicknameOf: (id: str
 }
 
 /**
+ * The true-or-false round as one player sees it.
+ *
+ * With two options, leaking a single pick before the reveal would hand the round away, so
+ * only the count of players who have committed goes out.
+ */
+function computeTrueFalse(
+  state: GameState,
+  forPlayerId: string,
+  nicknameOf: (id: string) => string,
+): TrueFalseView | null {
+  const round = state.trueFalse;
+  const question = questionAt(state, state.deckIndex);
+  if (!round || !question) return null;
+  const step = state.phase === "TRUEFALSE_ANSWER" ? "answer" : state.phase === "TRUEFALSE_REVEAL" ? "reveal" : null;
+  if (!step) return null;
+
+  const expected = normalizeAnswer(question.answer) === "vrai" ? "vrai" : "faux";
+  const revealing = step === "reveal";
+  const connected = Object.values(state.players).filter((p) => p.connected);
+  return {
+    step,
+    statement: question.prompt,
+    yourAnswer: round.answers[forPlayerId]?.value ?? null,
+    correctAnswer: revealing ? expected : null,
+    results: revealing
+      ? connected.map((p) => ({
+          nickname: nicknameOf(p.playerId),
+          answer: round.answers[p.playerId]?.value ?? null,
+          correct: round.answers[p.playerId]?.value === expected,
+          points: round.points[p.playerId] ?? 0,
+        }))
+      : null,
+    answered: Object.keys(round.answers).length,
+    total: connected.length,
+  };
+}
+
+/**
  * The blurred picture as one player sees it.
  *
  * No answer leaves the server before the reveal, same rule as every other round — and the blur
@@ -306,7 +346,7 @@ function computeReviewQuestions(
     .map(([deckIndexStr, answers]) => {
       const deckIndex = Number(deckIndexStr);
       const question = triviaAt(state, deckIndex);
-      const autoScored = question?.answerKind === "number";
+      const autoScored = question?.answerKind === "number" || question?.answerKind === "math";
       return {
         deckIndex,
         prompt: question?.prompt ?? "",
@@ -323,6 +363,130 @@ function computeReviewQuestions(
       };
     })
     .sort((a, b) => a.deckIndex - b.deckIndex);
+}
+
+/**
+ * The titles handed out on the podium.
+ *
+ * Only from what survives a whole game: `answerLog`, the host's grades, the points the server
+ * paid itself, and each player's duel count. The special rounds wipe their own state when
+ * their slot ends, so anything like "best reaction time" is simply not knowable here — better
+ * no title than one computed from the last round that happened to still be in memory.
+ *
+ * Every award needs a clear winner. Ties are dropped rather than split: "le plus rapide,
+ * ex æquo à trois" is not a thing anyone wants read out.
+ */
+function computeAwards(state: GameState, nicknameOf: (id: string) => string): Award[] | null {
+  if (state.phase !== "FINISHED") return null;
+  const players = Object.values(state.players);
+  if (players.length < 2) return null;
+
+  const logged = Object.entries(state.answerLog);
+  if (logged.length === 0) return null;
+
+  const stats = new Map(
+    players.map((p) => [
+      p.playerId,
+      { firsts: 0, answered: 0, chars: 0, good: 0, almost: 0, zero: 0, autoPoints: 0, duels: p.duels },
+    ]),
+  );
+
+  for (const [deckIndexStr, answers] of logged) {
+    const deckIndex = Number(deckIndexStr);
+    const inOrder = [...answers].sort((a, b) => a.submittedAt - b.submittedAt);
+    const first = inOrder[0];
+    const firstStats = first ? stats.get(first.playerId) : undefined;
+    if (firstStats) firstStats.firsts += 1;
+    for (const answer of answers) {
+      const s = stats.get(answer.playerId);
+      if (!s) continue;
+      s.answered += 1;
+      s.chars += answer.raw.trim().length;
+      const grade = state.grades[`${deckIndex}:${answer.playerId}`];
+      if (grade === 1) s.good += 1;
+      else if (grade === 0.5) s.almost += 1;
+      else if (grade === 0) s.zero += 1;
+      s.autoPoints += state.autoPoints[`${deckIndex}:${answer.playerId}`] ?? 0;
+    }
+  }
+
+  /** The single best player on a measure, or nobody if two of them tie at the top. */
+  const best = (
+    id: string,
+    label: string,
+    value: (s: NonNullable<ReturnType<typeof stats.get>>) => number,
+    detail: (n: number) => string,
+    min = 1,
+  ): Award | null => {
+    const scored = [...stats.entries()].map(([playerId, s]) => ({ playerId, n: value(s) }));
+    const top = Math.max(...scored.map((x) => x.n));
+    if (top < min) return null;
+    const winners = scored.filter((x) => x.n === top);
+    if (winners.length !== 1 || !winners[0]) return null;
+    return { id, label, nickname: nicknameOf(winners[0].playerId), detail: detail(top) };
+  };
+
+  const times = (n: number) => `${n} fois`;
+  const awards = [
+    best(
+      "fastest",
+      "La gâchette",
+      (s) => s.firsts,
+      (n) => `première réponse ${times(n)}`,
+      2,
+    ),
+    best(
+      "sharpest",
+      "Le cerveau",
+      (s) => s.good,
+      (n) => `${n} bonnes réponses`,
+      2,
+    ),
+    best(
+      "sniper",
+      "Le sniper",
+      (s) => s.autoPoints,
+      (n) => `${n} points au plus proche`,
+      2,
+    ),
+    best(
+      "almost",
+      "Le presque",
+      (s) => s.almost,
+      (n) => `${n} réponses à moitié bonnes`,
+      2,
+    ),
+    best(
+      "novelist",
+      "Le romancier",
+      (s) => (s.answered === 0 ? 0 : Math.round(s.chars / s.answered)),
+      (n) => `${n} caractères par réponse`,
+      25,
+    ),
+    best(
+      "duellist",
+      "Le duelliste",
+      (s) => s.duels,
+      (n) => `${n} duels disputés`,
+      2,
+    ),
+    best(
+      "ghost",
+      "Le fantôme",
+      (s) => logged.length - s.answered,
+      (n) => `${n} questions sans réponse`,
+      2,
+    ),
+    best(
+      "wrong",
+      "Le culot",
+      (s) => s.zero,
+      (n) => `${n} réponses hors sujet`,
+      3,
+    ),
+  ].filter((a): a is Award => a !== null);
+
+  return awards.length > 0 ? awards : null;
 }
 
 export function buildStateSync(
@@ -383,6 +547,8 @@ export function buildStateSync(
     duel: computeDuel(state, forPlayerId, nicknameOf),
     reflex: computeReflex(state, forPlayerId, nicknameOf),
     blur: computeBlur(state, forPlayerId, nicknameOf, resolveMediaUrl),
+    trueFalse: computeTrueFalse(state, forPlayerId, nicknameOf),
+    awards: computeAwards(state, nicknameOf),
     reviewQuestions: computeReviewQuestions(state, forPlayerId, nicknameOf),
     reviewIndex: state.reviewIndex,
     serverNowTs: Date.now(),
