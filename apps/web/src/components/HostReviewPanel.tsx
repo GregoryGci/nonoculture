@@ -60,6 +60,9 @@ export function HostReviewPanel({
   }
 
   const graded = q.answers.filter((a) => a.grade !== null).length;
+  // A "closest wins" question was settled by the server. The card is here so the room finally
+  // learns the number, which is the one thing the round never told anyone.
+  const readOnly = q.autoScored;
 
   return (
     <div className="flex flex-col gap-6">
@@ -97,8 +100,17 @@ export function HostReviewPanel({
 
           <hr className="divider" />
 
+          {readOnly && (
+            <p
+              className="rounded-[var(--radius-control)] px-3.5 py-2.5 text-[13px] leading-snug"
+              style={{ background: "var(--color-surface-2)", color: "var(--color-text-muted)" }}
+            >
+              Le plus proche gagne : les points ont déjà été comptés pendant la partie.
+            </p>
+          )}
+
           {/* The common case by far: everyone got it. One tap beats N taps. */}
-          {canGrade && (
+          {canGrade && !readOnly && (
             <button
               onClick={() => q.answers.forEach((a) => onGrade(q.deckIndex, a.playerId, 1))}
               disabled={q.answers.every((a) => a.grade === 1)}
@@ -116,9 +128,14 @@ export function HostReviewPanel({
                     {a.nickname}
                   </span>
                   <span className="min-w-0 flex-1 truncate text-[17px]">{a.raw || "—"}</span>
+                  {a.autoPoints !== null && a.autoPoints > 0 && (
+                    <span className="tabular shrink-0 text-[13px]" style={{ color: "var(--color-success)" }}>
+                      +{a.autoPoints}
+                    </span>
+                  )}
                 </div>
 
-                <div className="flex gap-1.5">
+                <div className="flex gap-1.5" hidden={readOnly}>
                   {GRADES.map(({ grade, label }) => {
                     const on = a.grade === grade;
                     return (
@@ -168,7 +185,7 @@ export function HostReviewPanel({
       </div>
 
       <p className="text-center text-[13px]" style={{ color: "var(--color-text-faint)" }}>
-        {graded}/{q.answers.length} notées sur cette question
+        {readOnly ? "Rien à noter sur cette question" : `${graded}/${q.answers.length} notées sur cette question`}
       </p>
     </div>
   );

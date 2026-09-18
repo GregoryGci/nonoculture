@@ -58,8 +58,12 @@ LOBBY → QUESTION → (QUESTION suivante | manche spéciale | HOST_REVIEW) → 
 Deux exceptions à ce scoring manuel, toutes deux automatiques parce qu'il n'y a rien à
 juger — c'est de l'arithmétique ou du comptage, pas du jugement :
 
-- `answer_kind = "number"` : scoré par proximité (le plus proche gagne). Ces réponses sont
-  **exclues d'`answerLog`**, donc l'hôte ne les voit pas en review.
+- `answer_kind = "number"` : scoré par proximité (le plus proche gagne). Les réponses **sont
+  archivées** et la carte remonte en review avec `autoScored: true` : l'hôte ne peut pas la
+  noter (les points sont déjà payés, `SUBMIT_HOST_GRADE` la refuse), mais toute la room y lit
+  enfin la bonne réponse. Sans ça la manche passait, les points tombaient, et personne
+  n'apprenait jamais le nombre. Les points attribués vivent dans `GameState.autoPoints`,
+  même forme de clé que `grades`, plutôt que d'être recalculés à la sortie.
 - `answer_kind = "list"` : la question porte tout son ensemble de réponses acceptées dans
   `answer` + `aliases`, et la manche duel compte les touches.
 - `answer_kind = "blur"` : la manche image floue, payée à l’ordre d’arrivée. Même raison que

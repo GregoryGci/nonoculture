@@ -523,34 +523,43 @@ function scoreNumericQuestion(state: GameState, question: InternalQuestion): Gam
 
   const best = Math.min(...distances.map((d) => d.gap));
   const scores = Object.fromEntries(Object.values(state.players).map((p) => [p.playerId, p.score]));
+  const autoPoints = { ...state.autoPoints };
   for (const { playerId, gap } of distances) {
-    if (gap !== best) continue;
-    scores[playerId] = (scores[playerId] ?? 0) + (gap === 0 ? NUMERIC_POINTS_EXACT : NUMERIC_POINTS_CLOSEST);
+    const points = gap !== best ? 0 : gap === 0 ? NUMERIC_POINTS_EXACT : NUMERIC_POINTS_CLOSEST;
+    autoPoints[`${state.deckIndex}:${playerId}`] = points;
+    scores[playerId] = (scores[playerId] ?? 0) + points;
   }
 
   const players = Object.fromEntries(
     Object.entries(state.players).map(([id, p]) => [id, { ...p, score: scores[id] ?? p.score }]),
   );
-  return { ...state, players };
+  return { ...state, players, autoPoints };
 }
 
 /**
  * Archives the current question's answers for the end-of-game review, then advances.
  *
- * A "closest wins" question is settled here instead and kept out of the review: it has an
- * objective answer, so putting it in front of the host would be asking them to rubber-stamp
- * arithmetic.
+ * A "closest wins" question is scored here rather than by the host — there is nothing to
+ * judge in arithmetic — but its answers are archived all the same. They were not, once, and
+ * the round simply never told anyone what the number was: it went by, points landed, and the
+ * table never found out. It reaches the review as a card to read, not to grade.
  */
+/** True when the server settled this slot itself, so the review shows it without grading. */
+function isAutoScored(state: GameState, deckIndex: number): boolean {
+  const item = state.deck[deckIndex];
+  return item?.kind === "trivia" && item.question.answerKind === "number";
+}
+
 function logAnswersAndAdvance(state: GameState, now: number): GameState {
   const question = currentQuestion(state);
+  const answerLog =
+    state.answers.length > 0 ? { ...state.answerLog, [state.deckIndex]: state.answers } : state.answerLog;
   if (question?.answerKind === "number") {
-    return advanceDeck(scoreNumericQuestion(state, question), now);
+    return advanceDeck(scoreNumericQuestion({ ...state, answerLog }, question), now);
   }
   if (question?.answerKind === "math") {
     return advanceDeck(scoreMathQuestion(state, question), now);
   }
-  const answerLog =
-    state.answers.length > 0 ? { ...state.answerLog, [state.deckIndex]: state.answers } : state.answerLog;
   return advanceDeck({ ...state, answerLog }, now);
 }
 
@@ -628,6 +637,7 @@ export function createRoom(roomCode: string, now: number): GameState {
     answers: [],
     answerLog: {},
     grades: {},
+    autoPoints: {},
     reviewIndex: 0,
     chain: null,
     bluff: null,
@@ -820,6 +830,8 @@ export function transition(state: GameState, event: GameEvent): TransitionResult
 
     case "SUBMIT_HOST_GRADE": {
       if (state.phase !== "HOST_REVIEW" || event.playerId !== state.hostPlayerId) break;
+      // The server already paid for this one. A grade on top would be a second payment.
+      if (isAutoScored(state, event.deckIndex)) break;
       const answered = state.answerLog[event.deckIndex]?.some((a) => a.playerId === event.targetPlayerId);
       if (!answered) break;
       const key = `${event.deckIndex}:${event.targetPlayerId}`;
@@ -980,6 +992,7 @@ export function transition(state: GameState, event: GameEvent): TransitionResult
         answers: [],
         answerLog: {},
         grades: {},
+        autoPoints: {},
         reviewIndex: 0,
         // Spread rather than listed one by one: adding the reflex round left this reset stale,
         // so a new game started with the previous round's state still attached.

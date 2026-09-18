@@ -134,6 +134,8 @@ export const THEME_LABELS: Record<string, string> = {
   langue: "Langue française",
   web: "Culture web",
   france: "France & terroirs",
+  physchi: "Physique & Chimie",
+  fromsoft: "FromSoftware",
 };
 
 /**
@@ -143,7 +145,7 @@ export const THEME_LABELS: Record<string, string> = {
  * the room has never played it stops being a quiz. Picking them explicitly is a deliberate
  * act; sweeping them in with everything else is not.
  */
-export const OPT_IN_THEMES = ["lol", "dofus", "pokemon"] as const;
+export const OPT_IN_THEMES = ["lol", "dofus", "pokemon", "fromsoft"] as const;
 
 export const isOptInTheme = (theme: string): boolean => (OPT_IN_THEMES as readonly string[]).includes(theme);
 
@@ -219,6 +221,8 @@ export interface ReviewAnswer {
   nickname: string;
   raw: string;
   grade: Grade | null;
+  /** Points the server already awarded, for questions it scored itself. Null elsewhere. */
+  autoPoints: number | null;
 }
 
 /** One trivia question and every answer given to it, for the host's end-of-game review pass. */
@@ -227,6 +231,14 @@ export interface ReviewQuestion {
   prompt: string;
   correctAnswer: string;
   explanation: string | null;
+  /**
+   * Already settled by the server, so the card is there to be read, not graded.
+   *
+   * "Closest wins" questions used to skip the review entirely — nothing to judge in
+   * arithmetic. But that also meant nobody ever learned the answer: the round passed, points
+   * appeared, and the table was left guessing what the number actually was.
+   */
+  autoScored: boolean;
   answers: ReviewAnswer[];
 }
 

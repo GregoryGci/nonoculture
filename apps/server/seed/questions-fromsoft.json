@@ -1,0 +1,810 @@
+[
+  {
+    "theme": "fromsoft",
+    "difficulty": 1,
+    "prompt": "Quel réalisateur japonais est le visage de FromSoftware, derrière Dark Souls et Elden Ring ?",
+    "answer": "Hidetaka Miyazaki",
+    "aliases": [
+      "Miyazaki"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 1,
+    "prompt": "Quel jeu de 2022 de FromSoftware a été élu jeu de l'année ?",
+    "answer": "Elden Ring",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 1,
+    "prompt": "Quel auteur de Game of Thrones a participé à l'écriture de l'univers d'Elden Ring ?",
+    "answer": "George R. R. Martin",
+    "aliases": [
+      "George RR Martin",
+      "Martin"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 1,
+    "prompt": "Quel mot anglais de deux mots s'affiche à chaque mort dans Dark Souls ?",
+    "answer": "YOU DIED",
+    "aliases": [
+      "You died",
+      "Vous êtes mort"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 1,
+    "prompt": "Quel genre de jeu porte le nom de la saga de FromSoftware qui l'a popularisé ?",
+    "answer": "le souls-like",
+    "aliases": [
+      "souls-like",
+      "soulslike"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 1,
+    "prompt": "Autour de quel objet les joueurs de Dark Souls se reposent-ils pour récupérer et sauvegarder ?",
+    "answer": "un feu de camp",
+    "aliases": [
+      "feu de camp",
+      "bonfire",
+      "feu"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 1,
+    "prompt": "Quelle monnaie sert à la fois de niveau et d'argent dans Dark Souls ?",
+    "answer": "les âmes",
+    "aliases": [
+      "âmes",
+      "souls"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 1,
+    "prompt": "Quelle monnaie sert à monter de niveau dans Elden Ring ?",
+    "answer": "les runes",
+    "aliases": [
+      "runes"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 1,
+    "prompt": "Comment s'appelle la monture d'Elden Ring, une chèvre-cheval invoquée d'un sifflet ?",
+    "answer": "Torrent",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 1,
+    "prompt": "Quel jeu de 2019 de FromSoftware se déroule dans le Japon féodal ?",
+    "answer": "Sekiro",
+    "aliases": [
+      "Sekiro: Shadows Die Twice"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 1,
+    "prompt": "Quel jeu de 2015 de FromSoftware, exclusif à la PlayStation, se déroule à Yharnam ?",
+    "answer": "Bloodborne",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 1,
+    "prompt": "Dans quelle ville gothique infestée de bêtes se déroule Bloodborne ?",
+    "answer": "Yharnam",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 1,
+    "prompt": "Quelle série de jeux de mechs FromSoftware développe-t-elle depuis 1997 ?",
+    "answer": "Armored Core",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 1,
+    "prompt": "Quel éditeur japonais publie Dark Souls et Elden Ring ?",
+    "answer": "Bandai Namco",
+    "aliases": [
+      "Namco"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 1,
+    "prompt": "Comment les autres joueurs laissent-ils des indices au sol dans un Souls ?",
+    "answer": "des messages",
+    "aliases": [
+      "messages",
+      "des notes"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 1,
+    "prompt": "Combien d'épisodes principaux la trilogie Dark Souls compte-t-elle ?",
+    "answer": "3",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 1,
+    "prompt": "Quel objet de soin, rechargé au feu de camp, accompagne le héros de Dark Souls ?",
+    "answer": "la Fiole d'Estus",
+    "aliases": [
+      "Estus",
+      "fiole d'Estus"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 1,
+    "prompt": "Quel héros banni, revenu réclamer sa couronne, est incarné dans Elden Ring ?",
+    "answer": "le Sans-éclat",
+    "aliases": [
+      "Sans-éclat",
+      "Tarnished"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 1,
+    "prompt": "Quel titre le héros d'Elden Ring cherche-t-il à obtenir en réunissant les grandes runes ?",
+    "answer": "Seigneur des Liges",
+    "aliases": [
+      "Elden Lord",
+      "Seigneur de l'Anneau Originel"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 1,
+    "prompt": "Sur quelle console Bloodborne est-il sorti à l'origine ?",
+    "answer": "la PS4",
+    "aliases": [
+      "PS4",
+      "PlayStation 4"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 1,
+    "prompt": "Quel arbre doré et immense domine le paysage d'Elden Ring ?",
+    "answer": "l'Arbre-Monde",
+    "aliases": [
+      "Arbre-Monde",
+      "Erdtree"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quel jeu de 2009 sur PS3, resté longtemps exclusif, a posé les bases de la formule maison ?",
+    "answer": "Demon's Souls",
+    "aliases": [
+      "Demons Souls"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "En quelle année le premier Dark Souls est-il sorti ?",
+    "answer": "2011",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "En quelle année Elden Ring est-il sorti ?",
+    "answer": "2022",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "En quelle année Sekiro est-il sorti ?",
+    "answer": "2019",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "En quelle année Bloodborne est-il sorti ?",
+    "answer": "2015",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quel royaume en déclin sert de décor au premier Dark Souls ?",
+    "answer": "Lordran",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quel royaume sert de décor à Dark Souls II ?",
+    "answer": "Drangleic",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quel royaume sert de décor à Dark Souls III ?",
+    "answer": "Lothric",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle la région où se déroule Elden Ring ?",
+    "answer": "l'Entre-terre",
+    "aliases": [
+      "Entre-terre",
+      "Lands Between"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quel chevalier en heaume, obsédé par l'astre du jour, lance « Praise the Sun » dans Dark Souls ?",
+    "answer": "Solaire d'Astora",
+    "aliases": [
+      "Solaire"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quel duo de gardiens d'Anor Londo, l'un rapide en or, l'autre énorme au marteau, terrorise les joueurs ?",
+    "answer": "Ornstein et Smough",
+    "aliases": [
+      "Ornstein & Smough"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quelle cité dorée abrite les dieux dans le premier Dark Souls ?",
+    "answer": "Anor Londo",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quel loup géant garde la tombe du chevalier Artorias ?",
+    "answer": "Sif",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quel sous-titre porte Sekiro ?",
+    "answer": "Shadows Die Twice",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quel éditeur a publié Sekiro en 2019 ?",
+    "answer": "Activision",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quel enfant divin le Loup protège-t-il dans Sekiro ?",
+    "answer": "Kuro",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Qu'est-ce qui remplace le bras gauche arraché du héros de Sekiro ?",
+    "answer": "une prothèse shinobi",
+    "aliases": [
+      "prothèse shinobi",
+      "bras mécanique"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quel clan tente de s'emparer de l'héritier divin dans Sekiro ?",
+    "answer": "Ashina",
+    "aliases": [
+      "le clan Ashina"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quelle monnaie utilise-t-on dans Sekiro ?",
+    "answer": "les sen",
+    "aliases": [
+      "sen"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quelle monnaie ramasse-t-on sur les cadavres à Yharnam ?",
+    "answer": "les échos de sang",
+    "aliases": [
+      "échos de sang",
+      "blood echoes"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quelle particularité ont les armes de Bloodborne, qu'un seul geste suffit à modifier ?",
+    "answer": "elles se transforment",
+    "aliases": [
+      "armes transformables",
+      "trick weapons",
+      "la transformation"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quel vieil homme en fauteuil roulant accueille le chasseur au Rêve du chasseur ?",
+    "answer": "Gehrman",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quel prêtre devenu bête, armé d'une hache, sert de premier grand test dans Bloodborne ?",
+    "answer": "le père Gascoigne",
+    "aliases": [
+      "Gascoigne"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quelle extension de Bloodborne, sortie en 2015, ajoute Ludwig et Lady Maria ?",
+    "answer": "The Old Hunters",
+    "aliases": [
+      "Old Hunters"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quelle extension d'Elden Ring est sortie en 2024 ?",
+    "answer": "L'Ombre de l'Arbre-Monde",
+    "aliases": [
+      "Shadow of the Erdtree",
+      "Ombre de l'Arbre-Monde"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quel jeu coopératif à trois joueurs, dérivé de l'univers du Sans-éclat, est sorti en 2025 ?",
+    "answer": "Elden Ring Nightreign",
+    "aliases": [
+      "Nightreign"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quel guerrier colossal, surnommé le Fléau des astres, garde Caelid dans Elden Ring ?",
+    "answer": "Radahn",
+    "aliases": [
+      "Starscourge Radahn",
+      "le général Radahn"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quelle guerrière manchote d'Elden Ring déclare n'avoir jamais connu la défaite ?",
+    "answer": "Malenia",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "De quel frère Malenia est-elle la lame et la protectrice ?",
+    "answer": "Miquella",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quelle sorcière au corps de poupée propose une fin alternative dans Elden Ring ?",
+    "answer": "Ranni",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quel demi-dieu greffé de bras et de têtes garde le premier grand château d'Elden Ring ?",
+    "answer": "Godrick",
+    "aliases": [
+      "Godrick le Greffé"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quelle reine éternelle règne sur l'Entre-terre avant la Fracture ?",
+    "answer": "Marika",
+    "aliases": [
+      "la reine Marika"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Comment s'appellent les points de sauvegarde d'Elden Ring, matérialisés par une lueur dorée ?",
+    "answer": "les sites de grâce",
+    "aliases": [
+      "site de grâce",
+      "sites de grâce"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quelle salle sert de refuge et de hub aux Sans-éclat dans Elden Ring ?",
+    "answer": "la Table Ronde",
+    "aliases": [
+      "Table Ronde",
+      "Roundtable Hold"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quel marchand fourbe et récurrent piège les joueurs dans presque tous les jeux FromSoftware ?",
+    "answer": "Patches",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Quel sous-titre porte Armored Core VI, sorti en 2023 ?",
+    "answer": "Fires of Rubicon",
+    "aliases": [
+      "Rubicon"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 2,
+    "prompt": "Comment appelle-t-on les pactes que l'on rejoint dans Dark Souls ?",
+    "answer": "les covenants",
+    "aliases": [
+      "covenant",
+      "pactes",
+      "serments"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "En quelle année FromSoftware a-t-elle été fondée ?",
+    "answer": "1986",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quelle série de jeux de rôle en vue subjective, lancée en 1994, est le premier succès de FromSoftware ?",
+    "answer": "King's Field",
+    "aliases": [
+      "Kings Field"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quel manga de Kentarō Miura est une influence assumée sur l'univers de Miyazaki ?",
+    "answer": "Berserk",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quel épisode de la trilogie n'a pas été réalisé par Miyazaki ?",
+    "answer": "Dark Souls II",
+    "aliases": [
+      "Dark Souls 2",
+      "le deuxième"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quel compositeur japonais a signé la musique du premier Dark Souls ?",
+    "answer": "Motoi Sakuraba",
+    "aliases": [
+      "Sakuraba"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quel studio a réalisé le remake de Demon's Souls sorti sur PS5 en 2020 ?",
+    "answer": "Bluepoint Games",
+    "aliases": [
+      "Bluepoint"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quel dieu, premier seigneur des cendres, attend le joueur au bout du premier Dark Souls ?",
+    "answer": "Gwyn",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quel chevalier déchu, corrompu par l'Abysse, est le héros tragique du DLC de Dark Souls ?",
+    "answer": "Artorias",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quel dragon blanc sans écailles a inventé la magie dans Dark Souls ?",
+    "answer": "Seath",
+    "aliases": [
+      "Seath l'Incolore"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quel forgeron d'Astora améliore les armes au Sanctuaire de Lige-feu ?",
+    "answer": "Andre",
+    "aliases": [
+      "André",
+      "Andre d'Astora"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quelle zone empoisonnée et verticale du premier Dark Souls est détestée de tous les joueurs ?",
+    "answer": "Blighttown",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quel chevalier en armure de pierre, armé d'un gigantesque marteau, garde une tour de Lordran ?",
+    "answer": "Havel",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quel chevalier bedonnant de Catarina, en armure d'oignon, croise la route du joueur ?",
+    "answer": "Siegmeyer",
+    "aliases": [
+      "Siegmeyer de Catarina"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quelle chasseuse de corbeau met en garde contre les chasseurs devenus fous à Yharnam ?",
+    "answer": "Eileen",
+    "aliases": [
+      "Eileen la Corneille",
+      "Eileen the Crow"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quelle entité lunaire apparaît dans l'une des fins de Bloodborne ?",
+    "answer": "la Présence de la Lune",
+    "aliases": [
+      "Moon Presence",
+      "Présence lunaire"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quel objet rituel donne son nom aux donjons générés de Bloodborne ?",
+    "answer": "le calice",
+    "aliases": [
+      "calice",
+      "chalice"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quelle maladie mortelle frappe les habitants à cause des morts répétées du héros de Sekiro ?",
+    "answer": "la pourriture du dragon",
+    "aliases": [
+      "pourriture du dragon",
+      "dragonrot"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quel épéiste légendaire, ultime adversaire de Sekiro, lance « l'hésitation, c'est la défaite » ?",
+    "answer": "Isshin",
+    "aliases": [
+      "Isshin Ashina",
+      "Isshin le Saint du sabre"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quel maître shinobi, père adoptif du Loup, le trahit dans Sekiro ?",
+    "answer": "Owl",
+    "aliases": [
+      "le Hibou",
+      "Hibou"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quelle noble maquillée, maîtresse des illusions, affronte le Loup dans le passé ?",
+    "answer": "Lady Butterfly",
+    "aliases": [
+      "Dame Papillon"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quel messager de Marika accompagne le Sans-éclat et lui offre ses runes ?",
+    "answer": "Melina",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quel loup-garou est le compagnon fidèle de Ranni ?",
+    "answer": "Blaidd",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quel seigneur du sang enlève Miquella pour en faire son épouse ?",
+    "answer": "Mohg",
+    "aliases": [
+      "Mohg le seigneur du sang"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quel personnage à la lance de feu est le principal antagoniste de l'extension d'Elden Ring ?",
+    "answer": "Messmer",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quel dieu rouge, autre moitié de Marika, garde l'Anneau Originel ?",
+    "answer": "Radagon",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quel joueur est devenu célèbre en 2022 en aidant gratuitement des milliers d'inconnus à vaincre Malenia ?",
+    "answer": "Let Me Solo Her",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quelle édition de 2012 a porté la saga sur PC, avec un titre qui prévenait le joueur de son sort ?",
+    "answer": "Prepare to Die",
+    "aliases": [
+      "Prepare to Die Edition"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quelle série d'infiltration ninja FromSoftware a-t-elle reprise avant de créer Sekiro ?",
+    "answer": "Tenchu",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quel jeu FromSoftware en réalité virtuelle est sorti en 2018 sur PSVR ?",
+    "answer": "Déraciné",
+    "aliases": [
+      "Deracine"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quel jeu déjanté de FromSoftware met en scène un président des États-Unis en robot de combat ?",
+    "answer": "Metal Wolf Chaos",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quel groupe japonais, éditeur de manga et d'animation, contrôle FromSoftware ?",
+    "answer": "Kadokawa",
+    "aliases": []
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quelle araignée géante et molle protège un secret au fond d'un lac dans Bloodborne ?",
+    "answer": "Rom",
+    "aliases": [
+      "Rom l'araignée hébétée"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quelle sœur au visage voilé, rencontrée dans le DLC de Dark Souls III, se bat en trois phases ?",
+    "answer": "Sister Friede",
+    "aliases": [
+      "Friede",
+      "Sœur Friede"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quel chevalier errant clôt la trilogie Dark Souls au bout du DLC The Ringed City ?",
+    "answer": "Gael",
+    "aliases": [
+      "l'esclave chevalier Gael"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quelle ressource extraterrestre est au cœur de l'intrigue d'Armored Core VI ?",
+    "answer": "le corail",
+    "aliases": [
+      "corail"
+    ]
+  },
+  {
+    "theme": "fromsoft",
+    "difficulty": 3,
+    "prompt": "Quel surnom porte le pilote mercenaire que l'on incarne dans Armored Core ?",
+    "answer": "Raven",
+    "aliases": []
+  }
+]

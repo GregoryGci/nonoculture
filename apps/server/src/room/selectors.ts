@@ -306,16 +306,19 @@ function computeReviewQuestions(
     .map(([deckIndexStr, answers]) => {
       const deckIndex = Number(deckIndexStr);
       const question = triviaAt(state, deckIndex);
+      const autoScored = question?.answerKind === "number";
       return {
         deckIndex,
         prompt: question?.prompt ?? "",
         correctAnswer: question?.answer ?? "",
         explanation: question?.explanation ?? null,
+        autoScored,
         answers: answers.map((a) => ({
           playerId: a.playerId,
           nickname: nicknameOf(a.playerId),
           raw: a.raw,
           grade: state.grades[`${deckIndex}:${a.playerId}`] ?? null,
+          autoPoints: autoScored ? (state.autoPoints[`${deckIndex}:${a.playerId}`] ?? 0) : null,
         })),
       };
     })

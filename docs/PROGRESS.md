@@ -145,7 +145,8 @@ sont sautées si la room est trop petite au moment où le slot arrive.
   pourcentages, priorités opératoires…), sans réseau : la source de vérité est l’arithmétique.
 - **Le plus proche gagne** — questions `answer_kind = "number"`, scorées par distance
   arithmétique (+2 au plus proche, +3 en plein dans le mille, ex æquo tous récompensés).
-  Ces réponses **ne remontent pas dans la review de l'hôte** : il n'y a rien à juger.
+  Ces réponses remontent en review en **lecture seule** (`autoScored`) : rien à juger, mais
+  la bonne réponse est enfin annoncée à la table, ce que la manche ne faisait jamais.
 
 ## Le reste, en bref
 

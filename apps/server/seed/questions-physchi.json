@@ -1,0 +1,1019 @@
+[
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Quel gaz les humains rejettent-ils en expirant, et les plantes absorbent-elles ?",
+    "answer": "le dioxyde de carbone",
+    "aliases": [
+      "CO2",
+      "gaz carbonique",
+      "dioxyde de carbone"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Quel élément chimique porte le symbole O ?",
+    "answer": "l'oxygène",
+    "aliases": [
+      "oxygène"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Quel élément chimique porte le symbole Fe ?",
+    "answer": "le fer",
+    "aliases": [
+      "fer"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Quel métal précieux porte le symbole Au ?",
+    "answer": "l'or",
+    "aliases": [
+      "or"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Quel métal porte le symbole Ag ?",
+    "answer": "l'argent",
+    "aliases": [
+      "argent"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Quel élément porte le symbole C, présent dans le diamant comme dans le charbon ?",
+    "answer": "le carbone",
+    "aliases": [
+      "carbone"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "À quelle température, en degrés Celsius, l'eau bout-elle au niveau de la mer ?",
+    "answer": "100",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "À quelle température, en degrés Celsius, l'eau gèle-t-elle ?",
+    "answer": "0",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Quels sont les trois états classiques de la matière ?",
+    "answer": "solide, liquide et gazeux",
+    "aliases": [
+      "solide liquide gazeux"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Comment s'appelle le passage de l'état solide à l'état liquide ?",
+    "answer": "la fusion",
+    "aliases": [
+      "fusion"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Comment s'appelle le passage de l'état liquide à l'état gazeux ?",
+    "answer": "la vaporisation",
+    "aliases": [
+      "vaporisation",
+      "évaporation",
+      "l'évaporation"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Quelle est la seule substance courante dont la forme solide flotte sur sa forme liquide ?",
+    "answer": "l'eau",
+    "aliases": [
+      "eau",
+      "la glace flotte"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Quel gaz remplit les ballons qui s'envolent et rend la voix aiguë ?",
+    "answer": "l'hélium",
+    "aliases": [
+      "hélium"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Quelle est la matière naturelle la plus dure ?",
+    "answer": "le diamant",
+    "aliases": [
+      "diamant"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Comment appelle-t-on la couche rouge qui attaque le fer exposé à l'air humide ?",
+    "answer": "la rouille",
+    "aliases": [
+      "rouille"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Quelle force nous retient au sol ?",
+    "answer": "la gravité",
+    "aliases": [
+      "gravité",
+      "pesanteur",
+      "la pesanteur"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Quel savant aurait compris la gravitation en voyant tomber une pomme ?",
+    "answer": "Isaac Newton",
+    "aliases": [
+      "Newton"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Quelle célèbre équation d'Einstein relie l'énergie et la masse ?",
+    "answer": "E = mc²",
+    "aliases": [
+      "E=mc2",
+      "E égale mc carré"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Quelle scientifique est la seule femme à avoir reçu deux prix Nobel dans deux disciplines différentes ?",
+    "answer": "Marie Curie",
+    "aliases": [
+      "Curie"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Dans quel milieu le son ne se propage-t-il pas du tout ?",
+    "answer": "le vide",
+    "aliases": [
+      "dans le vide",
+      "vide"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Quelle est l'unité de mesure de la puissance électrique ?",
+    "answer": "le watt",
+    "aliases": [
+      "watt"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Quelle est l'unité de mesure de la force ?",
+    "answer": "le newton",
+    "aliases": [
+      "newton"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Quelle est l'unité de mesure de l'énergie dans le système international ?",
+    "answer": "le joule",
+    "aliases": [
+      "joule"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Quelle est l'unité de mesure de la tension électrique ?",
+    "answer": "le volt",
+    "aliases": [
+      "volt"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Combien vaut à peu près le pH d'une solution neutre comme l'eau pure ?",
+    "answer": "7",
+    "aliases": []
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Quelle molécule donne au vinaigre son goût piquant ?",
+    "answer": "l'acide acétique",
+    "aliases": [
+      "acide acétique"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Quel gaz est indispensable à toute combustion ?",
+    "answer": "l'oxygène",
+    "aliases": [
+      "oxygène",
+      "le dioxygène"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Quel phénomène optique apparaît quand la lumière du soleil se décompose dans des gouttes de pluie ?",
+    "answer": "un arc-en-ciel",
+    "aliases": [
+      "arc-en-ciel"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 1,
+    "prompt": "Comment s'appelle l'appareil qui mesure la température ?",
+    "answer": "un thermomètre",
+    "aliases": [
+      "thermomètre"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Combien d'éléments le tableau périodique compte-t-il aujourd'hui ?",
+    "answer": "118",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quel chimiste russe a imaginé le tableau périodique des éléments ?",
+    "answer": "Mendeleïev",
+    "aliases": [
+      "Dmitri Mendeleïev",
+      "Mendeleiev"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quelles sont les trois particules qui composent un atome ?",
+    "answer": "proton, neutron et électron",
+    "aliases": [
+      "protons neutrons électrons"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quelle particule de l'atome porte une charge négative ?",
+    "answer": "l'électron",
+    "aliases": [
+      "électron"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quelle particule de l'atome ne porte aucune charge ?",
+    "answer": "le neutron",
+    "aliases": [
+      "neutron"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Comment appelle-t-on le centre d'un atome, où se concentre presque toute sa masse ?",
+    "answer": "le noyau",
+    "aliases": [
+      "noyau"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quel élément porte le symbole Na ?",
+    "answer": "le sodium",
+    "aliases": [
+      "sodium"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quel élément porte le symbole K ?",
+    "answer": "le potassium",
+    "aliases": [
+      "potassium"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quel élément porte le symbole Pb ?",
+    "answer": "le plomb",
+    "aliases": [
+      "plomb"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quel élément porte le symbole Cu ?",
+    "answer": "le cuivre",
+    "aliases": [
+      "cuivre"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quel élément porte le symbole N, et compose l'essentiel de l'air ?",
+    "answer": "l'azote",
+    "aliases": [
+      "azote"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quel élément porte le symbole W, celui du filament des vieilles ampoules ?",
+    "answer": "le tungstène",
+    "aliases": [
+      "tungstène"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quelle est la formule chimique du sel de table ?",
+    "answer": "NaCl",
+    "aliases": []
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quelle est la formule chimique du méthane ?",
+    "answer": "CH4",
+    "aliases": [
+      "CH₄"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quel alliage obtient-on en mêlant du cuivre et de l'étain ?",
+    "answer": "le bronze",
+    "aliases": [
+      "bronze"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quel alliage obtient-on en mêlant du cuivre et du zinc ?",
+    "answer": "le laiton",
+    "aliases": [
+      "laiton"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quel métal et quel élément léger composent l'acier ?",
+    "answer": "du fer et du carbone",
+    "aliases": [
+      "fer et carbone"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quel est l'élément le plus abondant de l'univers ?",
+    "answer": "l'hydrogène",
+    "aliases": [
+      "hydrogène"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quel est l'élément le plus abondant de la croûte terrestre ?",
+    "answer": "l'oxygène",
+    "aliases": [
+      "oxygène"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle le passage direct de l'état solide à l'état gazeux ?",
+    "answer": "la sublimation",
+    "aliases": [
+      "sublimation"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quel est le quatrième état de la matière, celui des étoiles et des néons ?",
+    "answer": "le plasma",
+    "aliases": [
+      "plasma"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "À combien de degrés Celsius se situe le zéro absolu, arrondi ?",
+    "answer": "-273",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quelle unité de température commence au zéro absolu ?",
+    "answer": "le kelvin",
+    "aliases": [
+      "kelvin"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "À quelle vitesse la lumière se déplace-t-elle dans le vide, en kilomètres par seconde ?",
+    "answer": "300000",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "À quelle vitesse le son se propage-t-il dans l'air, en mètres par seconde environ ?",
+    "answer": "340",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quelle est la valeur approximative de l'accélération de la pesanteur sur Terre ?",
+    "answer": "9,81 m/s²",
+    "aliases": [
+      "9,81",
+      "9.81",
+      "9,8"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quelle loi relie la tension, l'intensité et la résistance dans un circuit ?",
+    "answer": "la loi d'Ohm",
+    "aliases": [
+      "loi d'Ohm",
+      "Ohm"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quelle est l'unité de mesure de la résistance électrique ?",
+    "answer": "l'ohm",
+    "aliases": [
+      "ohm"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quelle est l'unité de mesure de l'intensité d'un courant électrique ?",
+    "answer": "l'ampère",
+    "aliases": [
+      "ampère"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quelle est l'unité de mesure de la fréquence ?",
+    "answer": "le hertz",
+    "aliases": [
+      "hertz"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quelle est l'unité de mesure de la pression dans le système international ?",
+    "answer": "le pascal",
+    "aliases": [
+      "pascal"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quel savant grec a énoncé le principe de la poussée subie par un corps plongé dans un liquide ?",
+    "answer": "Archimède",
+    "aliases": []
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quel chimiste français a énoncé que rien ne se perd et que tout se transforme ?",
+    "answer": "Lavoisier",
+    "aliases": [
+      "Antoine Lavoisier"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quels deux éléments Marie Curie a-t-elle découverts ?",
+    "answer": "le polonium et le radium",
+    "aliases": [
+      "polonium et radium"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quel pays Marie Curie a-t-elle honoré en nommant l'un de ses éléments ?",
+    "answer": "la Pologne",
+    "aliases": [
+      "Pologne"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quel gaz, formé de trois atomes d'oxygène, protège la Terre des ultraviolets ?",
+    "answer": "l'ozone",
+    "aliases": [
+      "ozone",
+      "O3"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Comment appelle-t-on le temps au bout duquel la moitié d'un échantillon radioactif s'est désintégrée ?",
+    "answer": "la demi-vie",
+    "aliases": [
+      "demi-vie",
+      "période radioactive"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quel isotope radioactif sert à dater les vestiges archéologiques ?",
+    "answer": "le carbone 14",
+    "aliases": [
+      "carbone 14",
+      "C14"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quelle substance accélère une réaction chimique sans être consommée ?",
+    "answer": "un catalyseur",
+    "aliases": [
+      "catalyseur"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quel gaz se dégage quand on verse du vinaigre sur du bicarbonate ?",
+    "answer": "du dioxyde de carbone",
+    "aliases": [
+      "CO2",
+      "dioxyde de carbone",
+      "gaz carbonique"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Que produit l'estomac, de très corrosif, pour digérer les aliments ?",
+    "answer": "l'acide chlorhydrique",
+    "aliases": [
+      "acide chlorhydrique",
+      "HCl"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quel physicien italien a donné son nom à la pile électrique ?",
+    "answer": "Volta",
+    "aliases": [
+      "Alessandro Volta"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quels trois éléments sont nécessaires pour qu'un feu se déclenche ?",
+    "answer": "un combustible, un comburant et une source de chaleur",
+    "aliases": [
+      "combustible comburant chaleur",
+      "le triangle du feu"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quel phénomène fait paraître plus aiguë la sirène qui s'approche ?",
+    "answer": "l'effet Doppler",
+    "aliases": [
+      "effet Doppler",
+      "Doppler"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quel matériau semi-conducteur est à la base de toute l'électronique moderne ?",
+    "answer": "le silicium",
+    "aliases": [
+      "silicium"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Quelle est la densité de l'eau, en grammes par centimètre cube ?",
+    "answer": "1",
+    "aliases": [
+      "1 g/cm3"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Comment s'appelle la famille des éléments qui ne réagissent presque jamais, comme l'hélium et le néon ?",
+    "answer": "les gaz nobles",
+    "aliases": [
+      "gaz nobles",
+      "gaz rares"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 2,
+    "prompt": "Comment appelle-t-on deux atomes d'un même élément qui n'ont pas le même nombre de neutrons ?",
+    "answer": "des isotopes",
+    "aliases": [
+      "isotopes"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quel est le numéro atomique de l'or ?",
+    "answer": "79",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quel est le numéro atomique du carbone ?",
+    "answer": "6",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quel est le numéro atomique de l'uranium ?",
+    "answer": "92",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quel est le numéro atomique du fer ?",
+    "answer": "26",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quelle est la valeur approximative du nombre d'Avogadro ?",
+    "answer": "6,022 × 10²³",
+    "aliases": [
+      "6,022e23",
+      "6.022 10^23",
+      "6 10 puissance 23"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quelle unité mesure la quantité de matière ?",
+    "answer": "la mole",
+    "aliases": [
+      "mole"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quelle unité mesure la radioactivité d'une source ?",
+    "answer": "le becquerel",
+    "aliases": [
+      "becquerel"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quel physicien français a découvert la radioactivité en 1896 ?",
+    "answer": "Henri Becquerel",
+    "aliases": [
+      "Becquerel"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quel physicien allemand a découvert les rayons X en 1895 ?",
+    "answer": "Röntgen",
+    "aliases": [
+      "Wilhelm Röntgen",
+      "Rontgen"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quel physicien britannique a découvert l'électron en 1897 ?",
+    "answer": "J. J. Thomson",
+    "aliases": [
+      "Thomson"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quel physicien a découvert le neutron en 1932 ?",
+    "answer": "James Chadwick",
+    "aliases": [
+      "Chadwick"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quel physicien a révélé l'existence du noyau atomique en bombardant une mince feuille d'or ?",
+    "answer": "Rutherford",
+    "aliases": [
+      "Ernest Rutherford"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quel physicien allemand a énoncé qu'on ne peut connaître à la fois la position et la vitesse d'une particule ?",
+    "answer": "Heisenberg",
+    "aliases": [
+      "Werner Heisenberg"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quel physicien autrichien a imaginé une expérience de pensée avec un chat dans une boîte ?",
+    "answer": "Schrödinger",
+    "aliases": [
+      "Erwin Schrödinger",
+      "Schrodinger"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quel physicien allemand a fondé la théorie des quanta en 1900 ?",
+    "answer": "Max Planck",
+    "aliases": [
+      "Planck"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "En quelle année la découverte du boson de Higgs a-t-elle été annoncée au CERN ?",
+    "answer": "2012",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quel accélérateur de particules a permis de détecter le boson de Higgs ?",
+    "answer": "le LHC",
+    "aliases": [
+      "LHC",
+      "grand collisionneur de hadrons"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quel élément chimique porte le nom d'un pays européen, patrie de Marie Curie d'adoption ?",
+    "answer": "le francium",
+    "aliases": [
+      "francium"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quel élément a été nommé en l'honneur de Marie et Pierre Curie ?",
+    "answer": "le curium",
+    "aliases": [
+      "curium"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Du latin de quel mot vient le symbole Na du sodium ?",
+    "answer": "natrium",
+    "aliases": []
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Du latin de quel mot vient le symbole Pb du plomb ?",
+    "answer": "plumbum",
+    "aliases": []
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Que signifie l'acronyme LASER, en une idée ?",
+    "answer": "amplification de la lumière par émission stimulée",
+    "aliases": [
+      "light amplification by stimulated emission of radiation",
+      "amplification de lumière"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quel savant allemand a donné son nom à l'échelle de dureté des minéraux, graduée de 1 à 10 ?",
+    "answer": "Mohs",
+    "aliases": [
+      "Friedrich Mohs"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quel minéral est le plus tendre, au premier degré de l'échelle de dureté ?",
+    "answer": "le talc",
+    "aliases": [
+      "talc"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quelle opération sépare l'eau en dioxygène et en dihydrogène grâce à un courant ?",
+    "answer": "l'électrolyse",
+    "aliases": [
+      "électrolyse"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quel inventeur défendait le courant alternatif face au courant continu d'Edison ?",
+    "answer": "Nikola Tesla",
+    "aliases": [
+      "Tesla"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quelle est la formule chimique de l'acide sulfurique ?",
+    "answer": "H2SO4",
+    "aliases": [
+      "H₂SO₄"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quelle est la formule chimique de l'ammoniac ?",
+    "answer": "NH3",
+    "aliases": [
+      "NH₃"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quel est le nom savant du bicarbonate de soude ?",
+    "answer": "hydrogénocarbonate de sodium",
+    "aliases": [
+      "bicarbonate de sodium",
+      "NaHCO3"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on la force qui fait qu'une goutte d'eau reste ronde ?",
+    "answer": "la tension superficielle",
+    "aliases": [
+      "tension superficielle"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quel phénomène permet à un matériau refroidi à l'extrême de conduire sans aucune résistance ?",
+    "answer": "la supraconductivité",
+    "aliases": [
+      "supraconductivité"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "En degrés Fahrenheit, à quelle température l'eau bout-elle ?",
+    "answer": "212",
+    "aliases": [],
+    "answer_kind": "number"
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quel physicien danois a placé, en 1913, les électrons sur des orbites bien définies ?",
+    "answer": "Niels Bohr",
+    "aliases": [
+      "Bohr"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Comment appelle-t-on l'antiparticule de l'électron ?",
+    "answer": "le positron",
+    "aliases": [
+      "positron",
+      "positon"
+    ]
+  },
+  {
+    "theme": "physchi",
+    "difficulty": 3,
+    "prompt": "Quelle famille d'éléments très réactifs regroupe le fluor, le chlore et l'iode ?",
+    "answer": "les halogènes",
+    "aliases": [
+      "halogènes"
+    ]
+  }
+]

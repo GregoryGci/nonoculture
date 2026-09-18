@@ -152,6 +152,14 @@ export interface GameState {
   /** Host-assigned grades, keyed by `${deckIndex}:${playerId}`. */
   grades: Record<string, Grade>;
   /**
+   * Points the server awarded on its own, same key shape as `grades`.
+   *
+   * Kept rather than recomputed for the review: re-deriving "who was closest" on the way out
+   * would be the scoring rule written a second time, in another file, free to drift from the
+   * one that actually paid the points.
+   */
+  autoPoints: Record<string, number>;
+  /**
    * Which review card the room is looking at.
    *
    * Server-side rather than local to the host's screen: the whole point of showing the

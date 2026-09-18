@@ -163,7 +163,7 @@ describe("closest-wins questions", () => {
   const numeric = question({ answerKind: "number", prompt: "En quelle année ?", answer: "1969" });
   const deck: DeckItem[] = [{ kind: "trivia", question: numeric }];
 
-  it("scores the closest answer and keeps it out of the host review", () => {
+  it("scores the closest answer itself, and still tells the room what it was", () => {
     let state = room(["a", "b", "c"], deck);
     state = transition(state, {
       kind: "SUBMIT_ANSWER",
@@ -191,8 +191,34 @@ describe("closest-wins questions", () => {
     expect(state.players.c?.score).toBe(3); // exact
     expect(state.players.a?.score).toBe(0);
     expect(state.players.b?.score).toBe(0);
-    // Nothing for the host to grade: this one is arithmetic, not judgement.
-    expect(state.answerLog).toEqual({});
+    // Nothing for the host to grade — but the answers are kept, or the round would end
+    // without anyone ever learning the number.
+    expect(state.answerLog[0]).toHaveLength(3);
+    const card = buildStateSync(state, "a").reviewQuestions?.[0];
+    expect(card?.autoScored).toBe(true);
+    expect(card?.correctAnswer).toBe("1969");
+    // Answers keep the order they arrived in: a, then b, then c.
+    expect(card?.answers.map((x) => x.autoPoints)).toEqual([0, 0, 3]);
+  });
+
+  it("refuses a host grade on a question the server already paid for", () => {
+    let state = room(["a", "b"], deck);
+    for (const [id, raw] of [
+      ["a", "1969"],
+      ["b", "1900"],
+    ] as const) {
+      state = transition(state, { kind: "SUBMIT_ANSWER", playerId: id, questionId: 1, raw, now: T0 + 200 }).state;
+    }
+    const before = state.players.b?.score;
+    const after = transition(state, {
+      kind: "SUBMIT_HOST_GRADE",
+      playerId: state.hostPlayerId,
+      deckIndex: 0,
+      targetPlayerId: "b",
+      grade: 1,
+    }).state;
+    expect(after.players.b?.score).toBe(before);
+    expect(after.grades).toEqual({});
   });
 
   it("rewards everyone equally close rather than splitting the points", () => {
