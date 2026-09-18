@@ -262,8 +262,15 @@ export function HostSettings({
   // "Tous" leaves out the game-specific themes, so the count has to say so rather than
   // claiming a total the server will not honour.
   const general = themes.filter((t) => !isOptInTheme(t.id));
-  const selectedLabel =
-    settings.themes.length === 0 ? `Tous (${general.length})` : `${settings.themes.length} sur ${themes.length}`;
+  // The opt-in themes have no "nothing selected" shorthand on the server — an empty list means
+  // "the general ones" by definition. So the button that includes them ticks every theme by
+  // name instead, which is the same thing said explicitly.
+  const everySelected = themes.length > 0 && settings.themes.length === themes.length;
+  const selectedLabel = everySelected
+    ? `Tout (${themes.length})`
+    : settings.themes.length === 0
+      ? `Tous (${general.length})`
+      : `${settings.themes.length} sur ${themes.length}`;
 
   return (
     <div className="panel flex w-full flex-col gap-8 p-6">
@@ -371,6 +378,16 @@ export function HostSettings({
             className={`chip${settings.themes.length === 0 ? " chip-on" : ""}`}
           >
             Tous
+          </button>
+          {/* Same idea, one step further: the game-specific themes included. */}
+          <button
+            type="button"
+            onClick={() => onChange({ themes: themes.map((t) => t.id) })}
+            aria-pressed={everySelected}
+            title="Thèmes généraux plus les thèmes de jeux (LoL, Dofus, Pokémon, FromSoftware)"
+            className={`chip${everySelected ? " chip-on" : ""}`}
+          >
+            Tout, jeux compris
           </button>
           {themes.map(({ id, label }) => {
             const active = settings.themes.includes(id);
